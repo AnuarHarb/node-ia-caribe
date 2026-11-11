@@ -10,6 +10,8 @@ from interfaz.informes import estado_hipotesis_portada, resumen_tarjeta
 from interfaz.red import enlace_telefono
 from voz.frases import FRASES
 
+REPO_GITHUB = "https://github.com/AnuarHarb/node-ia-caribe"
+
 
 def e(texto: object) -> str:
     return html.escape(str(texto))
@@ -135,8 +137,11 @@ def _pie(extra_script: str = "", *, demo: bool = False) -> str:
     return f"""  </main>
   <footer class="site-footer">
     <div class="footer-bars" aria-hidden="true"><span class="fca-bars"><i></i><i></i><i></i><i></i><i></i></span></div>
-    <p class="body-sm">Nodo IA Caribe · mediciones reproducibles en este equipo. Los informes viven en <code>resultados/</code>.
-      <a href="/nota-tecnica">Nota técnica del laboratorio</a> · cada corrida (demos 2–5) guarda un video en <code>resultados/demoN/historial/</code>.</p>
+    <p class="body-sm">Nodo IA Caribe · <a href="https://codigoabierto.tech" rel="noopener">Fundación Código Abierto</a>.
+      Informes en <code>resultados/</code> · <a href="/nota-tecnica">Nota técnica</a> ·
+      <a href="{e(REPO_GITHUB)}" rel="noopener">Repositorio</a> ·
+      <a href="{e(REPO_GITHUB + "/blob/main/LICENSE")}" rel="noopener">Licencia</a>.
+      Videos de corrida (demos 2–5): <code>resultados/demoN/historial/</code>.</p>
   </footer>
   {scripts_demo}<script src="/static/escenario.js"></script>
   <script src="/static/app.js"></script>

@@ -1,0 +1,33 @@
+Copyright (c) 2026 Fundación Código Abierto (FCA)
+
+Salvo que un archivo indique otra cosa, este repositorio se publica bajo los
+términos siguientes.
+
+## Permisos
+
+Puedes usar, copiar, modificar y redistribuir el código y la documentación con
+fines educativos, de investigación, demostración y política pública, siempre que:
+
+1. Mantengas este aviso de copyright y esta licencia en las copias sustanciales.
+2. Cites el proyecto como **Nodo IA Caribe · Laboratorio TRL 3 · Fundación Código
+   Abierto** y enlaces al repositorio cuando publiques resultados derivados.
+3. No uses el nombre **Fundación Código Abierto**, la sigla **FCA**, el isotipo
+   de las tres barras ni el sistema visual FCA de forma que sugiera aval oficial
+   sin autorización escrita de la fundación.
+
+## Sin garantía
+
+El software se entrega «tal cual», sin garantía de ningún tipo. Los demos usan
+modelos locales y servicios opcionales de terceros; los números deben leerse en
+el contexto del protocolo TRL 3 descrito en el repositorio.
+
+## Marcas y recursos de diseño
+
+Los archivos en `interfaz/static/fca/` y el sistema de diseño FCA son propiedad
+de la Fundación Código Abierto. Su uso fuera de este proyecto requiere seguir las
+guías internas de la fundación o pedir permiso.
+
+## Contacto
+
+Para licencias comerciales, co-branding o reutilización del sistema visual:
+Fundación Código Abierto — [codigoabierto.tech](https://codigoabierto.tech)

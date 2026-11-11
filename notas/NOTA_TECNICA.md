@@ -8,9 +8,10 @@ Cinco demos miden el punto de partida del nodo de inteligencia artificial sobera
 
 | Campo | Valor |
 | --- | --- |
-| Repositorio | REPOSITORIO_PENDIENTE — define `export NODO_REPO_URL='https://…'` antes de abrir la interfaz, o edita esta nota con la URL definitiva del git. |
+| Repositorio | https://github.com/AnuarHarb/node-ia-caribe |
 | Video de presentación (2–3 min) | Guion en `entregables/VIDEO-LABORATORIO.md`. Montaje sugerido: `scripts/montar-video-laboratorio.sh` (une los `.webm` del historial con ffmpeg). |
 | Interfaz local | `http://127.0.0.1:8765/` tras `.venv/bin/python -m interfaz` |
+| Página informativa (GitHub Pages) | Carpeta `docs/` del repositorio; no ejecuta los demos |
 
 ## Cómo reproducir
 

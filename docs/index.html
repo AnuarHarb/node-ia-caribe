@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nodo IA Caribe: laboratorio TRL 3 de la Fundación Código Abierto. Código y protocolo de medición; la interfaz corre en local.">
+  <title>Nodo IA Caribe · Fundación Código Abierto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --surface-page: #f8fafc;
+      --surface-card: #fff;
+      --surface-navy: #050a30;
+      --ink: #0b1220;
+      --ink-muted: #526077;
+      --brand-blue: #00a0f9;
+      --line: #d9e4ee;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Poppins", system-ui, sans-serif;
+      background: var(--surface-page);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    header {
+      background: var(--surface-card);
+      border-bottom: 1px solid var(--line);
+      padding: 1.5rem 1.25rem;
+    }
+    .wrap { max-width: 42rem; margin: 0 auto; padding: 0 1.25rem 3rem; }
+    .brand img { max-width: 220px; height: auto; }
+    .kicker {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--brand-blue);
+      margin: 1rem 0 0.25rem;
+    }
+    h1 { font-size: 1.75rem; margin: 0 0 0.75rem; line-height: 1.2; }
+  .lead { color: var(--ink-muted); margin: 0 0 1.5rem; }
+    section {
+      background: var(--surface-card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    h2 { font-size: 1.05rem; margin: 0 0 0.75rem; color: #1d4e57; }
+    ul { margin: 0; padding-left: 1.25rem; }
+    a { color: var(--brand-blue); }
+    .btn {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.6rem 1rem;
+      background: var(--brand-blue);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--brand-blue);
+      border: 2px solid var(--brand-blue);
+    }
+    .aviso {
+      background: #eff8ff;
+      border-left: 4px solid var(--brand-blue);
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+    footer {
+      margin-top: 2rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--line);
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { text-align: left; padding: 0.4rem 0; border-bottom: 1px solid var(--line); }
+    th { color: var(--ink-muted); font-weight: 600; }
+    code { font-size: 0.85em; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="https://codigoabierto.tech" rel="noopener">
+        <img
+          src="https://raw.githubusercontent.com/AnuarHarb/node-ia-caribe/main/interfaz/static/fca/FCA_Sistema-de-diseno/logos/fca-lockup-color.png"
+          width="220"
+          height="44"
+          alt="Fundación Código Abierto"
+        >
+      </a>
+      <p class="kicker">Nodo IA Caribe · laboratorio TRL 3</p>
+      <h1>Mediciones de punto de partida para IA soberana en el Caribe</h1>
+      <p class="lead">
+        Cinco demos reproducibles (voz, nodo sin internet, comparación local vs comercial,
+        WER dialectal y agentes aislados). El código y el protocolo están en GitHub; la
+        interfaz interactiva se ejecuta en tu equipo.
+      </p>
+      <a class="btn" href="https://github.com/AnuarHarb/node-ia-caribe">Ver repositorio en GitHub</a>
+      <a class="btn btn-secondary" href="https://github.com/AnuarHarb/node-ia-caribe/blob/main/LICENSE">Licencia (FCA)</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <p class="aviso" role="note">
+      <strong>Esta página es informativa.</strong> No ejecuta los demos: hacen falta Python,
+      Ollama y el servidor local descrito en el README. GitHub Pages no sustituye el laboratorio.
+    </p>
+
+    <section aria-labelledby="demos-titulo">
+      <h2 id="demos-titulo">Los cinco demos</h2>
+      <table>
+        <thead>
+          <tr><th scope="col">#</th><th scope="col">Tema</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Voz en español costeño (ASR + LLM + TTS local)</td></tr>
+          <tr><td>2</td><td>IA completa sin internet (varios usuarios)</td></tr>
+          <tr><td>3</td><td>Modelo local frente a referencia comercial (paquete ciego)</td></tr>
+          <tr><td>4</td><td>WER en costeño y palenquero</td></tr>
+          <tr><td>5</td><td>Agentes aislados por entidad pública ficticia</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section aria-labelledby="correr-titulo">
+      <h2 id="correr-titulo">Cómo correr el laboratorio en local</h2>
+      <ol>
+        <li>Clonar el repositorio e instalar <code>requirements.txt</code>.</li>
+        <li><code>ollama pull qwen2.5:3b</code> (demos que usan modelo local).</li>
+        <li><code>.venv/bin/python -m interfaz</code> y abrir <code>http://127.0.0.1:8765/</code>.</li>
+      </ol>
+      <p>Instrucciones completas en el <a href="https://github.com/AnuarHarb/node-ia-caribe#readme">README</a>.</p>
+    </section>
+
+    <section aria-labelledby="legal-titulo">
+      <h2 id="legal-titulo">Autoría</h2>
+      <p>
+        © <time datetime="2026">2026</time>
+        <a href="https://codigoabierto.tech">Fundación Código Abierto</a>.
+        Uso educativo e investigación con atribución; ver
+        <a href="https://github.com/AnuarHarb/node-ia-caribe/blob/main/LICENSE">LICENSE</a>.
+      </p>
+    </section>
+
+    <footer>
+      <p>
+        Página estática en GitHub Pages. Proyecto:
+        <a href="https://github.com/AnuarHarb/node-ia-caribe">github.com/AnuarHarb/node-ia-caribe</a>
+      </p>
+    </footer>
+  </main>
+</body>
+</html>
