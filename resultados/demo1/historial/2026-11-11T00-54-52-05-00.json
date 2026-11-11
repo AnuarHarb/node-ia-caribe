@@ -1,0 +1,52 @@
+{
+  "demo": 1,
+  "fecha": "2026-11-11T00:54:52-05:00",
+  "filas": 4,
+  "aciertos_marcados": 1,
+  "errores_marcados": 3,
+  "criterio_flujo": true,
+  "criterio_video_error_real": true,
+  "tabla": [
+    {
+      "id": "692fecb8f526",
+      "persona": "Anuar Harb",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_correcta": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_sistema": "Bueno, me voy a pedir una certificada de residencia. ¿Qué papeles tengo que traer?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/692fecb8f526.webm"
+    },
+    {
+      "id": "a801bfa62109",
+      "persona": "Anuar Harb",
+      "guion": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "transcripcion_correcta": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+      "transcripcion_sistema": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/a801bfa62109.webm"
+    },
+    {
+      "id": "65bf9ef7138e",
+      "persona": "Anuar Harb",
+      "guion": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "transcripcion_correcta": "Necesito un turno para el Sisbén. Me lo pueden dar ahora.",
+      "transcripcion_sistema": "Necesito un turno para el 6. Me lo pueden dar ahora.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/65bf9ef7138e.webm"
+    },
+    {
+      "id": "d6c300d069fc",
+      "persona": "Anuar Harb",
+      "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "transcripcion_correcta": "¿Dónde queda la oficina del peredial? Es que me perdí.",
+      "transcripcion_sistema": "¿Dónde queda el oficinal peredial? Es que me perdí.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/d6c300d069fc.webm"
+    }
+  ],
+  "corrida_id": "2026-11-11T00-54-52-05-00"
+}

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resultados · Nodo IA Caribe</title>
+  <style>
+    :root { color-scheme: light; }
+    body { font-family: Palatino, "Iowan Old Style", Georgia, serif; margin: 0 auto; max-width: 52rem; padding: 1.5rem 1rem 4rem; line-height: 1.45; color: #1c1c1c; }
+    nav a { margin-right: 1rem; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border-bottom: 1px solid #ccc; text-align: left; vertical-align: top; padding: 0.4rem; }
+    article { border-top: 1px solid #ddd; padding: 1rem 0; }
+    .respuesta { white-space: pre-wrap; background: #f6f4ef; padding: 0.8rem 1rem; }
+    code { font-family: ui-monospace, monospace; font-size: 0.85em; }
+  </style>
+</head>
+<body>
+  <header>
+    <p>Nodo IA Caribe · laboratorio</p>
+    <h1>Resultados medidos</h1>
+    <p>Apple M2 Pro, 16 GB. Modelo local qwen2.5:3b. La referencia comercial y las dos calificaciones humanas siguen pendientes.</p>
+  </header>
+  <nav aria-label="Secciones">
+    <a href="#demo5">Demo 5</a>
+    <a href="#demo3">Demo 3</a>
+    <a href="demo5/informe.html">Informe completo del demo 5</a>
+  </nav>
+  <main>
+    <section id="demo5">
+      <h2>Demo 5 · Agentes aislados</h2>
+      <p>Criterio cumplido. Pruebas 11 de 11. Acceso cruzado bloqueado: sí. Auditoría íntegra: sí.</p>
+      <table>
+        <caption>Las 11 pruebas</caption>
+        <thead><tr><th>Prueba</th><th>Esperado</th><th>Obtenido</th></tr></thead>
+        <tbody>
+          <tr><td><code>test_01_lectura_propia_entidad_a</code></td><td>El agente de la alcaldía lee un archivo de su propia caja.</td><td>pasó</td></tr>
+<tr><td><code>test_02_lectura_propia_entidad_b</code></td><td>El agente de la gobernación lee un archivo de su propia caja.</td><td>pasó</td></tr>
+<tr><td><code>test_03_trabajo_simultaneo</code></td><td>Dos agentes de dos entidades escriben y leen a la vez, cada uno en su caja.</td><td>pasó</td></tr>
+<tr><td><code>test_04_lectura_cruzada_bloqueada</code></td><td>Un agente no obtiene el archivo de la otra entidad.</td><td>pasó</td></tr>
+<tr><td><code>test_05_escritura_cruzada_bloqueada</code></td><td>Un agente no escribe en la caja de la otra entidad.</td><td>pasó</td></tr>
+<tr><td><code>test_06_listado_cruzado_bloqueado</code></td><td>El listado de una entidad no muestra los archivos de la otra, ni a través de un enlace.</td><td>pasó</td></tr>
+<tr><td><code>test_07_traversal_de_ruta_bloqueado</code></td><td>Una ruta absoluta y una ruta con .. no salen de la caja.</td><td>pasó</td></tr>
+<tr><td><code>test_08_escape_por_symlink_bloqueado</code></td><td>Un enlace simbólico hacia el archivo de otra entidad no se puede leer.</td><td>pasó</td></tr>
+<tr><td><code>test_09_auditoria_registra_bloqueo</code></td><td>El intento bloqueado queda en el registro, sin el contenido del archivo ajeno.</td><td>pasó</td></tr>
+<tr><td><code>test_10_auditoria_registra_acceso_permitido</code></td><td>Una lectura dentro de la propia caja queda registrada como permitida.</td><td>pasó</td></tr>
+<tr><td><code>test_11_cadena_de_auditoria_integra</code></td><td>El registro íntegro verifica, y una alteración se detecta.</td><td>pasó</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section id="demo3">
+      <h2>Demo 3 · Respuestas del modelo local</h2>
+      <p>Cuarenta tareas. La primera tardó 56,05 s con el modelo en frío. Las otras 39 promediaron 0,98 s. Aquí solo está el camino local.</p>
+      <article id="T01">
+          <h3>T01 · resumir peticion</h3>
+          <p>Alcaldía de Galapa (ficticia) · 56.054 s</p>
+          <h4>Entrada</h4>
+          <p>Radicado ficticio GA-1042. María del Carmen Gómez, documento de ejemplo terminado en 0001, barrio El Campito, pide un certificado de residencia para un subsidio de vivienda. Dice que vive ahí desde 2019. No adjunta recibo de servicio ni declaración de un vecino. Deja el celular de ejemplo 3000000001.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">María del Carmen Gómez pide un certificado de residencia para un subsidio de vivienda. Falta adjuntar un recibo de servicio o una declaración de un vecino para validar su residencia desde 2019. El número de celular 3000000001 también falta.</p>
+        </article><article id="T02">
+          <h3>T02 · resumir peticion</h3>
+          <p>Inspección de Policía de Soledad (ficticia) · 2.297 s</p>
+          <h4>Entrada</h4>
+          <p>Radicado ficticio SO-221. El señor Lázaro Peña, calle 30 con carrera 18, barrio La Paz, pide que revisen un hueco que lleva tres semanas frente a su casa. Dice que ya se cayó una moto. No indica el número de la casa ni si ya reportó el daño a la empresa de servicios.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">El señor Lázaro Peña, de la calle 30 con carrera 18, barrio La Paz, pide revisar un hueco frente a su casa que ya se cayó una moto. Falta indicar el número de la casa y si ya reportó el daño a la empresa de servicios.</p>
+        </article><article id="T03">
+          <h3>T03 · resumir peticion</h3>
+          <p>Secretaría de Educación de Bolívar (ficticia) · 1.223 s</p>
+          <h4>Entrada</h4>
+          <p>Radicado ficticio BOL-ED-77. La señora Rosa Mercado pide cupo en grado segundo para su hijo Tomás Mercado, de 7 años, en la IED Los Manglares, institución ficticia de Mahates. Adjunta registro civil de ejemplo. No adjunta el boletín del año anterior ni dice si el niño ya está matriculado en otro colegio.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">La señora Rosa Mercado pide un cupo para su hijo Tomás Mercado en el grado segundo de la IED Los Manglares. Falta adjuntar el boletín del año anterior y saber si el niño ya está matriculado en otro colegio.</p>
+        </article><article id="T04">
+          <h3>T04 · resumir peticion</h3>
+          <p>Alcaldía de Mahates (ficticia) · 1.191 s</p>
+          <h4>Entrada</h4>
+          <p>Radicado ficticio MA-15. La Junta de Acción Comunal del corregimiento de San Basilio, en este ejercicio una junta ficticia, pide el arreglo de un puente de madera que usa el transporte escolar. El puente está sobre un caño. No envían fotos ni el número de familias afectadas. Firman como presidenta de ejemplo: Nidia Cassiani.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">La Junta de Acción Comunal de San Basilio pide el arreglo de un puente de madera utilizado por el transporte escolar. Falta el número de familias afectadas. La petición está firmada por Nidia Cassiani.</p>
+        </article><article id="T05">
+          <h3>T05 · resumir peticion</h3>
+          <p>Aguas del Río (empresa ficticia) · 1.024 s</p>
+          <h4>Entrada</h4>
+          <p>PQR ficticia AR-900. Doña Eulalia Jiménez, manzana 4 casa 2 del barrio La Orilla, en Ciénaga, informa que lleva seis días sin agua. El último recibo que menciona es de agosto, por un valor de ejemplo de 48.000 pesos, y dice que está paga. Pide carro tanque. No da el número del contrato.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">La persona que pide es Doña Eulalia Jiménez, quien pide un carro tanque para que le traigan agua. Falta el número del contrato para poder resolver su problema.</p>
+        </article><article id="T06">
+          <h3>T06 · resumir peticion</h3>
+          <p>Puesto de salud El Carmen (ficticio) · 0.961 s</p>
+          <h4>Entrada</h4>
+          <p>Turno ficticio PS-33. Don Héctor Viloria, de 71 años, pide una cita de vacunación. No describe síntomas ni diagnósticos. Dice que puede ir los martes en la mañana y que su nieta lo acompaña. No indica el régimen de salud ni el número de documento.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">Don Héctor Viloria, de 71 años, pide una cita de vacunación. Solicita un turno de martes por la mañana. Falta el número de documento para su cita.</p>
+        </article><article id="T07">
+          <h3>T07 · resumir peticion</h3>
+          <p>IED Los Manglares (institución ficticia) · 0.975 s</p>
+          <h4>Entrada</h4>
+          <p>Comunicación ficticia IE-12. La docente Ana Ferrer pide marcadores, resmas de papel y un video beam para el grado noveno. Hay 36 estudiantes en el curso. La reunión de padres es el viernes. No dice la fecha de la reunión ni el salón.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">La docente Ana Ferrer pide marcadores, resmas de papel y un video beam para el grado noveno. Falta la fecha de la reunión de padres y el salón donde se realizará.</p>
+        </article><article id="T08">
+          <h3>T08 · resumir peticion</h3>
+          <p>Personería de Santa Marta (ficticia) · 0.991 s</p>
+          <h4>Entrada</h4>
+          <p>Radicado ficticio SM-P-58. El ciudadano Pablo Gómez pregunta si ya salió la respuesta a su derecho de petición del mes pasado, radicado ficticio SM-P-19, sobre el alumbrado de la calle 15. No adjunta copia del radicado anterior. Deja correo de ejemplo pablo.ejemplo@correo.test.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">Pablo Gómez pide información sobre la respuesta a su derecho de petición sobre alumbrado de la calle 15. Falta el radicado del correo anterior que adjuntó en la solicitud original.</p>
+        </article><article id="T09">
+          <h3>T09 · redactar respuesta</h3>
+          <p>Alcaldía de Galapa (ficticia) · 1.669 s</p>
+          <h4>Entrada</h4>
+          <p>Ficha de respuesta autorizada: acusar recibo del radicado GA-1042; pedir únicamente el recibo de un servicio público del barrio o una declaración de dos vecinos; no prometer la fecha del certificado. Trato de ventanilla, en español sencillo.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">Se ha acordado el radicado GA-1042. Se solicita el recibo de un servicio público del barrio o una declaración de dos vecinos. Se respetará el formato sin prometer fechas del certificado. El trámite se realizará en la ventanilla con un lenguaje sencillo.</p>
+        </article><article id="T10">
+          <h3>T10 · redactar respuesta</h3>
+          <p>Inspección de Policía de Soledad (ficticia) · 1.227 s</p>
+          <h4>Entrada</h4>
+          <p>Ficha de respuesta autorizada: informar que la queja SO-221 quedó registrada; pedir el número exacto de la casa; no prometer la fecha del arreglo del hueco; indicar que un inspector ficticio hará visita, sin fijar día.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">La queja SO-221 quedó registrada. Se solicita el número exacto de la casa. No se promete la fecha del arreglo del hueco. Se informa que un inspector ficticio realizará una visita, sin fijar un día.</p>
+        </article><article id="T11">
+          <h3>T11 · redactar respuesta</h3>
+          <p>Secretaría de Educación de Bolívar (ficticia) · 1.369 s</p>
+          <h4>Entrada</h4>
+          <p>Ficha de respuesta autorizada: no hay cupo asignado todavía; pedir el boletín del año anterior o una constancia de que el niño no estudió; no prometer cupo en la IED Los Manglares.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">La respuesta de la entidad es la siguiente: No se ha asignado ningún cupo aún; se solicita el boletín del año anterior o una constancia que el niño no estudió en el año inmediato anterior; se respetan las políticas de no prometer cupos en la IED Los Manglares.</p>
+        </article><article id="T12">
+          <h3>T12 · redactar respuesta</h3>
+          <p>Alcaldía de Mahates (ficticia) · 0.887 s</p>
+          <h4>Entrada</h4>
+          <p>Ficha de respuesta autorizada: agradecer el reporte del puente; pedir fotos y el número de familias que lo usan para llegar a la escuela; no prometer obra ni presupuesto.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">Agradecemos el reporte del puente. Pedimos fotos del mismo y el número de familias que lo utilizan para llegar a la escuela. No prometemos obra ni presupuesto.</p>
+        </article><article id="T13">
+          <h3>T13 · redactar respuesta</h3>
+          <p>Aguas del Río (empresa ficticia) · 1.026 s</p>
+          <h4>Entrada</h4>
+          <p>Ficha de respuesta autorizada: la suspensión del barrio La Orilla está en revisión; pedir el número del contrato; no confirmar carro tanque; no echarle la culpa al usuario.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">La suspensión del barrio La Orilla está en revisión. Por favor, solicitar el número del contrato correspondiente. No se confirmará el uso del carro tanque en este caso. No se echará la culpa al usuario.</p>
+        </article><article id="T14">
+          <h3>T14 · redactar respuesta</h3>
+          <p>Puesto de salud El Carmen (ficticio) · 1.344 s</p>
+          <h4>Entrada</h4>
+          <p>Ficha de respuesta autorizada: hay jornada de vacunación los martes de 8 a 11, sin cita; pedir que lleve el documento de identidad; no preguntar por diagnósticos; no inventar otras sedes.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">La jornada de vacunación se llevará a cabo los martes de 8 a 11 horas, sin cita previa. Se pide que lleve su documento de identidad y no se preguntará por ningún diagnóstico previo. No se informará sobre otras sedes de vacunación.</p>
+        </article><article id="T15">
+          <h3>T15 · redactar respuesta</h3>
+          <p>IED Los Manglares (institución ficticia) · 1.099 s</p>
+          <h4>Entrada</h4>
+          <p>Ficha de respuesta autorizada: hay papel en secretaría, máximo dos resmas por docente esta semana; no hay video beam disponible; los marcadores están agotados y no se puede prometer la compra.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">La respuesta de la entidad es la siguiente: hay papel en secretaría, con un máximo de dos resmas por docente esta semana; no se dispone de video beam; los marcadores están agotados y no se puede prometer la compra de nuevos.</p>
+        </article><article id="T16">
+          <h3>T16 · redactar respuesta</h3>
+          <p>Personería de Santa Marta (ficticia) · 1.506 s</p>
+          <h4>Entrada</h4>
+          <p>Ficha de respuesta autorizada: el radicado SM-P-19 sigue en trámite y todavía no tiene respuesta; pedir un teléfono de contacto; no inventar la fecha en que responderán; no opinar sobre el alumbrado.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">La respuesta de la entidad es la siguiente: el radicado SM-P-19 sigue en trámite y aún no ha recibido una respuesta; se solicita un teléfono de contacto para futuras consultas; no se especifica la fecha de respuesta debido a la falta de autorización en la ficha; se omite la información sobre el alumbrado.</p>
+        </article><article id="T17">
+          <h3>T17 · clasificar solicitud</h3>
+          <p>Alcaldía de Galapa (ficticia) · 0.231 s</p>
+          <h4>Entrada</h4>
+          <p>Buenas. Necesito el certificado de residencia para un subsidio. ¿Qué papeles llevo?</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">queja</p>
+        </article><article id="T18">
+          <h3>T18 · clasificar solicitud</h3>
+          <p>Aguas del Río (empresa ficticia) · 0.153 s</p>
+          <h4>Entrada</h4>
+          <p>Llevo seis días sin agua y nadie contesta el teléfono de la empresa. Esto es un irrespeto.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">reclamo</p>
+        </article><article id="T19">
+          <h3>T19 · clasificar solicitud</h3>
+          <p>Aguas del Río (empresa ficticia) · 0.19 s</p>
+          <h4>Entrada</h4>
+          <p>Me cobraron 120.000 pesos de un cargo que no reconozco. Exijo la reliquidación del recibo y la devolución de lo que pagué de más.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">reclamo</p>
+        </article><article id="T20">
+          <h3>T20 · clasificar solicitud</h3>
+          <p>IED Los Manglares (institución ficticia) · 0.164 s</p>
+          <h4>Entrada</h4>
+          <p>Sería bueno avisar la reunión de padres también por el grupo de WhatsApp, no solo en la cartelera.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">sugerencia</p>
+        </article><article id="T21">
+          <h3>T21 · clasificar solicitud</h3>
+          <p>Puesto de salud El Carmen (ficticio) · 0.186 s</p>
+          <h4>Entrada</h4>
+          <p>Quiero agradecer a la enfermera de la jornada del martes. Atendió a mi papá con mucha paciencia.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">felicitacion</p>
+        </article><article id="T22">
+          <h3>T22 · clasificar solicitud</h3>
+          <p>Secretaría de Educación de Bolívar (ficticia) · 0.202 s</p>
+          <h4>Entrada</h4>
+          <p>¿Hasta qué hora atienden hoy en la oficina de cobertura?</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">informacion</p>
+        </article><article id="T23">
+          <h3>T23 · clasificar solicitud</h3>
+          <p>Alcaldía de Mahates (ficticia) · 0.2 s</p>
+          <h4>Entrada</h4>
+          <p>Solicito copia del recibo de pago del impuesto predial del año pasado, a mi nombre.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">peticion</p>
+        </article><article id="T24">
+          <h3>T24 · clasificar solicitud</h3>
+          <p>Inspección de Policía de Soledad (ficticia) · 0.134 s</p>
+          <h4>Entrada</h4>
+          <p>El ruido del establecimiento de la esquina sigue después de las diez de la noche. Ya no se puede dormir.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">queja</p>
+        </article><article id="T25">
+          <h3>T25 · extraer datos</h3>
+          <p>Alcaldía de Galapa (ficticia) · 1.475 s</p>
+          <h4>Entrada</h4>
+          <p>Radicado GA-1042. Solicitante: María del Carmen Gómez. Documento de ejemplo terminado en 0001. Barrio El Campito. Celular de ejemplo 3000000001.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">{
+  &quot;radicado&quot;: &quot;GA-1042&quot;,
+  &quot;nombre&quot;: &quot;María del Carmen Gómez&quot;,
+  &quot;barrio&quot;: &quot;El Campito&quot;,
+  &quot;documento&quot;: &quot;0001&quot;,
+  &quot;telefono&quot;: &quot;3000000001&quot;
+}</p>
+        </article><article id="T26">
+          <h3>T26 · extraer datos</h3>
+          <p>Secretaría de Educación de Bolívar (ficticia) · 1.358 s</p>
+          <h4>Entrada</h4>
+          <p>Radicado BOL-ED-77. Acudiente Rosa Mercado. Estudiante Tomás Mercado, 7 años. Pide grado segundo en la IED Los Manglares.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">{
+  &quot;radicado&quot;: &quot;BOL-ED-77&quot;,
+  &quot;acudiente&quot;: &quot;Rosa Mercado&quot;,
+  &quot;estudiante&quot;: &quot;Tomás Mercado&quot;,
+  &quot;edad&quot;: 7,
+  &quot;grado&quot;: &quot;segundo&quot;,
+  &quot;institucion&quot;: &quot;IED Los Manglares&quot;
+}</p>
+        </article><article id="T27">
+          <h3>T27 · extraer datos</h3>
+          <p>Aguas del Río (empresa ficticia) · 1.212 s</p>
+          <h4>Entrada</h4>
+          <p>Doña Eulalia Jiménez, barrio La Orilla, lleva seis días sin agua. El recibo de agosto fue de 48.000 pesos. No informa el número del contrato.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">{
+  &quot;nombre&quot;: &quot;Doña Eulalia Jiménez&quot;,
+  &quot;barrio&quot;: &quot;La Orilla&quot;,
+  &quot;dias_sin_servicio&quot;: 6,
+  &quot;valor_recibo&quot;: 48000,
+  &quot;numero_contrato&quot;: null
+}</p>
+        </article><article id="T28">
+          <h3>T28 · extraer datos</h3>
+          <p>Puesto de salud El Carmen (ficticio) · 0.889 s</p>
+          <h4>Entrada</h4>
+          <p>Don Héctor Viloria, de 71 años, puede ir los martes en la mañana. No dictó el documento.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">{
+  &quot;nombre&quot;: &quot;Don Héctor Viloria&quot;,
+  &quot;edad&quot;: 71,
+  &quot;dia_disponible&quot;: &quot;martes&quot;,
+  &quot;documento&quot;: null
+}</p>
+        </article><article id="T29">
+          <h3>T29 · extraer datos</h3>
+          <p>IED Los Manglares (institución ficticia) · 1.204 s</p>
+          <h4>Entrada</h4>
+          <p>La docente Ana Ferrer, del grado noveno, con 36 estudiantes, pide marcadores, resmas y un video beam.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">{
+  &quot;docente&quot;: &quot;Ana Ferrer&quot;,
+  &quot;curso&quot;: &quot;Noveno&quot;,
+  &quot;estudiantes&quot;: 36,
+  &quot;pedido&quot;: {
+    &quot;marcadores&quot;: null,
+    &quot;resmas&quot;: null,
+    &quot;video_beam&quot;: null
+  }
+}</p>
+        </article><article id="T30">
+          <h3>T30 · extraer datos</h3>
+          <p>Personería de Santa Marta (ficticia) · 1.185 s</p>
+          <h4>Entrada</h4>
+          <p>Pablo Gómez pregunta por el radicado SM-P-19, sobre el alumbrado de la calle 15. Correo pablo.ejemplo@correo.test.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">{
+  &quot;nombre&quot;: &quot;Pablo Gómez&quot;,
+  &quot;radicado_anterior&quot;: &quot;SM-P-19&quot;,
+  &quot;tema&quot;: &quot;alumbrado de la calle 15&quot;,
+  &quot;correo&quot;: &quot;pablo.ejemplo@correo.test&quot;
+}</p>
+        </article><article id="T31">
+          <h3>T31 · extraer datos</h3>
+          <p>Alcaldía de Mahates (ficticia) · 1.208 s</p>
+          <h4>Entrada</h4>
+          <p>Firma Nidia Cassiani, presidenta de la junta ficticia. Pide el arreglo del puente de madera del transporte escolar. No dice cuántas familias lo usan.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">{
+  &quot;firmante&quot;: &quot;Nidia Cassiani&quot;,
+  &quot;cargo&quot;: &quot;presidenta de la junta ficticia&quot;,
+  &quot;obra_pedida&quot;: &quot;arreglo del puente de madera del transporte escolar&quot;,
+  &quot;numero_de_familias&quot;: null
+}</p>
+        </article><article id="T32">
+          <h3>T32 · extraer datos</h3>
+          <p>Inspección de Policía de Soledad (ficticia) · 0.982 s</p>
+          <h4>Entrada</h4>
+          <p>Lázaro Peña reporta un hueco en la calle 30 con carrera 18, barrio La Paz. No da el número de la casa.</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">{
+  &quot;nombre&quot;: &quot;Lázaro Peña&quot;,
+  &quot;barrio&quot;: &quot;La Paz&quot;,
+  &quot;direccion&quot;: &quot;calle 30 con carrera 18&quot;,
+  &quot;numero_de_casa&quot;: null
+}</p>
+        </article><article id="T33">
+          <h3>T33 · consulta normativa</h3>
+          <p>Texto de trabajo, no es el texto oficial de una ley · 0.841 s</p>
+          <h4>Entrada</h4>
+          <p>Texto de trabajo: una petición completa de interés particular se responde en 15 días hábiles, contados desde el día siguiente a la radicación. Sábado y domingo no son hábiles. En este ejercicio no hay festivos. El 2 de noviembre de 2026 es lunes.
+
+Consulta: la petición GA-1042, completa, se radicó el lunes 2 de noviembre de 2026. ¿Cuál es la fecha límite para responder?</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">La fecha límite para responder la petición GA-1042 sería el lunes 16 de noviembre de 2026.</p>
+        </article><article id="T34">
+          <h3>T34 · consulta normativa</h3>
+          <p>Texto de trabajo, no es el texto oficial de una ley · 1.494 s</p>
+          <h4>Entrada</h4>
+          <p>Texto de trabajo: si la petición está incompleta, la entidad pide lo que falta dentro de los 10 días siguientes. El plazo de 15 días hábiles empieza a contarse el día hábil siguiente a aquel en que el ciudadano completa la petición. El 13 de noviembre de 2026 es viernes.
+
+Consulta: el ciudadano completó la petición el viernes 13 de noviembre de 2026. ¿Qué día empieza a contarse el plazo de 15 días hábiles?</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">El plazo de 15 días hábiles empieza a contar el día hábil siguiente al 13 de noviembre de 2026, que es viernes. Por lo tanto, el plazo comenzaría a contar desde el lunes 15 de noviembre de 2026.</p>
+        </article><article id="T35">
+          <h3>T35 · consulta normativa</h3>
+          <p>Texto de trabajo, no es el texto oficial de una ley · 0.717 s</p>
+          <h4>Entrada</h4>
+          <p>Texto de trabajo: los datos personales de estudiantes menores de edad no se envían a proveedores externos ni se publican. Una consulta sobre cupos se responde con cifras agregadas, sin nombres ni documentos.
+
+Consulta: un proveedor pide la lista de nombres y documentos de los niños sin cupo para &#x27;mejorar el modelo&#x27;. ¿Se puede enviar?</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">No se puede enviar. Los datos personales de estudiantes menores de edad no se envían a proveedores externos ni se publican.</p>
+        </article><article id="T36">
+          <h3>T36 · consulta normativa</h3>
+          <p>Texto de trabajo, no es el texto oficial de una ley · 1.457 s</p>
+          <h4>Entrada</h4>
+          <p>Texto de trabajo: la petición verbal es válida. Quien atiende la escribe, la lee en voz alta y le entrega el número de radicado a la persona. No se exige que la persona sepa escribir.
+
+Consulta: una mujer llega a la ventanilla y quiere pedir el certificado de palabra, porque no trajo la carta. ¿La entidad debe recibirla?</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">La entidad debe recibir la solicitud verbal de la mujer para que se le pueda expedir el certificado de palabra. Según el texto de trabajo, quien atiende la ventanilla escribe la petición, la lee en voz alta y entrega el número de radicado a la persona, sin exigir que esta sepa escribir.</p>
+        </article><article id="T37">
+          <h3>T37 · consulta normativa</h3>
+          <p>Texto de trabajo, no es el texto oficial de una ley · 0.589 s</p>
+          <h4>Entrada</h4>
+          <p>Texto de trabajo: en este ejercicio el certificado de residencia no tiene costo. Cualquier cobro se devuelve y se deja constancia.
+
+Consulta: en la ventanilla le pidieron 20.000 pesos por el certificado. ¿Qué debe hacer la entidad?</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">La entidad debe devolver los 20.000 pesos cobrados y dejar constancia de este hecho.</p>
+        </article><article id="T38">
+          <h3>T38 · consulta normativa</h3>
+          <p>Texto de trabajo, no es el texto oficial de una ley · 0.954 s</p>
+          <h4>Entrada</h4>
+          <p>Texto de trabajo: una solicitud de información se responde en 10 días hábiles. Una petición que pide una actuación de la entidad se responde en 15 días hábiles. Si el escrito solo pregunta un horario, es solicitud de información.
+
+Consulta: el escrito dice únicamente &#x27;¿Hasta qué hora atienden hoy en hacienda?&#x27;. ¿Qué plazo aplica?</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">El plazo que aplica para la consulta &quot;¿Hasta qué hora atienden hoy en hacienda?&quot; es el plazo de solicitud de información, que es de 10 días hábiles.</p>
+        </article><article id="T39">
+          <h3>T39 · consulta normativa</h3>
+          <p>Texto de trabajo, no es el texto oficial de una ley · 1.351 s</p>
+          <h4>Entrada</h4>
+          <p>Texto de trabajo: si una circular interna da un plazo más largo que el del texto de trabajo, se aplica el plazo más corto. La circular de ventanilla dice 30 días. El texto de trabajo dice 15 días hábiles para esta petición.
+
+Consulta: ¿qué plazo debe usar el funcionario?</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">El funcionario debe usar el plazo de 15 días hábiles, ya que la circular de ventanilla, que dice 30 días, es más larga que el plazo mencionado en el texto de trabajo, que es de 15 días hábiles.</p>
+        </article><article id="T40">
+          <h3>T40 · consulta normativa</h3>
+          <p>Texto de trabajo, no es el texto oficial de una ley · 0.962 s</p>
+          <h4>Entrada</h4>
+          <p>Texto de trabajo: la entidad no promete una obra, un cupo ni un reembolso si la ficha de respuesta no lo autoriza. Puede acusar recibo, pedir un dato faltante y explicar el estado.
+
+Consulta: la ficha solo autoriza acusar recibo y pedir el número de la casa. El ciudadano pregunta &#x27;¿me arreglan el hueco esta semana?&#x27;. ¿Qué puede contestar la entidad?</p>
+          <h4>Respuesta local</h4>
+          <p class="respuesta">La entidad no puede garantizar que el hueco se arregle esta semana, ya que la ficha de respuesta solo autoriza acusar recibo y pedir el número de la casa.</p>
+        </article>
+    </section>
+  </main>
+</body>
+</html>

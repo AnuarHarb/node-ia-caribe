@@ -1,0 +1,44 @@
+[
+  {
+    "id": "2026-11-09T23-49-03-05-00",
+    "fecha": "2026-11-09T23:49:03-05:00",
+    "resumen": "40 tareas locales · ciego listo · calidad 4.6188 vs 4.7938 · 0.767 s prom.",
+    "estado": "ok"
+  },
+  {
+    "id": "2026-11-09T23-43-33-05-00",
+    "fecha": "2026-11-09T23:43:33-05:00",
+    "resumen": "40 tareas locales · ciego listo · 0.767 s prom.",
+    "estado": "parcial"
+  },
+  {
+    "id": "2026-11-09T23-38-05-05-00",
+    "fecha": "2026-11-09T23:38:05-05:00",
+    "resumen": "40 tareas locales · ciego listo · 0.767 s prom.",
+    "estado": "parcial"
+  },
+  {
+    "id": "2026-11-09T23-14-07-05-00",
+    "fecha": "2026-11-09T23:14:07-05:00",
+    "resumen": "40 tareas locales · ciego listo · 0.767 s prom.",
+    "estado": "parcial"
+  },
+  {
+    "id": "2026-11-09T23-10-59-05-00",
+    "fecha": "2026-11-09T23:10:59-05:00",
+    "resumen": "40 tareas locales · ciego listo · 0.767 s prom.",
+    "estado": "parcial"
+  },
+  {
+    "id": "2026-11-09T23-10-55-05-00",
+    "fecha": "2026-11-09T23:10:55-05:00",
+    "resumen": "40 tareas locales · ciego listo · 0.767 s prom.",
+    "estado": "parcial"
+  },
+  {
+    "id": "2026-11-09T23-09-29-05-00",
+    "fecha": "2026-11-09T23:09:29-05:00",
+    "resumen": "40 tareas locales · 0.767 s prom.",
+    "estado": "parcial"
+  }
+]

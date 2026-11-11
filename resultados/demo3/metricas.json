@@ -1,0 +1,345 @@
+{
+  "estado": "calculado",
+  "paquete": "6fef1ff49dccfcae50137c8aeeaac3c03cc3a2eb5b4bc5c9979abae433eb6414",
+  "calificadores": [
+    "Anuar Harb",
+    "Grace Torres"
+  ],
+  "tareas_calificadas": 40,
+  "tareas_incompletas": [],
+  "calidad_promedio": {
+    "local": 4.6188,
+    "referencia": 4.7938
+  },
+  "porcentaje_comparables": 85.0,
+  "kappa": {
+    "exactitud": {
+      "cohen": 0.6499,
+      "cuadratico": 0.9247,
+      "n": 80
+    },
+    "completitud": {
+      "cohen": 0.3074,
+      "cuadratico": 0.5833,
+      "n": 80
+    },
+    "tono": {
+      "cohen": 0.4425,
+      "cuadratico": 0.6823,
+      "n": 80
+    },
+    "utilidad": {
+      "cohen": 0.424,
+      "cuadratico": 0.707,
+      "n": 80
+    }
+  },
+  "kappa_cohen_promedio": 0.456,
+  "por_tarea": [
+    {
+      "id": "T01",
+      "local": 4.875,
+      "referencia": 5.0,
+      "diferencia": 0.125,
+      "comparable": true
+    },
+    {
+      "id": "T02",
+      "local": 4.875,
+      "referencia": 5.0,
+      "diferencia": 0.125,
+      "comparable": true
+    },
+    {
+      "id": "T03",
+      "local": 4.875,
+      "referencia": 4.875,
+      "diferencia": 0.0,
+      "comparable": true
+    },
+    {
+      "id": "T04",
+      "local": 4.875,
+      "referencia": 5.0,
+      "diferencia": 0.125,
+      "comparable": true
+    },
+    {
+      "id": "T05",
+      "local": 3.375,
+      "referencia": 5.0,
+      "diferencia": 1.625,
+      "comparable": false
+    },
+    {
+      "id": "T06",
+      "local": 4.875,
+      "referencia": 5.0,
+      "diferencia": 0.125,
+      "comparable": true
+    },
+    {
+      "id": "T07",
+      "local": 4.75,
+      "referencia": 5.0,
+      "diferencia": 0.25,
+      "comparable": true
+    },
+    {
+      "id": "T08",
+      "local": 4.75,
+      "referencia": 5.0,
+      "diferencia": 0.25,
+      "comparable": true
+    },
+    {
+      "id": "T09",
+      "local": 4.625,
+      "referencia": 5.0,
+      "diferencia": 0.375,
+      "comparable": true
+    },
+    {
+      "id": "T10",
+      "local": 4.0,
+      "referencia": 5.0,
+      "diferencia": 1.0,
+      "comparable": true
+    },
+    {
+      "id": "T11",
+      "local": 4.125,
+      "referencia": 5.0,
+      "diferencia": 0.875,
+      "comparable": true
+    },
+    {
+      "id": "T12",
+      "local": 4.75,
+      "referencia": 5.0,
+      "diferencia": 0.25,
+      "comparable": true
+    },
+    {
+      "id": "T13",
+      "local": 3.625,
+      "referencia": 5.0,
+      "diferencia": 1.375,
+      "comparable": false
+    },
+    {
+      "id": "T14",
+      "local": 4.375,
+      "referencia": 5.0,
+      "diferencia": 0.625,
+      "comparable": true
+    },
+    {
+      "id": "T15",
+      "local": 3.625,
+      "referencia": 5.0,
+      "diferencia": 1.375,
+      "comparable": false
+    },
+    {
+      "id": "T16",
+      "local": 4.0,
+      "referencia": 5.0,
+      "diferencia": 1.0,
+      "comparable": true
+    },
+    {
+      "id": "T17",
+      "local": 2.5,
+      "referencia": 5.0,
+      "diferencia": 2.5,
+      "comparable": false
+    },
+    {
+      "id": "T18",
+      "local": 5.0,
+      "referencia": 5.0,
+      "diferencia": 0.0,
+      "comparable": true
+    },
+    {
+      "id": "T19",
+      "local": 5.0,
+      "referencia": 5.0,
+      "diferencia": 0.0,
+      "comparable": true
+    },
+    {
+      "id": "T20",
+      "local": 5.0,
+      "referencia": 5.0,
+      "diferencia": 0.0,
+      "comparable": true
+    },
+    {
+      "id": "T21",
+      "local": 5.0,
+      "referencia": 5.0,
+      "diferencia": 0.0,
+      "comparable": true
+    },
+    {
+      "id": "T22",
+      "local": 5.0,
+      "referencia": 1.0,
+      "diferencia": 4.0,
+      "comparable": false
+    },
+    {
+      "id": "T23",
+      "local": 5.0,
+      "referencia": 5.0,
+      "diferencia": 0.0,
+      "comparable": true
+    },
+    {
+      "id": "T24",
+      "local": 5.0,
+      "referencia": 5.0,
+      "diferencia": 0.0,
+      "comparable": true
+    },
+    {
+      "id": "T25",
+      "local": 5.0,
+      "referencia": 5.0,
+      "diferencia": 0.0,
+      "comparable": true
+    },
+    {
+      "id": "T26",
+      "local": 5.0,
+      "referencia": 5.0,
+      "diferencia": 0.0,
+      "comparable": true
+    },
+    {
+      "id": "T27",
+      "local": 5.0,
+      "referencia": 5.0,
+      "diferencia": 0.0,
+      "comparable": true
+    },
+    {
+      "id": "T28",
+      "local": 5.0,
+      "referencia": 5.0,
+      "diferencia": 0.0,
+      "comparable": true
+    },
+    {
+      "id": "T29",
+      "local": 5.0,
+      "referencia": 5.0,
+      "diferencia": 0.0,
+      "comparable": true
+    },
+    {
+      "id": "T30",
+      "local": 5.0,
+      "referencia": 5.0,
+      "diferencia": 0.0,
+      "comparable": true
+    },
+    {
+      "id": "T31",
+      "local": 5.0,
+      "referencia": 5.0,
+      "diferencia": 0.0,
+      "comparable": true
+    },
+    {
+      "id": "T32",
+      "local": 5.0,
+      "referencia": 5.0,
+      "diferencia": 0.0,
+      "comparable": true
+    },
+    {
+      "id": "T33",
+      "local": 2.625,
+      "referencia": 3.75,
+      "diferencia": 1.125,
+      "comparable": false
+    },
+    {
+      "id": "T34",
+      "local": 5.0,
+      "referencia": 4.875,
+      "diferencia": 0.125,
+      "comparable": true
+    },
+    {
+      "id": "T35",
+      "local": 5.0,
+      "referencia": 4.25,
+      "diferencia": 0.75,
+      "comparable": true
+    },
+    {
+      "id": "T36",
+      "local": 5.0,
+      "referencia": 4.5,
+      "diferencia": 0.5,
+      "comparable": true
+    },
+    {
+      "id": "T37",
+      "local": 4.875,
+      "referencia": 4.5,
+      "diferencia": 0.375,
+      "comparable": true
+    },
+    {
+      "id": "T38",
+      "local": 4.75,
+      "referencia": 4.5,
+      "diferencia": 0.25,
+      "comparable": true
+    },
+    {
+      "id": "T39",
+      "local": 5.0,
+      "referencia": 4.75,
+      "diferencia": 0.25,
+      "comparable": true
+    },
+    {
+      "id": "T40",
+      "local": 4.625,
+      "referencia": 4.75,
+      "diferencia": 0.125,
+      "comparable": true
+    }
+  ],
+  "tiempo_y_costo": {
+    "local": {
+      "n": 40,
+      "tiempo_promedio_s": 0.857,
+      "tiempo_maximo_s": 4.35,
+      "costo_promedio_usd": 0.0
+    },
+    "referencia": {
+      "n": 40,
+      "tiempo_promedio_s": 1.42,
+      "tiempo_maximo_s": 2.936,
+      "costo_promedio_usd": null
+    }
+  },
+  "fechas_calificacion": [
+    "2026-11-10T20:36:41.835Z",
+    "2026-11-11T05:46:24.622Z"
+  ],
+  "fecha_calificacion_inicio": "2026-11-10T20:36:41.835Z",
+  "fecha_calificacion": "2026-11-11T05:46:24.622Z",
+  "archivos_contables": 2,
+  "archivos_usados": [
+    "calificacion-anuar-harb.json",
+    "calificacion-grace-torres.json"
+  ]
+}

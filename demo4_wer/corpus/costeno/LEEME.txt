@@ -1,0 +1,6 @@
+# Cada frase del corpus lleva tres archivos con el mismo nombre:
+#   001.wav       audio
+#   001.txt       transcripción correcta
+#   001.hip.txt   transcripción de Whisper, sin corregir
+#
+# En costeño, el demo 1 produce estos pares solo. Esta carpeta es para frases de más.

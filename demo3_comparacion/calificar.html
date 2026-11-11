@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calificación a ciegas · Demo 3</title>
+  <link rel="stylesheet" href="/static/fca/fca-fonts.css">
+  <link rel="stylesheet" href="/static/fca/FCA_Sistema-de-diseno/tokens.css">
+  <link rel="stylesheet" href="/static/fca/FCA_Sistema-de-diseno/componentes/fca-componentes.css">
+  <link rel="stylesheet" href="/static/app.css">
+  <style>
+    .escala { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    [role="status"] { min-height: 1.4em; }
+  </style>
+</head>
+<body class="fca-root pagina-auxiliar">
+  <header>
+    <a class="brand-lockup" href="/">
+      <img src="/static/fca/FCA_Sistema-de-diseno/logos/fca-lockup-color.png" width="180" height="36" alt="Fundación Código Abierto">
+    </a>
+    <p class="fca-kicker"><span class="fca-bars" aria-hidden="true"><i></i><i></i><i></i></span>Nodo IA Caribe · Demo 3</p>
+    <h1>Calificación a ciegas</h1>
+    <p>Cada tarea tiene dos respuestas, A y B. No se indica qué sistema escribió cada una. Elige un paquete medido en este laboratorio o sube otro JSON si lo trajiste de otro equipo.</p>
+  </header>
+  <main>
+    <form id="apertura" class="fca-card panel">
+      <label for="calificador">Nombre de quien califica
+        <input id="calificador" name="calificador" type="text" autocomplete="name" required>
+      </label>
+      <label for="selector-paquete">Paquete ciego disponible
+        <select id="selector-paquete" name="paquete" required aria-describedby="ayuda-paquete">
+          <option value="">— Cargando paquetes… —</option>
+        </select>
+      </label>
+      <p id="ayuda-paquete" class="body-sm">Solo se listan paquetes generados en <code>resultados/demo3/</code> (40 tareas con respuestas A y B).</p>
+      <details class="calificar-archivo-ajeno">
+        <summary>Subir otro archivo JSON (avanzado)</summary>
+        <label>Archivo <code>ciego.json</code>
+          <input id="archivo" name="archivo" type="file" accept="application/json,.json">
+        </label>
+      </details>
+      <button type="button" class="fca-btn" id="abrir-paquete">Empezar calificación</button>
+    </form>
+    <p id="aviso" role="status"></p>
+    <article id="tarea" hidden>
+      <header>
+        <h2 id="titulo-tarea"></h2>
+        <p id="tipo-tarea"></p>
+      </header>
+      <section aria-labelledby="titulo-instruccion">
+        <h3 id="titulo-instruccion">Qué se le pidió al sistema</h3>
+        <p id="instruccion"></p>
+        <h3>Entrada que recibieron los dos sistemas</h3>
+        <p id="entrada" class="respuesta respuesta-caja"></p>
+      </section>
+      <section aria-labelledby="titulo-a">
+        <h3 id="titulo-a">Respuesta A</h3>
+        <p id="texto-a" class="respuesta respuesta-caja"></p>
+        <div id="escalas-a"></div>
+      </section>
+      <section aria-labelledby="titulo-b">
+        <h3 id="titulo-b">Respuesta B</h3>
+        <p id="texto-b" class="respuesta respuesta-caja"></p>
+        <div id="escalas-b"></div>
+      </section>
+      <div class="barra-acciones">
+        <button type="button" class="fca-btn fca-btn--secondary" id="anterior">Anterior</button>
+        <button type="button" class="fca-btn" id="siguiente">Siguiente</button>
+        <button type="button" class="fca-btn fca-btn--secondary" id="descargar">Descargar copia JSON</button>
+        <button type="button" class="fca-btn" id="enviar-lab">Enviar al laboratorio</button>
+      </div>
+      <p id="progreso" role="status"></p>
+    </article>
+  </main>
+  <script>
+    const dimensiones = ["exactitud", "completitud", "tono", "utilidad"];
+    const estado = { paquete: null, indice: 0, notas: {} };
+
+    const aviso = document.querySelector("#aviso");
+    const articulo = document.querySelector("#tarea");
+    const selector = document.querySelector("#selector-paquete");
+
+    function abrirPaquete(datos) {
+      if (!datos || !datos.tareas || !datos.tareas.length) {
+        aviso.textContent = "Ese paquete no tiene tareas.";
+        return;
+      }
+      estado.paquete = datos;
+      const guardado = localStorage.getItem(claveLocal());
+      estado.notas = guardado ? JSON.parse(guardado) : {};
+      estado.indice = 0;
+      articulo.hidden = false;
+      aviso.textContent = "";
+      pintar();
+    }
+
+    async function obtenerResumenPaquetes() {
+      const urls = ["/api/demos/3/paquetes-ciegos", "/api/demo3/paquetes-ciegos"];
+      for (const url of urls) {
+        try {
+          const resp = await fetch(url);
+          if (resp.ok) return resp.json();
+        } catch {
+          /* siguiente URL */
+        }
+      }
+      return { paquetes: [] };
+    }
+
+    async function cargarCatalogo() {
+      if (!selector) return;
+      try {
+        const payload = await obtenerResumenPaquetes();
+        const paquetes = payload.paquetes || [];
+        selector.replaceChildren();
+        if (!paquetes.length) {
+          const opt = document.createElement("option");
+          opt.value = "";
+          opt.textContent = "— No hay paquete ciego aún (corre el demo 3 con las 40+40) —";
+          selector.append(opt);
+          aviso.textContent = "Genera el ciego desde la página Demo 3 antes de calificar.";
+          return;
+        }
+        const vacio = document.createElement("option");
+        vacio.value = "";
+        vacio.textContent = "— Elige un paquete —";
+        selector.append(vacio);
+        for (const item of paquetes) {
+          const opt = document.createElement("option");
+          opt.value = item.id;
+          opt.textContent = item.etiqueta || item.id;
+          selector.append(opt);
+        }
+        const params = new URLSearchParams(location.search);
+        const pre = params.get("paquete");
+        if (pre && paquetes.some((p) => p.id === pre)) {
+          selector.value = pre;
+        } else if (paquetes.length === 1) {
+          selector.value = paquetes[0].id;
+        }
+      } catch {
+        selector.replaceChildren();
+        const opt = document.createElement("option");
+        opt.value = "";
+        opt.textContent = "— Error al listar paquetes —";
+        selector.append(opt);
+      }
+    }
+
+    async function cargarPaqueteSeleccionado() {
+      const id = selector?.value;
+      if (!id) {
+        aviso.textContent = "Elige un paquete de la lista.";
+        return;
+      }
+      let resp = await fetch("/api/demos/3/paquetes-ciegos/" + encodeURIComponent(id));
+      if (!resp.ok) {
+        resp = await fetch("/api/demo3/paquetes-ciegos/" + encodeURIComponent(id));
+      }
+      if (!resp.ok) {
+        aviso.textContent = "No se pudo cargar el paquete.";
+        return;
+      }
+      abrirPaquete(await resp.json());
+    }
+
+    document.querySelector("#abrir-paquete").addEventListener("click", () => {
+      const nombre = document.querySelector("#calificador").value.trim();
+      if (!nombre) {
+        aviso.textContent = "Escribe el nombre de quien califica.";
+        return;
+      }
+      cargarPaqueteSeleccionado();
+    });
+
+    document.querySelector("#archivo").addEventListener("change", async (evento) => {
+      const archivo = evento.target.files[0];
+      if (!archivo) return;
+      abrirPaquete(JSON.parse(await archivo.text()));
+    });
+
+    cargarCatalogo();
+
+    document.querySelector("#calificador").addEventListener("change", guardar);
+
+    document.querySelector("#anterior").addEventListener("click", () => {
+      estado.indice = Math.max(0, estado.indice - 1);
+      pintar();
+    });
+    document.querySelector("#siguiente").addEventListener("click", () => {
+      const tareas = estado.paquete.tareas;
+      estado.indice = Math.min(tareas.length - 1, estado.indice + 1);
+      pintar();
+    });
+
+    function claveLocal() {
+      const nombre = document.querySelector("#calificador").value.trim() || "sin-nombre";
+      return "nodo-demo3:" + estado.paquete.paquete + ":" + nombre;
+    }
+
+    function nota(id, respuesta, dimension) {
+      return (((estado.notas[id] || {})[respuesta] || {})[dimension]) || null;
+    }
+
+    function ponerNota(id, respuesta, dimension, valor) {
+      estado.notas[id] = estado.notas[id] || {};
+      estado.notas[id][respuesta] = estado.notas[id][respuesta] || {};
+      estado.notas[id][respuesta][dimension] = valor;
+      guardar();
+      progreso();
+    }
+
+    function guardar() {
+      if (!estado.paquete) return;
+      localStorage.setItem(claveLocal(), JSON.stringify(estado.notas));
+    }
+
+    function escalas(contenedor, id, respuesta) {
+      contenedor.replaceChildren();
+      for (const dimension of dimensiones) {
+        const campo = document.createElement("fieldset");
+        const leyenda = document.createElement("legend");
+        leyenda.textContent = dimension.charAt(0).toUpperCase() + dimension.slice(1) + " (1 a 5)";
+        campo.append(leyenda);
+        const escala = document.createElement("div");
+        escala.className = "escala";
+        for (let valor = 1; valor <= 5; valor += 1) {
+          const etiqueta = document.createElement("label");
+          const radio = document.createElement("input");
+          radio.type = "radio";
+          radio.name = id + "-" + respuesta + "-" + dimension;
+          radio.value = String(valor);
+          radio.checked = nota(id, respuesta, dimension) === valor;
+          radio.addEventListener("change", () => ponerNota(id, respuesta, dimension, valor));
+          etiqueta.append(radio, " " + valor);
+          escala.append(etiqueta);
+        }
+        campo.append(escala);
+        contenedor.append(campo);
+      }
+    }
+
+    function pintar() {
+      const tarea = estado.paquete.tareas[estado.indice];
+      document.querySelector("#titulo-tarea").textContent = "Tarea " + tarea.id + " · " + (estado.indice + 1) + " de " + estado.paquete.tareas.length;
+      document.querySelector("#tipo-tarea").textContent = tarea.tipo.replaceAll("_", " ");
+      document.querySelector("#instruccion").textContent = tarea.instruccion;
+      document.querySelector("#entrada").textContent = tarea.entrada;
+      document.querySelector("#texto-a").textContent = tarea.respuesta_a;
+      document.querySelector("#texto-b").textContent = tarea.respuesta_b;
+      escalas(document.querySelector("#escalas-a"), tarea.id, "A");
+      escalas(document.querySelector("#escalas-b"), tarea.id, "B");
+      progreso();
+    }
+
+    function faltantes() {
+      let faltan = 0;
+      for (const tarea of estado.paquete.tareas) {
+        for (const respuesta of ["A", "B"]) {
+          for (const dimension of dimensiones) {
+            if (!nota(tarea.id, respuesta, dimension)) faltan += 1;
+          }
+        }
+      }
+      return faltan;
+    }
+
+    function progreso() {
+      const faltan = faltantes();
+      const total = estado.paquete.tareas.length * 2 * dimensiones.length;
+      document.querySelector("#progreso").textContent = faltan === 0
+        ? "Calificación completa. Use «Enviar al laboratorio» para reflejarla en el informe."
+        : "Van " + (total - faltan) + " de " + total + " notas.";
+    }
+
+    function cuerpoCalificacion() {
+      const nombre = document.querySelector("#calificador").value.trim();
+      if (!nombre) {
+        aviso.textContent = "Escribe el nombre de quien califica.";
+        return null;
+      }
+      const faltan = faltantes();
+      if (faltan > 0) {
+        aviso.textContent = "Faltan " + faltan + " notas. Complete la planilla antes de enviar.";
+        return null;
+      }
+      const puntajes = [];
+      for (const tarea of estado.paquete.tareas) {
+        for (const respuesta of ["A", "B"]) {
+          puntajes.push({ id: tarea.id, respuesta, ...estado.notas[tarea.id][respuesta] });
+        }
+      }
+      return {
+        calificador: nombre,
+        paquete: estado.paquete.paquete,
+        fecha: new Date().toISOString(),
+        puntajes,
+      };
+    }
+
+    async function postCalificacion(cuerpo) {
+      const urls = ["/api/demos/3/calificacion", "/api/demo3/calificacion"];
+      let ultimo = null;
+      for (const url of urls) {
+        const resp = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(cuerpo),
+        });
+        ultimo = resp;
+        let data = {};
+        try {
+          data = await resp.json();
+        } catch {
+          data = {};
+        }
+        if (resp.status === 404) continue;
+        return { resp, data };
+      }
+      return { resp: ultimo, data: { error: "no existe" } };
+    }
+
+    document.querySelector("#enviar-lab").addEventListener("click", async () => {
+      const cuerpo = cuerpoCalificacion();
+      if (!cuerpo) return;
+      aviso.textContent = "Enviando al laboratorio…";
+      try {
+        const { resp, data } = await postCalificacion(cuerpo);
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            aviso.textContent =
+              "El servidor no tiene la ruta de envío (código 404). Detenga y reinicie: .venv/bin/python -m interfaz, luego recargue esta página.";
+            return;
+          }
+          aviso.textContent = data.error || "No se pudo registrar la calificación.";
+          return;
+        }
+        if (data.metricas && data.metricas.estado === "calculado") {
+          aviso.textContent =
+            "Calificación registrada. Métricas cerradas — abra el informe del Demo 3 para ver la comparación final.";
+        } else if (data.metricas && data.metricas.estado === "parcial") {
+          aviso.textContent =
+            "Primera calificación en el laboratorio. Falta la segunda persona evaluadora.";
+        } else {
+          aviso.textContent = "Calificación guardada en resultados/demo3/calificaciones/.";
+        }
+      } catch {
+        aviso.textContent =
+          "No hubo respuesta del servidor. Confirme que corre en http://127.0.0.1:8765/ (no abra el HTML como archivo local).";
+      }
+    });
+
+    document.querySelector("#descargar").addEventListener("click", () => {
+      const cuerpo = cuerpoCalificacion();
+      if (!cuerpo) return;
+      aviso.textContent = "";
+      const blob = new Blob([JSON.stringify(cuerpo, null, 2)], { type: "application/json" });
+      const enlace = document.createElement("a");
+      enlace.href = URL.createObjectURL(blob);
+      enlace.download = "calificacion-" + cuerpo.calificador.toLowerCase().replaceAll(" ", "-") + ".json";
+      enlace.click();
+    });
+  </script>
+</body>
+</html>

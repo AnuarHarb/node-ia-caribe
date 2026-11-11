@@ -1,0 +1,139 @@
+{
+  "demo": 5,
+  "titulo": "Agentes aislados por entidad",
+  "fecha": "2026-11-09T22:49:40-05:00",
+  "equipo": {
+    "sistema": "macOS-14.6.1-arm64-arm-64bit",
+    "python": "3.12.2",
+    "arquitectura": "arm64",
+    "procesador": "Apple M2 Pro",
+    "memoria_gb": 16
+  },
+  "datos": "ficticios",
+  "internet": false,
+  "pruebas_pasadas": 11,
+  "pruebas_total": 11,
+  "criterio": "El acceso cruzado queda bloqueado y las 11 pruebas pasan.",
+  "criterio_cumplido": true,
+  "bloqueo": {
+    "bloqueado": true,
+    "motivo": "fuera_del_aislamiento",
+    "ruta": "../gobernacion-bolivar/educacion/cupos-mahates.txt"
+  },
+  "auditoria_integra": true,
+  "filas": [
+    {
+      "prueba": "test_01_lectura_propia_entidad_a",
+      "esperado": "El agente de la alcaldía lee un archivo de su propia caja.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_02_lectura_propia_entidad_b",
+      "esperado": "El agente de la gobernación lee un archivo de su propia caja.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_03_trabajo_simultaneo",
+      "esperado": "Dos agentes de dos entidades escriben y leen a la vez, cada uno en su caja.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_04_lectura_cruzada_bloqueada",
+      "esperado": "Un agente no obtiene el archivo de la otra entidad.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_05_escritura_cruzada_bloqueada",
+      "esperado": "Un agente no escribe en la caja de la otra entidad.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_06_listado_cruzado_bloqueado",
+      "esperado": "El listado de una entidad no muestra los archivos de la otra, ni a través de un enlace.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_07_traversal_de_ruta_bloqueado",
+      "esperado": "Una ruta absoluta y una ruta con .. no salen de la caja.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_08_escape_por_symlink_bloqueado",
+      "esperado": "Un enlace simbólico hacia el archivo de otra entidad no se puede leer.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_09_auditoria_registra_bloqueo",
+      "esperado": "El intento bloqueado queda en el registro, sin el contenido del archivo ajeno.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_10_auditoria_registra_acceso_permitido",
+      "esperado": "Una lectura dentro de la propia caja queda registrada como permitida.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_11_cadena_de_auditoria_integra",
+      "esperado": "El registro íntegro verifica, y una alteración se detecta.",
+      "obtenido": "pasó"
+    }
+  ],
+  "eventos": [
+    {
+      "accion": "escribir",
+      "entidad": "alcaldia-barranquilla",
+      "hash": "b7d0301418625748230086a347fd22b22abdf856eb69a193ed87ba860405de39",
+      "motivo": "dentro_de_la_entidad",
+      "n": 1,
+      "prev": "0000000000000000000000000000000000000000000000000000000000000000",
+      "resultado": "permitido",
+      "ruta": "pqrs/turno-1042.txt",
+      "ts": "2026-11-10T03:49:40+00:00"
+    },
+    {
+      "accion": "escribir",
+      "entidad": "gobernacion-bolivar",
+      "hash": "43d22d7d8197a6f06137116653961b8c11e793332b43e11662e9aa97b1041dda",
+      "motivo": "dentro_de_la_entidad",
+      "n": 2,
+      "prev": "b7d0301418625748230086a347fd22b22abdf856eb69a193ed87ba860405de39",
+      "resultado": "permitido",
+      "ruta": "educacion/cupos-mahates.txt",
+      "ts": "2026-11-10T03:49:40+00:00"
+    },
+    {
+      "accion": "escribir",
+      "entidad": "alcaldia-barranquilla",
+      "hash": "14d71db3bfa7913d332cea8713c680cae853f0f9df038481719ce2ef7a7ed9dc",
+      "motivo": "dentro_de_la_entidad",
+      "n": 3,
+      "prev": "43d22d7d8197a6f06137116653961b8c11e793332b43e11662e9aa97b1041dda",
+      "resultado": "permitido",
+      "ruta": "pqrs/nota-de-trabajo.txt",
+      "ts": "2026-11-10T03:49:40+00:00"
+    },
+    {
+      "accion": "escribir",
+      "entidad": "gobernacion-bolivar",
+      "hash": "876358f908b0a85db3e0d690462ac2bdcfd5b098b7d2cf2689e18e34e0350c5b",
+      "motivo": "dentro_de_la_entidad",
+      "n": 4,
+      "prev": "14d71db3bfa7913d332cea8713c680cae853f0f9df038481719ce2ef7a7ed9dc",
+      "resultado": "permitido",
+      "ruta": "educacion/nota-de-trabajo.txt",
+      "ts": "2026-11-10T03:49:40+00:00"
+    },
+    {
+      "accion": "leer",
+      "entidad": "alcaldia-barranquilla",
+      "hash": "4475f283fb007758161ca39d70a2c8ebccf14bb0dab0d5c186cdd6ca57ff6198",
+      "motivo": "fuera_del_aislamiento",
+      "n": 5,
+      "prev": "876358f908b0a85db3e0d690462ac2bdcfd5b098b7d2cf2689e18e34e0350c5b",
+      "resultado": "denegado",
+      "ruta": "../gobernacion-bolivar/educacion/cupos-mahates.txt",
+      "ts": "2026-11-10T03:49:40+00:00"
+    }
+  ],
+  "corrida_id": "2026-11-09T22-49-40-05-00"
+}

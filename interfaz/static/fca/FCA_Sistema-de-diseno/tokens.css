@@ -1,0 +1,126 @@
+/* Fundación Código Abierto — generado desde tokens.json */
+:root{
+  --surface-page:#F8FAFC;
+  --surface-card:#FFFFFF;
+  --surface-mist:#EFF8FF;
+  --surface-navy:#050A30;
+  --ink:#0B1220;
+  --ink-muted:#526077;
+  --ink-inverse:#FFFFFF;
+  --ink-inverse-muted:#C9DBF0;
+  --line:#D9E4EE;
+  --brand-blue:#00A0F9;
+  --brand-blue-strong:#006BAD;
+  --brand-blue-hover:#005A92;
+  --on-action:#FFFFFF;
+  --cyan:#2CC9FF;
+  --teal:#1DAFA1;
+  --signal-green:#00E676;
+  --signal-orange:#FB923C;
+  --shadow-card:0 1px 2px rgba(11,18,32,0.06), 0 8px 24px rgba(11,18,32,0.06);
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-6:24px;
+  --space-8:32px;
+  --space-12:48px;
+  --space-16:64px;
+  --radius-sm:6px;
+  --radius-md:10px;
+  --radius-lg:16px;
+  --radius-xl:24px;
+  --radius-full:9999px;
+  --font-display:"League Spartan", "Poppins", system-ui, sans-serif;
+  --font-sans:"Poppins", system-ui, sans-serif;
+  --font-mono:"Space Mono", ui-monospace, monospace;
+  }
+[data-theme="dark"]{
+  --surface-page:#050A30;
+  --surface-card:#0B1648;
+  --surface-mist:#0E1F54;
+  --surface-navy:#121E5A;
+  --ink:#F1F6FC;
+  --ink-muted:#A9B8CC;
+  --ink-inverse:#FFFFFF;
+  --ink-inverse-muted:#C9DBF0;
+  --line:#26346A;
+  --brand-blue:#00A0F9;
+  --brand-blue-strong:#2CC9FF;
+  --brand-blue-hover:#75DBFF;
+  --on-action:#050A30;
+  --cyan:#2CC9FF;
+  --teal:#1DAFA1;
+  --signal-green:#00E676;
+  --signal-orange:#FB923C;
+  --shadow-card:0 1px 2px rgba(0,0,0,0.4);
+  }
+.display{
+  font-family:var(--font-display);
+  font-size:64px;
+  line-height:60px;
+  font-weight:800;
+  letter-spacing:-1px;
+  }
+.h1{
+  font-family:var(--font-display);
+  font-size:44px;
+  line-height:44px;
+  font-weight:800;
+  letter-spacing:-0.5px;
+  }
+.h2{
+  font-family:var(--font-display);
+  font-size:30px;
+  line-height:34px;
+  font-weight:700;
+  }
+.h3{
+  font-family:var(--font-display);
+  font-size:20px;
+  line-height:24px;
+  font-weight:700;
+  }
+.stat{
+  font-family:var(--font-display);
+  font-size:40px;
+  line-height:40px;
+  font-weight:800;
+  }
+.body-lg{
+  font-family:var(--font-sans);
+  font-size:18px;
+  line-height:30px;
+  font-weight:400;
+  }
+.body{
+  font-family:var(--font-sans);
+  font-size:16px;
+  line-height:26px;
+  font-weight:400;
+  }
+.body-sm{
+  font-family:var(--font-sans);
+  font-size:14px;
+  line-height:22px;
+  font-weight:400;
+  }
+.label{
+  font-family:var(--font-sans);
+  font-size:14px;
+  line-height:20px;
+  font-weight:600;
+  }
+.kicker{
+  font-family:var(--font-mono);
+  font-size:12px;
+  line-height:16px;
+  font-weight:400;
+  letter-spacing:0.3px;
+  }
+.tag{
+  font-family:var(--font-mono);
+  font-size:11px;
+  line-height:14px;
+  font-weight:400;
+  }

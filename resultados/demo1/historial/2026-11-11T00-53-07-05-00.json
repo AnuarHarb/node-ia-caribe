@@ -1,0 +1,22 @@
+{
+  "demo": 1,
+  "fecha": "2026-11-11T00:53:07-05:00",
+  "filas": 1,
+  "aciertos_marcados": 0,
+  "errores_marcados": 1,
+  "criterio_flujo": true,
+  "criterio_video_error_real": true,
+  "tabla": [
+    {
+      "id": "692fecb8f526",
+      "persona": "Anuar Harb",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_correcta": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_sistema": "Bueno, me voy a pedir una certificada de residencia. ¿Qué papeles tengo que traer?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/692fecb8f526.webm"
+    }
+  ],
+  "corrida_id": "2026-11-11T00-53-07-05-00"
+}

@@ -1,0 +1,215 @@
+{
+  "demo": 1,
+  "titulo": "Voz en español costeño",
+  "fecha": "2026-11-11T00:57:26-05:00",
+  "responsable": "Anuar Harb",
+  "equipo": {
+    "sistema": "macOS-14.6.1-arm64-arm-64bit",
+    "python": "3.12.2",
+    "arquitectura": "arm64",
+    "procesador": "Apple M2 Pro",
+    "memoria_gb": 16
+  },
+  "modelos": {
+    "whisper_repo": "mlx-community/whisper-small-mlx",
+    "whisper": "Whisper small (MLX, mlx-community/whisper-small-mlx)",
+    "ollama": "qwen2.5:3b",
+    "piper_asistente": "Piper es_MX-ald-medium.onnx (español México, voz masculina medium)",
+    "piper_archivo": "es_MX-ald-medium.onnx"
+  },
+  "resumen_ejecutivo": "6 frases medidas (1 coincidencia exacta tras normalizar, 5 con error visible). WER corpus 17.39 %. Tiempos promedio: escuchar 2.098 s, entender/responder 2.49 s, hablar 0.296 s.",
+  "filas": 6,
+  "aciertos_marcados": 1,
+  "errores_marcados": 5,
+  "criterio_flujo": true,
+  "criterio_video_error_real": true,
+  "criterio_cumplido": true,
+  "wer_corpus": {
+    "frases": 6,
+    "wer": 0.17391304347826086,
+    "wer_porcentaje": 17.39,
+    "sustituciones": 10,
+    "inserciones": 1,
+    "eliminaciones": 1,
+    "palabras_referencia": 69,
+    "por_frase": [
+      {
+        "referencia": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+        "hipotesis": "Bueno, me voy a pedir una certificada de residencia. ¿Qué papeles tengo que traer?",
+        "wer": 0.38461538461538464
+      },
+      {
+        "referencia": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+        "hipotesis": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "Necesito un turno para el Sisbén. Me lo pueden dar ahora.",
+        "hipotesis": "Necesito un turno para el 6. Me lo pueden dar ahora.",
+        "wer": 0.09090909090909091
+      },
+      {
+        "referencia": "¿Dónde queda la oficina del peredial? Es que me perdí.",
+        "hipotesis": "¿Dónde queda el oficinal peredial? Es que me perdí.",
+        "wer": 0.3
+      },
+      {
+        "referencia": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+        "hipotesis": "Quiero saber si ya salió la respuesta de mi Derecha de Petición del mes pasado.",
+        "wer": 0.06666666666666667
+      },
+      {
+        "referencia": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+        "hipotesis": "hasta que ahora están recibiendo el pago del impuesto hoy",
+        "wer": 0.2
+      }
+    ]
+  },
+  "wer_por_persona": [
+    {
+      "persona": "Anuar Harb",
+      "frases": 6,
+      "wer_porcentaje": 17.39,
+      "sustituciones": 10,
+      "eliminaciones": 1,
+      "inserciones": 1
+    }
+  ],
+  "tiempos_promedio": {
+    "asr_promedio_s": 2.098,
+    "llm_promedio_s": 2.49,
+    "tts_promedio_s": 0.296,
+    "total_promedio_s": 5.153
+  },
+  "tabla": [
+    {
+      "id": "692fecb8f526",
+      "persona": "Anuar Harb",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_correcta": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_sistema": "Bueno, me voy a pedir una certificada de residencia. ¿Qué papeles tengo que traer?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/692fecb8f526.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/692fecb8f526",
+      "respuesta_asistente": "Tienes que traer tu documento de identidad y tu cédula de residencia.",
+      "asr_s": 5.629,
+      "llm_s": 4.236,
+      "tts_s": 0.473,
+      "segundos_total": 10.994,
+      "wer_porcentaje": 38.46,
+      "flujo_completo": true
+    },
+    {
+      "id": "a801bfa62109",
+      "persona": "Anuar Harb",
+      "guion": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "transcripcion_correcta": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+      "transcripcion_sistema": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/a801bfa62109.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/a801bfa62109",
+      "respuesta_asistente": "Lo siento, no tengo ese dato. ¿Podrías preguntar en la recepción o verificar en el sitio web de la alcaldía?",
+      "asr_s": 2.274,
+      "llm_s": 3.938,
+      "tts_s": 0.35,
+      "segundos_total": 6.76,
+      "wer_porcentaje": 0.0,
+      "flujo_completo": true
+    },
+    {
+      "id": "65bf9ef7138e",
+      "persona": "Anuar Harb",
+      "guion": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "transcripcion_correcta": "Necesito un turno para el Sisbén. Me lo pueden dar ahora.",
+      "transcripcion_sistema": "Necesito un turno para el 6. Me lo pueden dar ahora.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/65bf9ef7138e.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/65bf9ef7138e",
+      "respuesta_asistente": "Lo siento, no tengo información sobre turnos para el 6. Puedo ayudarte con otros asuntos, dime qué necesitas.",
+      "asr_s": 0.824,
+      "llm_s": 1.446,
+      "tts_s": 0.24,
+      "segundos_total": 2.681,
+      "wer_porcentaje": 9.09,
+      "flujo_completo": true
+    },
+    {
+      "id": "d6c300d069fc",
+      "persona": "Anuar Harb",
+      "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "transcripcion_correcta": "¿Dónde queda la oficina del peredial? Es que me perdí.",
+      "transcripcion_sistema": "¿Dónde queda el oficinal peredial? Es que me perdí.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/d6c300d069fc.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/d6c300d069fc",
+      "respuesta_asistente": "El oficinal peredial está en la avenida principal de la ciudad. ¿Cómo te va a llegar?",
+      "asr_s": 0.97,
+      "llm_s": 1.437,
+      "tts_s": 0.173,
+      "segundos_total": 2.753,
+      "wer_porcentaje": 30.0,
+      "flujo_completo": true
+    },
+    {
+      "id": "5b00e8a8e461",
+      "persona": "Anuar Harb",
+      "guion": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "transcripcion_correcta": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "transcripcion_sistema": "Quiero saber si ya salió la respuesta de mi Derecha de Petición del mes pasado.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/5b00e8a8e461.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/5b00e8a8e461",
+      "respuesta_asistente": "Lo siento, no tengo ese dato. Pide el radicado de tu solicitud para poder ayudarte mejor.",
+      "asr_s": 1.384,
+      "llm_s": 1.347,
+      "tts_s": 0.226,
+      "segundos_total": 3.185,
+      "wer_porcentaje": 6.67,
+      "flujo_completo": true
+    },
+    {
+      "id": "ac9a5b764e35",
+      "persona": "Anuar Harb",
+      "guion": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+      "transcripcion_correcta": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+      "transcripcion_sistema": "hasta que ahora están recibiendo el pago del impuesto hoy",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/ac9a5b764e35.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/ac9a5b764e35",
+      "respuesta_asistente": "No tengo información sobre el estado de recepción de pagos de impuestos. ¿Puede verificar con el departamento de hacienda?",
+      "asr_s": 1.506,
+      "llm_s": 2.536,
+      "tts_s": 0.317,
+      "segundos_total": 4.546,
+      "wer_porcentaje": 20.0,
+      "flujo_completo": true
+    }
+  ],
+  "video_corrida": null,
+  "definicion_wer": "WER por frase y por hablante con jiwer; texto en minúsculas y sin puntuación.",
+  "nota_referencias": "La referencia humana es lo dicho (guion revisado), no la transcripción del ASR. Se corrigieron dos referencias que habían copiado el texto del reconocimiento.",
+  "observaciones_llm": [
+    {
+      "id": "692fecb8f526",
+      "tipo": "alucinacion",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "respuesta": "Tienes que traer tu documento de identidad y tu cédula de residencia.",
+      "observacion": "El asistente pidió «cédula de residencia»; el ciudadano hablaba de un certificado de residencia. Requisito inventado."
+    },
+    {
+      "id": "d6c300d069fc",
+      "tipo": "alucinacion",
+      "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "respuesta": "El oficinal peredial está en la avenida principal de la ciudad. ¿Cómo te va a llegar?",
+      "observacion": "Inventó que la oficina del predial «está en la avenida principal» sin dato en la petición."
+    }
+  ],
+  "implicacion_alucinaciones": "El modelo local inventó requisitos y ubicaciones sin base documental. Eso motiva conectar el asistente a la información oficial de cada entidad (RAG o integración).",
+  "corrida_id": "2026-11-11T00-57-26-05-00"
+}

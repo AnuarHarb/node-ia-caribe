@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Demo 5 · Agentes aislados por entidad</title>
+  <style>
+    body { font-family: Palatino, "Iowan Old Style", serif; max-width: 54rem; margin: 2rem auto; padding: 0 1rem; color: #1c1c1c; line-height: 1.45; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0 2rem; }
+    th, td { border-bottom: 1px solid #ccc; text-align: left; vertical-align: top; padding: 0.4rem 0.5rem; }
+    code { font-family: ui-monospace, monospace; font-size: 0.9em; }
+    .estado { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <header>
+    <p>Nodo IA Caribe · evidencia de laboratorio TRL 3</p>
+    <h1>Agentes aislados por entidad</h1>
+    <p>Fecha: 2026-11-09T23:33:27-05:00<br>Equipo: Apple M2 Pro, 16 GB, macOS-14.6.1-arm64-arm-64bit, Python 3.12.2</p>
+    <p class="estado">Criterio cumplido. Pruebas 11 de 11. Acceso cruzado bloqueado: True. Auditoría íntegra: True.</p>
+  </header>
+  <main>
+    <section>
+      <h2>Pruebas</h2>
+      <table>
+        <caption>Resultado de las 11 pruebas automatizadas</caption>
+        <thead><tr><th>Prueba</th><th>Resultado esperado</th><th>Resultado obtenido</th></tr></thead>
+        <tbody>
+          <tr><td><code>test_01_lectura_propia_entidad_a</code></td><td>El agente de la alcaldía lee un archivo de su propia caja.</td><td>pasó</td></tr>
+<tr><td><code>test_02_lectura_propia_entidad_b</code></td><td>El agente de la gobernación lee un archivo de su propia caja.</td><td>pasó</td></tr>
+<tr><td><code>test_03_trabajo_simultaneo</code></td><td>Dos agentes de dos entidades escriben y leen a la vez, cada uno en su caja.</td><td>pasó</td></tr>
+<tr><td><code>test_04_lectura_cruzada_bloqueada</code></td><td>Un agente no obtiene el archivo de la otra entidad.</td><td>pasó</td></tr>
+<tr><td><code>test_05_escritura_cruzada_bloqueada</code></td><td>Un agente no escribe en la caja de la otra entidad.</td><td>pasó</td></tr>
+<tr><td><code>test_06_listado_cruzado_bloqueado</code></td><td>El listado de una entidad no muestra los archivos de la otra, ni a través de un enlace.</td><td>pasó</td></tr>
+<tr><td><code>test_07_traversal_de_ruta_bloqueado</code></td><td>Una ruta absoluta y una ruta con .. no salen de la caja.</td><td>pasó</td></tr>
+<tr><td><code>test_08_escape_por_symlink_bloqueado</code></td><td>Un enlace simbólico hacia el archivo de otra entidad no se puede leer.</td><td>pasó</td></tr>
+<tr><td><code>test_09_auditoria_registra_bloqueo</code></td><td>El intento bloqueado queda en el registro, sin el contenido del archivo ajeno.</td><td>pasó</td></tr>
+<tr><td><code>test_10_auditoria_registra_acceso_permitido</code></td><td>Una lectura dentro de la propia caja queda registrada como permitida.</td><td>pasó</td></tr>
+<tr><td><code>test_11_cadena_de_auditoria_integra</code></td><td>El registro íntegro verifica, y una alteración se detecta.</td><td>pasó</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Registro de auditoría de la corrida visible</h2>
+      <p>La alcaldía intentó leer <code>../gobernacion-atlantico/educacion/cupos-mahates.txt</code>. Motivo: fuera_del_aislamiento.</p>
+      <table>
+        <caption>Eventos, en orden, con cadena de hashes verificada</caption>
+        <thead><tr><th>#</th><th>Entidad</th><th>Acción</th><th>Ruta</th><th>Resultado</th><th>Motivo</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>alcaldia-santa-marta</td><td>escribir</td><td>pqrs/turno-1042.txt</td><td>permitido</td><td>dentro_de_la_entidad</td></tr>
+<tr><td>2</td><td>gobernacion-atlantico</td><td>escribir</td><td>educacion/cupos-mahates.txt</td><td>permitido</td><td>dentro_de_la_entidad</td></tr>
+<tr><td>3</td><td>alcaldia-santa-marta</td><td>escribir</td><td>pqrs/nota-de-trabajo.txt</td><td>permitido</td><td>dentro_de_la_entidad</td></tr>
+<tr><td>4</td><td>gobernacion-atlantico</td><td>escribir</td><td>educacion/nota-de-trabajo.txt</td><td>permitido</td><td>dentro_de_la_entidad</td></tr>
+<tr><td>5</td><td>alcaldia-santa-marta</td><td>leer</td><td>../gobernacion-atlantico/educacion/cupos-mahates.txt</td><td>denegado</td><td>fuera_del_aislamiento</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

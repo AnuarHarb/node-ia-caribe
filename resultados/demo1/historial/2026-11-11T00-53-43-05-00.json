@@ -1,0 +1,32 @@
+{
+  "demo": 1,
+  "fecha": "2026-11-11T00:53:43-05:00",
+  "filas": 2,
+  "aciertos_marcados": 1,
+  "errores_marcados": 1,
+  "criterio_flujo": true,
+  "criterio_video_error_real": true,
+  "tabla": [
+    {
+      "id": "692fecb8f526",
+      "persona": "Anuar Harb",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_correcta": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_sistema": "Bueno, me voy a pedir una certificada de residencia. ¿Qué papeles tengo que traer?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/692fecb8f526.webm"
+    },
+    {
+      "id": "a801bfa62109",
+      "persona": "Anuar Harb",
+      "guion": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "transcripcion_correcta": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+      "transcripcion_sistema": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/a801bfa62109.webm"
+    }
+  ],
+  "corrida_id": "2026-11-11T00-53-43-05-00"
+}

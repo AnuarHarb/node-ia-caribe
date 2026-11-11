@@ -1,0 +1,12 @@
+prueba,esperado,obtenido
+test_01_lectura_propia_entidad_a,El agente de la alcaldía lee un archivo de su propia caja.,pasó
+test_02_lectura_propia_entidad_b,El agente de la gobernación lee un archivo de su propia caja.,pasó
+test_03_trabajo_simultaneo,"Dos agentes de dos entidades escriben y leen a la vez, cada uno en su caja.",pasó
+test_04_lectura_cruzada_bloqueada,Un agente no obtiene el archivo de la otra entidad.,pasó
+test_05_escritura_cruzada_bloqueada,Un agente no escribe en la caja de la otra entidad.,pasó
+test_06_listado_cruzado_bloqueado,"El listado de una entidad no muestra los archivos de la otra, ni a través de un enlace.",pasó
+test_07_traversal_de_ruta_bloqueado,Una ruta absoluta y una ruta con .. no salen de la caja.,pasó
+test_08_escape_por_symlink_bloqueado,Un enlace simbólico hacia el archivo de otra entidad no se puede leer.,pasó
+test_09_auditoria_registra_bloqueo,"El intento bloqueado queda en el registro, sin el contenido del archivo ajeno.",pasó
+test_10_auditoria_registra_acceso_permitido,Una lectura dentro de la propia caja queda registrada como permitida.,pasó
+test_11_cadena_de_auditoria_integra,"El registro íntegro verifica, y una alteración se detecta.",pasó

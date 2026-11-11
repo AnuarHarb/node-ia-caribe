@@ -1,0 +1,12 @@
+{
+  "tareas": 40,
+  "con_respuesta_local": 40,
+  "con_las_dos_respuestas": 40,
+  "modelo_local": "qwen2.5:3b",
+  "modelo_referencia": "claude-haiku-4-5",
+  "proveedor_referencia": "anthropic",
+  "actualizado": "2026-11-09T23:49:03",
+  "paquete": "6fef1ff49dccfcae50137c8aeeaac3c03cc3a2eb5b4bc5c9979abae433eb6414",
+  "ciego": "/Users/anuarharb/Hacker/playground/demos/resultados/demo3/ciego.json",
+  "falta": null
+}

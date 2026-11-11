@@ -1,0 +1,6 @@
+mlx-whisper==0.4.3
+httpx==0.28.1
+jiwer==4.0.0
+piper-tts==1.8.0
+qrcode==8.2
+fpdf2==2.9.0

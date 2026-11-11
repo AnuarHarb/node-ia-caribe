@@ -1,0 +1,13 @@
+{
+  "demo": 3,
+  "fecha": "2026-11-09T23:09:29-05:00",
+  "modelo_local": "qwen2.5:3b",
+  "tareas_local": 40,
+  "tiempo_promedio_todas_s": 0.857,
+  "tiempo_promedio_caliente_s": 0.767,
+  "tiempo_maximo_caliente_s": 1.234,
+  "comparacion_completa": false,
+  "pendiente_calificacion": "Falta referencia comercial y dos calificaciones a ciegas.",
+  "costo_local_usd": 0,
+  "corrida_id": "2026-11-09T23-09-29-05-00"
+}

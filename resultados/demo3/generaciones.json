@@ -1,0 +1,1122 @@
+{
+  "T01": {
+    "local": {
+      "texto": "María del Carmen Gómez pide un certificado de residencia para un subsidio de vivienda. Falta adjuntar un recibo de servicio o una declaración de un vecino para validar su residencia desde 2019. El número de celular 3000000001 también falta.",
+      "segundos": 4.35,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "**Resumen de la petición:**\n\n**Quién pide:** María del Carmen Gómez (documento terminado en 0001), barrio El Campito.\n\n**Qué pide:** Certificado de residencia para subsidio de vivienda. Refiere residencia desde 2019.\n\n**Dato que falta:** Comprobante de servicios públicos o declaración de vecino (no adjuntó ninguno de estos documentos de soporte).",
+      "segundos": 2.016,
+      "tokens": {
+        "input_tokens": 226,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 113,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T02": {
+    "local": {
+      "texto": "El señor Lázaro Peña, de la calle 30 con carrera 18, barrio La Paz, pide revisar un hueco frente a su casa que ya se cayó una moto. Falta indicar el número de la casa y si ya reportó el daño a la empresa de servicios.",
+      "segundos": 1.207,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "**Resumen de la petición:**\n\nRadicado SO-221: Lázaro Peña (calle 30 con carrera 18, barrio La Paz) solicita revisión de un hueco frente a su vivienda que lleva tres semanas y ha causado caída de una moto. \n\n**Datos que faltan:** número de la casa y si ya reportó el daño a la empresa de servicios.",
+      "segundos": 1.694,
+      "tokens": {
+        "input_tokens": 222,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 106,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T03": {
+    "local": {
+      "texto": "La señora Rosa Mercado pide un cupo para su hijo Tomás Mercado en el grado segundo de la IED Los Manglares. Falta adjuntar el boletín del año anterior y saber si el niño ya está matriculado en otro colegio.",
+      "segundos": 1.029,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "**Resumen de la petición:**\n\nLa señora Rosa Mercado solicita cupo en grado segundo para su hijo Tomás Mercado (7 años) en la IED Los Manglares de Mahates. Adjunta registro civil. **Falta:** boletín del año anterior e información sobre si el niño está matriculado en otro colegio.",
+      "segundos": 1.374,
+      "tokens": {
+        "input_tokens": 229,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 90,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T04": {
+    "local": {
+      "texto": "La Junta de Acción Comunal de San Basilio pide el arreglo de un puente de madera utilizado por el transporte escolar. Falta el número de familias afectadas. La petición está firmada por Nidia Cassiani.",
+      "segundos": 0.922,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "**Resumen de la petición MA-15:**\n\nQuién pide: Junta de Acción Comunal del corregimiento de San Basilio (presidenta: Nidia Cassiani).\n\nQué pide: Arreglo de un puente de madera sobre un caño que utiliza el transporte escolar.\n\nDato que falta: Número de familias afectadas y evidencia fotográfica del estado del puente.",
+      "segundos": 1.586,
+      "tokens": {
+        "input_tokens": 233,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 110,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T05": {
+    "local": {
+      "texto": "La persona que pide es Doña Eulalia Jiménez, quien pide un carro tanque para que le traigan agua. Falta el número del contrato para poder resolver su problema.",
+      "segundos": 0.787,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "**Resumen de la PQR AR-900:**\n\nDoña Eulalia Jiménez, residente en manzana 4 casa 2 del barrio La Orilla en Ciénaga, solicita servicio de carro tanque porque lleva seis días sin agua. Reporta estar al día en pagos (último recibo de agosto por $48.000). **Dato faltante:** número del contrato de servicio.",
+      "segundos": 1.63,
+      "tokens": {
+        "input_tokens": 234,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 108,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T06": {
+    "local": {
+      "texto": "Don Héctor Viloria, de 71 años, pide una cita de vacunación. Solicita un turno de martes por la mañana. Falta el número de documento para su cita.",
+      "segundos": 0.772,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "**Resumen de la petición:**\n\nDon Héctor Viloria (71 años) solicita una cita de vacunación. Está disponible los martes en la mañana y será acompañado por su nieta. Faltan datos: régimen de salud y número de documento de identidad.",
+      "segundos": 1.305,
+      "tokens": {
+        "input_tokens": 212,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 76,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T07": {
+    "local": {
+      "texto": "La docente Ana Ferrer pide marcadores, resmas de papel y un video beam para el grado noveno. Falta la fecha de la reunión de padres y el salón donde se realizará.",
+      "segundos": 0.794,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "**Resumen de la petición:**\n\n**Quién pide:** Ana Ferrer, docente.\n\n**Qué pide:** Marcadores, resmas de papel y un video beam para el grado noveno (36 estudiantes).\n\n**Datos que faltan:** Fecha específica de la reunión de padres y número/identificación del salón.",
+      "segundos": 1.427,
+      "tokens": {
+        "input_tokens": 202,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 88,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T08": {
+    "local": {
+      "texto": "Pablo Gómez pide información sobre la respuesta a su derecho de petición sobre alumbrado de la calle 15. Falta el radicado del correo anterior que adjuntó en la solicitud original.",
+      "segundos": 0.827,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "**Resumen de la petición:**\n\n**Quién pide:** Pablo Gómez (correo: pablo.ejemplo@correo.test)\n\n**Qué pide:** Conocer el estado de respuesta de su derecho de petición anterior (radicado SM-P-19) sobre alumbrado de la calle 15.\n\n**Dato que falta:** Copia o comprobante del radicado anterior SM-P-19.",
+      "segundos": 1.652,
+      "tokens": {
+        "input_tokens": 223,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 109,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T09": {
+    "local": {
+      "texto": "Se ha acordado el radicado GA-1042. Se solicita el recibo de un servicio público del barrio o una declaración de dos vecinos. Se respetará el formato sin prometer fechas del certificado. El trámite se realizará en la ventanilla con un lenguaje sencillo.",
+      "segundos": 1.234,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "Estimado ciudadano, acusamos recibo de su radicado GA-1042 y agradecemos su gestión ante nuestra entidad. Para continuar con el trámite, le solicitamos que presente el recibo de un servicio público (agua, luz o gas) del barrio donde reside, o en su defecto, una declaración escrita firmada por dos vecinos que certifiquen su residencia en la zona. Una vez recibida esta documentación, procederemos a evaluar su solicitud conforme a nuestros procedimientos.",
+      "segundos": 1.986,
+      "tokens": {
+        "input_tokens": 222,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 132,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T10": {
+    "local": {
+      "texto": "La queja SO-221 quedó registrada. Se solicita el número exacto de la casa. No se promete la fecha del arreglo del hueco. Se informa que un inspector ficticio realizará una visita, sin fijar un día.",
+      "segundos": 0.905,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "Agradecemos su comunicación y le informamos que su queja SO-221 ha quedado debidamente registrada en nuestro sistema. Para continuar con el trámite de inspección, le solicitamos amablemente que nos proporcione el número exacto de la casa donde se encuentra la situación reportada. Una vez recibida esta información, un inspector de nuestra entidad se acercará al lugar para evaluar la situación; le confirmaremos oportunamente los detalles de esta visita.",
+      "segundos": 1.696,
+      "tokens": {
+        "input_tokens": 216,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 121,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T11": {
+    "local": {
+      "texto": "La respuesta de la entidad es la siguiente: No se ha asignado ningún cupo aún; se solicita el boletín del año anterior o una constancia que el niño no estudió en el año inmediato anterior; se respetan las políticas de no prometer cupos en la IED Los Manglares.",
+      "segundos": 1.139,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "Agradecemos su solicitud y le informamos que actualmente no contamos con cupo disponible en la Institución Educativa Distrital Los Manglares. Para continuar con el trámite de inscripción, le solicitamos que presente el boletín de calificaciones del año anterior o, en su defecto, una constancia expedida por la institución donde estudió que certifique su desempeño académico previo, o en caso de no haber estudiado, una constancia que lo acredite. Una vez recibida esta documentación, podremos continuar evaluando su solicitud conforme a los procedimientos establecidos.",
+      "segundos": 2.125,
+      "tokens": {
+        "input_tokens": 209,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 154,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T12": {
+    "local": {
+      "texto": "Agradecemos el reporte del puente. Pedimos fotos del mismo y el número de familias que lo utilizan para llegar a la escuela. No prometemos obra ni presupuesto.",
+      "segundos": 0.711,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "Agradecemos sinceramente su reporte sobre la situación del puente en nuestra jurisdicción. Para poder evaluar adecuadamente esta situación y dar trámite a su solicitud, le solicitamos respetuosamente que nos proporcione fotografías del estado actual de la estructura y nos indique cuántas familias dependen de este puente para acceder a la escuela. Esta información nos permitirá documentar la situación de manera completa.",
+      "segundos": 1.715,
+      "tokens": {
+        "input_tokens": 203,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 110,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T13": {
+    "local": {
+      "texto": "La suspensión del barrio La Orilla está en revisión. Por favor, solicitar el número del contrato correspondiente. No se confirmará el uso del carro tanque en este caso. No se echará la culpa al usuario.",
+      "segundos": 0.833,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "Estimado ciudadano, agradecemos su comunicación y le informamos que la situación del barrio La Orilla se encuentra actualmente en revisión por parte de nuestras áreas competentes. Para poder avanzar en la gestión de su solicitud de manera más efectiva, le solicitamos respetuosamente que nos proporcione el número del contrato relacionado con su caso. Continuaremos trabajando en la evaluación de esta situación y le mantendremos informado de los avances.",
+      "segundos": 1.885,
+      "tokens": {
+        "input_tokens": 203,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 121,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T14": {
+    "local": {
+      "texto": "La jornada de vacunación se llevará a cabo los martes de 8 a 11 horas, sin cita previa. Se pide que lleve su documento de identidad y no se preguntará por ningún diagnóstico previo. No se informará sobre otras sedes de vacunación.",
+      "segundos": 1.071,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "Agradecemos su consulta. Le informamos que contamos con jornadas de vacunación todos los martes de 8:00 a 11:00 de la mañana sin necesidad de cita previa. Para asistir, le solicitamos que traiga su documento de identidad. Si tiene dudas adicionales sobre este servicio, no dude en comunicarse con nosotros.",
+      "segundos": 1.498,
+      "tokens": {
+        "input_tokens": 211,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 96,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T15": {
+    "local": {
+      "texto": "La respuesta de la entidad es la siguiente: hay papel en secretaría, con un máximo de dos resmas por docente esta semana; no se dispone de video beam; los marcadores están agotados y no se puede prometer la compra de nuevos.",
+      "segundos": 0.877,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "Estimado solicitante, agradecemos su consulta. Informamos que contamos con papel disponible en secretaría con un límite de dos resmas por docente durante esta semana; sin embargo, en este momento no disponemos de video beam ni de marcadores, cuyo reabastecimiento no podemos prometer en el corto plazo. Le invitamos a acercarse a secretaría para gestionar el papel o a comunicarse con nosotros si requiere información adicional sobre otros recursos.",
+      "segundos": 2.048,
+      "tokens": {
+        "input_tokens": 204,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 119,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T16": {
+    "local": {
+      "texto": "La respuesta de la entidad es la siguiente: el radicado SM-P-19 sigue en trámite y aún no ha recibido una respuesta; se solicita un teléfono de contacto para futuras consultas; no se especifica la fecha de respuesta debido a la falta de autorización en la ficha; se omite la información sobre el alumbrado.",
+      "segundos": 1.212,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "Estimado ciudadano, agradecemos su comunicación. Informamos que el radicado SM-P-19 se encuentra actualmente en trámite dentro de nuestras dependencias y aún no cuenta con una respuesta definitiva. Para poder mantenerlo informado sobre el avance de su solicitud, le solicitamos respetuosamente que nos proporcione un número telefónico de contacto donde podamos comunicarnos con usted. Quedamos atentos a sus datos.",
+      "segundos": 1.752,
+      "tokens": {
+        "input_tokens": 217,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 117,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T17": {
+    "local": {
+      "texto": "queja",
+      "segundos": 0.195,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "peticion",
+      "segundos": 0.68,
+      "tokens": {
+        "input_tokens": 178,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 5,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T18": {
+    "local": {
+      "texto": "reclamo",
+      "segundos": 0.128,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "reclamo",
+      "segundos": 0.654,
+      "tokens": {
+        "input_tokens": 179,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 6,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T19": {
+    "local": {
+      "texto": "reclamo",
+      "segundos": 0.159,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "reclamo",
+      "segundos": 0.668,
+      "tokens": {
+        "input_tokens": 193,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 6,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T20": {
+    "local": {
+      "texto": "sugerencia",
+      "segundos": 0.148,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "sugerencia",
+      "segundos": 0.676,
+      "tokens": {
+        "input_tokens": 179,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 6,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T21": {
+    "local": {
+      "texto": "felicitacion",
+      "segundos": 0.159,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "felicitacion",
+      "segundos": 0.684,
+      "tokens": {
+        "input_tokens": 184,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 6,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T22": {
+    "local": {
+      "texto": "informacion",
+      "segundos": 0.116,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "peticion",
+      "segundos": 0.683,
+      "tokens": {
+        "input_tokens": 170,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 5,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T23": {
+    "local": {
+      "texto": "peticion",
+      "segundos": 0.125,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "peticion",
+      "segundos": 0.683,
+      "tokens": {
+        "input_tokens": 175,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 5,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T24": {
+    "local": {
+      "texto": "queja",
+      "segundos": 0.116,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "queja",
+      "segundos": 0.676,
+      "tokens": {
+        "input_tokens": 178,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 5,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T25": {
+    "local": {
+      "texto": "{\n  \"radicado\": \"GA-1042\",\n  \"nombre\": \"María del Carmen Gómez\",\n  \"barrio\": \"El Campito\",\n  \"documento\": \"0001\",\n  \"telefono\": \"3000000001\"\n}",
+      "segundos": 1.125,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "```json\n{\n  \"radicado\": \"GA-1042\",\n  \"nombre\": \"María del Carmen Gómez\",\n  \"barrio\": \"El Campito\",\n  \"documento\": \"0001\",\n  \"telefono\": \"3000000001\"\n}\n```",
+      "segundos": 1.092,
+      "tokens": {
+        "input_tokens": 202,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 71,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T26": {
+    "local": {
+      "texto": "{\n  \"radicado\": \"BOL-ED-77\",\n  \"acudiente\": \"Rosa Mercado\",\n  \"estudiante\": \"Tomás Mercado\",\n  \"edad\": 7,\n  \"grado\": \"segundo\",\n  \"institucion\": \"IED Los Manglares\"\n}",
+      "segundos": 1.088,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "```json\n{\n  \"radicado\": \"BOL-ED-77\",\n  \"acudiente\": \"Rosa Mercado\",\n  \"estudiante\": \"Tomás Mercado\",\n  \"edad\": 7,\n  \"grado\": \"segundo\",\n  \"institucion\": \"IED Los Manglares\"\n}\n```",
+      "segundos": 1.241,
+      "tokens": {
+        "input_tokens": 206,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 85,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T27": {
+    "local": {
+      "texto": "{\n  \"nombre\": \"Doña Eulalia Jiménez\",\n  \"barrio\": \"La Orilla\",\n  \"dias_sin_servicio\": 6,\n  \"valor_recibo\": 48000,\n  \"numero_contrato\": null\n}",
+      "segundos": 0.997,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "```json\n{\n  \"nombre\": \"Doña Eulalia Jiménez\",\n  \"barrio\": \"La Orilla\",\n  \"dias_sin_servicio\": 6,\n  \"valor_recibo\": 48000,\n  \"numero_contrato\": null\n}\n```",
+      "segundos": 1.1,
+      "tokens": {
+        "input_tokens": 208,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 74,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T28": {
+    "local": {
+      "texto": "{\n  \"nombre\": \"Don Héctor Viloria\",\n  \"edad\": 71,\n  \"dia_disponible\": \"martes\",\n  \"documento\": null\n}",
+      "segundos": 0.659,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "```json\n{\n  \"nombre\": \"Héctor Viloria\",\n  \"edad\": 71,\n  \"dia_disponible\": \"martes\",\n  \"documento\": null\n}\n```",
+      "segundos": 0.962,
+      "tokens": {
+        "input_tokens": 178,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 50,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T29": {
+    "local": {
+      "texto": "{\n  \"docente\": \"Ana Ferrer\",\n  \"curso\": \"Noveno\",\n  \"estudiantes\": 36,\n  \"pedido\": {\n    \"marcadores\": null,\n    \"resmas\": null,\n    \"video_beam\": null\n  }\n}",
+      "segundos": 0.928,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "```json\n{\n  \"docente\": \"Ana Ferrer\",\n  \"curso\": \"noveno\",\n  \"estudiantes\": 36,\n  \"pedido\": [\"marcadores\", \"resmas\", \"video beam\"]\n}\n```",
+      "segundos": 1.053,
+      "tokens": {
+        "input_tokens": 180,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 59,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T30": {
+    "local": {
+      "texto": "{\n  \"nombre\": \"Pablo Gómez\",\n  \"radicado_anterior\": \"SM-P-19\",\n  \"tema\": \"alumbrado de la calle 15\",\n  \"correo\": \"pablo.ejemplo@correo.test\"\n}",
+      "segundos": 0.995,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "```json\n{\n  \"nombre\": \"Pablo Gómez\",\n  \"radicado_anterior\": \"SM-P-19\",\n  \"tema\": \"alumbrado de la calle 15\",\n  \"correo\": \"pablo.ejemplo@correo.test\"\n}\n```",
+      "segundos": 1.093,
+      "tokens": {
+        "input_tokens": 191,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 71,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T31": {
+    "local": {
+      "texto": "{\n  \"firmante\": \"Nidia Cassiani\",\n  \"cargo\": \"presidenta de la junta ficticia\",\n  \"obra_pedida\": \"arreglo del puente de madera del transporte escolar\",\n  \"numero_de_familias\": null\n}",
+      "segundos": 0.976,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "```json\n{\n  \"firmante\": \"Nidia Cassiani\",\n  \"cargo\": \"presidenta de la junta ficticia\",\n  \"obra_pedida\": \"arreglo del puente de madera del transporte escolar\",\n  \"numero_de_familias\": null\n}\n```",
+      "segundos": 1.119,
+      "tokens": {
+        "input_tokens": 201,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 75,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T32": {
+    "local": {
+      "texto": "{\n  \"nombre\": \"Lázaro Peña\",\n  \"barrio\": \"La Paz\",\n  \"direccion\": \"calle 30 con carrera 18\",\n  \"numero_de_casa\": null\n}",
+      "segundos": 0.8,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "```json\n{\n  \"nombre\": \"Lázaro Peña\",\n  \"barrio\": \"La Paz\",\n  \"direccion\": \"calle 30 con carrera 18\",\n  \"numero_de_casa\": null\n}\n```",
+      "segundos": 1.044,
+      "tokens": {
+        "input_tokens": 189,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 64,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T33": {
+    "local": {
+      "texto": "La fecha límite para responder la petición GA-1042 sería el lunes 16 de noviembre de 2026.",
+      "segundos": 0.699,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "# Respuesta\n\nBasándome en el texto de trabajo proporcionado:\n\n**Fecha límite para responder la petición GA-1042: viernes 20 de noviembre de 2026**\n\n## Cálculo:\n\n- **Radicación:** lunes 2 de noviembre de 2026\n- **Inicio del conteo:** martes 3 de noviembre de 2026 (día siguiente a la radicación)\n- **Plazo:** 15 días hábiles (excluyendo sábados y domingos, sin festivos)\n\nContando 15 días hábiles desde el 3 de noviembre:\n- Semana 1: 3, 4, 5, 6, 7 (5 días)\n- Semana 2: 10, 11, 12, 13, 14 (5 días)\n- Semana 3: 17, 18, 19, 20 (4 días)\n\n**Total: 15 días hábiles = viernes 20 de noviembre de 2026**",
+      "segundos": 2.936,
+      "tokens": {
+        "input_tokens": 261,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 266,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T34": {
+    "local": {
+      "texto": "El plazo de 15 días hábiles empieza a contar el día hábil siguiente al 13 de noviembre de 2026, que es viernes. Por lo tanto, el plazo comenzaría a contar desde el lunes 15 de noviembre de 2026.",
+      "segundos": 1.167,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "# Respuesta\n\nSegún el texto de trabajo: \"El plazo de 15 días hábiles empieza a contarse el día hábil siguiente a aquel en que el ciudadano completa la petición.\"\n\nEl ciudadano completó la petición el viernes 13 de noviembre de 2026.\n\n**El plazo de 15 días hábiles empieza a contarse el lunes 16 de noviembre de 2026** (el día hábil siguiente al viernes 13 de noviembre).",
+      "segundos": 1.699,
+      "tokens": {
+        "input_tokens": 277,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 128,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T35": {
+    "local": {
+      "texto": "No se puede enviar. Los datos personales de estudiantes menores de edad no se envían a proveedores externos ni se publican.",
+      "segundos": 0.587,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "**No, no se puede enviar.**\n\nSegún el texto de trabajo: \"los datos personales de estudiantes menores de edad no se envían a proveedores externos ni se publican.\"\n\nLa solicitud del proveedor pide nombres y documentos de menores, lo que viola esta regla. Además, el texto especifica que \"una consulta sobre cupos se responde con cifras agregadas, sin nombres ni documentos.\"\n\nLa respuesta correcta es entregar solo cifras agregadas (por ejemplo: \"hay 45 niños sin cupo\"), nunca la lista con identificadores personales.",
+      "segundos": 2.117,
+      "tokens": {
+        "input_tokens": 230,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 140,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T36": {
+    "local": {
+      "texto": "La entidad debe recibir la solicitud verbal de la mujer para que se le pueda expedir el certificado de palabra. Según el texto de trabajo, quien atiende la ventanilla escribe la petición, la lee en voz alta y entrega el número de radicado a la persona, sin exigir que esta sepa escribir.",
+      "segundos": 1.157,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "Según el texto de trabajo: **Sí, la entidad debe recibirla.**\n\nEl texto establece que \"la petición verbal es válida\" y que \"quien atiende la escribe, la lee en voz alta y le entrega el número de radicado a la persona. No se exige que la persona sepa escribir.\"\n\nPor lo tanto, la mujer puede hacer su petición de forma verbal (de palabra) sin necesidad de traer una carta escrita. El funcionario que la atiende es quien se encarga de escribirla, leerla en voz alta y entregarle el número de radicado.",
+      "segundos": 1.927,
+      "tokens": {
+        "input_tokens": 236,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 149,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T37": {
+    "local": {
+      "texto": "La entidad debe devolver los 20.000 pesos cobrados y dejar constancia de este hecho.",
+      "segundos": 0.479,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "Según el texto de trabajo, **la entidad debe devolver los 20.000 pesos** que le cobraron indebidamente, ya que el certificado de residencia no tiene costo.\n\nAdemás, el texto indica que **se debe dejar constancia** de esa devolución.",
+      "segundos": 1.276,
+      "tokens": {
+        "input_tokens": 210,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 72,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T38": {
+    "local": {
+      "texto": "El plazo que aplica para la consulta \"¿Hasta qué hora atienden hoy en hacienda?\" es el plazo de solicitud de información, que es de 10 días hábiles.",
+      "segundos": 0.819,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "Según el texto de trabajo, aplica un plazo de **10 días hábiles**.\n\n**Justificación:** El escrito solo pregunta un horario. El texto establece que \"si el escrito solo pregunta un horario, es solicitud de información\". Las solicitudes de información se responden en 10 días hábiles.",
+      "segundos": 1.48,
+      "tokens": {
+        "input_tokens": 242,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 81,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T39": {
+    "local": {
+      "texto": "El funcionario debe usar el plazo de 15 días hábiles, ya que la circular de ventanilla, que dice 30 días, es más larga que el plazo mencionado en el texto de trabajo, que es de 15 días hábiles.",
+      "segundos": 1.05,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "Según el texto de trabajo: **15 días hábiles**.\n\nEl texto de trabajo establece que cuando una circular interna da un plazo más largo que el del texto de trabajo, se aplica el plazo más corto. Como la circular de ventanilla dice 30 días y el texto de trabajo dice 15 días hábiles, el funcionario debe usar **15 días hábiles** por ser el plazo más corto.",
+      "segundos": 1.421,
+      "tokens": {
+        "input_tokens": 217,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 102,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  },
+  "T40": {
+    "local": {
+      "texto": "La entidad no puede garantizar que el hueco se arregle esta semana, ya que la ficha de respuesta solo autoriza acusar recibo y pedir el número de la casa.",
+      "segundos": 0.919,
+      "costo_usd": 0.0,
+      "modelo": "qwen2.5:3b"
+    },
+    "referencia": {
+      "texto": "Según el texto de trabajo, la entidad **puede**:\n\n1. **Acusar recibo** de la pregunta del ciudadano\n2. **Pedir el número de la casa** (dato faltante que autoriza la ficha)\n\nLa entidad **no puede prometer** que le arreglen el hueco esta semana, porque:\n- El texto dice que \"la entidad no promete una obra, un cupo ni un reembolso si la ficha de respuesta no lo autoriza\"\n- La ficha solo autoriza acusar recibo y pedir un dato, no autoriza prometer la obra ni plazos\n\n**Respuesta recomendada**: Acusar recibo de la solicitud, solicitar el número de la casa, y explicar el estado (si el texto lo permite en ese momento).",
+      "segundos": 2.458,
+      "tokens": {
+        "input_tokens": 252,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 196,
+        "service_tier": "standard",
+        "inference_geo": "not_available",
+        "speed": "standard"
+      },
+      "costo_usd": null,
+      "modelo": "claude-haiku-4-5",
+      "nota_costo": "Tokens guardados. El costo en dólares se calcula cuando se confirma la tarifa del día."
+    }
+  }
+}

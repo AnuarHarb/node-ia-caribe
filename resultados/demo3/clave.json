@@ -1,0 +1,168 @@
+{
+  "paquete": "6fef1ff49dccfcae50137c8aeeaac3c03cc3a2eb5b4bc5c9979abae433eb6414",
+  "semilla": 20261110,
+  "modelo_local": "qwen2.5:3b",
+  "modelo_referencia": "claude-haiku-4-5",
+  "asignacion": {
+    "T01": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T02": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T03": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T04": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T05": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T06": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T07": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T08": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T09": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T10": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T11": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T12": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T13": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T14": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T15": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T16": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T17": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T18": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T19": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T20": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T21": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T22": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T23": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T24": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T25": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T26": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T27": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T28": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T29": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T30": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T31": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T32": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T33": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T34": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T35": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T36": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T37": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T38": {
+      "A": "local",
+      "B": "referencia"
+    },
+    "T39": {
+      "A": "referencia",
+      "B": "local"
+    },
+    "T40": {
+      "A": "local",
+      "B": "referencia"
+    }
+  }
+}

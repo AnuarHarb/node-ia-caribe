@@ -1,0 +1,326 @@
+{
+  "paquete": "6fef1ff49dccfcae50137c8aeeaac3c03cc3a2eb5b4bc5c9979abae433eb6414",
+  "aviso": "Las respuestas están marcadas como A y B. No se indica qué sistema escribió cada una.",
+  "tareas": [
+    {
+      "id": "T01",
+      "tipo": "resumir_peticion",
+      "instruccion": "Resume la petición en máximo 4 líneas. Di quién pide, qué pide y qué dato falta. No inventes datos.",
+      "entrada": "Radicado ficticio GA-1042. María del Carmen Gómez, documento de ejemplo terminado en 0001, barrio El Campito, pide un certificado de residencia para un subsidio de vivienda. Dice que vive ahí desde 2019. No adjunta recibo de servicio ni declaración de un vecino. Deja el celular de ejemplo 3000000001.",
+      "respuesta_a": "María del Carmen Gómez pide un certificado de residencia para un subsidio de vivienda. Falta adjuntar un recibo de servicio o una declaración de un vecino para validar su residencia desde 2019. El número de celular 3000000001 también falta.",
+      "respuesta_b": "**Resumen de la petición:**\n\n**Quién pide:** María del Carmen Gómez (documento terminado en 0001), barrio El Campito.\n\n**Qué pide:** Certificado de residencia para subsidio de vivienda. Refiere residencia desde 2019.\n\n**Dato que falta:** Comprobante de servicios públicos o declaración de vecino (no adjuntó ninguno de estos documentos de soporte)."
+    },
+    {
+      "id": "T02",
+      "tipo": "resumir_peticion",
+      "instruccion": "Resume la petición en máximo 4 líneas. Di quién pide, qué pide y qué dato falta. No inventes datos.",
+      "entrada": "Radicado ficticio SO-221. El señor Lázaro Peña, calle 30 con carrera 18, barrio La Paz, pide que revisen un hueco que lleva tres semanas frente a su casa. Dice que ya se cayó una moto. No indica el número de la casa ni si ya reportó el daño a la empresa de servicios.",
+      "respuesta_a": "**Resumen de la petición:**\n\nRadicado SO-221: Lázaro Peña (calle 30 con carrera 18, barrio La Paz) solicita revisión de un hueco frente a su vivienda que lleva tres semanas y ha causado caída de una moto. \n\n**Datos que faltan:** número de la casa y si ya reportó el daño a la empresa de servicios.",
+      "respuesta_b": "El señor Lázaro Peña, de la calle 30 con carrera 18, barrio La Paz, pide revisar un hueco frente a su casa que ya se cayó una moto. Falta indicar el número de la casa y si ya reportó el daño a la empresa de servicios."
+    },
+    {
+      "id": "T03",
+      "tipo": "resumir_peticion",
+      "instruccion": "Resume la petición en máximo 4 líneas. Di quién pide, qué pide y qué dato falta. No inventes datos.",
+      "entrada": "Radicado ficticio BOL-ED-77. La señora Rosa Mercado pide cupo en grado segundo para su hijo Tomás Mercado, de 7 años, en la IED Los Manglares, institución ficticia de Mahates. Adjunta registro civil de ejemplo. No adjunta el boletín del año anterior ni dice si el niño ya está matriculado en otro colegio.",
+      "respuesta_a": "**Resumen de la petición:**\n\nLa señora Rosa Mercado solicita cupo en grado segundo para su hijo Tomás Mercado (7 años) en la IED Los Manglares de Mahates. Adjunta registro civil. **Falta:** boletín del año anterior e información sobre si el niño está matriculado en otro colegio.",
+      "respuesta_b": "La señora Rosa Mercado pide un cupo para su hijo Tomás Mercado en el grado segundo de la IED Los Manglares. Falta adjuntar el boletín del año anterior y saber si el niño ya está matriculado en otro colegio."
+    },
+    {
+      "id": "T04",
+      "tipo": "resumir_peticion",
+      "instruccion": "Resume la petición en máximo 4 líneas. Di quién pide, qué pide y qué dato falta. No inventes datos.",
+      "entrada": "Radicado ficticio MA-15. La Junta de Acción Comunal del corregimiento de San Basilio, en este ejercicio una junta ficticia, pide el arreglo de un puente de madera que usa el transporte escolar. El puente está sobre un caño. No envían fotos ni el número de familias afectadas. Firman como presidenta de ejemplo: Nidia Cassiani.",
+      "respuesta_a": "**Resumen de la petición MA-15:**\n\nQuién pide: Junta de Acción Comunal del corregimiento de San Basilio (presidenta: Nidia Cassiani).\n\nQué pide: Arreglo de un puente de madera sobre un caño que utiliza el transporte escolar.\n\nDato que falta: Número de familias afectadas y evidencia fotográfica del estado del puente.",
+      "respuesta_b": "La Junta de Acción Comunal de San Basilio pide el arreglo de un puente de madera utilizado por el transporte escolar. Falta el número de familias afectadas. La petición está firmada por Nidia Cassiani."
+    },
+    {
+      "id": "T05",
+      "tipo": "resumir_peticion",
+      "instruccion": "Resume la petición en máximo 4 líneas. Di quién pide, qué pide y qué dato falta. No inventes datos.",
+      "entrada": "PQR ficticia AR-900. Doña Eulalia Jiménez, manzana 4 casa 2 del barrio La Orilla, en Ciénaga, informa que lleva seis días sin agua. El último recibo que menciona es de agosto, por un valor de ejemplo de 48.000 pesos, y dice que está paga. Pide carro tanque. No da el número del contrato.",
+      "respuesta_a": "La persona que pide es Doña Eulalia Jiménez, quien pide un carro tanque para que le traigan agua. Falta el número del contrato para poder resolver su problema.",
+      "respuesta_b": "**Resumen de la PQR AR-900:**\n\nDoña Eulalia Jiménez, residente en manzana 4 casa 2 del barrio La Orilla en Ciénaga, solicita servicio de carro tanque porque lleva seis días sin agua. Reporta estar al día en pagos (último recibo de agosto por $48.000). **Dato faltante:** número del contrato de servicio."
+    },
+    {
+      "id": "T06",
+      "tipo": "resumir_peticion",
+      "instruccion": "Resume la petición en máximo 4 líneas. Di quién pide, qué pide y qué dato falta. No inventes datos.",
+      "entrada": "Turno ficticio PS-33. Don Héctor Viloria, de 71 años, pide una cita de vacunación. No describe síntomas ni diagnósticos. Dice que puede ir los martes en la mañana y que su nieta lo acompaña. No indica el régimen de salud ni el número de documento.",
+      "respuesta_a": "Don Héctor Viloria, de 71 años, pide una cita de vacunación. Solicita un turno de martes por la mañana. Falta el número de documento para su cita.",
+      "respuesta_b": "**Resumen de la petición:**\n\nDon Héctor Viloria (71 años) solicita una cita de vacunación. Está disponible los martes en la mañana y será acompañado por su nieta. Faltan datos: régimen de salud y número de documento de identidad."
+    },
+    {
+      "id": "T07",
+      "tipo": "resumir_peticion",
+      "instruccion": "Resume la petición en máximo 4 líneas. Di quién pide, qué pide y qué dato falta. No inventes datos.",
+      "entrada": "Comunicación ficticia IE-12. La docente Ana Ferrer pide marcadores, resmas de papel y un video beam para el grado noveno. Hay 36 estudiantes en el curso. La reunión de padres es el viernes. No dice la fecha de la reunión ni el salón.",
+      "respuesta_a": "**Resumen de la petición:**\n\n**Quién pide:** Ana Ferrer, docente.\n\n**Qué pide:** Marcadores, resmas de papel y un video beam para el grado noveno (36 estudiantes).\n\n**Datos que faltan:** Fecha específica de la reunión de padres y número/identificación del salón.",
+      "respuesta_b": "La docente Ana Ferrer pide marcadores, resmas de papel y un video beam para el grado noveno. Falta la fecha de la reunión de padres y el salón donde se realizará."
+    },
+    {
+      "id": "T08",
+      "tipo": "resumir_peticion",
+      "instruccion": "Resume la petición en máximo 4 líneas. Di quién pide, qué pide y qué dato falta. No inventes datos.",
+      "entrada": "Radicado ficticio SM-P-58. El ciudadano Pablo Gómez pregunta si ya salió la respuesta a su derecho de petición del mes pasado, radicado ficticio SM-P-19, sobre el alumbrado de la calle 15. No adjunta copia del radicado anterior. Deja correo de ejemplo pablo.ejemplo@correo.test.",
+      "respuesta_a": "**Resumen de la petición:**\n\n**Quién pide:** Pablo Gómez (correo: pablo.ejemplo@correo.test)\n\n**Qué pide:** Conocer el estado de respuesta de su derecho de petición anterior (radicado SM-P-19) sobre alumbrado de la calle 15.\n\n**Dato que falta:** Copia o comprobante del radicado anterior SM-P-19.",
+      "respuesta_b": "Pablo Gómez pide información sobre la respuesta a su derecho de petición sobre alumbrado de la calle 15. Falta el radicado del correo anterior que adjuntó en la solicitud original."
+    },
+    {
+      "id": "T09",
+      "tipo": "redactar_respuesta",
+      "instruccion": "Redacta la respuesta de la entidad en un solo párrafo breve y respetuoso. No prometas plazos, obras ni entregas que la ficha no autorice. Si falta un dato, pide solo ese dato.",
+      "entrada": "Ficha de respuesta autorizada: acusar recibo del radicado GA-1042; pedir únicamente el recibo de un servicio público del barrio o una declaración de dos vecinos; no prometer la fecha del certificado. Trato de ventanilla, en español sencillo.",
+      "respuesta_a": "Estimado ciudadano, acusamos recibo de su radicado GA-1042 y agradecemos su gestión ante nuestra entidad. Para continuar con el trámite, le solicitamos que presente el recibo de un servicio público (agua, luz o gas) del barrio donde reside, o en su defecto, una declaración escrita firmada por dos vecinos que certifiquen su residencia en la zona. Una vez recibida esta documentación, procederemos a evaluar su solicitud conforme a nuestros procedimientos.",
+      "respuesta_b": "Se ha acordado el radicado GA-1042. Se solicita el recibo de un servicio público del barrio o una declaración de dos vecinos. Se respetará el formato sin prometer fechas del certificado. El trámite se realizará en la ventanilla con un lenguaje sencillo."
+    },
+    {
+      "id": "T10",
+      "tipo": "redactar_respuesta",
+      "instruccion": "Redacta la respuesta de la entidad en un solo párrafo breve y respetuoso. No prometas plazos, obras ni entregas que la ficha no autorice. Si falta un dato, pide solo ese dato.",
+      "entrada": "Ficha de respuesta autorizada: informar que la queja SO-221 quedó registrada; pedir el número exacto de la casa; no prometer la fecha del arreglo del hueco; indicar que un inspector ficticio hará visita, sin fijar día.",
+      "respuesta_a": "La queja SO-221 quedó registrada. Se solicita el número exacto de la casa. No se promete la fecha del arreglo del hueco. Se informa que un inspector ficticio realizará una visita, sin fijar un día.",
+      "respuesta_b": "Agradecemos su comunicación y le informamos que su queja SO-221 ha quedado debidamente registrada en nuestro sistema. Para continuar con el trámite de inspección, le solicitamos amablemente que nos proporcione el número exacto de la casa donde se encuentra la situación reportada. Una vez recibida esta información, un inspector de nuestra entidad se acercará al lugar para evaluar la situación; le confirmaremos oportunamente los detalles de esta visita."
+    },
+    {
+      "id": "T11",
+      "tipo": "redactar_respuesta",
+      "instruccion": "Redacta la respuesta de la entidad en un solo párrafo breve y respetuoso. No prometas plazos, obras ni entregas que la ficha no autorice. Si falta un dato, pide solo ese dato.",
+      "entrada": "Ficha de respuesta autorizada: no hay cupo asignado todavía; pedir el boletín del año anterior o una constancia de que el niño no estudió; no prometer cupo en la IED Los Manglares.",
+      "respuesta_a": "La respuesta de la entidad es la siguiente: No se ha asignado ningún cupo aún; se solicita el boletín del año anterior o una constancia que el niño no estudió en el año inmediato anterior; se respetan las políticas de no prometer cupos en la IED Los Manglares.",
+      "respuesta_b": "Agradecemos su solicitud y le informamos que actualmente no contamos con cupo disponible en la Institución Educativa Distrital Los Manglares. Para continuar con el trámite de inscripción, le solicitamos que presente el boletín de calificaciones del año anterior o, en su defecto, una constancia expedida por la institución donde estudió que certifique su desempeño académico previo, o en caso de no haber estudiado, una constancia que lo acredite. Una vez recibida esta documentación, podremos continuar evaluando su solicitud conforme a los procedimientos establecidos."
+    },
+    {
+      "id": "T12",
+      "tipo": "redactar_respuesta",
+      "instruccion": "Redacta la respuesta de la entidad en un solo párrafo breve y respetuoso. No prometas plazos, obras ni entregas que la ficha no autorice. Si falta un dato, pide solo ese dato.",
+      "entrada": "Ficha de respuesta autorizada: agradecer el reporte del puente; pedir fotos y el número de familias que lo usan para llegar a la escuela; no prometer obra ni presupuesto.",
+      "respuesta_a": "Agradecemos el reporte del puente. Pedimos fotos del mismo y el número de familias que lo utilizan para llegar a la escuela. No prometemos obra ni presupuesto.",
+      "respuesta_b": "Agradecemos sinceramente su reporte sobre la situación del puente en nuestra jurisdicción. Para poder evaluar adecuadamente esta situación y dar trámite a su solicitud, le solicitamos respetuosamente que nos proporcione fotografías del estado actual de la estructura y nos indique cuántas familias dependen de este puente para acceder a la escuela. Esta información nos permitirá documentar la situación de manera completa."
+    },
+    {
+      "id": "T13",
+      "tipo": "redactar_respuesta",
+      "instruccion": "Redacta la respuesta de la entidad en un solo párrafo breve y respetuoso. No prometas plazos, obras ni entregas que la ficha no autorice. Si falta un dato, pide solo ese dato.",
+      "entrada": "Ficha de respuesta autorizada: la suspensión del barrio La Orilla está en revisión; pedir el número del contrato; no confirmar carro tanque; no echarle la culpa al usuario.",
+      "respuesta_a": "La suspensión del barrio La Orilla está en revisión. Por favor, solicitar el número del contrato correspondiente. No se confirmará el uso del carro tanque en este caso. No se echará la culpa al usuario.",
+      "respuesta_b": "Estimado ciudadano, agradecemos su comunicación y le informamos que la situación del barrio La Orilla se encuentra actualmente en revisión por parte de nuestras áreas competentes. Para poder avanzar en la gestión de su solicitud de manera más efectiva, le solicitamos respetuosamente que nos proporcione el número del contrato relacionado con su caso. Continuaremos trabajando en la evaluación de esta situación y le mantendremos informado de los avances."
+    },
+    {
+      "id": "T14",
+      "tipo": "redactar_respuesta",
+      "instruccion": "Redacta la respuesta de la entidad en un solo párrafo breve y respetuoso. No prometas plazos, obras ni entregas que la ficha no autorice. Si falta un dato, pide solo ese dato.",
+      "entrada": "Ficha de respuesta autorizada: hay jornada de vacunación los martes de 8 a 11, sin cita; pedir que lleve el documento de identidad; no preguntar por diagnósticos; no inventar otras sedes.",
+      "respuesta_a": "Agradecemos su consulta. Le informamos que contamos con jornadas de vacunación todos los martes de 8:00 a 11:00 de la mañana sin necesidad de cita previa. Para asistir, le solicitamos que traiga su documento de identidad. Si tiene dudas adicionales sobre este servicio, no dude en comunicarse con nosotros.",
+      "respuesta_b": "La jornada de vacunación se llevará a cabo los martes de 8 a 11 horas, sin cita previa. Se pide que lleve su documento de identidad y no se preguntará por ningún diagnóstico previo. No se informará sobre otras sedes de vacunación."
+    },
+    {
+      "id": "T15",
+      "tipo": "redactar_respuesta",
+      "instruccion": "Redacta la respuesta de la entidad en un solo párrafo breve y respetuoso. No prometas plazos, obras ni entregas que la ficha no autorice. Si falta un dato, pide solo ese dato.",
+      "entrada": "Ficha de respuesta autorizada: hay papel en secretaría, máximo dos resmas por docente esta semana; no hay video beam disponible; los marcadores están agotados y no se puede prometer la compra.",
+      "respuesta_a": "Estimado solicitante, agradecemos su consulta. Informamos que contamos con papel disponible en secretaría con un límite de dos resmas por docente durante esta semana; sin embargo, en este momento no disponemos de video beam ni de marcadores, cuyo reabastecimiento no podemos prometer en el corto plazo. Le invitamos a acercarse a secretaría para gestionar el papel o a comunicarse con nosotros si requiere información adicional sobre otros recursos.",
+      "respuesta_b": "La respuesta de la entidad es la siguiente: hay papel en secretaría, con un máximo de dos resmas por docente esta semana; no se dispone de video beam; los marcadores están agotados y no se puede prometer la compra de nuevos."
+    },
+    {
+      "id": "T16",
+      "tipo": "redactar_respuesta",
+      "instruccion": "Redacta la respuesta de la entidad en un solo párrafo breve y respetuoso. No prometas plazos, obras ni entregas que la ficha no autorice. Si falta un dato, pide solo ese dato.",
+      "entrada": "Ficha de respuesta autorizada: el radicado SM-P-19 sigue en trámite y todavía no tiene respuesta; pedir un teléfono de contacto; no inventar la fecha en que responderán; no opinar sobre el alumbrado.",
+      "respuesta_a": "Estimado ciudadano, agradecemos su comunicación. Informamos que el radicado SM-P-19 se encuentra actualmente en trámite dentro de nuestras dependencias y aún no cuenta con una respuesta definitiva. Para poder mantenerlo informado sobre el avance de su solicitud, le solicitamos respetuosamente que nos proporcione un número telefónico de contacto donde podamos comunicarnos con usted. Quedamos atentos a sus datos.",
+      "respuesta_b": "La respuesta de la entidad es la siguiente: el radicado SM-P-19 sigue en trámite y aún no ha recibido una respuesta; se solicita un teléfono de contacto para futuras consultas; no se especifica la fecha de respuesta debido a la falta de autorización en la ficha; se omite la información sobre el alumbrado."
+    },
+    {
+      "id": "T17",
+      "tipo": "clasificar_solicitud",
+      "instruccion": "Clasifica el mensaje en exactamente una etiqueta: peticion, queja, reclamo, sugerencia, felicitacion, informacion. Responde solo con la etiqueta, en minúscula y sin punto.",
+      "entrada": "Buenas. Necesito el certificado de residencia para un subsidio. ¿Qué papeles llevo?",
+      "respuesta_a": "peticion",
+      "respuesta_b": "queja"
+    },
+    {
+      "id": "T18",
+      "tipo": "clasificar_solicitud",
+      "instruccion": "Clasifica el mensaje en exactamente una etiqueta: peticion, queja, reclamo, sugerencia, felicitacion, informacion. Responde solo con la etiqueta, en minúscula y sin punto.",
+      "entrada": "Llevo seis días sin agua y nadie contesta el teléfono de la empresa. Esto es un irrespeto.",
+      "respuesta_a": "reclamo",
+      "respuesta_b": "reclamo"
+    },
+    {
+      "id": "T19",
+      "tipo": "clasificar_solicitud",
+      "instruccion": "Clasifica el mensaje en exactamente una etiqueta: peticion, queja, reclamo, sugerencia, felicitacion, informacion. Responde solo con la etiqueta, en minúscula y sin punto.",
+      "entrada": "Me cobraron 120.000 pesos de un cargo que no reconozco. Exijo la reliquidación del recibo y la devolución de lo que pagué de más.",
+      "respuesta_a": "reclamo",
+      "respuesta_b": "reclamo"
+    },
+    {
+      "id": "T20",
+      "tipo": "clasificar_solicitud",
+      "instruccion": "Clasifica el mensaje en exactamente una etiqueta: peticion, queja, reclamo, sugerencia, felicitacion, informacion. Responde solo con la etiqueta, en minúscula y sin punto.",
+      "entrada": "Sería bueno avisar la reunión de padres también por el grupo de WhatsApp, no solo en la cartelera.",
+      "respuesta_a": "sugerencia",
+      "respuesta_b": "sugerencia"
+    },
+    {
+      "id": "T21",
+      "tipo": "clasificar_solicitud",
+      "instruccion": "Clasifica el mensaje en exactamente una etiqueta: peticion, queja, reclamo, sugerencia, felicitacion, informacion. Responde solo con la etiqueta, en minúscula y sin punto.",
+      "entrada": "Quiero agradecer a la enfermera de la jornada del martes. Atendió a mi papá con mucha paciencia.",
+      "respuesta_a": "felicitacion",
+      "respuesta_b": "felicitacion"
+    },
+    {
+      "id": "T22",
+      "tipo": "clasificar_solicitud",
+      "instruccion": "Clasifica el mensaje en exactamente una etiqueta: peticion, queja, reclamo, sugerencia, felicitacion, informacion. Responde solo con la etiqueta, en minúscula y sin punto.",
+      "entrada": "¿Hasta qué hora atienden hoy en la oficina de cobertura?",
+      "respuesta_a": "informacion",
+      "respuesta_b": "peticion"
+    },
+    {
+      "id": "T23",
+      "tipo": "clasificar_solicitud",
+      "instruccion": "Clasifica el mensaje en exactamente una etiqueta: peticion, queja, reclamo, sugerencia, felicitacion, informacion. Responde solo con la etiqueta, en minúscula y sin punto.",
+      "entrada": "Solicito copia del recibo de pago del impuesto predial del año pasado, a mi nombre.",
+      "respuesta_a": "peticion",
+      "respuesta_b": "peticion"
+    },
+    {
+      "id": "T24",
+      "tipo": "clasificar_solicitud",
+      "instruccion": "Clasifica el mensaje en exactamente una etiqueta: peticion, queja, reclamo, sugerencia, felicitacion, informacion. Responde solo con la etiqueta, en minúscula y sin punto.",
+      "entrada": "El ruido del establecimiento de la esquina sigue después de las diez de la noche. Ya no se puede dormir.",
+      "respuesta_a": "queja",
+      "respuesta_b": "queja"
+    },
+    {
+      "id": "T25",
+      "tipo": "extraer_datos",
+      "instruccion": "Devuelve un único objeto JSON con exactamente las claves pedidas. Si el dato no está en el texto, usa null. No uses markdown ni expliques. Claves: radicado, nombre, barrio, documento, telefono.",
+      "entrada": "Radicado GA-1042. Solicitante: María del Carmen Gómez. Documento de ejemplo terminado en 0001. Barrio El Campito. Celular de ejemplo 3000000001.",
+      "respuesta_a": "```json\n{\n  \"radicado\": \"GA-1042\",\n  \"nombre\": \"María del Carmen Gómez\",\n  \"barrio\": \"El Campito\",\n  \"documento\": \"0001\",\n  \"telefono\": \"3000000001\"\n}\n```",
+      "respuesta_b": "{\n  \"radicado\": \"GA-1042\",\n  \"nombre\": \"María del Carmen Gómez\",\n  \"barrio\": \"El Campito\",\n  \"documento\": \"0001\",\n  \"telefono\": \"3000000001\"\n}"
+    },
+    {
+      "id": "T26",
+      "tipo": "extraer_datos",
+      "instruccion": "Devuelve un único objeto JSON con exactamente las claves pedidas. Si el dato no está en el texto, usa null. No uses markdown ni expliques. Claves: radicado, acudiente, estudiante, edad, grado, institucion.",
+      "entrada": "Radicado BOL-ED-77. Acudiente Rosa Mercado. Estudiante Tomás Mercado, 7 años. Pide grado segundo en la IED Los Manglares.",
+      "respuesta_a": "```json\n{\n  \"radicado\": \"BOL-ED-77\",\n  \"acudiente\": \"Rosa Mercado\",\n  \"estudiante\": \"Tomás Mercado\",\n  \"edad\": 7,\n  \"grado\": \"segundo\",\n  \"institucion\": \"IED Los Manglares\"\n}\n```",
+      "respuesta_b": "{\n  \"radicado\": \"BOL-ED-77\",\n  \"acudiente\": \"Rosa Mercado\",\n  \"estudiante\": \"Tomás Mercado\",\n  \"edad\": 7,\n  \"grado\": \"segundo\",\n  \"institucion\": \"IED Los Manglares\"\n}"
+    },
+    {
+      "id": "T27",
+      "tipo": "extraer_datos",
+      "instruccion": "Devuelve un único objeto JSON con exactamente las claves pedidas. Si el dato no está en el texto, usa null. No uses markdown ni expliques. Claves: nombre, barrio, dias_sin_servicio, valor_recibo, numero_contrato.",
+      "entrada": "Doña Eulalia Jiménez, barrio La Orilla, lleva seis días sin agua. El recibo de agosto fue de 48.000 pesos. No informa el número del contrato.",
+      "respuesta_a": "```json\n{\n  \"nombre\": \"Doña Eulalia Jiménez\",\n  \"barrio\": \"La Orilla\",\n  \"dias_sin_servicio\": 6,\n  \"valor_recibo\": 48000,\n  \"numero_contrato\": null\n}\n```",
+      "respuesta_b": "{\n  \"nombre\": \"Doña Eulalia Jiménez\",\n  \"barrio\": \"La Orilla\",\n  \"dias_sin_servicio\": 6,\n  \"valor_recibo\": 48000,\n  \"numero_contrato\": null\n}"
+    },
+    {
+      "id": "T28",
+      "tipo": "extraer_datos",
+      "instruccion": "Devuelve un único objeto JSON con exactamente las claves pedidas. Si el dato no está en el texto, usa null. No uses markdown ni expliques. Claves: nombre, edad, dia_disponible, documento.",
+      "entrada": "Don Héctor Viloria, de 71 años, puede ir los martes en la mañana. No dictó el documento.",
+      "respuesta_a": "{\n  \"nombre\": \"Don Héctor Viloria\",\n  \"edad\": 71,\n  \"dia_disponible\": \"martes\",\n  \"documento\": null\n}",
+      "respuesta_b": "```json\n{\n  \"nombre\": \"Héctor Viloria\",\n  \"edad\": 71,\n  \"dia_disponible\": \"martes\",\n  \"documento\": null\n}\n```"
+    },
+    {
+      "id": "T29",
+      "tipo": "extraer_datos",
+      "instruccion": "Devuelve un único objeto JSON con exactamente las claves pedidas. Si el dato no está en el texto, usa null. No uses markdown ni expliques. Claves: docente, curso, estudiantes, pedido.",
+      "entrada": "La docente Ana Ferrer, del grado noveno, con 36 estudiantes, pide marcadores, resmas y un video beam.",
+      "respuesta_a": "```json\n{\n  \"docente\": \"Ana Ferrer\",\n  \"curso\": \"noveno\",\n  \"estudiantes\": 36,\n  \"pedido\": [\"marcadores\", \"resmas\", \"video beam\"]\n}\n```",
+      "respuesta_b": "{\n  \"docente\": \"Ana Ferrer\",\n  \"curso\": \"Noveno\",\n  \"estudiantes\": 36,\n  \"pedido\": {\n    \"marcadores\": null,\n    \"resmas\": null,\n    \"video_beam\": null\n  }\n}"
+    },
+    {
+      "id": "T30",
+      "tipo": "extraer_datos",
+      "instruccion": "Devuelve un único objeto JSON con exactamente las claves pedidas. Si el dato no está en el texto, usa null. No uses markdown ni expliques. Claves: nombre, radicado_anterior, tema, correo.",
+      "entrada": "Pablo Gómez pregunta por el radicado SM-P-19, sobre el alumbrado de la calle 15. Correo pablo.ejemplo@correo.test.",
+      "respuesta_a": "```json\n{\n  \"nombre\": \"Pablo Gómez\",\n  \"radicado_anterior\": \"SM-P-19\",\n  \"tema\": \"alumbrado de la calle 15\",\n  \"correo\": \"pablo.ejemplo@correo.test\"\n}\n```",
+      "respuesta_b": "{\n  \"nombre\": \"Pablo Gómez\",\n  \"radicado_anterior\": \"SM-P-19\",\n  \"tema\": \"alumbrado de la calle 15\",\n  \"correo\": \"pablo.ejemplo@correo.test\"\n}"
+    },
+    {
+      "id": "T31",
+      "tipo": "extraer_datos",
+      "instruccion": "Devuelve un único objeto JSON con exactamente las claves pedidas. Si el dato no está en el texto, usa null. No uses markdown ni expliques. Claves: firmante, cargo, obra_pedida, numero_de_familias.",
+      "entrada": "Firma Nidia Cassiani, presidenta de la junta ficticia. Pide el arreglo del puente de madera del transporte escolar. No dice cuántas familias lo usan.",
+      "respuesta_a": "```json\n{\n  \"firmante\": \"Nidia Cassiani\",\n  \"cargo\": \"presidenta de la junta ficticia\",\n  \"obra_pedida\": \"arreglo del puente de madera del transporte escolar\",\n  \"numero_de_familias\": null\n}\n```",
+      "respuesta_b": "{\n  \"firmante\": \"Nidia Cassiani\",\n  \"cargo\": \"presidenta de la junta ficticia\",\n  \"obra_pedida\": \"arreglo del puente de madera del transporte escolar\",\n  \"numero_de_familias\": null\n}"
+    },
+    {
+      "id": "T32",
+      "tipo": "extraer_datos",
+      "instruccion": "Devuelve un único objeto JSON con exactamente las claves pedidas. Si el dato no está en el texto, usa null. No uses markdown ni expliques. Claves: nombre, barrio, direccion, numero_de_casa.",
+      "entrada": "Lázaro Peña reporta un hueco en la calle 30 con carrera 18, barrio La Paz. No da el número de la casa.",
+      "respuesta_a": "{\n  \"nombre\": \"Lázaro Peña\",\n  \"barrio\": \"La Paz\",\n  \"direccion\": \"calle 30 con carrera 18\",\n  \"numero_de_casa\": null\n}",
+      "respuesta_b": "```json\n{\n  \"nombre\": \"Lázaro Peña\",\n  \"barrio\": \"La Paz\",\n  \"direccion\": \"calle 30 con carrera 18\",\n  \"numero_de_casa\": null\n}\n```"
+    },
+    {
+      "id": "T33",
+      "tipo": "consulta_normativa",
+      "instruccion": "Responde la consulta aplicando solo el texto de trabajo. Si el texto no alcanza para responder, dilo. No cites normas que no estén escritas ahí.",
+      "entrada": "Texto de trabajo: una petición completa de interés particular se responde en 15 días hábiles, contados desde el día siguiente a la radicación. Sábado y domingo no son hábiles. En este ejercicio no hay festivos. El 2 de noviembre de 2026 es lunes.\n\nConsulta: la petición GA-1042, completa, se radicó el lunes 2 de noviembre de 2026. ¿Cuál es la fecha límite para responder?",
+      "respuesta_a": "# Respuesta\n\nBasándome en el texto de trabajo proporcionado:\n\n**Fecha límite para responder la petición GA-1042: viernes 20 de noviembre de 2026**\n\n## Cálculo:\n\n- **Radicación:** lunes 2 de noviembre de 2026\n- **Inicio del conteo:** martes 3 de noviembre de 2026 (día siguiente a la radicación)\n- **Plazo:** 15 días hábiles (excluyendo sábados y domingos, sin festivos)\n\nContando 15 días hábiles desde el 3 de noviembre:\n- Semana 1: 3, 4, 5, 6, 7 (5 días)\n- Semana 2: 10, 11, 12, 13, 14 (5 días)\n- Semana 3: 17, 18, 19, 20 (4 días)\n\n**Total: 15 días hábiles = viernes 20 de noviembre de 2026**",
+      "respuesta_b": "La fecha límite para responder la petición GA-1042 sería el lunes 16 de noviembre de 2026."
+    },
+    {
+      "id": "T34",
+      "tipo": "consulta_normativa",
+      "instruccion": "Responde la consulta aplicando solo el texto de trabajo. Si el texto no alcanza para responder, dilo. No cites normas que no estén escritas ahí.",
+      "entrada": "Texto de trabajo: si la petición está incompleta, la entidad pide lo que falta dentro de los 10 días siguientes. El plazo de 15 días hábiles empieza a contarse el día hábil siguiente a aquel en que el ciudadano completa la petición. El 13 de noviembre de 2026 es viernes.\n\nConsulta: el ciudadano completó la petición el viernes 13 de noviembre de 2026. ¿Qué día empieza a contarse el plazo de 15 días hábiles?",
+      "respuesta_a": "El plazo de 15 días hábiles empieza a contar el día hábil siguiente al 13 de noviembre de 2026, que es viernes. Por lo tanto, el plazo comenzaría a contar desde el lunes 15 de noviembre de 2026.",
+      "respuesta_b": "# Respuesta\n\nSegún el texto de trabajo: \"El plazo de 15 días hábiles empieza a contarse el día hábil siguiente a aquel en que el ciudadano completa la petición.\"\n\nEl ciudadano completó la petición el viernes 13 de noviembre de 2026.\n\n**El plazo de 15 días hábiles empieza a contarse el lunes 16 de noviembre de 2026** (el día hábil siguiente al viernes 13 de noviembre)."
+    },
+    {
+      "id": "T35",
+      "tipo": "consulta_normativa",
+      "instruccion": "Responde la consulta aplicando solo el texto de trabajo. Si el texto no alcanza para responder, dilo. No cites normas que no estén escritas ahí.",
+      "entrada": "Texto de trabajo: los datos personales de estudiantes menores de edad no se envían a proveedores externos ni se publican. Una consulta sobre cupos se responde con cifras agregadas, sin nombres ni documentos.\n\nConsulta: un proveedor pide la lista de nombres y documentos de los niños sin cupo para 'mejorar el modelo'. ¿Se puede enviar?",
+      "respuesta_a": "No se puede enviar. Los datos personales de estudiantes menores de edad no se envían a proveedores externos ni se publican.",
+      "respuesta_b": "**No, no se puede enviar.**\n\nSegún el texto de trabajo: \"los datos personales de estudiantes menores de edad no se envían a proveedores externos ni se publican.\"\n\nLa solicitud del proveedor pide nombres y documentos de menores, lo que viola esta regla. Además, el texto especifica que \"una consulta sobre cupos se responde con cifras agregadas, sin nombres ni documentos.\"\n\nLa respuesta correcta es entregar solo cifras agregadas (por ejemplo: \"hay 45 niños sin cupo\"), nunca la lista con identificadores personales."
+    },
+    {
+      "id": "T36",
+      "tipo": "consulta_normativa",
+      "instruccion": "Responde la consulta aplicando solo el texto de trabajo. Si el texto no alcanza para responder, dilo. No cites normas que no estén escritas ahí.",
+      "entrada": "Texto de trabajo: la petición verbal es válida. Quien atiende la escribe, la lee en voz alta y le entrega el número de radicado a la persona. No se exige que la persona sepa escribir.\n\nConsulta: una mujer llega a la ventanilla y quiere pedir el certificado de palabra, porque no trajo la carta. ¿La entidad debe recibirla?",
+      "respuesta_a": "Según el texto de trabajo: **Sí, la entidad debe recibirla.**\n\nEl texto establece que \"la petición verbal es válida\" y que \"quien atiende la escribe, la lee en voz alta y le entrega el número de radicado a la persona. No se exige que la persona sepa escribir.\"\n\nPor lo tanto, la mujer puede hacer su petición de forma verbal (de palabra) sin necesidad de traer una carta escrita. El funcionario que la atiende es quien se encarga de escribirla, leerla en voz alta y entregarle el número de radicado.",
+      "respuesta_b": "La entidad debe recibir la solicitud verbal de la mujer para que se le pueda expedir el certificado de palabra. Según el texto de trabajo, quien atiende la ventanilla escribe la petición, la lee en voz alta y entrega el número de radicado a la persona, sin exigir que esta sepa escribir."
+    },
+    {
+      "id": "T37",
+      "tipo": "consulta_normativa",
+      "instruccion": "Responde la consulta aplicando solo el texto de trabajo. Si el texto no alcanza para responder, dilo. No cites normas que no estén escritas ahí.",
+      "entrada": "Texto de trabajo: en este ejercicio el certificado de residencia no tiene costo. Cualquier cobro se devuelve y se deja constancia.\n\nConsulta: en la ventanilla le pidieron 20.000 pesos por el certificado. ¿Qué debe hacer la entidad?",
+      "respuesta_a": "Según el texto de trabajo, **la entidad debe devolver los 20.000 pesos** que le cobraron indebidamente, ya que el certificado de residencia no tiene costo.\n\nAdemás, el texto indica que **se debe dejar constancia** de esa devolución.",
+      "respuesta_b": "La entidad debe devolver los 20.000 pesos cobrados y dejar constancia de este hecho."
+    },
+    {
+      "id": "T38",
+      "tipo": "consulta_normativa",
+      "instruccion": "Responde la consulta aplicando solo el texto de trabajo. Si el texto no alcanza para responder, dilo. No cites normas que no estén escritas ahí.",
+      "entrada": "Texto de trabajo: una solicitud de información se responde en 10 días hábiles. Una petición que pide una actuación de la entidad se responde en 15 días hábiles. Si el escrito solo pregunta un horario, es solicitud de información.\n\nConsulta: el escrito dice únicamente '¿Hasta qué hora atienden hoy en hacienda?'. ¿Qué plazo aplica?",
+      "respuesta_a": "El plazo que aplica para la consulta \"¿Hasta qué hora atienden hoy en hacienda?\" es el plazo de solicitud de información, que es de 10 días hábiles.",
+      "respuesta_b": "Según el texto de trabajo, aplica un plazo de **10 días hábiles**.\n\n**Justificación:** El escrito solo pregunta un horario. El texto establece que \"si el escrito solo pregunta un horario, es solicitud de información\". Las solicitudes de información se responden en 10 días hábiles."
+    },
+    {
+      "id": "T39",
+      "tipo": "consulta_normativa",
+      "instruccion": "Responde la consulta aplicando solo el texto de trabajo. Si el texto no alcanza para responder, dilo. No cites normas que no estén escritas ahí.",
+      "entrada": "Texto de trabajo: si una circular interna da un plazo más largo que el del texto de trabajo, se aplica el plazo más corto. La circular de ventanilla dice 30 días. El texto de trabajo dice 15 días hábiles para esta petición.\n\nConsulta: ¿qué plazo debe usar el funcionario?",
+      "respuesta_a": "Según el texto de trabajo: **15 días hábiles**.\n\nEl texto de trabajo establece que cuando una circular interna da un plazo más largo que el del texto de trabajo, se aplica el plazo más corto. Como la circular de ventanilla dice 30 días y el texto de trabajo dice 15 días hábiles, el funcionario debe usar **15 días hábiles** por ser el plazo más corto.",
+      "respuesta_b": "El funcionario debe usar el plazo de 15 días hábiles, ya que la circular de ventanilla, que dice 30 días, es más larga que el plazo mencionado en el texto de trabajo, que es de 15 días hábiles."
+    },
+    {
+      "id": "T40",
+      "tipo": "consulta_normativa",
+      "instruccion": "Responde la consulta aplicando solo el texto de trabajo. Si el texto no alcanza para responder, dilo. No cites normas que no estén escritas ahí.",
+      "entrada": "Texto de trabajo: la entidad no promete una obra, un cupo ni un reembolso si la ficha de respuesta no lo autoriza. Puede acusar recibo, pedir un dato faltante y explicar el estado.\n\nConsulta: la ficha solo autoriza acusar recibo y pedir el número de la casa. El ciudadano pregunta '¿me arreglan el hueco esta semana?'. ¿Qué puede contestar la entidad?",
+      "respuesta_a": "La entidad no puede garantizar que el hueco se arregle esta semana, ya que la ficha de respuesta solo autoriza acusar recibo y pedir el número de la casa.",
+      "respuesta_b": "Según el texto de trabajo, la entidad **puede**:\n\n1. **Acusar recibo** de la pregunta del ciudadano\n2. **Pedir el número de la casa** (dato faltante que autoriza la ficha)\n\nLa entidad **no puede prometer** que le arreglen el hueco esta semana, porque:\n- El texto dice que \"la entidad no promete una obra, un cupo ni un reembolso si la ficha de respuesta no lo autoriza\"\n- La ficha solo autoriza acusar recibo y pedir un dato, no autoriza prometer la obra ni plazos\n\n**Respuesta recomendada**: Acusar recibo de la solicitud, solicitar el número de la casa, y explicar el estado (si el texto lo permite en ese momento)."
+    }
+  ]
+}

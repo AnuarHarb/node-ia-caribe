@@ -1,0 +1,647 @@
+{
+  "calificador": "Anuar Harb",
+  "paquete": "6fef1ff49dccfcae50137c8aeeaac3c03cc3a2eb5b4bc5c9979abae433eb6414",
+  "fecha": "2026-11-10T20:36:41.835Z",
+  "puntajes": [
+    {
+      "id": "T01",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 4
+    },
+    {
+      "id": "T01",
+      "respuesta": "B",
+      "utilidad": 5,
+      "tono": 5,
+      "completitud": 5,
+      "exactitud": 5
+    },
+    {
+      "id": "T02",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T02",
+      "respuesta": "B",
+      "utilidad": 4,
+      "tono": 5,
+      "completitud": 5,
+      "exactitud": 5
+    },
+    {
+      "id": "T03",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 4
+    },
+    {
+      "id": "T03",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 4
+    },
+    {
+      "id": "T04",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T04",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 4
+    },
+    {
+      "id": "T05",
+      "respuesta": "A",
+      "exactitud": 3,
+      "completitud": 3,
+      "tono": 3,
+      "utilidad": 2
+    },
+    {
+      "id": "T05",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T06",
+      "respuesta": "A",
+      "exactitud": 4,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T06",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T07",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T07",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 4,
+      "utilidad": 5
+    },
+    {
+      "id": "T08",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T08",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 4,
+      "utilidad": 5
+    },
+    {
+      "id": "T09",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T09",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 4,
+      "utilidad": 4
+    },
+    {
+      "id": "T10",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 4,
+      "tono": 2,
+      "utilidad": 4
+    },
+    {
+      "id": "T10",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T11",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 2,
+      "utilidad": 4
+    },
+    {
+      "id": "T11",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T12",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 4,
+      "utilidad": 5
+    },
+    {
+      "id": "T12",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T13",
+      "respuesta": "A",
+      "exactitud": 4,
+      "completitud": 5,
+      "tono": 2,
+      "utilidad": 3
+    },
+    {
+      "id": "T13",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T14",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T14",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 4,
+      "utilidad": 5
+    },
+    {
+      "id": "T15",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T15",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 1,
+      "utilidad": 3
+    },
+    {
+      "id": "T16",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T16",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 2,
+      "utilidad": 4
+    },
+    {
+      "id": "T17",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T17",
+      "respuesta": "B",
+      "exactitud": 3,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 3
+    },
+    {
+      "id": "T18",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T18",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T19",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T19",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T20",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T20",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T21",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T21",
+      "respuesta": "B",
+      "exactitud": 5,
+      "tono": 5,
+      "completitud": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T22",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T22",
+      "respuesta": "B",
+      "exactitud": 1,
+      "completitud": 1,
+      "tono": 1,
+      "utilidad": 1
+    },
+    {
+      "id": "T23",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T23",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T24",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T24",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T25",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T25",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T26",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T26",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T27",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T27",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T28",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T28",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T29",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T29",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T30",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T30",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T31",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T31",
+      "respuesta": "B",
+      "utilidad": 5,
+      "tono": 5,
+      "completitud": 5,
+      "exactitud": 5
+    },
+    {
+      "id": "T32",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T32",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T33",
+      "respuesta": "A",
+      "exactitud": 3,
+      "completitud": 5,
+      "tono": 4,
+      "utilidad": 3
+    },
+    {
+      "id": "T33",
+      "respuesta": "B",
+      "exactitud": 1,
+      "completitud": 5,
+      "tono": 4,
+      "utilidad": 2
+    },
+    {
+      "id": "T34",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T34",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T35",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T35",
+      "respuesta": "B",
+      "exactitud": 5,
+      "tono": 2,
+      "utilidad": 4,
+      "completitud": 5
+    },
+    {
+      "id": "T36",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T36",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T37",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 4
+    },
+    {
+      "id": "T37",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 4,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T38",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T38",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T39",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T39",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    },
+    {
+      "id": "T40",
+      "respuesta": "A",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 4,
+      "utilidad": 3
+    },
+    {
+      "id": "T40",
+      "respuesta": "B",
+      "exactitud": 5,
+      "completitud": 5,
+      "tono": 5,
+      "utilidad": 5
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+/* Fundación Código Abierto — componentes. Todo valor viene de tokens.css. */
+.fca-root{font-family:var(--font-sans);color:var(--ink);background:var(--surface-page)}
+.fca-btn{display:inline-flex;align-items:center;gap:var(--space-2);font-family:var(--font-sans);font-weight:600;font-size:14px;line-height:20px;padding:var(--space-3) var(--space-6);border-radius:var(--radius-full);border:2px solid var(--brand-blue-strong);background:var(--brand-blue-strong);color:var(--on-action);cursor:pointer;text-decoration:none}
+.fca-btn:hover{background:var(--brand-blue-hover);border-color:var(--brand-blue-hover)}
+.fca-btn:focus-visible{outline:3px solid var(--brand-blue-strong);outline-offset:3px}
+.fca-btn--secondary{background:transparent;color:var(--brand-blue-strong)}
+.fca-btn--secondary:hover{background:var(--surface-mist);color:var(--brand-blue-hover)}
+.fca-btn[disabled]{opacity:.45;cursor:not-allowed}
+.fca-kicker{display:inline-flex;align-items:center;gap:var(--space-2);font-family:var(--font-mono);font-size:12px;line-height:16px;letter-spacing:.3px;color:var(--brand-blue-strong)}
+.fca-bars{display:inline-flex;gap:3px}
+.fca-bars i{display:block;width:9px;height:7px;background:var(--brand-blue);transform:skewX(-40deg)}
+.fca-card{background:var(--surface-card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:var(--space-6);box-shadow:var(--shadow-card)}
+.fca-card h3{font-family:var(--font-display);font-weight:700;font-size:20px;line-height:24px;margin:0 0 var(--space-2);color:var(--brand-blue-strong)}
+.fca-card p{margin:0;font-size:14px;line-height:22px;color:var(--ink-muted)}
+.fca-card--navy{background:var(--surface-navy);border-color:var(--surface-navy)}
+.fca-card--navy h3{color:var(--cyan)}
+.fca-card--navy p{color:var(--ink-inverse-muted)}
+.fca-stat .v{font-family:var(--font-display);font-weight:800;font-size:40px;line-height:40px;color:var(--ink)}
+.fca-stat .l{font-size:14px;line-height:22px;color:var(--ink-muted);margin-top:var(--space-1)}
+.fca-pill{display:inline-block;font-family:var(--font-mono);font-size:11px;line-height:14px;padding:var(--space-1) var(--space-3);border-radius:var(--radius-sm);background:var(--surface-navy);color:var(--cyan)}
+.fca-pill--soft{background:var(--surface-mist);color:var(--brand-blue-strong)}
+.fca-quote{margin:0;padding:var(--space-2) 0 var(--space-2) var(--space-6);border-left:6px solid var(--teal);font-family:var(--font-display);font-weight:600;font-size:22px;line-height:28px;color:var(--ink)}
+.fca-quote small{display:block;margin-top:var(--space-2);font-family:var(--font-sans);font-weight:400;font-size:14px;line-height:22px;color:var(--ink-muted)}
