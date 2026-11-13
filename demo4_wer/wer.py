@@ -49,6 +49,9 @@ def pares_de_carpeta(carpeta: Path) -> list[tuple[str, str, str]]:
     if not carpeta.exists():
         return pares
     for referencia in sorted(carpeta.glob("*.txt")):
+        # Ni las instrucciones de la carpeta ni las transcripciones del sistema son referencias.
+        if referencia.name.endswith(".hip.txt") or referencia.stem.upper() in ("LEEME", "README"):
+            continue
         audio = None
         for extension in (".wav", ".webm", ".mp3", ".m4a", ".flac"):
             candidato = referencia.with_suffix(extension)
@@ -59,12 +62,24 @@ def pares_de_carpeta(carpeta: Path) -> list[tuple[str, str, str]]:
     return pares
 
 
-def pares_demo1(path: Path) -> list[tuple[str, str, str]]:
+def _variedad_demo1(fila: dict) -> str:
+    v = (fila.get("variedad") or "costeno").strip().lower()
+    if v in ("palenquero", "pln"):
+        return "palenquero"
+    return "costeno"
+
+
+def pares_demo1(path: Path, *, variedad: str | None = None) -> list[tuple]:
     if not path.exists():
         return []
     filas = json.loads(path.read_text(encoding="utf-8"))
+    objetivo = None
+    if variedad:
+        objetivo = "palenquero" if variedad.lower().startswith("pal") else "costeno"
     pares = []
     for fila in filas:
+        if objetivo and _variedad_demo1(fila) != objetivo:
+            continue
         correcta = (fila.get("transcripcion_correcta") or "").strip()
         sistema = (fila.get("transcripcion_sistema") or "").strip()
         if correcta and sistema:

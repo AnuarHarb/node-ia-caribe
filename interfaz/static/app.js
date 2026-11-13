@@ -1,56 +1,7 @@
-const ETIQUETAS = {
-  fecha: "Fecha de la corrida",
-  fecha_corrida: "Fecha de la corrida (40+40)",
-  fecha_calificacion: "Fecha de calificación ciega",
-  costo_local_nota: "Costo local",
-  titulo: "Título",
-  pruebas_pasadas: "Pruebas pasadas",
-  pruebas_total: "Pruebas totales",
-  criterio: "Criterio",
-  criterio_cumplido: "Criterio cumplido",
-  internet: "Internet durante la prueba",
-  auditoria_integra: "Auditoría íntegra",
-  filas: "Mediciones",
-  errores_marcados: "Errores marcados",
-  aciertos_marcados: "Aciertos marcados",
-  consultas: "Consultas",
-  consultas_voz: "Consultas por voz",
-  tiempo_promedio_s: "Tiempo promedio (s)",
-  parcial: "Solo carga parcial",
-  tareas_local: "Tareas con respuesta local",
-  tiempo_promedio_caliente_s: "Promedio en caliente (s)",
-  tiempo_maximo_caliente_s: "Máximo en caliente (s)",
-  tiempo_promedio_todas_s: "Promedio todas las tareas (s)",
-  modelo_local: "Modelo local",
-  comparacion_completa: "Paquete ciego listo",
-  pendiente: "Pendiente",
-  pendiente_calificacion: "Falta calificación",
-  costo_local_usd: "Costo local (USD)",
-  datos: "Origen de datos",
-  criterio_flujo: "Flujo registrado",
-  criterio_video_error_real: "Error real para video",
-};
-
 function escapeHtml(text) {
   const div = document.createElement("div");
   div.textContent = text;
   return div.innerHTML;
-}
-
-function formatoValor(clave, valor) {
-  if (typeof valor === "boolean") return valor ? "Sí" : "No";
-  if (valor === null || valor === undefined) return "—";
-  if (clave === "fecha" && typeof valor === "string") {
-    try {
-      const d = new Date(valor);
-      if (!Number.isNaN(d.getTime())) {
-        return d.toLocaleString("es-CO", { dateStyle: "medium", timeStyle: "short" });
-      }
-    } catch {
-      /* seguir */
-    }
-  }
-  return String(valor);
 }
 
 function estadoInforme(demoId, data) {
@@ -60,8 +11,26 @@ function estadoInforme(demoId, data) {
   if (data.criterio_cumplido === true) {
     return { clase: "ok", texto: "Criterio cumplido" };
   }
-  if (demoId === 1 && data.criterio_cumplido) {
-    return { clase: "ok", texto: "Flujo completo y error real registrado" };
+  if (demoId === 2) {
+    // Igual que en el servidor: el criterio son tres partes medidas, no solo el tiempo.
+    if (!data.consultas_voz || data.entrada === "texto") {
+      return { clase: "pendiente", texto: "Falta la medición por voz" };
+    }
+    if (data.criterios?.tiempo === false || data.criterio_10s === false) {
+      return { clase: "falla", texto: "Promedio por encima de 10 s" };
+    }
+    return { clase: "parcial", texto: "Medición por voz · criterio incompleto" };
+  }
+  if (demoId === 4) {
+    const medidas = (data.variedades || []).length;
+    if (!medidas) return { clase: "pendiente", texto: "Sin frases medidas" };
+    return {
+      clase: "parcial",
+      texto: medidas < 2 ? "Falta una variedad por medir" : "Cifra por variedad · muestra corta",
+    };
+  }
+  if (demoId === 5 && data.criterio_cumplido === false) {
+    return { clase: "falla", texto: "Criterio no cumplido" };
   }
   if (demoId === 3) {
     if (data.criterio_metodo_armado && !data.criterio_calificacion_completa) {
@@ -106,9 +75,6 @@ function estadoInforme(demoId, data) {
   if (demoId === 1 && data.filas > 0) {
     return { clase: data.criterio_video_error_real ? "ok" : "parcial", texto: data.criterio_video_error_real ? "Listo para video" : "Falta error real" };
   }
-  if (demoId === 4 && (data.variedades || []).length) {
-    return { clase: "ok", texto: "WER calculado" };
-  }
   if (data.filas?.length || data.consultas) {
     return { clase: "parcial", texto: "Medición en curso" };
   }
@@ -125,16 +91,28 @@ function kpisDeInforme(demoId, data) {
     if (data.auditoria_integra != null) {
       items.push({ etiqueta: "Auditoría", valor: data.auditoria_integra ? "Íntegra" : "Revisar" });
     }
-    items.push({ etiqueta: "Red", valor: data.internet === false ? "Sin internet" : data.internet === true ? "Con internet" : "—" });
+    if (data.bloqueo?.bloqueado != null) {
+      items.push({ etiqueta: "Acceso cruzado", valor: data.bloqueo.bloqueado ? "Bloqueado" : "No bloqueado" });
+    }
   } else if (demoId === 1) {
-    items.push({ etiqueta: "Filas", valor: data.filas ?? 0 });
-    items.push({ etiqueta: "WER corpus", valor: data.wer_corpus?.wer_porcentaje != null ? `${data.wer_corpus.wer_porcentaje} %` : "—" });
-    items.push({ etiqueta: "Errores", valor: data.errores_marcados ?? 0 });
+    items.push({ etiqueta: "Frases medidas", valor: data.filas ?? 0 });
+    items.push({ etiqueta: "Hablantes", valor: data.cobertura?.hablantes ?? "—" });
+    items.push({ etiqueta: "Frases con error", valor: data.errores_marcados ?? 0 });
+    items.push({ etiqueta: "WER", valor: data.wer_corpus?.wer_porcentaje != null ? `${data.wer_corpus.wer_porcentaje} %` : "—" });
   } else if (demoId === 2) {
-    items.push({ etiqueta: "Consultas", valor: data.consultas_voz ?? data.consultas ?? 0 });
-    items.push({ etiqueta: "Promedio", valor: data.tiempo_promedio_s != null ? `${data.tiempo_promedio_s} s` : "—" });
-    items.push({ etiqueta: "Modo", valor: data.parcial ? "Texto (parcial)" : "Voz" });
+    const voz = data.consultas_voz > 0 && data.entrada !== "texto";
+    items.push({ etiqueta: "Usuarios a la vez", valor: voz ? data.usuarios_simultaneos ?? "—" : "Sin medir" });
+    items.push({ etiqueta: "Promedio", valor: voz && data.tiempo_promedio_s != null ? `${data.tiempo_promedio_s} s` : "Sin medir" });
+    items.push({ etiqueta: "Máximo", valor: voz && data.tiempo_maximo_s != null ? `${data.tiempo_maximo_s} s` : "Sin medir" });
+    items.push({
+      etiqueta: "Red",
+      valor: !voz ? "Sin medir" : data.sin_internet === true ? "Sin internet" : data.sin_internet === false ? "Con internet" : "Sin registrar",
+    });
   } else if (demoId === 3) {
+    const calidad = data.paquete_ciego?.calificacion?.calidad_promedio;
+    if (calidad?.local != null) {
+      items.push({ etiqueta: "Calidad local / ref.", valor: `${Number(calidad.local).toFixed(2)} / ${Number(calidad.referencia).toFixed(2)}` });
+    }
     const c = data.comparacion || {};
     items.push({ etiqueta: "Local / ref.", valor: `${c.respuestas_local ?? data.tareas_local ?? 0}/${c.respuestas_referencia ?? data.tareas_referencia ?? 0}` });
     items.push({ etiqueta: "Caliente", valor: data.tiempo_promedio_caliente_s != null ? `${data.tiempo_promedio_caliente_s} s` : "—" });
@@ -144,227 +122,73 @@ function kpisDeInforme(demoId, data) {
       valor: data.comparacion_completa ? (cal?.estado === "calculado" ? "Calificado" : cal?.estado === "parcial" ? "1/2 cal." : "Listo") : "Pendiente",
     });
   } else if (demoId === 4) {
-    for (const v of data.variedades || []) {
-      items.push({ etiqueta: v.variedad, valor: `${v.wer_porcentaje} % WER` });
+    const medidas = data.variedades || [];
+    for (const v of medidas) {
+      items.push({ etiqueta: `${v.variedad} · ${v.frases} frases`, valor: `${v.wer_porcentaje} % WER` });
     }
-    if (!items.length && data.pendiente) {
-      items.push({ etiqueta: "Estado", valor: "Faltan pares" });
+    if (!medidas.some((v) => (v.clave || v.variedad) === "palenquero")) {
+      items.push({ etiqueta: "palenquero", valor: "Sin medir" });
+    }
+    if (!medidas.some((v) => (v.clave || "").startsWith("coste") || String(v.variedad).includes("coste"))) {
+      items.push({ etiqueta: "español costeño", valor: "Sin medir" });
     }
   }
   return items.slice(0, 4);
 }
 
-function filasDetalleDemo1(data) {
-  if (!data.tabla?.length || data.wer_corpus == null && !data.modelos) return "";
-  const m = data.modelos || {};
-  const wc = data.wer_corpus || {};
-  const tp = data.tiempos_promedio || {};
-  const filas = data.tabla
+function audiosDemo1(data) {
+  // Los audios no van en la nota (no se publican); aquí se pueden oír en el equipo donde se grabaron.
+  const conAudio = (data.tabla || []).filter((f) => f.audio_entrada_url);
+  if (!conAudio.length) return "";
+  const filas = (data.tabla || [])
     .map(
-      (f) =>
+      (f, i) =>
         `<tr>
+          <th scope="row">${i + 1}</th>
           <td>${escapeHtml(f.persona || "")}</td>
-          <td class="col-texto">${escapeHtml(f.transcripcion_sistema || "")}</td>
-          <td>${f.wer_porcentaje != null ? `${f.wer_porcentaje} %` : "—"}</td>
-          <td class="col-texto">${escapeHtml(f.respuesta_asistente || "—")}</td>
-          <td>${f.asr_s != null ? `${f.asr_s} / ${f.llm_s} / ${f.tts_s}` : "—"}</td>
-          <td>${f.audio_entrada_url ? `<a href="${escapeHtml(f.audio_entrada_url)}">Escuchar</a>` : "—"}</td>
+          <td class="col-texto">${escapeHtml(f.transcripcion_correcta || "")}</td>
+          <td>${
+            f.audio_entrada_url
+              ? `<audio controls preload="none" src="${escapeHtml(f.audio_entrada_url)}" aria-label="Grabación de la frase ${i + 1}"></audio>`
+              : "Sin audio"
+          }</td>
         </tr>`
     )
     .join("");
-  const porPersona = (data.wer_por_persona || [])
-    .map((p) => `<li>${escapeHtml(p.persona)}: ${p.wer_porcentaje} % WER (${p.frases} frases)</li>`)
-    .join("");
-  const video =
-    data.video_corrida || data.corrida_id
-      ? `<p><a class="fca-btn fca-btn--secondary" href="${escapeHtml(data.video_corrida || `/api/demos/1/historial/${data.corrida_id}.webm`)}">Video de la corrida</a></p>`
-      : "<p class=\"body-sm\">Sube el video de la sesión desde el historial del demo (botón de grabación en pantalla).</p>";
-  return `<details class="informe-details" open>
-    <summary>Modelos, WER y flujo punta a punta</summary>
-    ${data.resumen_ejecutivo ? `<p class="informe-resumen">${escapeHtml(data.resumen_ejecutivo)}</p>` : ""}
-    <dl class="informe-dl compacto">
-      <dt>Whisper</dt><dd>${escapeHtml(m.whisper || "—")}</dd>
-      <dt>Ollama</dt><dd>${escapeHtml(m.ollama || "—")}</dd>
-      <dt>Piper (voz asistente)</dt><dd>${escapeHtml(m.piper_asistente || "—")}</dd>
-      <dt>WER corpus</dt><dd>${wc.wer_porcentaje != null ? `${wc.wer_porcentaje} %` : "—"}</dd>
-      ${porPersona ? `<dt>WER por hablante</dt><dd><ul class="lista-inline">${porPersona}</ul></dd>` : ""}
-      ${tp.asr_promedio_s != null ? `<dt>Tiempos prom.</dt><dd>ASR ${tp.asr_promedio_s} s · LLM ${tp.llm_promedio_s} s · TTS ${tp.tts_promedio_s} s · total ${tp.total_promedio_s} s</dd>` : ""}
-    </dl>
-    ${data.nota_referencias ? `<p class="informe-nota">${escapeHtml(data.nota_referencias)}</p>` : ""}
-    ${
-      (data.observaciones_llm || []).length
-        ? `<section><h3 class="informe-subtitulo">Alucinaciones del asistente</h3><ul>${(data.observaciones_llm || [])
-            .map((h) => `<li>${escapeHtml(h.observacion || "")}</li>`)
-            .join("")}</ul><p class="informe-nota">${escapeHtml(data.implicacion_alucinaciones || "")}</p></section>`
-        : ""
-    }
-    ${video}
+  return `<details class="informe-details">
+    <summary>Escuchar las grabaciones (solo en este equipo)</summary>
     <table class="datos informe-tabla">
-      <thead><tr><th>Persona</th><th>ASR</th><th>WER</th><th>Respuesta</th><th>ASR/LLM/TTS (s)</th><th>Audio</th></tr></thead>
+      <caption>Grabación de cada frase medida</caption>
+      <thead><tr><th scope="col">#</th><th scope="col">Hablante</th><th scope="col">Lo que se dijo</th><th scope="col">Grabación</th></tr></thead>
       <tbody>${filas}</tbody>
     </table>
   </details>`;
 }
 
-function filasDetalleDemo3(data) {
-  if (!data.comparacion && !data.paquete_ciego) return "";
-  const c = data.comparacion || {};
-  const rl = data.rendimiento?.local || {};
-  const rr = data.rendimiento?.referencia || {};
-  const p = data.paquete_ciego || {};
-  const cal = p.calificacion || {};
-  const chk = (data.protocolo_checklist || [])
-    .map(
-      (f) =>
-        `<tr><td>${escapeHtml(f.item || "")}</td><td>${escapeHtml(String(f.medido ?? ""))}</td><td>${f.cumple ? "Sí" : "No"}</td></tr>`
-    )
-    .join("");
-  return `<details class="informe-details" open>
-    <summary>Comparación y paquete ciego</summary>
-    ${data.resumen_ejecutivo ? `<p class="informe-resumen">${escapeHtml(data.resumen_ejecutivo)}</p>` : ""}
-    <table class="datos informe-tabla">
-      <thead><tr><th></th><th>Local</th><th>Referencia</th></tr></thead>
-      <tbody>
-        <tr><th scope="row">Modelo</th><td>${escapeHtml(c.modelo_local || "—")}</td><td>${escapeHtml((c.proveedor_referencia || "") + " · " + (c.modelo_referencia || "—"))}</td></tr>
-        <tr><th scope="row">Respuestas</th><td>${c.respuestas_local ?? "—"} / ${c.tareas_total ?? 40}</td><td>${c.respuestas_referencia ?? "—"} / ${c.tareas_total ?? 40}</td></tr>
-        <tr><th scope="row">Promedio caliente (s)</th><td>${rl.promedio_caliente_s ?? "—"}</td><td>${rr.promedio_caliente_s ?? "—"}</td></tr>
-        <tr><th scope="row">Promedio todas (s)</th><td>${rl.promedio_todas_s ?? "—"}</td><td>${rr.promedio_todas_s ?? "—"}</td></tr>
-      </tbody>
-    </table>
-    <h3 class="informe-subtitulo">Paquete ciego</h3>
-    <dl class="informe-dl compacto">
-      <dt>Estado</dt><dd>${p.listo ? "Generado" : "Pendiente"}</dd>
-      <dt>Hash</dt><dd><code>${escapeHtml(p.hash || "—")}</code></dd>
-      <dt>Archivo</dt><dd><code>${escapeHtml(p.archivo || "—")}</code></dd>
-      <dt>Evaluadores</dt><dd>${escapeHtml((cal.calificadores || []).join(", ") || "—")}</dd>
-      <dt>Calificación</dt><dd>${escapeHtml(cal.descripcion || "Pendiente")}</dd>
-      ${cal.kappa_cohen_promedio != null ? `<dt>Kappa Cohen</dt><dd>${cal.kappa_cohen_promedio}</dd>` : ""}
-      ${cal.calidad_promedio ? `<dt>Calidad media</dt><dd>Local ${cal.calidad_promedio.local ?? "—"} · Referencia ${cal.calidad_promedio.referencia ?? "—"}</dd>` : ""}
-      <dt>Fecha corrida</dt><dd>${escapeHtml(formatoValor("fecha_corrida", data.fecha_corrida || data.fecha))}</dd>
-      <dt>Fecha calificación</dt><dd>${escapeHtml(formatoValor("fecha_calificacion", data.fecha_calificacion))}</dd>
-      ${data.costo_local_nota ? `<dt>Costo local</dt><dd>${escapeHtml(data.costo_local_nota)}</dd>` : ""}
-    </dl>
-    ${data.limitacion_calificadores ? `<p class="informe-nota">${escapeHtml(data.limitacion_calificadores)}</p>` : ""}
-    ${chk ? `<table class="datos informe-tabla"><thead><tr><th>Paso</th><th>Medido</th><th>OK</th></tr></thead><tbody>${chk}</tbody></table>` : ""}
-  </details>`;
+async function cargarNota(destino, demoId, corridaId) {
+  // La nota técnica la arma el servidor: es el mismo documento del PDF y de la vista para imprimir.
+  const consulta = corridaId ? `?corrida=${encodeURIComponent(corridaId)}` : "";
+  try {
+    const resp = await fetch(`/api/demos/${demoId}/nota${consulta}`);
+    if (!resp.ok) throw new Error(`respuesta ${resp.status}`);
+    destino.innerHTML = await resp.text();
+  } catch (err) {
+    destino.innerHTML = `<p class="error-texto" role="alert">No se pudo cargar la nota técnica (${escapeHtml(err.message)}). Recarga la página.</p>`;
+  }
 }
 
-function filasDetalle(data) {
-  if (data.demo === 1 || (data.tabla?.length && data.modelos)) {
-    return filasDetalleDemo1(data);
-  }
-  if (data.comparacion || data.paquete_ciego) {
-    return filasDetalleDemo3(data);
-  }
-  if (data.tabla && data.tabla.length && !data.modelos) {
-    const rows = data.tabla
-      .map(
-        (f) =>
-          `<tr><td>${escapeHtml(f.persona || "")}</td><td>${escapeHtml(f.transcripcion_sistema || "")}</td><td>${escapeHtml(f.correcta || "")}</td></tr>`
-      )
-      .join("");
-    return `<details class="informe-details" open><summary>Tabla de voz (${data.tabla.length})</summary>
-      <table class="datos informe-tabla"><thead><tr><th>Persona</th><th>Transcripción</th><th>¿Correcta?</th></tr></thead><tbody>${rows}</tbody></table></details>`;
-  }
-  if (data.filas && Array.isArray(data.filas) && data.filas[0]?.prueba) {
-    const rows = data.filas
-      .map((f) => {
-        const ok = String(f.obtenido || "").toLowerCase().includes("pasó");
-        return `<tr class="${ok ? "fila-ok" : "fila-falla"}"><td>${escapeHtml(f.prueba || "")}</td><td>${escapeHtml(f.obtenido || "")}</td></tr>`;
-      })
-      .join("");
-    return `<details class="informe-details" open><summary>Pruebas automatizadas (${data.filas.length})</summary>
-      <table class="datos informe-tabla"><thead><tr><th>Prueba</th><th>Resultado</th></tr></thead><tbody>${rows}</tbody></table></details>`;
-  }
-  if (data.tabla && data.tabla.length) {
-    const rows = data.tabla
-      .map(
-        (f) =>
-          `<tr><td>${escapeHtml(f.persona || "")}</td><td>${escapeHtml(f.transcripcion_sistema || "")}</td><td>${escapeHtml(f.correcta || "")}</td></tr>`
-      )
-      .join("");
-    return `<details class="informe-details" open><summary>Tabla de voz (${data.tabla.length} filas)</summary>
-      <table class="datos informe-tabla"><thead><tr><th>Persona</th><th>Sistema</th><th>¿Correcta?</th></tr></thead><tbody>${rows}</tbody></table></details>`;
-  }
-  if (data.variedades && data.variedades.length) {
-    const rows = data.variedades
-      .map((v) => `<tr><td>${escapeHtml(v.variedad)}</td><td>${v.frases}</td><td>${v.wer_porcentaje} %</td></tr>`)
-      .join("");
-    return `<details class="informe-details" open><summary>WER por variedad</summary>
-      <table class="datos informe-tabla"><thead><tr><th>Variedad</th><th>Frases</th><th>WER</th></tr></thead><tbody>${rows}</tbody></table></details>`;
-  }
-  if (typeof data.filas === "number") {
-    return `<p class="informe-nota">${data.filas} filas registradas en el informe completo (JSON).</p>`;
-  }
-  return "";
-}
-
-function renderInforme(container, data, demoId) {
+function renderInforme(container, data, demoId, opciones = {}) {
   demoId = demoId ?? (Number(document.body.dataset.demo) || 0);
   if (!data) {
     container.innerHTML = `<p class="pendiente">Todavía no hay informe. Sigue el protocolo o usa <strong>Correr de nuevo</strong>.</p>`;
     return;
   }
-  const estado = estadoInforme(demoId, data);
-  const kpis = kpisDeInforme(demoId, data);
-  const kpiHtml = kpis.length
-    ? `<ul class="kpi-row" aria-label="Indicadores principales">${kpis.map((k) => `<li><span class="kpi-valor">${escapeHtml(String(k.valor))}</span><span class="kpi-etiqueta">${escapeHtml(k.etiqueta)}</span></li>`).join("")}</ul>`
-  : "";
-
-  const omitidas = new Set([
-    "comparacion",
-    "rendimiento",
-    "paquete_ciego",
-    "protocolo_checklist",
-    "resumen_ejecutivo",
-    "criterio_protocolo",
-    "criterio_metodo_armado",
-    "criterio_calificacion_completa",
-    "limitacion_calificadores",
-    "costo_local_nota",
-    "fecha_corrida",
-    "fecha_calificacion",
-    "modelos",
-    "wer_corpus",
-    "wer_por_persona",
-    "tiempos_promedio",
-    "resumen_ejecutivo",
-    "definicion_wer",
-    "video_corrida",
-    "observaciones_llm",
-    "nota_referencias",
-    "implicacion_alucinaciones",
-    "tabla",
-    "filas",
-    "eventos",
-    "variedades",
-    "detalle",
-    "equipo",
-    "bloqueo",
-    "demo",
-    "titulo",
-    "ultima_corrida_error",
-  ]);
   const extraDemo3 =
     demoId === 3 && data.ultima_corrida_error
       ? `<p class="informe-alerta error-texto" role="alert"><strong>Última corrida comercial/local:</strong> ${escapeHtml(
           data.ultima_corrida_error
         )}</p>`
       : "";
-  const metadatos = Object.entries(data)
-    .filter(([clave, valor]) => !omitidas.has(clave) && valor !== null && typeof valor !== "object")
-    .map(([clave, valor]) => {
-      const etiqueta = ETIQUETAS[clave] || clave.replaceAll("_", " ");
-      return `<dt>${escapeHtml(etiqueta)}</dt><dd>${escapeHtml(formatoValor(clave, valor))}</dd>`;
-    })
-    .join("");
-
-  const equipo = data.equipo
-    ? `<details class="informe-details"><summary>Equipo de medición</summary><dl class="informe-dl compacto">${Object.entries(data.equipo)
-        .map(([k, v]) => `<dt>${escapeHtml(k)}</dt><dd>${escapeHtml(String(v))}</dd>`)
-        .join("")}</dl></details>`
-    : "";
-
   const calEstado = data.paquete_ciego?.calificacion?.estado;
   const ctaCiego =
     demoId === 3 &&
@@ -374,14 +198,37 @@ function renderInforme(container, data, demoId) {
           calEstado === "parcial" ? "(falta segunda evaluación)" : "(paquete listo · falta calificación humana)"
         }</span></p>`
       : "";
+
+  if (opciones.completo) {
+    // Vista completa: la nota técnica entera y, en el demo 1, los audios de cada frase.
+    container.innerHTML = `<div class="informe-resumen">
+      ${extraDemo3}
+      ${ctaCiego}
+      <div class="nota-en-pantalla" aria-live="polite"><p class="pendiente">Cargando la nota técnica…</p></div>
+      ${demoId === 1 ? audiosDemo1(data) : ""}
+    </div>`;
+    cargarNota(container.querySelector(".nota-en-pantalla"), demoId, opciones.corridaId);
+    return;
+  }
+
+  // Vista corta, al terminar una corrida: estado, cifras principales y el camino a la nota.
+  const estado = estadoInforme(demoId, data);
+  const kpis = kpisDeInforme(demoId, data);
+  const kpiHtml = kpis.length
+    ? `<ul class="kpi-row" aria-label="Indicadores principales">${kpis.map((k) => `<li><span class="kpi-valor">${escapeHtml(String(k.valor))}</span><span class="kpi-etiqueta">${escapeHtml(k.etiqueta)}</span></li>`).join("")}</ul>`
+    : "";
+  const faltantes = [...(data.faltantes || []), ...(Array.isArray(data.pendiente) ? data.pendiente : []), ...(data.advertencias || [])];
   container.innerHTML = `<div class="informe-resumen estado-${estado.clase}">
     <span class="estado-badge ${estado.clase}">${escapeHtml(estado.texto)}</span>
     ${extraDemo3}
     ${ctaCiego}
     ${kpiHtml}
-    <dl class="informe-dl">${metadatos}</dl>
-    ${filasDetalle(data)}
-    ${equipo}
+    ${data.resumen_ejecutivo ? `<p class="informe-nota">${escapeHtml(data.resumen_ejecutivo)}</p>` : ""}
+    ${faltantes.length ? `<ul class="informe-faltantes">${faltantes.map((f) => `<li>${escapeHtml(String(f))}</li>`).join("")}</ul>` : ""}
+    <p class="informe-exportar">
+      <a class="enlace-json" href="/demo/${demoId}/informe/imprimir" target="_blank" rel="noopener">Ver la nota técnica</a>
+      <a class="enlace-json" href="/api/demos/${demoId}/informe.pdf">Descargar PDF</a>
+    </p>
   </div>`;
 }
 
@@ -465,14 +312,14 @@ async function seleccionarCorrida(demoId, corridaId, boton) {
     demoId === 3 && (data.comparacion_completa || (data.tareas_referencia ?? 0) >= 40)
       ? `<a class="enlace-json enlace-calificar-ciego" href="/calificar?paquete=actual">Calificar paquete ciego</a>`
       : "";
-  nav.innerHTML = `<a class="enlace-json" href="/demo/${demoId}/informe/imprimir?corrida=${q}" target="_blank" rel="noopener">Vista PDF</a>
+  nav.innerHTML = `<a class="enlace-json" href="/demo/${demoId}/informe/imprimir?corrida=${q}" target="_blank" rel="noopener">Abrir la nota para imprimir</a>
     <a class="enlace-json" href="/api/demos/${demoId}/informe.pdf?corrida=${q}">Descargar PDF</a>
     ${videoLink}
     ${enlaceCiego}`;
   const cuerpo = document.createElement("div");
   detalle.appendChild(nav);
   detalle.appendChild(cuerpo);
-  renderInforme(cuerpo, data, demoId);
+  renderInforme(cuerpo, data, demoId, { completo: true, corridaId });
 }
 
 async function cargarHistorial(demoId) {
@@ -487,8 +334,13 @@ async function cargarHistorial(demoId) {
     if (vacio) vacio.hidden = false;
     const detalle = document.getElementById("historial-detalle");
     if (detalle) {
-      detalle.replaceChildren();
-      detalle.innerHTML = "<p class=\"pendiente\">Elige una corrida de la lista para ver el detalle.</p>";
+      // Sin corridas todavía: se muestra la nota tal como está, con el montaje y el procedimiento.
+      detalle.innerHTML = `<nav class="informe-exportar" aria-label="Exportar la nota">
+          <a class="enlace-json" href="/demo/${demoId}/informe/imprimir" target="_blank" rel="noopener">Abrir la nota para imprimir</a>
+          <a class="enlace-json" href="/api/demos/${demoId}/informe.pdf">Descargar PDF</a>
+        </nav>
+        <div class="nota-en-pantalla" aria-live="polite"><p class="pendiente">Cargando la nota técnica…</p></div>`;
+      cargarNota(detalle.querySelector(".nota-en-pantalla"), demoId);
     }
     return;
   }
@@ -772,6 +624,67 @@ function initDemo2Telefono() {
 
 initDemo2Telefono();
 
+function initDemo2Medicion() {
+  if (document.body.dataset.demo !== "2") return;
+  const estadoRed = document.getElementById("red-estado");
+  const form = document.getElementById("form-consumo");
+  const estadoConsumo = document.getElementById("consumo-estado");
+
+  async function comprobarRed() {
+    if (!estadoRed || document.hidden) return;
+    try {
+      const datos = await (await fetch("/api/red")).json();
+      estadoRed.dataset.red = datos.internet ? "con" : "sin";
+      estadoRed.textContent = datos.internet
+        ? "Este equipo SÍ tiene salida a internet ahora. Desconecta el router antes de medir."
+        : "Este equipo está sin salida a internet. Se puede medir.";
+    } catch {
+      estadoRed.dataset.red = "desconocida";
+      estadoRed.textContent = "No se pudo comprobar la red.";
+    }
+  }
+  comprobarRed();
+  setInterval(comprobarRed, 10000);
+
+  fetch("/api/demos/2/informe")
+    .then((resp) => (resp.ok ? resp.json() : null))
+    .then((informe) => {
+      const consumo = informe?.consumo;
+      if (!consumo || !form) return;
+      if (consumo.reposo_w != null) form.elements.reposo_w.value = consumo.reposo_w;
+      if (consumo.carga_w != null) form.elements.carga_w.value = consumo.carga_w;
+      if (consumo.instrumento) form.elements.instrumento.value = consumo.instrumento;
+    })
+    .catch(() => {});
+
+  form?.addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const cuerpo = {
+      reposo_w: form.elements.reposo_w.value,
+      carga_w: form.elements.carga_w.value,
+      instrumento: form.elements.instrumento.value,
+    };
+    estadoConsumo.hidden = false;
+    estadoConsumo.classList.remove("error-texto");
+    estadoConsumo.textContent = "Guardando…";
+    try {
+      const resp = await fetch("/api/demos/2/consumo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cuerpo),
+      });
+      const datos = await resp.json();
+      if (!resp.ok) throw new Error(datos.error || "no se pudo guardar");
+      estadoConsumo.textContent = "Consumo guardado. Entra en el informe y en la nota técnica.";
+    } catch (err) {
+      estadoConsumo.classList.add("error-texto");
+      estadoConsumo.textContent = `No se guardó: ${err.message}. Escribe al menos una lectura en vatios.`;
+    }
+  });
+}
+
+initDemo2Medicion();
+
 const CLAVE_REF_API = "nodo-demo3-api-key";
 const CLAVE_REF_REC = "nodo-demo3-recordar-clave";
 
@@ -963,6 +876,73 @@ function initLecturaExplicacion() {
 }
 
 initLecturaExplicacion();
+
+function filaCorpusLista(items) {
+  if (!items?.length) return "<p class=\"pendiente\">Ningún archivo todavía.</p>";
+  const rows = items
+    .map(
+      (it) =>
+        `<tr><td>${escapeHtml(it.id)}</td><td>${escapeHtml(it.referencia)}</td><td>${it.audio ? "Sí" : "—"}</td><td>${it.hipotesis ? "Sí" : "pendiente"}</td></tr>`
+    )
+    .join("");
+  return `<table class="informe-tabla"><thead><tr><th>Id</th><th>Referencia</th><th>Audio</th><th>.hip.txt</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+async function initDemo4Corpus() {
+  if (document.body.dataset.demo !== "4") return;
+  const resumen = document.getElementById("corpus-resumen");
+  const tablas = document.getElementById("corpus-tablas");
+  const form = document.getElementById("form-corpus-demo4");
+  const estado = document.getElementById("corpus-estado");
+  if (!form || !resumen) return;
+
+  const pintar = async () => {
+    const resp = await fetch("/api/demos/4/corpus");
+    const data = await resp.json();
+    const d1 = data.demo1_filas || {};
+    resumen.textContent = `Demo 1: ${d1.costeno ?? 0} filas costeñas, ${d1.palenquero ?? 0} filas palenqueras. En carpeta: costeño ${(data.carpetas?.costeno || []).length}, palenquero ${(data.carpetas?.palenquero || []).length}.`;
+    if (tablas) {
+      tablas.innerHTML = `<h3>Costeño</h3>${filaCorpusLista(data.carpetas?.costeno)}<h3>Palenquero</h3>${filaCorpusLista(data.carpetas?.palenquero)}`;
+    }
+  };
+
+  await pintar();
+
+  form.addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const archivo = document.getElementById("corpus-audio")?.files?.[0];
+    if (!archivo) return;
+    estado.hidden = false;
+    estado.textContent = "Subiendo…";
+    const b64 = await new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(String(r.result).split(",")[1]);
+      r.onerror = reject;
+      r.readAsDataURL(archivo);
+    });
+    const resp = await fetch("/api/demos/4/corpus", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        variedad: document.getElementById("corpus-variedad")?.value || "palenquero",
+        id: document.getElementById("corpus-id")?.value.trim(),
+        referencia: document.getElementById("corpus-ref")?.value.trim(),
+        audio_b64: b64,
+        mime: archivo.type || "audio/webm",
+      }),
+    });
+    const data = await resp.json();
+    if (!resp.ok) {
+      estado.textContent = data.error || "No se pudo guardar.";
+      return;
+    }
+    estado.textContent = "Guardado. Al correr el experimento, Whisper generará .hip.txt si hace falta.";
+    form.reset();
+    await pintar();
+  });
+}
+
+initDemo4Corpus();
 
 const demoEnPagina = document.body.dataset.demo;
 if (demoEnPagina) {

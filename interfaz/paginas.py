@@ -4,11 +4,12 @@ from __future__ import annotations
 
 import html
 import json
+import re
 
 from interfaz.catalogo import DEMOS
 from interfaz.informes import estado_hipotesis_portada, resumen_tarjeta
 from interfaz.red import enlace_telefono
-from voz.frases import FRASES
+from voz.frases import FRASES, FRASES_PALENQUERO
 
 REPO_GITHUB = "https://github.com/AnuarHarb/node-ia-caribe"
 
@@ -57,7 +58,8 @@ def _head_css() -> str:
     return """<link rel="stylesheet" href="/static/fca/fca-fonts.css">
   <link rel="stylesheet" href="/static/fca/FCA_Sistema-de-diseno/tokens.css">
   <link rel="stylesheet" href="/static/fca/FCA_Sistema-de-diseno/componentes/fca-componentes.css">
-  <link rel="stylesheet" href="/static/app.css">"""
+  <link rel="stylesheet" href="/static/app.css">
+  <link rel="stylesheet" href="/static/nota.css">"""
 
 
 DEMO_ICONOS: dict[int, str] = {
@@ -133,12 +135,15 @@ def _cabecera(titulo: str, intro: str, breadcrumb: str | None = None, demo_id: i
 def _pie(extra_script: str = "", *, demo: bool = False) -> str:
     scripts_demo = ""
     if demo:
-        scripts_demo = '<script src="/static/corrida-video.js"></script>\n  '
+        scripts_demo = (
+            '<script src="/static/corrida-video.js"></script>\n  '
+            '<script src="/static/grabar-pantalla.js"></script>\n  '
+        )
     return f"""  </main>
   <footer class="site-footer">
     <div class="footer-bars" aria-hidden="true"><span class="fca-bars"><i></i><i></i><i></i><i></i><i></i></span></div>
     <p class="body-sm">Nodo IA Caribe · <a href="https://codigoabierto.tech" rel="noopener">Fundación Código Abierto</a>.
-      Informes en <code>resultados/</code> · <a href="/nota-tecnica">Nota técnica</a> ·
+      Informes en <code>resultados/</code> · <a href="/nota-tecnica">Entrega</a> ·
       <a href="{e(REPO_GITHUB)}" rel="noopener">Repositorio</a> ·
       <a href="{e(REPO_GITHUB + "/blob/main/LICENSE")}" rel="noopener">Licencia</a>.
       Videos de corrida (demos 2–5): <code>resultados/demoN/historial/</code>.</p>
@@ -170,7 +175,7 @@ def inicio() -> str:
                 <span class="fca-pill fca-pill--soft">Demo {demo_id}</span>
                 <span class="demo-tarjeta-titulo">{e(meta["titulo"])}</span>
               </span>
-              <span class="demo-tarjeta-resumen body-sm">{e(meta["tesis"])}</span>
+              <span class="demo-tarjeta-resumen body-sm">{e(meta["pregunta"])}</span>
               <span class="demo-tarjeta-metrica">{e(metrica)}</span>
             </span>
           </a>
@@ -182,7 +187,7 @@ def inicio() -> str:
         portada=True,
     )
     cuerpo += """<p class="portada-nota">Orden 1 → 5. Desliza o usa las flechas. <strong>Verde ✓</strong> hipótesis cumplida, <strong>rojo ✗</strong> no cumplida, <strong>amarillo</strong> por ejecutar o en progreso. El pie de cada tarjeta resume la última medición.</p>"""
-    cuerpo += """<p class="portada-entrega body-sm"><a href="/nota-tecnica">Nota técnica</a> (video 2–3 min, enlace al repositorio y evidencias). Al correr un demo desde la interfaz se guarda un <strong>video corto</strong> junto al informe en el historial.</p>"""
+    cuerpo += """<p class="portada-entrega body-sm"><a href="/nota-tecnica">Entrega del laboratorio</a>: cómo va cada nota técnica (2 a 3 páginas), su video y lo que falta para radicar.</p>"""
     cuerpo += f"""<section class="demo-carrusel-seccion" aria-labelledby="demos-portada-titulo">
       <div class="demo-carrusel-cabecera">
         <h2 id="demos-portada-titulo" class="demo-carrusel-titulo">Demos del laboratorio</h2>
@@ -215,7 +220,10 @@ def demo(demo_id: int) -> str:
 
     hero_botones = ""
     if demo_id == 1:
-        hero_botones = '<p class="hero-ayuda">Graba en costeño en el bloque de abajo. Cada medición guardada entra al historial.</p>'
+        hero_botones = (
+            '<p class="hero-ayuda">Este demo se mide frase por frase en <a href="#sesion-voz">Sesión de voz</a>: '
+            "graba, revisa lo que entendió el sistema y guarda. Cada frase guardada entra sola al informe.</p>"
+        )
     else:
         hero_botones = (
             f"""<button type="button" class="fca-btn hero-correr" data-demo-correr="{demo_id}">"""
@@ -238,6 +246,7 @@ def demo(demo_id: int) -> str:
         </button>
       </div>
       <p class="demo-explicacion-texto" id="demo-explicacion-texto">{explicacion}</p>
+      <p class="demo-explicacion-criterio"><strong>Pregunta que responde:</strong> {e(meta["pregunta"])}</p>
       <p class="demo-explicacion-criterio"><strong>Criterio de éxito:</strong> {criterio_corto}</p>
       <p class="demo-explicacion-voz-estado" id="leer-explicacion-estado" role="status" hidden></p>
       <audio id="audio-explicacion" preload="none" class="sr-only-audio"></audio>
@@ -265,6 +274,23 @@ def demo(demo_id: int) -> str:
         <p><button type="button" class="fca-btn fca-btn--secondary" data-ir-tab="resultados">Ver en historial</button></p>
       </article>
       __EXTRA_EXPERIMENTO__
+      <section class="panel fca-card grabacion-pantalla" id="grabacion-pantalla" aria-labelledby="video-entrega-titulo">
+        <h2 id="video-entrega-titulo">Video para la entrega (2 a 3 minutos)</h2>
+        <p>Graba lo que pide la convocatoria: esta pantalla, otras ventanas, teléfonos si los muestras a cámara, o la pantalla completa con QuickTime u OBS. Aquí el navegador guarda un <code>.webm</code> en este equipo.</p>
+        <ol class="pasos-medicion">
+          <li>Pulsa <strong>Empezar a grabar</strong>. Elige «Pestaña», «Ventana» o «Pantalla completa» y, si aparece, activa el audio.</li>
+          <li>Haz la demostración (2 a 3 minutos, sin editar de más).</li>
+          <li>Pulsa <strong>Detener y guardar</strong>. Descarga el archivo y súbelo como no listado.</li>
+          <li>Pega el enlace en <code>entregables/enlaces.json</code> en el número de este demo.</li>
+        </ol>
+        <div class="grabacion-pantalla-acciones">
+          <button type="button" id="btn-video-iniciar" class="fca-btn">Empezar a grabar</button>
+          <button type="button" id="btn-video-detener" class="fca-btn fca-btn--secondary" disabled>Detener y guardar</button>
+        </div>
+        <p id="video-entrega-estado" class="grabacion-pantalla-estado" role="status">Sin grabación en curso.</p>
+        <ul id="video-entrega-lista" class="video-entrega-lista"></ul>
+        <p class="body-sm">La corrida automática (al pulsar <strong>Correr experimento</strong>) solo captura esta pestaña a baja calidad; este botón es el que conviene para entregar.</p>
+      </section>
       <details class="bitacora-details panel">
         <summary>Bitácora técnica de la sesión</summary>
         <ul id="avance" aria-live="polite" aria-label="Avance de la corrida"></ul>
@@ -285,7 +311,7 @@ def demo(demo_id: int) -> str:
         </aside>
         <article id="historial-detalle" class="panel fca-card panel-informe historial-detalle">
           <nav class="informe-exportar" aria-label="Exportar informe" id="historial-exportar" hidden>
-            <a class="enlace-json" id="hist-link-imprimir" href="#" target="_blank" rel="noopener">Vista PDF</a>
+            <a class="enlace-json" id="hist-link-imprimir" href="#" target="_blank" rel="noopener">Ver la nota técnica</a>
             <a class="enlace-json" id="hist-link-pdf" href="#">Descargar PDF</a>
           </nav>
           <p class="pendiente">Elige una corrida de la lista para ver el detalle.</p>
@@ -339,7 +365,36 @@ def demo(demo_id: int) -> str:
           <p>En el computador, la sala en <a href="/voz/sala">/voz/sala</a>.</p>
         </div>
       </div>
+    </section>
+    <section class="panel fca-card" aria-labelledby="medicion2-titulo">
+      <h2 id="medicion2-titulo">Lo que se mide en esta sesión</h2>
+      <p>El criterio tiene tres partes y las tres quedan medidas: <strong>3 o más usuarios a la vez</strong>, <strong>respuesta de voz en menos de 10 s en promedio</strong> y <strong>sin internet</strong>. En cada consulta el servidor comprueba si el equipo alcanza internet y lo guarda.</p>
+      <p id="red-estado" class="red-estado" role="status" data-red="desconocida">Comprobando la salida a internet…</p>
+      <ol class="pasos-medicion">
+        <li>Desconecta el router de internet frente a la cámara y espera a que arriba diga «sin salida a internet».</li>
+        <li>Cada persona abre el enlace en su teléfono, escribe su nombre y hace 10 consultas por voz, todos al mismo tiempo.</li>
+        <li>Anota abajo la lectura del medidor de consumo, si lo tienes.</li>
+        <li>Pulsa <strong>Correr experimento</strong>: el informe se calcula con las consultas por voz de la sesión.</li>
+      </ol>
+      <form id="form-consumo" class="consumo-form">
+        <fieldset>
+          <legend>Consumo eléctrico (opcional, lectura del medidor)</legend>
+          <label for="consumo-reposo">En reposo (W)
+            <input id="consumo-reposo" name="reposo_w" type="number" inputmode="decimal" min="0" max="5000" step="0.1" autocomplete="off">
+          </label>
+          <label for="consumo-carga">Durante la carga (W)
+            <input id="consumo-carga" name="carga_w" type="number" inputmode="decimal" min="0" max="5000" step="0.1" autocomplete="off">
+          </label>
+          <label for="consumo-instrumento">Medidor usado
+            <input id="consumo-instrumento" name="instrumento" type="text" autocomplete="off" maxlength="120" placeholder="Marca y modelo del medidor de enchufe">
+          </label>
+          <button type="submit" class="fca-btn fca-btn--secondary">Guardar consumo</button>
+        </fieldset>
+        <p id="consumo-estado" class="aviso" role="status" hidden></p>
+      </form>
     </section>"""
+    if demo_id == 4:
+        extra = _bloque_corpus_demo4()
     if demo_id == 3:
         extra = """<section class="panel fca-card" aria-labelledby="referencia-titulo">
       <h2 id="referencia-titulo">Referencia comercial (segunda mitad)</h2>
@@ -378,133 +433,147 @@ def demo(demo_id: int) -> str:
     return cuerpo + _pie(_script_voz_si(demo_id), demo=True)
 
 
+def _bloque_corpus_demo4() -> str:
+    return """<section class="panel fca-card" aria-labelledby="corpus-demo4-titulo">
+      <h2 id="corpus-demo4-titulo">Armar el corpus (WER)</h2>
+      <p>El demo 4 necesita pares <strong>audio + transcripción de referencia</strong> por variedad. Tienes dos caminos:</p>
+      <ul>
+        <li><strong>Español costeño:</strong> las mediciones del <a href="/demo/1">demo 1</a> (variedad costeño) cuentan solas; aquí puedes sumar frases extra.</li>
+        <li><strong>Palenquero:</strong> en el <a href="/demo/1">demo 1</a> elige variedad <em>palenquero</em> y guarda cada medición, <strong>o</strong> sube el audio y la referencia en este formulario (aval lingüístico según protocolo).</li>
+      </ul>
+      <p id="corpus-resumen" class="corpus-resumen" role="status">Cargando estado del corpus…</p>
+      <form id="form-corpus-demo4" class="corpus-form">
+        <label for="corpus-variedad">Variedad
+          <select id="corpus-variedad" name="variedad">
+            <option value="palenquero" selected>Palenquero</option>
+            <option value="costeno">Costeño (adicional al demo 1)</option>
+          </select>
+        </label>
+        <label for="corpus-id">Id de la frase (ej. P01, 001)
+          <input id="corpus-id" name="id" type="text" autocomplete="off" spellcheck="false" required placeholder="P01">
+        </label>
+        <label for="corpus-ref">Transcripción de referencia (lo que dijo el hablante)
+          <textarea id="corpus-ref" name="referencia" rows="3" required></textarea>
+        </label>
+        <label for="corpus-audio">Audio
+          <input id="corpus-audio" name="audio" type="file" accept="audio/*" capture required>
+        </label>
+        <button type="submit" class="fca-btn">Guardar en corpus</button>
+        <p id="corpus-estado" class="aviso" role="status" hidden></p>
+      </form>
+      <details class="corpus-listado">
+        <summary>Ver archivos en carpeta</summary>
+        <div id="corpus-tablas" class="corpus-tablas"></div>
+      </details>
+    </section>"""
+
+
 def _bloque_voz() -> str:
-    frases_json = json.dumps(FRASES, ensure_ascii=False)
-    return f"""<section class="panel fca-card voz-grid" aria-labelledby="voz-titulo">
-      <h2 id="voz-titulo">Sesión de voz (demo 1)</h2>
-      <p>Consentimiento escrito antes de grabar. El audio no se publica.</p>
-      <label>Nombre de quien habla
-        <input id="persona" name="persona" type="text" autocomplete="name" required>
-      </label>
-      <label>
-        <input id="consentimiento" type="checkbox">
-        Hay consentimiento de donación de voz
-      </label>
-      <p id="frase-guion"></p>
-      <section id="escenario-voz" class="escenario escenario-1 vacio" aria-label="Flujo de voz en vivo">
-        <ol class="flujo-voz">
-          <li data-paso="grabar">Grabar</li>
-          <li data-paso="transcribir">Transcribir</li>
-          <li data-paso="responder">Responder</li>
-        </ol>
-        <p class="escenario-pie" aria-live="polite">Listo para grabar.</p>
+    frases_json = json.dumps(
+        {"costeno": FRASES, "palenquero": FRASES_PALENQUERO}, ensure_ascii=False
+    ).replace("</", "<\\/")
+    return f"""<section class="panel fca-card sesion-voz" id="sesion-voz" aria-labelledby="voz-titulo" data-paso="quien">
+      <h2 id="voz-titulo">Sesión de voz</h2>
+      <ol class="sesion-pasos" aria-label="Pasos de cada frase">
+        <li data-paso="quien">1. Quién habla</li>
+        <li data-paso="grabar">2. Grabar la frase</li>
+        <li data-paso="revisar">3. Revisar y guardar</li>
+      </ol>
+
+      <form id="voz-quien" class="voz-quien" data-panel="quien">
+        <p>Cada persona dice las {len(FRASES)} frases de su variedad con su habla natural. El audio se queda en este equipo y no se publica.</p>
+        <label for="persona">Nombre de quien habla
+          <input id="persona" name="persona" type="text" autocomplete="name" required>
+        </label>
+        <fieldset class="voz-variedad">
+          <legend>Variedad</legend>
+          <label><input type="radio" name="variedad" value="costeno" checked> Español costeño (guion del protocolo)</label>
+          <label><input type="radio" name="variedad" value="palenquero"> Palenquero ({len(FRASES_PALENQUERO)} frases publicadas, con su fuente)</label>
+        </fieldset>
+        <label class="voz-consentimiento">
+          <input id="consentimiento" name="consentimiento" type="checkbox" required>
+          Esta persona firmó el consentimiento de donación de voz
+        </label>
+        <button type="submit" class="fca-btn">Empezar</button>
+        <p class="voz-error" role="alert" hidden></p>
+      </form>
+
+      <section class="voz-panel" data-panel="grabar" aria-labelledby="voz-frase-titulo" hidden>
+        <header class="voz-cabecera">
+          <p class="voz-quien-resumen"><strong id="voz-persona-nombre"></strong> · <span id="voz-variedad-nombre"></span>
+            · <button type="button" class="enlace-boton" id="voz-cambiar">Cambiar</button></p>
+          <p class="voz-progreso" id="voz-progreso" role="status"></p>
+        </header>
+        <h3 id="voz-frase-titulo" class="voz-frase-numero"></h3>
+        <figure class="voz-frase-figura">
+          <blockquote class="voz-frase" id="voz-frase"></blockquote>
+          <figcaption class="voz-frase-fuente body-sm" id="voz-frase-fuente" hidden></figcaption>
+        </figure>
+        <details class="voz-palenquero" hidden>
+          <summary>Usar otra frase acordada con el hablante</summary>
+          <label for="guion-palenquero">Frase en palenquero (será la transcripción correcta)
+            <textarea id="guion-palenquero" rows="2" placeholder="Texto acordado con la Fundación Chano y Chalole o el hablante"></textarea>
+          </label>
+        </details>
+        <div class="voz-microfono">
+          <button type="button" class="boton-mic" id="boton-mic" aria-pressed="false" aria-describedby="voz-mic-ayuda">
+            <span class="boton-mic-icono" aria-hidden="true"></span>
+            <span class="boton-mic-texto">Grabar</span>
+          </button>
+          <p class="voz-mic-estado" aria-live="polite">
+            <span class="voz-cronometro" id="voz-cronometro">0:00</span>
+            <meter id="voz-nivel" min="0" max="1" low="0.15" high="0.85" optimum="0.5" value="0" aria-label="Nivel del micrófono"></meter>
+          </p>
+          <p id="voz-mic-ayuda" class="body-sm">Pulsa Grabar y lee la frase en voz alta. Se detiene sola cuando terminas; si coincide con la frase, se guarda sola. También puedes pulsar Terminar o la barra espaciadora.</p>
+        </div>
+        <section class="voz-procesando" id="escenario-voz" aria-label="Procesando la frase" hidden>
+          <ol class="flujo-voz">
+            <li data-paso="grabar">Escuchar</li>
+            <li data-paso="transcribir">Transcribir</li>
+            <li data-paso="responder">Responder en voz</li>
+          </ol>
+          <p class="escenario-pie" aria-live="polite"></p>
+        </section>
+        <p class="voz-error" role="alert" hidden></p>
+        <details class="voz-guion-completo">
+          <summary>Ver todas las frases</summary>
+          <ol id="voz-lista-frases" class="voz-lista-frases"></ol>
+        </details>
       </section>
-      <div class="fila-boton">
-        <button type="button" id="grabar" class="fca-btn">Grabar</button>
-        <button type="button" id="detener" disabled>Detener y enviar</button>
-      </div>
-      <p id="estado-voz" role="status"></p>
-      <p><strong>Transcripción del sistema:</strong> <span id="transcripcion">—</span></p>
-      <p><strong>Respuesta:</strong> <span id="respuesta-voz"></span></p>
-      <audio id="audio-respuesta" controls></audio>
-      <label>Transcripción correcta
-        <textarea id="correcta" rows="3"></textarea>
-      </label>
-      <fieldset>
-        <legend>¿La transcripción del sistema quedó bien?</legend>
-        <label><input type="radio" name="ok" value="si"> Sí</label>
-        <label><input type="radio" name="ok" value="no"> No</label>
-      </fieldset>
-      <button type="button" id="guardar-fila" class="fca-btn">Guardar medición</button>
+
+      <section class="voz-panel" data-panel="revisar" aria-labelledby="voz-revisar-titulo" hidden>
+        <h3 id="voz-revisar-titulo">Lo que entendió no coincide con la frase</h3>
+        <p class="body-sm">Escucha lo que entendió y decide si es un error del sistema. Una tilde, una «s» que se come el costeño o una palabra que la persona leyó distinto pueden no serlo.</p>
+        <dl class="voz-comparacion">
+          <dt>Lo que entendió el sistema <span class="body-sm">(te lo lee en voz alta)</span></dt>
+          <dd><p id="voz-sistema" class="voz-sistema"></p>
+            <audio id="audio-eco" controls preload="auto"></audio></dd>
+          <dt>Respuesta del asistente</dt>
+          <dd><details class="voz-respuesta">
+            <summary>Escuchar lo que respondió</summary>
+            <p id="voz-respuesta"></p>
+            <audio id="audio-respuesta" controls preload="none"></audio>
+          </details></dd>
+          <dt>Tiempo</dt>
+          <dd id="voz-tiempos"></dd>
+        </dl>
+        <label for="correcta">Lo que de verdad se dijo <span class="body-sm">(viene del guion; corrígelo si la persona dijo otra cosa)</span>
+          <textarea id="correcta" rows="2"></textarea>
+        </label>
+        <p id="voz-sugerencia" class="voz-sugerencia" role="status"></p>
+        <fieldset class="voz-veredicto">
+          <legend>¿Cómo quedó la transcripción?</legend>
+          <button type="button" class="fca-btn" data-correcta="no">Mal transcrita · Guardar</button>
+          <button type="button" class="fca-btn fca-btn--secondary" data-correcta="si">Bien transcrita · Guardar</button>
+        </fieldset>
+        <p><button type="button" class="enlace-boton" id="voz-repetir">Descartar y grabar de nuevo</button></p>
+        <p class="voz-error" role="alert" hidden></p>
+      </section>
+
+      <p class="voz-guardado" id="voz-guardado" role="status" hidden></p>
     </section>
-    <script>
-    const FRASES = {frases_json};
-    let indice = 0;
-    let grabacion = null;
-    let trozos = [];
-    let ultimo = null;
-    const fraseEl = document.getElementById("frase-guion");
-    function mostrarFrase() {{ fraseEl.textContent = FRASES[indice]; }}
-    mostrarFrase();
-    document.getElementById("grabar").onclick = async () => {{
-      if (!document.getElementById("consentimiento").checked || !document.getElementById("persona").value.trim()) {{
-        document.getElementById("estado-voz").textContent = "Falta nombre o consentimiento.";
-        return;
-      }}
-      trozos = [];
-      const flujo = await navigator.mediaDevices.getUserMedia({{ audio: true }});
-      grabacion = new MediaRecorder(flujo);
-      grabacion.ondataavailable = (ev) => {{ if (ev.data.size) trozos.push(ev.data); }};
-      grabacion.onstop = enviarAudio;
-      grabacion.start();
-      document.getElementById("grabar").disabled = true;
-      document.getElementById("detener").disabled = false;
-      document.getElementById("estado-voz").textContent = "Grabando.";
-      if (typeof setEstadoCorrida === "function") setEstadoCorrida("corriendo", "Grabando voz…");
-      if (typeof escenarioVozPaso === "function") escenarioVozPaso("grabar", "Grabando la frase en costeño.");
-    }};
-    document.getElementById("detener").onclick = () => {{
-      if (grabacion && grabacion.state !== "inactive") grabacion.stop();
-    }};
-    async function enviarAudio() {{
-      const blob = new Blob(trozos, {{ type: grabacion.mimeType }});
-      grabacion.stream.getTracks().forEach((t) => t.stop());
-      const b64 = await new Promise((res) => {{
-        const r = new FileReader();
-        r.onload = () => res(String(r.result).split(",")[1]);
-        r.readAsDataURL(blob);
-      }});
-      document.getElementById("estado-voz").textContent = "Procesando en el equipo…";
-      if (typeof escenarioVozPaso === "function") escenarioVozPaso("transcribir", "Whisper transcribe en este Mac…");
-      const resp = await fetch("/api/voz/turno", {{
-        method: "POST",
-        headers: {{ "Content-Type": "application/json" }},
-        body: JSON.stringify({{
-          demo: 1,
-          persona: document.getElementById("persona").value.trim(),
-          guion: FRASES[indice],
-          audio_b64: b64,
-          mime: blob.type
-        }})
-      }});
-      const data = await resp.json();
-      document.getElementById("grabar").disabled = false;
-      document.getElementById("detener").disabled = true;
-      if (!resp.ok) {{
-        document.getElementById("estado-voz").textContent = data.error || "Falló.";
-        return;
-      }}
-      ultimo = data;
-      document.getElementById("transcripcion").textContent = data.transcripcion || "(vacía)";
-      document.getElementById("respuesta-voz").textContent = data.respuesta;
-      document.getElementById("audio-respuesta").src = "data:audio/wav;base64," + data.audio_b64;
-      if (typeof escenarioVozPaso === "function") escenarioVozPaso("responder", "Ollama responde y Piper sintetiza la voz.");
-      document.getElementById("estado-voz").textContent = "Listo en " + data.segundos + " s.";
-      indice = (indice + 1) % FRASES.length;
-      mostrarFrase();
-    }};
-    document.getElementById("guardar-fila").onclick = async () => {{
-      if (!ultimo) return;
-      const ok = document.querySelector('input[name="ok"]:checked');
-      if (!ok) return;
-      await fetch("/api/voz/fila", {{
-        method: "POST",
-        headers: {{ "Content-Type": "application/json" }},
-        body: JSON.stringify({{
-          id: ultimo.id,
-          persona: document.getElementById("persona").value.trim(),
-          guion: ultimo.guion,
-          transcripcion_correcta: document.getElementById("correcta").value.trim(),
-          transcripcion_sistema: ultimo.transcripcion,
-          correcta: ok.value,
-          audio: ultimo.audio
-        }})
-      }});
-      document.getElementById("estado-voz").textContent = "Fila guardada. Informe actualizado.";
-      if (typeof mostrarUltimoResultado === "function") mostrarUltimoResultado(1);
-      if (typeof setEstadoCorrida === "function") setEstadoCorrida("ok", "Medición guardada en el historial.");
-    }};
-    </script>"""
+    <script type="application/json" id="frases-demo1">{frases_json}</script>
+    <script src="/static/demo1-voz.js"></script>"""
 
 
 def _script_voz_si(demo_id: int) -> str:
@@ -513,57 +582,128 @@ def _script_voz_si(demo_id: int) -> str:
     return ""
 
 
+def _en_linea(texto: str) -> str:
+    """Negrita, código y enlaces de una línea de Markdown, ya escapada."""
+    salida = e(texto)
+    salida = re.sub(r"`([^`]+)`", r"<code>\1</code>", salida)
+    salida = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", salida)
+    return re.sub(r"(?<![\"'>=])(https?://[^\s<]+[^\s<.,;)])", r'<a href="\1">\1</a>', salida)
+
+
 def _markdown_simple(texto: str) -> str:
     partes: list[str] = []
-    for bloque in texto.split("\n\n"):
+    for bloque in re.split(r"\n{2,}", texto):
         bloque = bloque.strip()
         if not bloque:
             continue
+        if bloque.startswith("```"):
+            codigo = "\n".join(linea for linea in bloque.splitlines() if not linea.startswith("```"))
+            partes.append(f"<pre><code>{e(codigo)}</code></pre>")
+            continue
         if bloque.startswith("# "):
-            partes.append(f"<h1>{e(bloque[2:])}</h1>")
+            # El título de la página ya es el h1; el del documento baja un nivel.
+            partes.append(f"<h2>{_en_linea(bloque[2:])}</h2>")
             continue
         if bloque.startswith("## "):
-            partes.append(f"<h2>{e(bloque[3:])}</h2>")
+            partes.append(f"<h2>{_en_linea(bloque[3:])}</h2>")
             continue
         if bloque.startswith("### "):
-            partes.append(f"<h3>{e(bloque[4:])}</h3>")
+            partes.append(f"<h3>{_en_linea(bloque[4:])}</h3>")
             continue
         if bloque.startswith("|"):
             filas = [
-                "<tr>"
-                + "".join(f"<td>{e(celda.strip())}</td>" for celda in fila.split("|")[1:-1])
-                + "</tr>"
+                [celda.strip() for celda in fila.split("|")[1:-1]]
                 for fila in bloque.splitlines()
-                if fila.strip().startswith("|") and not set(fila.replace("|", "").strip()) <= {"-", " "}
+                if fila.strip().startswith("|") and not set(fila.replace("|", "").strip()) <= {"-", " ", ":"}
             ]
             if filas:
+                cabecera = "".join(f'<th scope="col">{_en_linea(celda)}</th>' for celda in filas[0])
+                cuerpo = "".join(
+                    "<tr>" + "".join(f"<td>{_en_linea(celda)}</td>" for celda in fila) + "</tr>" for fila in filas[1:]
+                )
                 partes.append(
-                    '<table class="nota-tabla"><tbody>' + "".join(filas) + "</tbody></table>"
+                    f'<table class="nota-tabla"><thead><tr>{cabecera}</tr></thead><tbody>{cuerpo}</tbody></table>'
                 )
             continue
         if bloque.startswith("- "):
-            items = "".join(f"<li>{e(linea[2:])}</li>" for linea in bloque.splitlines() if linea.startswith("- "))
+            items = "".join(f"<li>{_en_linea(linea[2:])}</li>" for linea in bloque.splitlines() if linea.startswith("- "))
             partes.append(f"<ul>{items}</ul>")
             continue
-        partes.append(f"<p>{e(bloque)}</p>")
+        if re.match(r"\d+\. ", bloque):
+            items = "".join(
+                f"<li>{_en_linea(re.sub(r'^\d+\. ', '', linea))}</li>"
+                for linea in bloque.splitlines()
+                if re.match(r"\d+\. ", linea)
+            )
+            partes.append(f"<ol>{items}</ol>")
+            continue
+        partes.append(f"<p>{_en_linea(' '.join(bloque.splitlines()))}</p>")
     return "\n".join(partes)
 
 
+def _estado_de_la_entrega() -> str:
+    """Tabla viva: cómo va cada nota frente a lo que pide la especificación."""
+    from interfaz.entregar import revisar
+
+    revision = revisar()
+    filas = []
+    for fila in revision["notas"]:
+        n = fila["demo"]
+        if fila["video"]:
+            video = f'<a href="{e(fila["video"])}" rel="noopener">Ver video</a>'
+        elif fila["video_opcional"]:
+            video = "Opcional"
+        else:
+            video = "Falta el enlace"
+        filas.append(
+            f"""<tr>
+          <th scope="row"><a href="/demo/{n}">Demo {n}. {e(fila["titulo"])}</a></th>
+          <td><span class="estado-badge {e(fila["estado"])}">{e(fila["etiqueta"])}</span></td>
+          <td class="num">{fila["paginas"]}</td>
+          <td>{video}</td>
+          <td><a href="/demo/{n}/informe/imprimir">Ver</a> · <a href="/api/demos/{n}/informe.pdf">PDF</a></td>
+        </tr>"""
+        )
+    resultados = "".join(
+        f"<dt>Demo {fila['demo']}. {e(fila['titulo'])}</dt><dd>{e(fila['resumen'])}</dd>" for fila in revision["notas"]
+    )
+    if revision["pendientes"]:
+        items = "".join(f"<li>{e(texto)}</li>" for texto in revision["pendientes"])
+        falta = f'<h3 id="falta-titulo">Falta antes de radicar</h3><ul aria-labelledby="falta-titulo">{items}</ul>'
+    else:
+        falta = "<p><strong>Nada pendiente:</strong> las cinco notas cumplen el criterio y tienen su video.</p>"
+    return f"""<section class="panel fca-card entrega" aria-labelledby="entrega-titulo">
+      <h2 id="entrega-titulo">Cómo va la entrega</h2>
+      <p>Se calcula ahora con los informes medidos. Para escribir los cinco PDF y el ZIP: <code>.venv/bin/python -m interfaz.entregar</code>.</p>
+      <div class="tabla-desplazable">
+        <table class="datos entrega-tabla">
+          <caption>Estado de cada nota técnica</caption>
+          <thead><tr>
+            <th scope="col">Demo</th><th scope="col">Estado</th>
+            <th scope="col">Páginas</th><th scope="col">Video</th><th scope="col">Nota</th>
+          </tr></thead>
+          <tbody>{"".join(filas)}</tbody>
+        </table>
+      </div>
+      <h3>Resultado de cada demo</h3>
+      <dl class="entrega-resultados">{resultados}</dl>
+      {falta}
+    </section>"""
+
+
 def nota_tecnica() -> str:
-    import os
     from pathlib import Path
 
-    raiz = Path(__file__).resolve().parents[1]
-    archivo = raiz / "notas" / "NOTA_TECNICA.md"
+    archivo = Path(__file__).resolve().parents[1] / "notas" / "NOTA_TECNICA.md"
     texto = archivo.read_text(encoding="utf-8") if archivo.is_file() else "Falta notas/NOTA_TECNICA.md."
-    repo = os.environ.get("NODO_REPO_URL", "").strip()
-    if repo:
-        texto = texto.replace("REPOSITORIO_PENDIENTE", repo)
+    # El primer título del archivo repite el de la página.
+    texto = re.sub(r"\A# [^\n]*\n+", "", texto)
     cuerpo = _cabecera(
-        "Nota técnica del laboratorio",
-        "Evidencia TRL 3 · Nodo IA Caribe. Incluye enlace al repositorio, al video de presentación y a las corridas medidas.",
-        breadcrumb="Nota técnica",
+        "Entrega del laboratorio",
+        "Evidencia TRL 3 · Nodo IA Caribe. Estado de las cinco notas técnicas, sus videos y lo que falta para radicar.",
+        breadcrumb="Entrega",
     )
+    cuerpo += _estado_de_la_entrega()
     cuerpo += f'<article class="nota-tecnica panel fca-card">{_markdown_simple(texto)}</article>'
     cuerpo += """<p class="body-sm"><a href="/">← Volver a la portada</a></p>"""
     return cuerpo + _pie()

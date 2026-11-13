@@ -12,11 +12,14 @@ corridas.
 
 | Demo | Tema | Evidencia principal |
 | --- | --- | --- |
-| 1 | Voz en español costeño | `resultados/demo1/` · WER y flujo punta a punta |
-| 2 | IA completa sin internet | Tiempos con router desconectado · QR a teléfonos |
-| 3 | Local vs referencia comercial | 40 tareas · paquete ciego · calificación humana |
-| 4 | WER palenquero y costeño | Corpus en `demo4_wer/corpus/` |
-| 5 | Agentes aislados por entidad | 11 pruebas sin red |
+| 1 | Voz en español costeño | Flujo de punta a punta y errores reales de reconocimiento, frase por frase |
+| 2 | IA completa sin internet | Usuarios a la vez, tiempo promedio y máximo, red comprobada en cada consulta, consumo |
+| 3 | IA local frente a referencia externa | 40 tareas, calificación a ciegas de dos personas, % comparables, kappa de Cohen |
+| 4 | Línea base del error (WER) | Una cifra por variedad: palenquero y español costeño |
+| 5 | Agentes aislados por entidad | Acceso cruzado bloqueado, registro de auditoría y 11 pruebas |
+
+Cada demo tiene su **nota técnica** de 2 a 3 páginas (objetivo, montaje, procedimiento, resultados,
+limitaciones y enlaces). Se arma sola con el informe medido; si un dato no se midió, dice «sin medir».
 
 La forma recomendada de ejecutar y presentar todo es la **interfaz web** (puerto local 8765).
 
@@ -33,7 +36,7 @@ ollama pull qwen2.5:3b   # demos 1–4 (salvo demo 5)
 
 Abrir **http://127.0.0.1:8765/** — portada, cinco demos, informes, historial y PDF.
 
-- **Nota técnica del laboratorio:** http://127.0.0.1:8765/nota-tecnica  
+- **Entrega del laboratorio** (cómo va cada nota y qué falta): http://127.0.0.1:8765/nota-tecnica  
 - **Calificación ciega (demo 3):** http://127.0.0.1:8765/calificar  
 - Variables de entorno: copiar `.env.example` a `.env` si usas API comercial en el demo 3 (la clave no se guarda en disco en el servidor).
 
@@ -60,20 +63,58 @@ export ANTHROPIC_API_KEY='…'
 .venv/bin/python -m demo4_wer.calcular --transcribir
 ```
 
-El costeño consume las filas del demo 1; el palenquero requiere corpus con consentimiento
-(ver `demo4_wer/corpus/palenquero/`).
+El español costeño usa las frases del demo 1. El palenquero entra por dos caminos:
+
+- grabar en el demo 1 eligiendo la variedad «palenquero» y escribiendo la frase acordada, o
+- subir audio y transcripción correcta en la página del demo 4, sección «Armar el corpus»
+  (quedan en `demo4_wer/corpus/palenquero/`).
+
+En los dos casos hace falta consentimiento individual y el aval de la Fundación Chano y Chalole.
+El protocolo pide de 30 a 50 frases por variedad; con menos, la nota queda como evidencia parcial.
+
+Whisper no incluye el palenquero entre sus idiomas, así que las dos variedades se transcriben con el
+idioma fijado en español. Para probar otra configuración: `DEMO4_IDIOMA_WHISPER=auto` (detección
+automática) o un código de idioma.
+
+El demo 4 tiene además una prueba por escrito: los modelos traducen estrofas de poemas entre español
+y palenquero, y la salida se compara con la traducción humana del libro (chrF, con el control de no
+traducir).
+
+```bash
+.venv/bin/python -m demo4_wer.traduccion                          # modelo local (Ollama)
+export ANTHROPIC_API_KEY='…'
+.venv/bin/python -m demo4_wer.traduccion --referencia anthropic   # agrega la referencia comercial
+.venv/bin/python -m interfaz.entregar                             # lleva las cifras a la nota
+```
+
+Los poemas son obras con autor: van en `demo4_wer/corpus/poemas/poemas.json`, que no se sube al
+repositorio. Lo que se publica es `resultados/demo4/traduccion.json`, con las cifras y dos versos de
+ejemplo. Correr la referencia envía las estrofas a un servicio externo; hazlo solo con permiso de los
+autores.
+
+**Demo 2** — sin internet y con varios usuarios:
+
+1. Desconecta el router de internet. La página del demo 2 muestra si el equipo tiene salida.
+2. Cada teléfono abre el enlace del código QR y hace 10 consultas por voz, todos a la vez.
+3. Anota en la misma página la lectura del medidor de consumo, en reposo y en carga.
+4. Pulsa **Correr experimento**: el informe se calcula con las consultas por voz de la sesión.
+
+Las consultas por texto sirven para probar que el servidor responde; no cuentan para el criterio.
+
+**Costo por tarea del demo 3:** la nota reporta los tokens que midió el servicio de referencia. Para
+que salga en dólares, escribe la tarifa vigente y su fuente en `demo3_comparacion/tarifa_referencia.json`.
 
 ## Estructura del repositorio
 
 ```
-interfaz/          Servidor web y exportación PDF
+interfaz/          Servidor web, notas técnicas (PDF, HTML y Markdown) y paquete de entrega
 demo3_comparacion/ Protocolo de comparación y calificación
-demo4_wer/         Cálculo WER
+demo4_wer/         Cálculo WER y prueba de traducción por escrito
 demo5_agentes/     Aislamiento multi-entidad
 voz/               ASR, LLM local y Piper (demo 1 y 2)
 resultados/        Informes JSON, PDF, historial y videos .webm
 notas/             Notas técnicas por demo
-entregables/       Guion de video de laboratorio
+entregables/       Notas en PDF, ZIP, enlaces a los videos y guion de cada video
 ```
 
 No subas al repositorio: `.env`, API keys, grabaciones con datos personales sin consentimiento
@@ -82,14 +123,25 @@ documentado, ni `grabaciones/` si contienen voz identificable (revisa `.gitignor
 ## Pruebas automatizadas
 
 ```bash
-.venv/bin/python -m unittest demo5_agentes.test_aislamiento demo3_comparacion.test_metodo demo4_wer.test_wer
+.venv/bin/python -m unittest interfaz.test_notas demo5_agentes.test_aislamiento demo3_comparacion.test_metodo demo4_wer.test_wer demo4_wer.test_traduccion
 ```
 
-## Video e informes
+`interfaz.test_notas` comprueba que las cinco notas se generan, traen las seis secciones de la
+plantilla y caben en 2 a 3 páginas.
 
-- Video de presentación (2–3 min): guion en `entregables/VIDEO-LABORATORIO.md`  
-- Por corrida: captura automática en demos 2–5 → `resultados/demoN/historial/*.webm`  
-- PDF: tipografía Poppins (sistema de diseño FCA)
+## Entrega: notas, videos y enlaces
+
+```bash
+.venv/bin/python -m interfaz.entregar
+```
+
+Escribe las cinco notas en `entregables/notas/`, el ZIP `entregables/Nodo-IA-Caribe_Notas-tecnicas.zip`
+(máximo 10 MB) y `entregables/RESUMEN-PARA-DOCUMENTO-TECNICO.md`, y lista lo que falta para radicar.
+
+- Un video por demo, de 2 a 3 minutos, no listado (opcional en el demo 4). Qué debe verse en cada
+  uno: `entregables/VIDEO-LABORATORIO.md`.
+- El enlace de cada video se pega en `entregables/enlaces.json`; las notas lo toman de ahí.
+- Los consentimientos de voz se guardan y no se suben.
 
 ## ¿GitHub Pages?
 

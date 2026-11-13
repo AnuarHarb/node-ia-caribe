@@ -15,8 +15,9 @@ import httpx
 from demo3_comparacion.tareas import TAREAS
 from demo5_agentes import en_vivo as demo5_en_vivo
 from demo5_agentes.test_aislamiento import Aislamiento
-from demo4_wer.calcular import transcribir_faltantes, variedad_desde_pares
-from demo4_wer.wer import pares_de_carpeta, pares_demo1, tabla
+from demo4_wer.calcular import CORPUS as CORPUS_DEMO4
+from demo4_wer.calcular import medir as medir_demo4
+from demo4_wer.calcular import transcribir_faltantes
 from equipo import describir_equipo
 from interfaz.eventos import BUS
 from interfaz.informes import (
@@ -396,59 +397,26 @@ def _correr_demo4() -> None:
     if not _inicio(4):
         return
     estado = BUS.de(4)
-    costeno_dir = RAIZ / "demo4_wer" / "corpus" / "costeno"
-    palenquero_dir = RAIZ / "demo4_wer" / "corpus" / "palenquero"
-    demo1_filas = RAIZ / "resultados" / "demo1" / "filas.json"
     try:
-        estado.emitir("paso", "Whisper transcribe audios sin .hip.txt (si hay audios).")
-        transcribir_faltantes(costeno_dir, palenquero_dir)
-        variedades = []
-        costeno = pares_demo1(demo1_filas)
-        for stem, _audio, referencia in pares_de_carpeta(costeno_dir):
-            hip = costeno_dir / f"{stem}.hip.txt"
-            if hip.exists():
-                costeno.append((stem, _audio, referencia, hip.read_text(encoding="utf-8")))
-        if costeno:
-            v = variedad_desde_pares("español costeño", costeno)
-            if v:
-                variedades.append(v)
-                estado.emitir(
-                    "wer",
-                    f"Costeño: {v['frases']} frases, WER {v['wer_porcentaje']} %",
-                    {"clave": "costeno", "frases": v["frases"], "wer_porcentaje": v["wer_porcentaje"]},
-                )
-        palenquero = []
-        for stem, audio, referencia in pares_de_carpeta(palenquero_dir):
-            hip = palenquero_dir / f"{stem}.hip.txt"
-            if hip.exists():
-                palenquero.append((stem, audio, referencia, hip.read_text(encoding="utf-8")))
-        if palenquero:
-            v = variedad_desde_pares("palenquero", palenquero)
-            if v:
-                variedades.append(v)
-                estado.emitir(
-                    "wer",
-                    f"Palenquero: {v['frases']} frases, WER {v['wer_porcentaje']} %",
-                    {"clave": "palenquero", "frases": v["frases"], "wer_porcentaje": v["wer_porcentaje"]},
-                )
-        pendiente = []
-        if not any(item["variedad"] == "español costeño" for item in variedades):
-            pendiente.append("español costeño: faltan frases del demo 1 o corpus en carpeta costeño")
-        if not any(item["variedad"] == "palenquero" for item in variedades):
-            pendiente.append("palenquero: faltan audios y transcripciones en corpus/palenquero")
-        informe = {
-            "demo": 4,
-            "fecha": datetime.now().astimezone().isoformat(timespec="seconds"),
-            "equipo": describir_equipo(),
-            "modelo": "mlx-community/whisper-small-mlx, sin ajustar",
-            **tabla(variedades),
-            "pendiente": pendiente,
-        }
-        destino = ruta_informe(4)
-        destino.parent.mkdir(parents=True, exist_ok=True)
+        estado.emitir("paso", "Whisper transcribe los audios del corpus que aún no tienen transcripción.")
+        transcribir_faltantes(CORPUS_DEMO4 / "costeno", CORPUS_DEMO4 / "palenquero")
+        informe = medir_demo4()
+        for v in informe["variedades"]:
+            estado.emitir(
+                "wer",
+                f"{v['variedad'].capitalize()}: {v['frases']} frases, WER {v['wer_porcentaje']} %",
+                {"clave": v["clave"], "frases": v["frases"], "wer_porcentaje": v["wer_porcentaje"]},
+            )
+        for texto in informe["advertencias"]:
+            estado.emitir("paso", "Muestra corta. " + texto + ".")
         corrida_id = persistir_informe(4, informe)
-        if variedades:
-            estado.emitir("informe", "WER calculado para " + ", ".join(v["variedad"] for v in variedades))
+        from interfaz.notas import escribir_nota
+
+        escribir_nota(4, {**informe, "corrida_id": corrida_id})
+        if informe["variedades"]:
+            estado.emitir(
+                "informe", "WER calculado para " + ", ".join(v["variedad"] for v in informe["variedades"])
+            )
         else:
             estado.emitir("informe", "Sin pares completos. El informe lista lo que falta.")
         _fin(4, True, corrida_id)
@@ -458,48 +426,61 @@ def _correr_demo4() -> None:
 
 
 def _correr_demo2() -> None:
+    """Arma el informe con las consultas por voz de los teléfonos.
+
+    Si todavía no hay sesión de voz, hace un ensayo por texto para comprobar que el
+    servidor responde a tres consultas a la vez. El ensayo no cuenta para el criterio
+    y no se guarda como corrida.
+    """
     if not _inicio(2):
         return
     estado = BUS.de(2)
-    from concurrent.futures import ThreadPoolExecutor
+    from interfaz.demo2_informe import construir_informe_demo2
 
-    from voz.carga import FRASES, una
-
-    base = "http://127.0.0.1:8765"
-    usuarios = 3
     try:
-        estado.emitir("paso", f"Carga con {usuarios} consultas de texto (parcial si no es voz).")
+        estado.emitir("paso", "Se leen las consultas por voz de la última sesión con los teléfonos.")
+        informe = construir_informe_demo2()
+        if informe and informe.get("consultas_voz"):
+            for indice, usuario in enumerate(informe.get("por_usuario") or [], 1):
+                estado.emitir(
+                    "turno",
+                    f"Usuario {indice} ({usuario['usuario']}): {usuario['consultas']} consultas, "
+                    f"{usuario['promedio_s']} s en promedio",
+                    {"usuario": indice, "segundos": usuario["promedio_s"]},
+                )
+            for texto in informe.get("faltantes") or []:
+                estado.emitir("paso", texto)
+            corrida_id = asegurar_informe_demo2(informe)
+            estado.emitir("informe", informe.get("resumen_ejecutivo", "Informe calculado."))
+            _fin(2, True, corrida_id)
+            return
+
+        from concurrent.futures import ThreadPoolExecutor
+
+        from voz.carga import FRASES, una
+
+        usuarios = 3
+        estado.emitir(
+            "paso",
+            f"Aún no hay consultas por voz. Ensayo con {usuarios} consultas de texto a la vez "
+            "(no cuenta para el criterio).",
+        )
         trabajos = [(i, FRASES[i % len(FRASES)]) for i in range(usuarios)]
         with ThreadPoolExecutor(max_workers=usuarios) as pool:
-            resultados = list(pool.map(lambda item: una(base, item[0], item[1]), trabajos))
+            resultados = list(pool.map(lambda item: una("http://127.0.0.1:8765", item[0], item[1]), trabajos))
         tiempos = [item["segundos"] for item in resultados]
-        informe = {
-            "fecha": datetime.now().astimezone().isoformat(timespec="seconds"),
-            "entrada": "texto",
-            "advertencia": "Parcial: medición por texto. El criterio oficial es voz con el router sin internet.",
-            "usuarios_simultaneos": usuarios,
-            "consultas": len(resultados),
-            "tiempo_promedio_s": round(statistics.fmean(tiempos), 3),
-            "tiempo_maximo_s": round(max(tiempos), 3),
-            "criterio_10s": statistics.fmean(tiempos) < 10,
-            "parcial": True,
-        }
-        (RAIZ / "resultados" / "demo2" / "carga.json").write_text(
-            json.dumps(informe, ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8",
-        )
-        corrida_id = asegurar_informe_demo2(informe)
         for i, item in enumerate(resultados):
             estado.emitir(
                 "turno",
-                f"Usuario {i + 1}: {item['segundos']} s",
+                f"Usuario {i + 1}: {item['segundos']} s (ensayo por texto)",
                 {"usuario": i + 1, "segundos": item["segundos"]},
             )
         estado.emitir(
             "informe",
-            f"Promedio {informe['tiempo_promedio_s']} s (parcial, texto).",
+            f"Ensayo por texto: promedio {round(statistics.fmean(tiempos), 3)} s. El servidor responde. "
+            "Falta la sesión por voz desde los teléfonos, con el router sin internet.",
         )
-        _fin(2, informe["criterio_10s"], corrida_id)
+        _fin(2, True)
     except Exception as exc:  # noqa: BLE001
         estado.emitir("error", str(exc))
         _fin(2, False)

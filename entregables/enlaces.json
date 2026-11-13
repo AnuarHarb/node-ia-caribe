@@ -1,0 +1,11 @@
+{
+  "_ayuda": "Enlaces que la especificación pide en cada nota técnica. Pega aquí la URL del video de cada demo (YouTube no listado o Drive con enlace abierto). Vacío = la nota dice que está pendiente.",
+  "repositorio": "https://github.com/AnuarHarb/node-ia-caribe",
+  "video": {
+    "1": "",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": ""
+  }
+}

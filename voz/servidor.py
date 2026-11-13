@@ -56,32 +56,11 @@ def _anexar(path: Path, fila: dict) -> None:
 
 
 def nota_demo1(filas: list[dict]) -> None:
-    errores = [fila for fila in filas if fila.get("correcta") == "no"]
-    aciertos = [fila for fila in filas if fila.get("correcta") == "si"]
-    personas = sorted({fila.get("persona", "") for fila in filas if fila.get("persona")})
-    lineas = [
-        "# Nota técnica · Voz en español costeño",
-        "",
-        f"Filas guardadas: {len(filas)}. Personas: {', '.join(personas) if personas else 'ninguna'}.",
-        f"Coincidencias marcadas como sí: {len(aciertos)}. Errores reales marcados como no: {len(errores)}.",
-        "",
-        "El flujo cuenta como completo cuando una grabación produce transcripción, respuesta y voz.",
-        "El criterio del video pide, además, al menos un error real de reconocimiento.",
-        "",
-        "| Persona | Transcripción correcta | Transcripción del sistema | ¿Correcta? |",
-        "| --- | --- | --- | --- |",
-    ]
-    for fila in filas:
-        lineas.append(
-            f"| {fila.get('persona','')} | {fila.get('transcripcion_correcta','')} | {fila.get('transcripcion_sistema','')} | {fila.get('correcta','')} |"
-        )
-    if not filas:
-        lineas.append("| | | | |")
-        lineas += ["", "Pendiente: todavía no hay grabaciones con consentimiento."]
-    elif not errores:
-        lineas += ["", "Pendiente del criterio de video: en estas filas todavía no aparece un error de reconocimiento."]
-    (RAIZ / "notas").mkdir(exist_ok=True)
-    (RAIZ / "notas" / "Demo-1_Voz-en-espanol-costeno.md").write_text("\n".join(lineas) + "\n", encoding="utf-8")
+    """Regenera la nota técnica del demo 1 con el mismo documento que usa la interfaz."""
+    from interfaz.demo1_informe import construir_informe_demo1
+    from interfaz.notas import escribir_nota
+
+    escribir_nota(1, construir_informe_demo1())
 
 
 class Manejador(BaseHTTPRequestHandler):

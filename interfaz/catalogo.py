@@ -1,4 +1,7 @@
-"""Metadatos de los cinco demos, para la portada y cada página."""
+"""Metadatos de los cinco demos, para la portada, cada página y las notas.
+
+Cada demo responde una pregunta del proyecto («pregunta») y sostiene una parte de él («justifica»).
+"""
 
 from __future__ import annotations
 
@@ -7,6 +10,8 @@ DEMOS: dict[int, dict] = {
         "id": 1,
         "slug": "voz-costeno",
         "titulo": "Voz en español costeño",
+        "pregunta": "¿Un equipo común puede escuchar, entender y responder sin servicios externos?",
+        "justifica": "Objetivo específico 4.",
         "tesis": "El reconocimiento y la síntesis ya funcionan con habla costeña, y se ve dónde fallan.",
         "montaje": (
             "Whisper small, Piper y un modelo local en Ollama. Tres o cuatro personas del equipo "
@@ -30,6 +35,8 @@ DEMOS: dict[int, dict] = {
         "id": 2,
         "slug": "sin-internet",
         "titulo": "IA completa sin internet",
+        "pregunta": "¿El mismo equipo atiende a varias personas a la vez con el internet cortado?",
+        "justifica": "La operación del nodo sin conexión.",
         "tesis": "Modelo abierto, reconocimiento y síntesis responden juntos en un equipo, con varios usuarios a la vez y sin red.",
         "montaje": "El mismo nodo local; el router desconectado de internet; teléfonos en la página de consulta.",
         "criterio": "Tres usuarios simultáneos; respuesta de voz en menos de 10 s en promedio.",
@@ -50,6 +57,8 @@ DEMOS: dict[int, dict] = {
         "id": 3,
         "slug": "comparacion",
         "titulo": "IA local frente a referencia externa",
+        "pregunta": "¿Un modelo abierto alcanza una calidad comparable a la de un servicio comercial?",
+        "justifica": "Objetivo específico 1 y el método de evaluación.",
         "tesis": "El método de evaluación comparativa a ciegas ya funciona a pequeña escala.",
         "montaje": "40 tareas ficticias; modelo local y un servicio comercial; dos calificadores.",
         "criterio": "El método funciona; no se exige que la IA local gane.",
@@ -72,6 +81,8 @@ DEMOS: dict[int, dict] = {
         "id": 4,
         "slug": "wer",
         "titulo": "Línea base del error (WER)",
+        "pregunta": "¿Los modelos de hoy entienden el palenquero?",
+        "justifica": "Objetivo específico 3.",
         "tesis": "Whisper sin ajustar falla en palenquero y en costeño, con un número por variedad.",
         "montaje": "30–50 frases por variedad; jiwer tras normalizar; palenquero con aval de Chano y Chalole.",
         "criterio": "Una cifra clara por variedad.",
@@ -92,6 +103,8 @@ DEMOS: dict[int, dict] = {
         "id": 5,
         "slug": "agentes",
         "titulo": "Agentes aislados por entidad",
+        "pregunta": "¿Cada entidad puede tener un agente que no vea los datos de las otras?",
+        "justifica": "El arnés y los agentes.",
         "tesis": "Dos agentes de dos entidades no pueden leer los archivos del otro; el registro de auditoría queda íntegro.",
         "montaje": "Prototipo con datos ficticios y 11 pruebas automatizadas.",
         "criterio": "Acceso cruzado bloqueado y las 11 pruebas pasando.",

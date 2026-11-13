@@ -184,10 +184,6 @@ def _cli() -> int:
     return 0 if resultado.get("estado") == "calculado" else 1
 
 
-if __name__ == "__main__":
-    raise SystemExit(_cli())
-
-
 def tiempos_y_costos(generaciones: dict) -> dict:
     resumen = {}
     for camino in CAMINOS:
@@ -208,3 +204,7 @@ def tiempos_y_costos(generaciones: dict) -> dict:
             "costo_promedio_usd": round(_media(costos), 6) if costos and len(costos) == len(segundos) else None,
         }
     return resumen
+
+
+if __name__ == "__main__":
+    raise SystemExit(_cli())

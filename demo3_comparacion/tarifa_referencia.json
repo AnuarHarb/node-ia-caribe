@@ -1,0 +1,8 @@
+{
+  "_ayuda": "Tarifa de lista del modelo de referencia el día de la corrida, en USD por millón de tokens. Con los dos valores, el informe del demo 3 calcula el costo por tarea a partir de los tokens medidos. Con null, el informe muestra solo los tokens y deja el costo como pendiente.",
+  "modelo": "claude-haiku-4-5",
+  "usd_por_millon_entrada": null,
+  "usd_por_millon_salida": null,
+  "fuente": "",
+  "fecha_consulta": ""
+}

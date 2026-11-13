@@ -1453,3 +1453,504 @@ table.datos td {
 .pagina-auxiliar #respuesta {
   font-size: 1.35rem;
 }
+
+/* Informe corto al terminar una corrida y nota técnica dentro de la pestaña Resultados. */
+.informe-faltantes {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--ink-muted);
+  font-size: 0.92rem;
+}
+
+.informe-faltantes li + li {
+  margin-top: 0.3rem;
+}
+
+.nota-en-pantalla {
+  min-width: 0;
+}
+
+.informe-tabla caption {
+  padding-bottom: 0.4rem;
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.informe-tabla audio {
+  width: min(100%, 16rem);
+  height: 2.25rem;
+}
+
+/* Demo 2: estado de la red y lectura del medidor de consumo. */
+.red-estado {
+  --red-color: var(--ink-muted);
+  margin: 0.75rem 0;
+  padding: 0.6rem 0.85rem;
+  border-left: 4px solid var(--red-color);
+  background: color-mix(in srgb, var(--red-color) 12%, transparent);
+  font-weight: 600;
+}
+
+.red-estado[data-red="sin"] {
+  --red-color: #008c55;
+}
+
+.red-estado[data-red="con"] {
+  --red-color: #d6781e;
+}
+
+.pasos-medicion {
+  margin: 0.75rem 0 1rem;
+  padding-left: 1.4rem;
+}
+
+.pasos-medicion li + li {
+  margin-top: 0.35rem;
+}
+
+.consumo-form fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: flex-end;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border: 1px dashed var(--line);
+}
+
+.consumo-form legend {
+  padding: 0 0.35rem;
+  font-weight: 700;
+}
+
+.consumo-form label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.consumo-form input {
+  font: inherit;
+  width: 9rem;
+  min-height: 44px;
+  padding: 0.45rem 0.5rem;
+}
+
+.consumo-form input[type="text"] {
+  width: min(100%, 18rem);
+}
+
+/* Video de entrega grabado desde el navegador. */
+.grabacion-pantalla-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 0.75rem 0;
+}
+
+.grabacion-pantalla-estado {
+  margin: 0.5rem 0;
+  padding: 0.55rem 0.75rem;
+  border-left: 4px solid var(--line);
+  background: #f4f8fa;
+  font-size: 0.92rem;
+}
+
+.grabacion-pantalla-estado.error-texto {
+  border-left-color: #c44;
+  background: #fdf4f4;
+}
+
+.video-entrega-lista {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.video-entrega-lista li + li {
+  margin-top: 0.35rem;
+}
+
+/* Página de entrega: estado de las cinco notas. */
+.estado-badge.pendiente {
+  background: #e3e8ee;
+  color: #3d4a5c;
+}
+
+.tabla-desplazable {
+  overflow-x: auto;
+}
+
+.entrega-tabla caption {
+  padding-bottom: 0.5rem;
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.entrega-tabla th[scope="row"] {
+  min-width: 11rem;
+  font-weight: 600;
+}
+
+.entrega-tabla td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.entrega-tabla .estado-badge {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.nota-tecnica table.nota-tabla th {
+  border-bottom: 2px solid var(--fca-border, #c5d4d8);
+  padding: 0.4rem 0.5rem;
+  text-align: left;
+}
+
+.nota-tecnica pre {
+  overflow-x: auto;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--line);
+  font-size: 0.88rem;
+}
+
+.entrega-resultados {
+  margin: 0.5rem 0 1.25rem;
+}
+
+.entrega-resultados dt {
+  margin-top: 0.75rem;
+  font-weight: 700;
+}
+
+.entrega-resultados dd {
+  margin: 0.2rem 0 0;
+}
+
+/* Demo 1: sesión de voz guiada. */
+.sesion-pasos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.sesion-pasos li {
+  flex: 1 1 10rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.sesion-pasos li.activo {
+  border-color: var(--brand-blue-strong);
+  background: #e8f2f4;
+  color: var(--brand-blue-strong);
+}
+
+.sesion-pasos li.hecho {
+  border-color: #1a4d3a;
+  color: #1a4d3a;
+}
+
+.sesion-pasos li.hecho::before {
+  content: "✓ ";
+}
+
+.voz-quien label,
+.voz-panel label {
+  display: block;
+  margin-bottom: 0.85rem;
+  font-weight: 600;
+}
+
+.voz-quien input[type="text"],
+.voz-panel textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.5rem 0.6rem;
+  font: inherit;
+  font-weight: 400;
+}
+
+.voz-variedad {
+  margin: 0 0 0.85rem;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--line);
+}
+
+.voz-variedad label,
+.voz-consentimiento {
+  font-weight: 400;
+}
+
+.voz-variedad label {
+  margin-bottom: 0.35rem;
+}
+
+.voz-error {
+  margin: 0.75rem 0 0;
+  padding: 0.55rem 0.75rem;
+  border-left: 4px solid #c44;
+  background: #fdf4f4;
+  color: #6b2e2e;
+}
+
+.voz-cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.92rem;
+}
+
+.voz-cabecera p {
+  margin: 0;
+}
+
+.enlace-boton {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--brand-blue-strong);
+  font: inherit;
+  text-align: left;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.voz-frase-numero {
+  margin: 0 0 0.4rem;
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.voz-frase {
+  margin: 0 0 1.25rem;
+  padding: 1rem 1.25rem;
+  border-left: 5px solid var(--brand-blue-strong);
+  background: #f4f8fa;
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  line-height: 1.4;
+}
+
+.voz-microfono {
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+  margin: 0.5rem 0 1rem;
+  text-align: center;
+}
+
+.boton-mic {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 13rem;
+  min-height: 4rem;
+  padding: 0.75rem 1.75rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--brand-blue-strong);
+  color: #fff;
+  font: inherit;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 160ms ease, transform 120ms ease;
+}
+
+.boton-mic:active {
+  transform: scale(0.97);
+}
+
+.boton-mic:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.boton-mic-icono {
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.boton-mic.grabando {
+  background: #c62828;
+}
+
+.boton-mic.grabando .boton-mic-icono {
+  border-radius: 3px;
+  animation: mic-pulso 1.1s ease-in-out infinite;
+}
+
+@keyframes mic-pulso {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boton-mic.grabando .boton-mic-icono {
+    animation: none;
+  }
+}
+
+.voz-mic-estado {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  visibility: hidden;
+}
+
+.esta-grabando .voz-mic-estado {
+  visibility: visible;
+}
+
+.voz-cronometro {
+  color: #c62828;
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.voz-mic-estado meter {
+  width: 10rem;
+  height: 0.75rem;
+}
+
+.voz-procesando {
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+  border: 1px dashed var(--line);
+  background: #f0f5f7;
+}
+
+.voz-procesando .escenario-pie {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+}
+
+.voz-guion-completo {
+  margin-top: 1rem;
+}
+
+.voz-lista-frases {
+  margin: 0.5rem 0 0;
+  padding-left: 1.4rem;
+}
+
+.voz-lista-frases li {
+  margin-bottom: 0.35rem;
+}
+
+.voz-lista-frases li[aria-current] {
+  font-weight: 700;
+}
+
+.voz-lista-frases li.guardada-si::marker,
+.voz-lista-frases li.guardada-no::marker {
+  color: #1a4d3a;
+}
+
+.voz-comparacion {
+  display: grid;
+  grid-template-columns: minmax(9rem, max-content) 1fr;
+  gap: 0.5rem 1rem;
+  margin: 0 0 1rem;
+}
+
+.voz-comparacion dt {
+  font-weight: 700;
+}
+
+.voz-comparacion dd {
+  margin: 0;
+}
+
+.voz-comparacion audio {
+  display: block;
+  width: min(100%, 22rem);
+  margin-top: 0.4rem;
+}
+
+.voz-comparacion .voz-sistema {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.voz-respuesta p {
+  margin: 0.4rem 0 0;
+}
+
+.voz-sistema mark {
+  padding: 0 0.15em;
+  background: #ffe1a8;
+  color: inherit;
+}
+
+.voz-sugerencia {
+  margin: -0.35rem 0 0.85rem;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+}
+
+.voz-veredicto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  border: 0;
+}
+
+.voz-veredicto legend {
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.voz-guardado {
+  margin: 1rem 0 0;
+  padding: 0.65rem 0.85rem;
+  border-left: 4px solid #1a4d3a;
+  background: #e6f2ec;
+  color: #1a4d3a;
+  font-weight: 600;
+}
+
+@media (max-width: 560px) {
+  .voz-comparacion {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sesion-voz [hidden] {
+  display: none !important;
+}
+
+.voz-frase-figura {
+  margin: 0 0 1rem;
+}
+
+.voz-frase-figura .voz-frase {
+  margin-bottom: 0.4rem;
+}
+
+.voz-frase-fuente a {
+  color: inherit;
+}

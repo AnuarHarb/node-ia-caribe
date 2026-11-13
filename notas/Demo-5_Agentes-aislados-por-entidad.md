@@ -1,43 +1,65 @@
-# Nota técnica · Agentes aislados por entidad
+# Nota técnica · Demo 5. Agentes aislados por entidad
 
-Evidencia del punto de partida (TRL 3). Proyecto Nodo IA Caribe.
+Nodo IA Caribe · Convocatoria 54 · Evidencia del punto de partida (TRL 3)
+
+**Criterio cumplido.** El intento de lectura cruzada quedó bloqueado, pasaron 11 de 11 pruebas y el registro de auditoría conserva su cadena íntegra.
 
 | Campo | Contenido |
 | --- | --- |
-| Fecha de la prueba | 2026-11-09T23:33:27-05:00 |
+| Pregunta que responde | **¿Cada entidad puede tener un agente que no vea los datos de las otras?** |
+| Respuesta medida | Sí: pasaron 11 de 11 pruebas; acceso cruzado bloqueado: sí; auditoría íntegra: sí. |
+| Qué sostiene en el proyecto | El arnés y los agentes. |
+| Fecha de la prueba | 9 de noviembre de 2026, 23:33 |
 | Responsable | Anuar Harb |
-| Enlace al video | `entregables/VIDEO-LABORATORIO.md` y capturas `.webm` en `resultados/demo5/historial/` |
-| Enlace al repositorio o a los datos | Repositorio local · carpetas `demo5_agentes` y `resultados/demo5` |
+| Equipo | Apple M2 Pro, 16 GB, macOS-14.6.1-arm64-arm-64bit, Python 3.12.2 |
+| Video | Pendiente: falta subir el video (no listado) y pegar el enlace. |
+| Código y datos | <https://github.com/AnuarHarb/node-ia-caribe> |
 
 ## 1. Objetivo
 
-Que la arquitectura de agentes aislados por entidad ya existe y está probada, en entorno simulado y con datos ficticios.
+Mostrar que la arquitectura de agentes aislados por entidad ya existe y está probada: dos agentes de dos entidades trabajan en el mismo nodo y ninguno puede leer ni escribir los archivos del otro.
+
+**Criterio de éxito:**acceso cruzado bloqueado y las 11 pruebas pasando.
 
 ## 2. Montaje
 
 | Componente | Detalle |
 | --- | --- |
 | Equipo | Apple M2 Pro, 16 GB, macOS-14.6.1-arm64-arm-64bit, Python 3.12.2 |
-| Modelos y versiones | No usa modelo de lenguaje. El prototipo es la mediación de archivos y el registro de auditoría en `demo5_agentes/nodo.py`. |
-| Software | Python 3.12.2, pruebas `unittest` de la biblioteca estándar. |
-| Conexión a internet durante la prueba | No. |
-
-Dos entidades ficticias: `alcaldia-santa-marta` y `gobernacion-atlantico`. Cada una tiene una caja de archivos. Toda lectura, escritura y listado pasa por el agente. Si la ruta resuelta sale de la caja, la operación se niega y se anota.
+| Prototipo | Un nodo que entrega a cada entidad un agente con su propia caja de archivos. Toda lectura, escritura y listado pasa por el agente; si la ruta sale de la caja, la operación se niega y se anota. |
+| Entidades | Dos, ficticias: alcaldia-santa-marta y gobernacion-atlantico. |
+| Datos | Ficticios: un trámite inventado y una lista inventada de cupos escolares. |
+| Registro de auditoría | Cada operación queda en una línea con su resultado y un hash que encadena la línea anterior; si alguien cambia o borra una línea, la cadena deja de cuadrar. |
+| Software | Python 3.12.2, pruebas con unittest de la biblioteca estándar. No usa modelo de lenguaje. |
+| Internet | No usa red: el prototipo solo lee y escribe archivos en el equipo. |
 
 ## 3. Procedimiento
 
-1. Se crea un entorno nuevo con las dos cajas y archivos ficticios de un trámite y de unos cupos escolares.
-2. Los dos agentes escriben, cada uno en su caja, una nota de trabajo.
-3. El agente de la alcaldía intenta leer `../gobernacion-atlantico/educacion/cupos-mahates.txt`.
-4. Se muestra el registro de auditoría y se verifica la cadena de hashes.
-5. Se corren las 11 pruebas automatizadas, cada una en un directorio temporal propio.
-6. Se guardan `resultados/demo5/pruebas.csv`, `informe.json` e `informe.html`.
+1. Se crea un entorno nuevo con las dos cajas y sus archivos ficticios.
+2. Cada agente escribe una nota de trabajo en su propia caja.
+3. El agente de la alcaldía intenta leer un archivo de la gobernación usando una ruta que sale de su caja.
+4. Se muestra el registro de auditoría y se verifica su cadena de hashes.
+5. Se corren las 11 pruebas automatizadas, cada una en un directorio temporal propio: lectura y escritura propias, trabajo simultáneo, lectura, escritura y listado cruzados, rutas con «..», enlaces simbólicos y auditoría.
 
 ## 4. Resultados
 
-Criterio cumplido: Sí. Acceso cruzado bloqueado: True (fuera_del_aislamiento). Auditoría íntegra: True. Pruebas: 11 de 11.
+**Acceso cruzado:**el agente de la alcaldía pidió el archivo ../gobernacion-atlantico/educacion/cupos-mahates.txt de la otra entidad. El nodo lo negó (motivo: fuera_del_aislamiento) y dejó el intento en el registro.
 
-| Prueba | Resultado esperado | Resultado obtenido |
+**Tabla 1. Registro de auditoría de la corrida, en orden**
+
+| # | Entidad | Acción | Ruta pedida | Resultado | Motivo |
+| --- | --- | --- | --- | --- | --- |
+| 1 | alcaldia-santa-marta | escribir | pqrs/turno-1042.txt | permitido | dentro_de_la_entidad |
+| 2 | gobernacion-atlantico | escribir | educacion/cupos-mahates.txt | permitido | dentro_de_la_entidad |
+| 3 | alcaldia-santa-marta | escribir | pqrs/nota-de-trabajo.txt | permitido | dentro_de_la_entidad |
+| 4 | gobernacion-atlantico | escribir | educacion/nota-de-trabajo.txt | permitido | dentro_de_la_entidad |
+| 5 | alcaldia-santa-marta | leer | ../gobernacion-atlantico/educacion/cupos-mahates.txt | denegado | fuera_del_aislamiento |
+
+Cadena de hashes del registro: **íntegra.** Se verifica recalculando el hash de cada línea a partir de la anterior.
+
+**Tabla 2. Las 11 pruebas automatizadas: 11 de 11 pasaron**
+
+| Prueba | Esperado | Obtenido |
 | --- | --- | --- |
 | test_01_lectura_propia_entidad_a | El agente de la alcaldía lee un archivo de su propia caja. | pasó |
 | test_02_lectura_propia_entidad_b | El agente de la gobernación lee un archivo de su propia caja. | pasó |
@@ -53,8 +75,19 @@ Criterio cumplido: Sí. Acceso cruzado bloqueado: True (fuera_del_aislamiento). 
 
 ## 5. Limitaciones
 
-La prueba demuestra el mecanismo en un solo computador y con datos ficticios. La mediación está en las herramientas del agente: quien ya controla el proceso de Python puede saltársela. No usa usuarios distintos del sistema operativo, ni red, ni entidades reales. No es el nodo del borde ni el enrutador soberano. Sirve como prueba de concepto de la arquitectura (TRL 3). El proyecto, en las fases siguientes, tiene que sostener el mismo aislamiento con entidades reales y con un registro que no dependa de un solo proceso.
+- **Entorno simulado.**Un solo computador, datos ficticios y entidades inventadas. No hay red ni entidades reales.
+- **El aislamiento está en las herramientas del agente.**Quien ya controla el proceso de Python puede saltárselo. No se usan usuarios distintos del sistema operativo ni contenedores.
+- **El registro es un archivo en el mismo equipo.**La cadena de hashes detecta si alguien cambia o quita una línea, pero no impide que quien tenga acceso al disco borre el archivo o lo reescriba entero.
+- **No es el nodo del proyecto.**Es la prueba de concepto de la arquitectura (TRL 3). En las fases siguientes el mismo aislamiento se debe sostener con entidades reales y con un registro que no dependa de un solo proceso.
 
-## Guion del video
+## 6. Enlaces
 
-Se ven las dos cajas, el intento de lectura cruzada bloqueado, la tabla de auditoría y las 11 pruebas en pasado. Comando: `python -m demo5_agentes.en_vivo`.
+- **Video:**pendiente. Cuando esté subido como no listado, el enlace se pega en `entregables/enlaces.json` y esta nota lo toma de ahí.
+- **Repositorio:**<https://github.com/AnuarHarb/node-ia-caribe>
+- **Código:**`demo5_agentes/nodo.py`, `demo5_agentes/test_aislamiento.py`, `demo5_agentes/en_vivo.py`.
+- **Datos medidos:**`resultados/demo5/informe.json`, `resultados/demo5/pruebas.csv`.
+- **Para repetirla:**`python -m demo5_agentes.en_vivo`.
+
+---
+
+Nota generada el 13 de noviembre de 2026, 02:29 (hora de Colombia) a partir de resultados/demo5/informe.json. Todas las cifras son medidas; ninguna se estima ni se completa a mano.

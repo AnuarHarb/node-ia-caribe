@@ -7,7 +7,7 @@
     "transcripcion_sistema": "Bueno, me voy a pedir una certificada de residencia. ¿Qué papeles tengo que traer?",
     "correcta": "no",
     "correcta_automatica": "no",
-    "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/692fecb8f526.webm"
+    "audio": "grabaciones/692fecb8f526.webm"
   },
   {
     "id": "a801bfa62109",
@@ -17,7 +17,7 @@
     "transcripcion_sistema": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
     "correcta": "si",
     "correcta_automatica": "si",
-    "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/a801bfa62109.webm"
+    "audio": "grabaciones/a801bfa62109.webm"
   },
   {
     "id": "65bf9ef7138e",
@@ -27,7 +27,7 @@
     "transcripcion_sistema": "Necesito un turno para el 6. Me lo pueden dar ahora.",
     "correcta": "no",
     "correcta_automatica": "no",
-    "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/65bf9ef7138e.webm"
+    "audio": "grabaciones/65bf9ef7138e.webm"
   },
   {
     "id": "d6c300d069fc",
@@ -37,7 +37,7 @@
     "transcripcion_sistema": "¿Dónde queda el oficinal peredial? Es que me perdí.",
     "correcta": "no",
     "correcta_automatica": "no",
-    "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/d6c300d069fc.webm"
+    "audio": "grabaciones/d6c300d069fc.webm"
   },
   {
     "id": "5b00e8a8e461",
@@ -47,7 +47,7 @@
     "transcripcion_sistema": "Quiero saber si ya salió la respuesta de mi Derecha de Petición del mes pasado.",
     "correcta": "no",
     "correcta_automatica": "no",
-    "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/5b00e8a8e461.webm"
+    "audio": "grabaciones/5b00e8a8e461.webm"
   },
   {
     "id": "ac9a5b764e35",
@@ -57,6 +57,215 @@
     "transcripcion_sistema": "hasta que ahora están recibiendo el pago del impuesto hoy",
     "correcta": "no",
     "correcta_automatica": "no",
-    "audio": "/Users/anuarharb/Hacker/playground/demos/grabaciones/ac9a5b764e35.webm"
+    "audio": "grabaciones/ac9a5b764e35.webm"
+  },
+  {
+    "id": "b8efed77da1f",
+    "persona": "Grace Torres",
+    "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+    "variedad": "costeno",
+    "transcripcion_correcta": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+    "transcripcion_sistema": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+    "correcta": "si",
+    "correcta_automatica": "si",
+    "audio": "grabaciones/b8efed77da1f.webm"
+  },
+  {
+    "id": "8bdf18324f2e",
+    "persona": "Grace Torres",
+    "guion": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+    "variedad": "costeno",
+    "transcripcion_correcta": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+    "transcripcion_sistema": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+    "correcta": "si",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/8bdf18324f2e.webm"
+  },
+  {
+    "id": "315a5de97ecf",
+    "persona": "Grace Torres",
+    "guion": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+    "variedad": "costeno",
+    "transcripcion_correcta": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+    "transcripcion_sistema": "Necesito un turno para el cisbeño, me lo pueden dar ahora.",
+    "correcta": "no",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/315a5de97ecf.webm"
+  },
+  {
+    "id": "f6e0536c13f4",
+    "persona": "Grace Torres",
+    "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+    "variedad": "costeno",
+    "transcripcion_correcta": "¿Dónde queda la oficina del predial? Es que me perdí.",
+    "transcripcion_sistema": "donde queda la oficina del predial es que me perdí",
+    "correcta": "no",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/f6e0536c13f4.webm"
+  },
+  {
+    "id": "77745eff7387",
+    "persona": "Grace Torres",
+    "guion": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+    "variedad": "costeno",
+    "transcripcion_correcta": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+    "transcripcion_sistema": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+    "correcta": "si",
+    "correcta_automatica": "si",
+    "audio": "grabaciones/77745eff7387.webm"
+  },
+  {
+    "id": "f41cfe6e4e6c",
+    "persona": "Grace Torres",
+    "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+    "variedad": "costeno",
+    "transcripcion_correcta": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+    "transcripcion_sistema": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+    "correcta": "si",
+    "correcta_automatica": "si",
+    "audio": "grabaciones/f41cfe6e4e6c.webm"
+  },
+  {
+    "id": "c1bf23ca42f4",
+    "persona": "Grace Torres",
+    "guion": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+    "variedad": "costeno",
+    "transcripcion_correcta": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+    "transcripcion_sistema": "A qué horas atiende Nubi en la Secretaría de Hacienda?",
+    "correcta": "no",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/c1bf23ca42f4.webm"
+  },
+  {
+    "id": "92650173d035",
+    "persona": "Grace Torres",
+    "guion": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+    "variedad": "costeno",
+    "transcripcion_correcta": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+    "transcripcion_sistema": "Necesito un turno para el system, me lo pueden dar ahora.",
+    "correcta": "no",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/92650173d035.webm"
+  },
+  {
+    "id": "30d437cb576c",
+    "persona": "Grace Torres",
+    "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+    "variedad": "costeno",
+    "transcripcion_correcta": "¿Dónde queda la oficina del predial? Es que me perdí.",
+    "transcripcion_sistema": "Donde queda la oficina del predial es que me perdí.",
+    "correcta": "si",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/30d437cb576c.webm"
+  },
+  {
+    "id": "f1964f939849",
+    "persona": "Grace Torres",
+    "guion": "Suto á bae pa Katagena.",
+    "variedad": "palenquero",
+    "transcripcion_correcta": "Suto á bae pa Katagena.",
+    "transcripcion_sistema": "Sútuaváe, pacatajéna.",
+    "correcta": "no",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/f1964f939849.webm"
+  },
+  {
+    "id": "cf180f4072a0",
+    "persona": "Grace Torres",
+    "guion": "Ma pueko a kumé eso.",
+    "variedad": "palenquero",
+    "transcripcion_correcta": "Ma pueko a kumé eso.",
+    "transcripcion_sistema": "MAPUECO ACUMÉ ESO",
+    "correcta": "no",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/cf180f4072a0.webm"
+  },
+  {
+    "id": "39657071b2ec",
+    "persona": "Grace Torres",
+    "guion": "Ele á kojé un kusa ngandísimo.",
+    "variedad": "palenquero",
+    "transcripcion_correcta": "Ele á kojé un kusa ngandísimo.",
+    "transcripcion_sistema": "El acoge un curso grandísimo.",
+    "correcta": "no",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/39657071b2ec.webm"
+  },
+  {
+    "id": "4b8dffb20122",
+    "persona": "Grace Torres",
+    "guion": "Ané kume mbollo mí.",
+    "variedad": "palenquero",
+    "transcripcion_correcta": "Ané kume mbollo mí.",
+    "transcripcion_sistema": "¡Ane, kume, mo yomi!",
+    "correcta": "no",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/4b8dffb20122.webm"
+  },
+  {
+    "id": "acc99a652b36",
+    "persona": "Grace Torres",
+    "guion": "I advedtí mae mí nú komblá eso nú.",
+    "variedad": "palenquero",
+    "transcripcion_correcta": "I advedtí mae mí nú komblá eso nú.",
+    "transcripcion_sistema": "Las allied Pablo Else Привет Ads",
+    "correcta": "no",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/acc99a652b36.webm"
+  },
+  {
+    "id": "4ea5915777f1",
+    "persona": "Grace Torres",
+    "guion": "Tiela lo que kelá sin semblá.",
+    "variedad": "palenquero",
+    "transcripcion_correcta": "Tiela lo que kelá sin semblá.",
+    "transcripcion_sistema": "Tierra lo que quela sin semblar.",
+    "correcta": "no",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/4ea5915777f1.webm"
+  },
+  {
+    "id": "aefcc4543806",
+    "persona": "Grace Torres",
+    "guion": "I tá saká un ma matika ñame.",
+    "variedad": "palenquero",
+    "transcripcion_correcta": "I tá saká un ma matika ñame.",
+    "transcripcion_sistema": "훈alalalal adjournos bargaining",
+    "correcta": "no",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/aefcc4543806.webm"
+  },
+  {
+    "id": "73a202ce34b5",
+    "persona": "Grace Torres",
+    "guion": "Suto se jablá lengua africano.",
+    "variedad": "palenquero",
+    "transcripcion_correcta": "Suto se jablá lengua africano.",
+    "transcripcion_sistema": "Su tosseja habla lengua africano.",
+    "correcta": "no",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/73a202ce34b5.webm"
+  },
+  {
+    "id": "e0f636ce385f",
+    "persona": "Grace Torres",
+    "guion": "Ané a tre machete mí.",
+    "variedad": "palenquero",
+    "transcripcion_correcta": "Ané a tre machete mí.",
+    "transcripcion_sistema": "NHÍ seperti referencing precedent İyi",
+    "correcta": "no",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/e0f636ce385f.webm"
+  },
+  {
+    "id": "dbcfd25f0c32",
+    "persona": "Grace Torres",
+    "guion": "Palenke tiela suto, asino kumo Afrika.",
+    "variedad": "palenquero",
+    "transcripcion_correcta": "Palenke tiela suto, asino kumo Afrika.",
+    "transcripcion_sistema": "Palenque tiene el asunto, así no como África.",
+    "correcta": "no",
+    "correcta_automatica": "no",
+    "audio": "grabaciones/dbcfd25f0c32.webm"
   }
 ]

@@ -1,0 +1,237 @@
+{
+  "fecha": "2026-11-13T02:26:09-05:00",
+  "equipo": {
+    "sistema": "macOS-14.6.1-arm64-arm-64bit",
+    "python": "3.12.2",
+    "arquitectura": "arm64",
+    "procesador": "Apple M2 Pro",
+    "memoria_gb": 16
+  },
+  "fuente": {
+    "titulo": "Letras palenqueras, la profunda necesidad de nombrar",
+    "autores": [
+      "Sebastián Salgado",
+      "Faustino Torres",
+      "Uriel Cassiani"
+    ],
+    "editorial": null,
+    "anio": null,
+    "permiso": null,
+    "origen_del_texto": "Transcrito de fotos de las páginas 56 a 71 del libro impreso. Se respeta la ortografía impresa, incluidas las erratas."
+  },
+  "por_verificar": "La transcripción salió de fotos de baja resolución. Antes de citar cifras, alguien con el libro en la mano debe revisar cada verso, sobre todo las palabras en palenquero.",
+  "poemas": 8,
+  "estrofas": 12,
+  "versos": {
+    "palenquero": 83,
+    "espanol": 77
+  },
+  "metrica": "sacrebleu 2.5.1, nrefs:1|case:mixed|eff:yes|nc:6|nw:0|space:no|version:2.5.1",
+  "instruccion": "Eres traductor. Traduces entre el español y la lengua palenquera, el criollo de San Basilio de Palenque (Colombia). Devuelve solo la traducción, con los mismos saltos de línea, sin notas ni explicaciones.",
+  "sistemas": {
+    "local": {
+      "modelo": "qwen2.5:3b",
+      "motor": "Ollama",
+      "version": "357c53fb659c"
+    },
+    "referencia": null
+  },
+  "direcciones": [
+    {
+      "clave": "es-pal",
+      "origen": "español",
+      "destino": "palenquero",
+      "palabras_referencia": 314,
+      "control": {
+        "chrf": 24.85,
+        "palabras_pct": 5.1
+      },
+      "local": {
+        "chrf": 24.64,
+        "palabras_pct": 6.05,
+        "copiadas_pct": 84.17,
+        "segundos_promedio": 1.48
+      },
+      "referencia": null,
+      "por_unidad": [
+        {
+          "id": "p56-1",
+          "control_chrf": 16.93,
+          "local_chrf": 16.44
+        },
+        {
+          "id": "p58-1",
+          "control_chrf": 23.82,
+          "local_chrf": 23.53
+        },
+        {
+          "id": "p58-2",
+          "control_chrf": 22.64,
+          "local_chrf": 20.99
+        },
+        {
+          "id": "p58-3",
+          "control_chrf": 20.56,
+          "local_chrf": 20.31
+        },
+        {
+          "id": "p60-1",
+          "control_chrf": 28.56,
+          "local_chrf": 28.56
+        },
+        {
+          "id": "p60-2",
+          "control_chrf": 22.79,
+          "local_chrf": 22.79
+        },
+        {
+          "id": "p62-1",
+          "control_chrf": 25.23,
+          "local_chrf": 25.23
+        },
+        {
+          "id": "p62-2",
+          "control_chrf": 22.17,
+          "local_chrf": 22.17
+        },
+        {
+          "id": "p64-1",
+          "control_chrf": 38.52,
+          "local_chrf": 38.52
+        },
+        {
+          "id": "p66-1",
+          "control_chrf": 21.51,
+          "local_chrf": 22.45
+        },
+        {
+          "id": "p68-1",
+          "control_chrf": 23.16,
+          "local_chrf": 23.14
+        },
+        {
+          "id": "p70-1",
+          "control_chrf": 15.86,
+          "local_chrf": 16.88
+        }
+      ]
+    },
+    {
+      "clave": "pal-es",
+      "origen": "palenquero",
+      "destino": "español",
+      "palabras_referencia": 351,
+      "control": {
+        "chrf": 21.42,
+        "palabras_pct": 4.56
+      },
+      "local": {
+        "chrf": 20.54,
+        "palabras_pct": 3.99,
+        "copiadas_pct": 97.76,
+        "segundos_promedio": 1.13
+      },
+      "referencia": null,
+      "por_unidad": [
+        {
+          "id": "p56-1",
+          "control_chrf": 16.38,
+          "local_chrf": 16.38
+        },
+        {
+          "id": "p58-1",
+          "control_chrf": 21.06,
+          "local_chrf": 21.06
+        },
+        {
+          "id": "p58-2",
+          "control_chrf": 19.68,
+          "local_chrf": 19.68
+        },
+        {
+          "id": "p58-3",
+          "control_chrf": 21.0,
+          "local_chrf": 21.0
+        },
+        {
+          "id": "p60-1",
+          "control_chrf": 21.1,
+          "local_chrf": 19.78
+        },
+        {
+          "id": "p60-2",
+          "control_chrf": 21.29,
+          "local_chrf": 24.08
+        },
+        {
+          "id": "p62-1",
+          "control_chrf": 19.3,
+          "local_chrf": 19.3
+        },
+        {
+          "id": "p62-2",
+          "control_chrf": 17.71,
+          "local_chrf": 17.71
+        },
+        {
+          "id": "p64-1",
+          "control_chrf": 33.87,
+          "local_chrf": 28.5
+        },
+        {
+          "id": "p66-1",
+          "control_chrf": 17.39,
+          "local_chrf": 17.39
+        },
+        {
+          "id": "p68-1",
+          "control_chrf": 20.71,
+          "local_chrf": 20.49
+        },
+        {
+          "id": "p70-1",
+          "control_chrf": 12.57,
+          "local_chrf": 12.57
+        }
+      ]
+    }
+  ],
+  "ejemplos": [
+    {
+      "direccion": "es-pal",
+      "poema": "Nosotros",
+      "paginas": "70-71",
+      "origen": [
+        "En esta vida somos",
+        "Como aves que emigran"
+      ],
+      "humana": [
+        "E bila suto sendá",
+        "Kumo kajomba"
+      ],
+      "local": [
+        "En ahi vida somos",
+        "Como aves ke emigran"
+      ],
+      "referencia": []
+    },
+    {
+      "direccion": "pal-es",
+      "poema": "Suto",
+      "paginas": "70-71",
+      "origen": [
+        "E bila suto sendá",
+        "Kumo kajomba"
+      ],
+      "humana": [
+        "En esta vida somos",
+        "Como aves que emigran"
+      ],
+      "local": [
+        "E bila suto sendá",
+        "Kumo kajomba"
+      ],
+      "referencia": []
+    }
+  ]
+}

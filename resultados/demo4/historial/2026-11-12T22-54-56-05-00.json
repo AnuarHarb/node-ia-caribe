@@ -1,0 +1,115 @@
+{
+  "demo": 4,
+  "titulo": "Línea base del error (WER)",
+  "fecha": "2026-11-12T22:54:56-05:00",
+  "responsable": "Anuar Harb",
+  "equipo": {
+    "sistema": "macOS-14.6.1-arm64-arm-64bit",
+    "python": "3.12.2",
+    "arquitectura": "arm64",
+    "procesador": "Apple M2 Pro",
+    "memoria_gb": 16
+  },
+  "modelo": "mlx-community/whisper-small-mlx, sin ajustar",
+  "idioma_whisper": "es",
+  "frases_minimas_protocolo": 30,
+  "frases_maximas_protocolo": 50,
+  "definicion": "WER de corpus con jiwer, tras pasar a minúsculas y quitar la puntuación.",
+  "variedades": [
+    {
+      "variedad": "español costeño",
+      "frases": 11,
+      "wer_porcentaje": 11.72,
+      "detalle": {
+        "frases": 11,
+        "wer": 0.1171875,
+        "wer_porcentaje": 11.72,
+        "sustituciones": 13,
+        "inserciones": 1,
+        "eliminaciones": 1,
+        "palabras_referencia": 128,
+        "por_frase": [
+          {
+            "referencia": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+            "hipotesis": "Bueno, me voy a pedir una certificada de residencia. ¿Qué papeles tengo que traer?",
+            "wer": 0.38461538461538464,
+            "id": "692fecb8f526"
+          },
+          {
+            "referencia": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+            "hipotesis": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+            "wer": 0.0,
+            "id": "a801bfa62109"
+          },
+          {
+            "referencia": "Necesito un turno para el Sisbén. Me lo pueden dar ahora.",
+            "hipotesis": "Necesito un turno para el 6. Me lo pueden dar ahora.",
+            "wer": 0.09090909090909091,
+            "id": "65bf9ef7138e"
+          },
+          {
+            "referencia": "¿Dónde queda la oficina del peredial? Es que me perdí.",
+            "hipotesis": "¿Dónde queda el oficinal peredial? Es que me perdí.",
+            "wer": 0.3,
+            "id": "d6c300d069fc"
+          },
+          {
+            "referencia": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+            "hipotesis": "Quiero saber si ya salió la respuesta de mi Derecha de Petición del mes pasado.",
+            "wer": 0.06666666666666667,
+            "id": "5b00e8a8e461"
+          },
+          {
+            "referencia": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+            "hipotesis": "hasta que ahora están recibiendo el pago del impuesto hoy",
+            "wer": 0.2,
+            "id": "ac9a5b764e35"
+          },
+          {
+            "referencia": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+            "hipotesis": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+            "wer": 0.0,
+            "id": "b8efed77da1f"
+          },
+          {
+            "referencia": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+            "hipotesis": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+            "wer": 0.1,
+            "id": "8bdf18324f2e"
+          },
+          {
+            "referencia": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+            "hipotesis": "Necesito un turno para el cisbeño, me lo pueden dar ahora.",
+            "wer": 0.09090909090909091,
+            "id": "315a5de97ecf"
+          },
+          {
+            "referencia": "¿Dónde queda la oficina del predial? Es que me perdí.",
+            "hipotesis": "donde queda la oficina del predial es que me perdí",
+            "wer": 0.1,
+            "id": "f6e0536c13f4"
+          },
+          {
+            "referencia": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+            "hipotesis": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+            "wer": 0.0,
+            "id": "77745eff7387"
+          }
+        ]
+      },
+      "clave": "costeno",
+      "origen": {
+        "demo1": 11,
+        "carpeta": 0
+      },
+      "muestra_suficiente": false
+    }
+  ],
+  "pendiente": [
+    "palenquero: faltan frases. Grábalas en el demo 1 con la variedad «palenquero» o súbelas en «Armar el corpus» (grabación pública o hablante designado por la Fundación Chano y Chalole, con consentimiento y aval)"
+  ],
+  "advertencias": [
+    "español costeño: 11 frases medidas; el protocolo pide entre 30 y 50"
+  ],
+  "corrida_id": "2026-11-12T22-54-56-05-00"
+}

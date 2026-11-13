@@ -1,0 +1,558 @@
+{
+  "demo": 1,
+  "titulo": "Voz en español costeño",
+  "fecha": "2026-11-12T23:04:57-05:00",
+  "responsable": "Anuar Harb",
+  "equipo": {
+    "sistema": "macOS-14.6.1-arm64-arm-64bit",
+    "python": "3.12.2",
+    "arquitectura": "arm64",
+    "procesador": "Apple M2 Pro",
+    "memoria_gb": 16
+  },
+  "modelos": {
+    "whisper_repo": "mlx-community/whisper-small-mlx",
+    "whisper": "Whisper small (MLX, mlx-community/whisper-small-mlx)",
+    "ollama": "qwen2.5:3b",
+    "piper_asistente": "Piper es_MX-ald-medium.onnx (español México, voz masculina medium)",
+    "piper_archivo": "es_MX-ald-medium.onnx"
+  },
+  "resumen_ejecutivo": "14 frases medidas con 3 hablante(s): 5 transcritas bien y 9 con error de reconocimiento. WER del corpus 11.11 %. Tiempos promedio: escuchar 2.666 s, entender/responder 3.249 s, hablar 0.388 s.",
+  "filas": 14,
+  "aciertos_marcados": 5,
+  "errores_marcados": 9,
+  "criterio_flujo": true,
+  "criterio_video_error_real": true,
+  "criterio_cumplido": true,
+  "wer_corpus": {
+    "frases": 14,
+    "wer": 0.1111111111111111,
+    "wer_porcentaje": 11.11,
+    "sustituciones": 16,
+    "inserciones": 1,
+    "eliminaciones": 1,
+    "palabras_referencia": 162,
+    "por_frase": [
+      {
+        "referencia": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+        "hipotesis": "Bueno, me voy a pedir una certificada de residencia. ¿Qué papeles tengo que traer?",
+        "wer": 0.38461538461538464
+      },
+      {
+        "referencia": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+        "hipotesis": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "Necesito un turno para el Sisbén. Me lo pueden dar ahora.",
+        "hipotesis": "Necesito un turno para el 6. Me lo pueden dar ahora.",
+        "wer": 0.09090909090909091
+      },
+      {
+        "referencia": "¿Dónde queda la oficina del peredial? Es que me perdí.",
+        "hipotesis": "¿Dónde queda el oficinal peredial? Es que me perdí.",
+        "wer": 0.3
+      },
+      {
+        "referencia": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+        "hipotesis": "Quiero saber si ya salió la respuesta de mi Derecha de Petición del mes pasado.",
+        "wer": 0.06666666666666667
+      },
+      {
+        "referencia": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+        "hipotesis": "hasta que ahora están recibiendo el pago del impuesto hoy",
+        "wer": 0.2
+      },
+      {
+        "referencia": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+        "hipotesis": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+        "hipotesis": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+        "wer": 0.1
+      },
+      {
+        "referencia": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+        "hipotesis": "Necesito un turno para el cisbeño, me lo pueden dar ahora.",
+        "wer": 0.09090909090909091
+      },
+      {
+        "referencia": "¿Dónde queda la oficina del predial? Es que me perdí.",
+        "hipotesis": "donde queda la oficina del predial es que me perdí",
+        "wer": 0.1
+      },
+      {
+        "referencia": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+        "hipotesis": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+        "wer": 0.0
+      },
+      {
+        "referencia": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+        "hipotesis": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+        "hipotesis": "A qué horas atiende Nubi en la Secretaría de Hacienda?",
+        "wer": 0.2
+      },
+      {
+        "referencia": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+        "hipotesis": "Necesito un turno para el system, me lo pueden dar ahora.",
+        "wer": 0.09090909090909091
+      }
+    ]
+  },
+  "wer_por_persona": [
+    {
+      "persona": "Anuar Harb",
+      "frases": 6,
+      "wer_porcentaje": 17.39,
+      "sustituciones": 10,
+      "eliminaciones": 1,
+      "inserciones": 1
+    },
+    {
+      "persona": "Grace Torres",
+      "frases": 5,
+      "wer_porcentaje": 5.08,
+      "sustituciones": 3,
+      "eliminaciones": 0,
+      "inserciones": 0
+    },
+    {
+      "persona": "Grace Trres",
+      "frases": 3,
+      "wer_porcentaje": 8.82,
+      "sustituciones": 3,
+      "eliminaciones": 0,
+      "inserciones": 0
+    }
+  ],
+  "tiempos_promedio": {
+    "asr_promedio_s": 2.666,
+    "llm_promedio_s": 3.249,
+    "tts_promedio_s": 0.388,
+    "total_promedio_s": 6.588,
+    "total_maximo_s": 12.593,
+    "primera_total_s": 10.994,
+    "resto_promedio_s": 6.249
+  },
+  "cobertura": {
+    "hablantes": 3,
+    "hablantes_protocolo": 3,
+    "frases": 14,
+    "frases_por_hablante_protocolo": 10,
+    "por_hablante": [
+      {
+        "persona": "Anuar Harb",
+        "frases": 6
+      },
+      {
+        "persona": "Grace Torres",
+        "frases": 5
+      },
+      {
+        "persona": "Grace Trres",
+        "frases": 3
+      }
+    ],
+    "completa": false
+  },
+  "filas_palenquero": 0,
+  "tabla": [
+    {
+      "id": "692fecb8f526",
+      "persona": "Anuar Harb",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_correcta": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_sistema": "Bueno, me voy a pedir una certificada de residencia. ¿Qué papeles tengo que traer?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "grabaciones/692fecb8f526.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/692fecb8f526",
+      "respuesta_asistente": "Tienes que traer tu documento de identidad y tu cédula de residencia.",
+      "asr_s": 5.629,
+      "llm_s": 4.236,
+      "tts_s": 0.473,
+      "segundos_total": 10.994,
+      "ts": "2026-11-11T00:51:43-05:00",
+      "wer_porcentaje": 38.46,
+      "errores_palabras": [
+        {
+          "tipo": "insercion",
+          "referencia": "",
+          "sistema": "bueno"
+        },
+        {
+          "tipo": "sustitucion",
+          "referencia": "buenas vengo",
+          "sistema": "me voy"
+        },
+        {
+          "tipo": "sustitucion",
+          "referencia": "un certificado",
+          "sistema": "una certificada"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "a801bfa62109",
+      "persona": "Anuar Harb",
+      "guion": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "transcripcion_correcta": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+      "transcripcion_sistema": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "grabaciones/a801bfa62109.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/a801bfa62109",
+      "respuesta_asistente": "Lo siento, no tengo ese dato. ¿Podrías preguntar en la recepción o verificar en el sitio web de la alcaldía?",
+      "asr_s": 2.274,
+      "llm_s": 3.938,
+      "tts_s": 0.35,
+      "segundos_total": 6.76,
+      "ts": "2026-11-11T00:53:32-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "65bf9ef7138e",
+      "persona": "Anuar Harb",
+      "guion": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "transcripcion_correcta": "Necesito un turno para el Sisbén. Me lo pueden dar ahora.",
+      "transcripcion_sistema": "Necesito un turno para el 6. Me lo pueden dar ahora.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "grabaciones/65bf9ef7138e.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/65bf9ef7138e",
+      "respuesta_asistente": "Lo siento, no tengo información sobre turnos para el 6. Puedo ayudarte con otros asuntos, dime qué necesitas.",
+      "asr_s": 0.824,
+      "llm_s": 1.446,
+      "tts_s": 0.24,
+      "segundos_total": 2.681,
+      "ts": "2026-11-11T00:54:03-05:00",
+      "wer_porcentaje": 9.09,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "sisbén",
+          "sistema": "6"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "d6c300d069fc",
+      "persona": "Anuar Harb",
+      "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "transcripcion_correcta": "¿Dónde queda la oficina del peredial? Es que me perdí.",
+      "transcripcion_sistema": "¿Dónde queda el oficinal peredial? Es que me perdí.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "grabaciones/d6c300d069fc.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/d6c300d069fc",
+      "respuesta_asistente": "El oficinal peredial está en la avenida principal de la ciudad. ¿Cómo te va a llegar?",
+      "asr_s": 0.97,
+      "llm_s": 1.437,
+      "tts_s": 0.173,
+      "segundos_total": 2.753,
+      "ts": "2026-11-11T00:54:35-05:00",
+      "wer_porcentaje": 30.0,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "la oficina",
+          "sistema": "el oficinal"
+        },
+        {
+          "tipo": "omision",
+          "referencia": "del",
+          "sistema": ""
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "5b00e8a8e461",
+      "persona": "Anuar Harb",
+      "guion": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "transcripcion_correcta": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "transcripcion_sistema": "Quiero saber si ya salió la respuesta de mi Derecha de Petición del mes pasado.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "grabaciones/5b00e8a8e461.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/5b00e8a8e461",
+      "respuesta_asistente": "Lo siento, no tengo ese dato. Pide el radicado de tu solicitud para poder ayudarte mejor.",
+      "asr_s": 1.384,
+      "llm_s": 1.347,
+      "tts_s": 0.226,
+      "segundos_total": 3.185,
+      "ts": "2026-11-11T00:55:18-05:00",
+      "wer_porcentaje": 6.67,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "derecho",
+          "sistema": "derecha"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "ac9a5b764e35",
+      "persona": "Anuar Harb",
+      "guion": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+      "transcripcion_correcta": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+      "transcripcion_sistema": "hasta que ahora están recibiendo el pago del impuesto hoy",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "grabaciones/ac9a5b764e35.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/ac9a5b764e35",
+      "respuesta_asistente": "No tengo información sobre el estado de recepción de pagos de impuestos. ¿Puede verificar con el departamento de hacienda?",
+      "asr_s": 1.506,
+      "llm_s": 2.536,
+      "tts_s": 0.317,
+      "segundos_total": 4.546,
+      "ts": "2026-11-11T00:57:15-05:00",
+      "wer_porcentaje": 20.0,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "qué hora",
+          "sistema": "que ahora"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "b8efed77da1f",
+      "persona": "Grace Torres",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "variedad": "costeno",
+      "transcripcion_correcta": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_sistema": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "grabaciones/b8efed77da1f.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/b8efed77da1f",
+      "respuesta_asistente": "Para pedir un certificado de residencia necesitas tu cédula de identidad. También podrías necesitar un comprobante de domicilio como recibo de luz o agua.",
+      "asr_s": 6.214,
+      "llm_s": 4.087,
+      "tts_s": 0.723,
+      "segundos_total": 11.569,
+      "ts": "2026-11-12T19:00:34-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "8bdf18324f2e",
+      "persona": "Grace Torres",
+      "guion": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "variedad": "costeno",
+      "transcripcion_correcta": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "transcripcion_sistema": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+      "correcta": "si",
+      "correcta_automatica": "no",
+      "audio": "grabaciones/8bdf18324f2e.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/8bdf18324f2e",
+      "respuesta_asistente": "Lo siento, no tengo esa información. Pide al personal de la secretaría.",
+      "asr_s": 2.778,
+      "llm_s": 2.947,
+      "tts_s": 0.487,
+      "segundos_total": 6.409,
+      "ts": "2026-11-12T19:01:47-05:00",
+      "wer_porcentaje": 10.0,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "horas",
+          "sistema": "hora"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "315a5de97ecf",
+      "persona": "Grace Torres",
+      "guion": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "variedad": "costeno",
+      "transcripcion_correcta": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "transcripcion_sistema": "Necesito un turno para el cisbeño, me lo pueden dar ahora.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "grabaciones/315a5de97ecf.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/315a5de97ecf",
+      "respuesta_asistente": "Lo siento, pero no tengo información sobre turnos para el Cisbeño. ¿Podrías informarme sobre el departamento o municipio al que pertenece este lugar?",
+      "asr_s": 2.875,
+      "llm_s": 5.001,
+      "tts_s": 0.598,
+      "segundos_total": 8.773,
+      "ts": "2026-11-12T19:02:30-05:00",
+      "wer_porcentaje": 9.09,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "sisbén",
+          "sistema": "cisbeño"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "f6e0536c13f4",
+      "persona": "Grace Torres",
+      "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "variedad": "costeno",
+      "transcripcion_correcta": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "transcripcion_sistema": "donde queda la oficina del predial es que me perdí",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "grabaciones/f6e0536c13f4.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/f6e0536c13f4",
+      "respuesta_asistente": "La oficina del predial está en la avenida principal del centro de la ciudad. ¿Necesitas más información?",
+      "asr_s": 2.209,
+      "llm_s": 2.531,
+      "tts_s": 0.267,
+      "segundos_total": 5.467,
+      "ts": "2026-11-12T19:03:06-05:00",
+      "wer_porcentaje": 10.0,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "dónde",
+          "sistema": "donde"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "77745eff7387",
+      "persona": "Grace Torres",
+      "guion": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "variedad": "costeno",
+      "transcripcion_correcta": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "transcripcion_sistema": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "grabaciones/77745eff7387.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/77745eff7387",
+      "respuesta_asistente": "Lo siento, no tengo ese dato. ¿Podrías decirme tu radicado por favor?",
+      "asr_s": 1.773,
+      "llm_s": 2.944,
+      "tts_s": 0.25,
+      "segundos_total": 5.165,
+      "ts": "2026-11-12T19:03:54-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "f41cfe6e4e6c",
+      "persona": "Grace Trres",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "variedad": "costeno",
+      "transcripcion_correcta": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_sistema": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "grabaciones/f41cfe6e4e6c.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/f41cfe6e4e6c",
+      "respuesta_asistente": "Para pedir un certificado de residencia necesitas tu cédula de identidad. También podrías necesitar una fotocopia de la misma.",
+      "asr_s": 4.566,
+      "llm_s": 7.175,
+      "tts_s": 0.652,
+      "segundos_total": 12.593,
+      "ts": "2026-11-12T23:02:55-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "c1bf23ca42f4",
+      "persona": "Grace Trres",
+      "guion": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "variedad": "costeno",
+      "transcripcion_correcta": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "transcripcion_sistema": "A qué horas atiende Nubi en la Secretaría de Hacienda?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "grabaciones/c1bf23ca42f4.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/c1bf23ca42f4",
+      "respuesta_asistente": "Lo siento, no tengo ese dato. ¿Tienes alguna otra pregunta sobre la alcaldía?",
+      "asr_s": 2.003,
+      "llm_s": 2.751,
+      "tts_s": 0.233,
+      "segundos_total": 5.193,
+      "ts": "2026-11-12T23:03:43-05:00",
+      "wer_porcentaje": 20.0,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "atienden hoy",
+          "sistema": "atiende nubi"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "92650173d035",
+      "persona": "Grace Trres",
+      "guion": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "variedad": "costeno",
+      "transcripcion_correcta": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "transcripcion_sistema": "Necesito un turno para el system, me lo pueden dar ahora.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "grabaciones/92650173d035.webm",
+      "audio_entrada_url": "/api/demos/1/grabacion/92650173d035",
+      "respuesta_asistente": "Lo siento, no tengo información sobre turnos para el sistema. Puedo ayudarte con otros asuntos relacionados con la alcaldía.",
+      "asr_s": 2.322,
+      "llm_s": 3.111,
+      "tts_s": 0.448,
+      "segundos_total": 6.143,
+      "ts": "2026-11-12T23:04:44-05:00",
+      "wer_porcentaje": 9.09,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "sisbén",
+          "sistema": "system"
+        }
+      ],
+      "flujo_completo": true
+    }
+  ],
+  "video_corrida": null,
+  "definicion_wer": "WER por frase y por hablante con jiwer; texto en minúsculas y sin puntuación.",
+  "nota_referencias": "La referencia humana es lo dicho (guion revisado), no la transcripción del ASR. Se corrigieron dos referencias que habían copiado el texto del reconocimiento.",
+  "observaciones_llm": [
+    {
+      "id": "692fecb8f526",
+      "tipo": "alucinacion",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "respuesta": "Tienes que traer tu documento de identidad y tu cédula de residencia.",
+      "observacion": "El asistente pidió «cédula de residencia»; el ciudadano hablaba de un certificado de residencia. Requisito inventado."
+    },
+    {
+      "id": "d6c300d069fc",
+      "tipo": "alucinacion",
+      "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "respuesta": "El oficinal peredial está en la avenida principal de la ciudad. ¿Cómo te va a llegar?",
+      "observacion": "Inventó que la oficina del predial «está en la avenida principal» sin dato en la petición."
+    },
+    {
+      "id": "f6e0536c13f4",
+      "tipo": "alucinacion",
+      "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "respuesta": "La oficina del predial está en la avenida principal del centro de la ciudad. ¿Necesitas más información?",
+      "observacion": "Inventó que la oficina del predial «está en la avenida principal» sin dato en la petición."
+    }
+  ],
+  "implicacion_alucinaciones": "El modelo local inventó requisitos y ubicaciones sin base documental. Eso motiva conectar el asistente a la información oficial de cada entidad (RAG o integración).",
+  "corrida_id": "2026-11-12T23-04-57-05-00"
+}

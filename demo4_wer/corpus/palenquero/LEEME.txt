@@ -1,0 +1,12 @@
+# Corpus palenquero (demo 4)
+#
+# Por frase, mismo nombre base:
+#   P01.wav       audio
+#   P01.txt       transcripción de referencia (lo que dijo el hablante)
+#   P01.hip.txt   hipótesis de Whisper (se genera al correr el demo 4)
+#
+# También cuentan las mediciones del demo 1 con variedad «palenquero»
+# (campo variedad en resultados/demo1/filas.json).
+#
+# Puedes subir archivos desde la pestaña Experimento del demo 4
+# o grabar en el demo 1 con el selector de variedad.

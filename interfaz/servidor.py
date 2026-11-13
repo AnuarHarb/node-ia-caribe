@@ -19,7 +19,7 @@ from interfaz.corridas import lanzar
 from interfaz.demo3_calificacion import guardar_calificacion, listar_calificaciones, sincronizar_metricas
 from interfaz.demo3_ciego import cargar_paquete_ciego, listar_paquetes_ciegos, resumen_calificacion_demo3
 from interfaz.eventos import BUS
-from interfaz.informe_export import html_imprimible, pdf_bytes
+from interfaz.informe_export import fragmento_nota, html_imprimible, nombre_pdf, pdf_bytes
 from interfaz.informes import (
     asegurar_informe_demo1,
     cargar,
@@ -30,6 +30,9 @@ from interfaz.informes import (
     ruta_video_corrida,
 )
 from interfaz.qr import svg_de_enlace
+from interfaz.videos_entrega import guardar as guardar_video_entrega
+from interfaz.videos_entrega import listar as listar_videos_entrega
+from interfaz.videos_entrega import ruta as ruta_video_entrega
 from interfaz.red import enlace_telefono
 from medicion import coincide
 from voz.frases import FRASES
@@ -50,6 +53,21 @@ def hay_internet() -> bool:
             return True
     except OSError:
         return False
+
+
+_red_reciente: dict = {"valor": None, "momento": 0.0}
+_red_lock = threading.Lock()
+
+
+def internet_reciente(max_edad_s: float = 8.0) -> bool:
+    """Si el equipo alcanza internet, medido como mucho hace `max_edad_s` segundos."""
+    with _red_lock:
+        if _red_reciente["valor"] is not None and time.monotonic() - _red_reciente["momento"] < max_edad_s:
+            return bool(_red_reciente["valor"])
+    valor = hay_internet()
+    with _red_lock:
+        _red_reciente.update(valor=valor, momento=time.monotonic())
+    return valor
 
 
 def _leer_json(path: Path, vacio):
@@ -115,17 +133,26 @@ class Manejador(BaseHTTPRequestHandler):
             corrida = parse_qs(ruta.query).get("corrida", [None])[0]
             informe = cargar_corrida(demo_id, corrida) if corrida else cargar(demo_id)
             if informe is None:
-                self._html(
-                    html_imprimible(
-                        demo_id,
-                        {"fecha": None, "pendiente": "Aún no hay informe medido para este demo."},
-                        auto_imprimir=False,
-                    ),
-                    codigo=404,
-                )
+                # Sin medición, la nota lo dice; no se inventa un informe.
+                self._html(html_imprimible(demo_id, None), codigo=404)
                 return
             auto = parse_qs(ruta.query).get("auto", ["0"])[0] in ("1", "true", "sí", "si")
-            self._html(html_imprimible(demo_id, informe, auto_imprimir=auto))
+            self._html(html_imprimible(demo_id, informe, auto_imprimir=auto, corrida=corrida))
+            return
+        m_nota = re.fullmatch(r"/api/demos/(\d)/nota", path)
+        if m_nota:
+            demo_id = int(m_nota.group(1))
+            if demo_id not in DEMOS:
+                self._json(404, {"error": "no existe"})
+                return
+            corrida = parse_qs(ruta.query).get("corrida", [None])[0]
+            informe = cargar_corrida(demo_id, corrida) if corrida else cargar(demo_id)
+            try:
+                fragmento = fragmento_nota(demo_id, informe)
+            except Exception as exc:  # noqa: BLE001
+                self._json(500, {"error": f"No se pudo armar la nota: {exc}"})
+                return
+            self._enviar(200, "text/html; charset=utf-8", fragmento.encode("utf-8"))
             return
         if path == "/voz/telefono":
             html = paginas.pagina_voz("telefono").replace('?modo=telefono', "").replace(
@@ -155,6 +182,11 @@ class Manejador(BaseHTTPRequestHandler):
             return
         if path in ("/api/demo3/calificacion", "/api/demos/3/calificacion"):
             self._json(200, {"metodo": "POST", "envio_laboratorio": True})
+            return
+        if path == "/api/demos/4/corpus":
+            from interfaz.demo4_corpus import listar_corpus
+
+            self._json(200, listar_corpus())
             return
         m_grab1 = re.fullmatch(r"/api/demos/1/grabacion/([^/]+)", path)
         if m_grab1:
@@ -240,6 +272,35 @@ class Manejador(BaseHTTPRequestHandler):
                 return
             self._json(200, {"corridas": listar_historial(demo_id)})
             return
+        m_vid_ent = re.fullmatch(r"/api/demos/(\d)/videos-entrega(?:/([^/]+))?", path)
+        if m_vid_ent:
+            demo_id = int(m_vid_ent.group(1))
+            nombre = m_vid_ent.group(2)
+            if demo_id not in DEMOS:
+                self._json(404, {"error": "no existe"})
+                return
+            if nombre:
+                try:
+                    archivo = ruta_video_entrega(demo_id, nombre)
+                except ValueError as exc:
+                    self._json(400, {"error": str(exc)})
+                    return
+                if not archivo.is_file():
+                    self._json(404, {"error": "sin video"})
+                    return
+                datos = archivo.read_bytes()
+                self.send_response(200)
+                self.send_header("Content-Type", "video/webm")
+                self.send_header("Content-Length", str(len(datos)))
+                self.send_header(
+                    "Content-Disposition",
+                    f'attachment; filename="{nombre}"',
+                )
+                self.end_headers()
+                self.wfile.write(datos)
+                return
+            self._json(200, {"videos": listar_videos_entrega(demo_id)})
+            return
         m_hist_video = re.fullmatch(r"/api/demos/(\d)/historial/([^/]+)\.webm", path)
         if m_hist_video:
             demo_id = int(m_hist_video.group(1))
@@ -285,18 +346,20 @@ class Manejador(BaseHTTPRequestHandler):
                 return
             corrida = parse_qs(ruta.query).get("corrida", [None])[0]
             informe = cargar_corrida(demo_id, corrida) if corrida else cargar(demo_id)
-            if informe is None:
+            if informe is None and (corrida or demo_id != 2):
                 self._json(404, {"error": "sin informe"})
                 return
             try:
                 datos = pdf_bytes(demo_id, informe)
-                destino = RAIZ / "resultados" / f"demo{demo_id}" / "informe.pdf"
-                destino.parent.mkdir(parents=True, exist_ok=True)
-                destino.write_bytes(datos)
+                if not corrida:
+                    # informe.pdf es siempre la nota de la medición vigente, no la de una corrida vieja.
+                    destino = RAIZ / "resultados" / f"demo{demo_id}" / "informe.pdf"
+                    destino.parent.mkdir(parents=True, exist_ok=True)
+                    destino.write_bytes(datos)
             except Exception as exc:  # noqa: BLE001
                 self._json(500, {"error": f"No se pudo generar el PDF: {exc}"})
                 return
-            nombre = f"Nodo-IA-Caribe_Demo-{demo_id}_informe.pdf"
+            nombre = nombre_pdf(demo_id)
             self.send_response(200)
             self.send_header("Content-Type", "application/pdf")
             self.send_header("Content-Disposition", f'attachment; filename="{nombre}"')
@@ -324,6 +387,22 @@ class Manejador(BaseHTTPRequestHandler):
         except ValueError as exc:
             self._json(400, {"error": str(exc)})
             return
+        if path == "/api/demos/4/corpus":
+            from interfaz.demo4_corpus import guardar_frase
+
+            try:
+                guardar_frase(
+                    str(cuerpo.get("variedad") or "palenquero"),
+                    str(cuerpo.get("id") or ""),
+                    str(cuerpo.get("referencia") or ""),
+                    str(cuerpo.get("audio_b64") or ""),
+                    str(cuerpo.get("mime") or "audio/webm"),
+                )
+            except ValueError as exc:
+                self._json(400, {"error": str(exc)})
+                return
+            self._json(200, {"ok": True})
+            return
         if path in ("/api/demo3/calificacion", "/api/demos/3/calificacion"):
             try:
                 guardado = guardar_calificacion(cuerpo)
@@ -346,6 +425,14 @@ class Manejador(BaseHTTPRequestHandler):
                     "criterio_cumplido": informe.get("criterio_cumplido") if informe else None,
                 },
             )
+            return
+        if path == "/api/demos/2/consumo":
+            from interfaz.demo2_informe import guardar_consumo
+
+            try:
+                self._json(200, {"ok": True, "consumo": guardar_consumo(cuerpo)})
+            except (TypeError, ValueError) as exc:
+                self._json(400, {"error": str(exc)})
             return
         m_correr = re.fullmatch(r"/api/demos/(\d)/correr", path)
         if m_correr:
@@ -389,6 +476,24 @@ class Manejador(BaseHTTPRequestHandler):
                 self._json(200, self._guardar_fila(cuerpo))
             except Exception as exc:  # noqa: BLE001
                 self._json(500, {"error": str(exc)})
+            return
+        m_vid_post = re.fullmatch(r"/api/demos/(\d)/videos-entrega", path)
+        if m_vid_post:
+            demo_id = int(m_vid_post.group(1))
+            if demo_id not in DEMOS:
+                self._json(404, {"error": "no existe"})
+                return
+            try:
+                datos = self._leer_binario(maximo=220 * 1024 * 1024)
+            except ValueError as exc:
+                self._json(400, {"error": str(exc)})
+                return
+            try:
+                meta = guardar_video_entrega(demo_id, datos)
+            except ValueError as exc:
+                self._json(400, {"error": str(exc)})
+                return
+            self._json(200, meta)
             return
         m_video = re.fullmatch(r"/api/demos/(\d)/corrida-video", path)
         if m_video:
@@ -459,6 +564,14 @@ class Manejador(BaseHTTPRequestHandler):
         persona = (cuerpo.get("persona") or "sin-nombre").strip()
         demo = int(cuerpo.get("demo") or 1)
         identificador = uuid.uuid4().hex[:12]
+        # Demo 2: la salida a internet se comprueba en cada consulta, en un hilo aparte
+        # para que la comprobación no sume tiempo a la respuesta.
+        red: dict = {}
+        sonda = None
+        if demo == 2:
+            sonda = threading.Thread(target=lambda: red.update(internet=internet_reciente()), daemon=True)
+            sonda.start()
+        ts_inicio = datetime.now().astimezone().isoformat(timespec="milliseconds")
         inicio = time_mod.perf_counter()
         if cuerpo.get("audio_b64"):
             mime = cuerpo.get("mime") or "audio/webm"
@@ -468,7 +581,11 @@ class Manejador(BaseHTTPRequestHandler):
             origen.write_bytes(base64.b64decode(cuerpo["audio_b64"]))
             transcripcion, asr_s = motor.transcribir(origen, idioma="es")
             entrada = "voz"
-            audio_guardado = str(origen)
+            # Ruta relativa al proyecto: los datos se publican y no llevan la carpeta personal de quien midió.
+            try:
+                audio_guardado = str(origen.resolve().relative_to(RAIZ))
+            except ValueError:
+                audio_guardado = origen.name
         elif cuerpo.get("texto"):
             transcripcion = str(cuerpo["texto"]).strip()
             asr_s = 0.0
@@ -494,22 +611,40 @@ class Manejador(BaseHTTPRequestHandler):
             "audio": audio_guardado,
             "ts": datetime.now().astimezone().isoformat(timespec="seconds"),
         }
+        if demo == 2:
+            fila["ts_inicio"] = ts_inicio
+            fila["ts_fin"] = datetime.now().astimezone().isoformat(timespec="milliseconds")
+            if sonda is not None:
+                sonda.join(timeout=3)
+            # True: el equipo alcanzó internet. False: no lo alcanzó. None: la comprobación no terminó.
+            fila["internet"] = red.get("internet")
         destino = RAIZ / "resultados" / ("demo1" if demo == 1 else "demo2")
         destino.mkdir(parents=True, exist_ok=True)
         with _candado_voz:
             with (destino / "turnos.jsonl").open("a", encoding="utf-8") as archivo:
                 archivo.write(json.dumps(fila, ensure_ascii=False) + "\n")
         fila["audio_b64"] = base64.b64encode(wav).decode("ascii")
+        if demo == 1:
+            # Lectura de lo transcrito para calificar de oído; no entra en los tiempos del flujo.
+            eco, eco_s = motor.hablar(transcripcion or "No entendí nada.")
+            fila["eco_b64"] = base64.b64encode(eco).decode("ascii")
+            fila["eco_s"] = eco_s
         return fila
 
     def _guardar_fila(self, cuerpo: dict) -> dict:
         necesaria = ("id", "persona", "transcripcion_correcta", "transcripcion_sistema", "correcta")
         if any(not str(cuerpo.get(campo, "")).strip() for campo in necesaria):
             raise ValueError("fila incompleta")
+        variedad = (cuerpo.get("variedad") or "costeno").strip().lower()
+        if variedad.startswith("pal"):
+            variedad = "palenquero"
+        else:
+            variedad = "costeno"
         fila = {
             "id": cuerpo["id"],
             "persona": cuerpo["persona"].strip(),
             "guion": cuerpo.get("guion") or "",
+            "variedad": variedad,
             "transcripcion_correcta": cuerpo["transcripcion_correcta"].strip(),
             "transcripcion_sistema": cuerpo["transcripcion_sistema"].strip(),
             "correcta": cuerpo["correcta"],

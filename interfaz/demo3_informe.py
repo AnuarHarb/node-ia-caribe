@@ -8,12 +8,11 @@ from datetime import datetime
 from pathlib import Path
 
 from demo3_comparacion.tareas import TAREAS
-from equipo import describir_equipo, texto_equipo
+from equipo import describir_equipo
 from interfaz.catalogo import DEMOS
 
 RAIZ = Path(__file__).resolve().parents[1]
 DEMO3 = RAIZ / "resultados" / "demo3"
-NOTA = RAIZ / "notas" / "Demo-3_IA-local-frente-a-referencia-externa.md"
 
 
 def _cargar_json(path: Path) -> dict | list | None:
@@ -38,6 +37,189 @@ def _estadisticas_camino(generaciones: dict, camino: str) -> dict:
         "promedio_todas_s": round(statistics.fmean(segundos), 3),
         "maximo_caliente_s": round(max(en_caliente), 3) if en_caliente else None,
         "costo_usd": 0.0 if camino == "local" else None,
+    }
+
+
+NOMBRE_TIPO = {
+    "resumir_peticion": "Resumir una petición ciudadana",
+    "redactar_respuesta": "Redactar una respuesta",
+    "clasificar_solicitud": "Clasificar una solicitud",
+    "extraer_datos": "Extraer datos de un documento",
+    "consulta_normativa": "Responder una consulta normativa",
+}
+DIMENSIONES = ("exactitud", "completitud", "tono", "utilidad")
+TARIFA = RAIZ / "demo3_comparacion" / "tarifa_referencia.json"
+
+
+def interpretar_kappa(valor: float | None) -> str:
+    """Escala de Landis y Koch (1977)."""
+    if valor is None:
+        return "sin dato"
+    if valor < 0:
+        return "pobre"
+    if valor <= 0.20:
+        return "leve"
+    if valor <= 0.40:
+        return "aceptable"
+    if valor <= 0.60:
+        return "moderado"
+    if valor <= 0.80:
+        return "considerable"
+    return "casi perfecto"
+
+
+def _analisis_calificacion(metricas: dict) -> dict | None:
+    """Quién gana, por tipo de tarea y por dimensión. Solo con las dos calificaciones cerradas."""
+    if metricas.get("estado") != "calculado":
+        return None
+    por_tarea = metricas.get("por_tarea") or []
+    if not por_tarea:
+        return None
+    tipo_de = {tarea["id"]: tarea.get("tipo", "") for tarea in TAREAS}
+
+    def ganador(item: dict) -> str:
+        if item["local"] > item["referencia"]:
+            return "local"
+        if item["referencia"] > item["local"]:
+            return "referencia"
+        return "empate"
+
+    gana = {"local": 0, "empate": 0, "referencia": 0}
+    for item in por_tarea:
+        gana[ganador(item)] += 1
+
+    por_tipo = []
+    for tipo, nombre in NOMBRE_TIPO.items():
+        grupo = [item for item in por_tarea if tipo_de.get(item["id"]) == tipo]
+        if not grupo:
+            continue
+        por_tipo.append(
+            {
+                "tipo": tipo,
+                "nombre": nombre,
+                "tareas": len(grupo),
+                "local": round(statistics.fmean(item["local"] for item in grupo), 2),
+                "referencia": round(statistics.fmean(item["referencia"] for item in grupo), 2),
+                "comparables": sum(1 for item in grupo if item["comparable"]),
+                "gana_local": sum(1 for item in grupo if ganador(item) == "local"),
+                "gana_referencia": sum(1 for item in grupo if ganador(item) == "referencia"),
+            }
+        )
+
+    no_comparables = [
+        {
+            "id": item["id"],
+            "tipo": NOMBRE_TIPO.get(tipo_de.get(item["id"], ""), tipo_de.get(item["id"], "")),
+            "local": item["local"],
+            "referencia": item["referencia"],
+            "diferencia": item["diferencia"],
+            "gana": ganador(item),
+        }
+        for item in por_tarea
+        if not item["comparable"]
+    ]
+
+    dimensiones = _dimensiones_y_acuerdo(metricas)
+    return {
+        "gana": gana,
+        "por_tipo": por_tipo,
+        "no_comparables": no_comparables,
+        "dimensiones": dimensiones,
+    }
+
+
+def _dimensiones_y_acuerdo(metricas: dict) -> list[dict]:
+    """Nota media por dimensión y camino, y cuánto coinciden los dos calificadores."""
+    from interfaz.demo3_calificacion import CAL_DIR
+
+    clave = _cargar_json(DEMO3 / "clave.json") or {}
+    asignacion = clave.get("asignacion") or {}
+    archivos = metricas.get("archivos_usados") or []
+    calificaciones = [_cargar_json(CAL_DIR / nombre) for nombre in archivos]
+    if len(calificaciones) != 2 or not all(isinstance(item, dict) for item in calificaciones) or not asignacion:
+        return []
+    indices = [
+        {(puntaje["id"], puntaje["respuesta"]): puntaje for puntaje in item.get("puntajes") or []}
+        for item in calificaciones
+    ]
+    kappas = metricas.get("kappa") or {}
+    salida = []
+    for dimension in DIMENSIONES:
+        notas: dict[str, list[int]] = {"local": [], "referencia": []}
+        pares = iguales = cercanos = 0
+        cincos = 0
+        for tarea_id, mapa in asignacion.items():
+            for letra, camino in mapa.items():
+                uno = indices[0].get((tarea_id, letra))
+                dos = indices[1].get((tarea_id, letra))
+                if not uno or not dos or dimension not in uno or dimension not in dos:
+                    continue
+                a, b_ = int(uno[dimension]), int(dos[dimension])
+                notas[camino] += [a, b_]
+                pares += 1
+                iguales += a == b_
+                cercanos += abs(a - b_) <= 1
+                cincos += (a == 5) + (b_ == 5)
+        if not pares:
+            continue
+        kappa = kappas.get(dimension) or {}
+        salida.append(
+            {
+                "dimension": dimension,
+                "local": round(statistics.fmean(notas["local"]), 2) if notas["local"] else None,
+                "referencia": round(statistics.fmean(notas["referencia"]), 2) if notas["referencia"] else None,
+                "acuerdo_exacto_pct": round(100 * iguales / pares, 1),
+                "acuerdo_un_punto_pct": round(100 * cercanos / pares, 1),
+                "notas_en_cinco_pct": round(100 * cincos / (2 * pares), 1),
+                "kappa_cohen": kappa.get("cohen"),
+                "kappa_cuadratico": kappa.get("cuadratico"),
+                "interpretacion": interpretar_kappa(kappa.get("cohen")),
+                "respuestas": pares,
+            }
+        )
+    return salida
+
+
+def _costo(generaciones: dict) -> dict:
+    """Costo por tarea. Los tokens de la referencia se miden; los dólares salen de una tarifa confirmada."""
+    entrada = salida = con_tokens = 0
+    for item in generaciones.values():
+        uso = (item.get("referencia") or {}).get("tokens") or {}
+        if not uso:
+            continue
+        con_tokens += 1
+        entrada += int(uso.get("input_tokens") or uso.get("prompt_tokens") or 0)
+        salida += int(uso.get("output_tokens") or uso.get("completion_tokens") or 0)
+    referencia: dict = {
+        "tareas_con_tokens": con_tokens,
+        "tokens_entrada": entrada,
+        "tokens_salida": salida,
+        "tokens_entrada_por_tarea": round(entrada / con_tokens, 1) if con_tokens else None,
+        "tokens_salida_por_tarea": round(salida / con_tokens, 1) if con_tokens else None,
+        "usd_total": None,
+        "usd_por_tarea": None,
+        "tarifa": None,
+    }
+    tarifa = _cargar_json(TARIFA)
+    if isinstance(tarifa, dict) and con_tokens:
+        por_entrada = tarifa.get("usd_por_millon_entrada")
+        por_salida = tarifa.get("usd_por_millon_salida")
+        if isinstance(por_entrada, (int, float)) and isinstance(por_salida, (int, float)):
+            total = (entrada * por_entrada + salida * por_salida) / 1_000_000
+            referencia["usd_total"] = round(total, 6)
+            referencia["usd_por_tarea"] = round(total / con_tokens, 6)
+            referencia["tarifa"] = {
+                "usd_por_millon_entrada": por_entrada,
+                "usd_por_millon_salida": por_salida,
+                "fuente": str(tarifa.get("fuente") or "").strip(),
+                "fecha_consulta": str(tarifa.get("fecha_consulta") or "").strip(),
+            }
+    return {
+        "local": {
+            "usd_por_tarea": 0.0,
+            "nota": "Inferencia en el propio equipo. No incluye energía ni amortización del computador.",
+        },
+        "referencia": referencia,
     }
 
 
@@ -77,7 +259,11 @@ def _bloque_calificacion() -> dict:
         "porcentaje_comparables": metricas.get("porcentaje_comparables"),
         "calidad_promedio": metricas.get("calidad_promedio"),
         "kappa_cohen_promedio": metricas.get("kappa_cohen_promedio"),
+        "kappa_interpretacion": interpretar_kappa(metricas.get("kappa_cohen_promedio"))
+        if metricas.get("kappa_cohen_promedio") is not None
+        else None,
         "kappa": metricas.get("kappa"),
+        "analisis": _analisis_calificacion(metricas),
         "fecha_calificacion": metricas.get("fecha_calificacion"),
         "fecha_calificacion_inicio": metricas.get("fecha_calificacion_inicio"),
         "fechas_calificacion": metricas.get("fechas_calificacion"),
@@ -209,6 +395,12 @@ def construir_informe_demo3(extra: dict | None = None) -> dict | None:
             "proveedor_referencia": estado.get("proveedor_referencia"),
         },
         "rendimiento": {"local": rend_local, "referencia": rend_ref},
+        "costo": _costo(generaciones),
+        "tipos_de_tarea": [
+            {"tipo": tipo, "nombre": nombre, "tareas": sum(1 for t in TAREAS if t.get("tipo") == tipo)}
+            for tipo, nombre in NOMBRE_TIPO.items()
+        ],
+        "semilla_paquete": (_cargar_json(DEMO3 / "clave.json") or {}).get("semilla"),
         "paquete_ciego": {
             "listo": tareas_ciego >= len(TAREAS) and bool(paquete_hash),
             "hash": paquete_hash,
@@ -255,103 +447,9 @@ def construir_informe_demo3(extra: dict | None = None) -> dict | None:
 
 
 def escribir_nota_tecnica_demo3(informe: dict) -> None:
-    NOTA.parent.mkdir(parents=True, exist_ok=True)
-    c = informe.get("comparacion") or {}
-    p = informe.get("paquete_ciego") or {}
-    rl = (informe.get("rendimiento") or {}).get("local") or {}
-    rr = (informe.get("rendimiento") or {}).get("referencia") or {}
-    cal = p.get("calificacion") or {}
+    from interfaz.notas import escribir_nota
 
-    lineas = [
-        "# Nota técnica · IA local frente a una referencia externa",
-        "",
-        "Evidencia TRL 3 · Nodo IA Caribe.",
-        "",
-        "| Campo | Contenido |",
-        "| --- | --- |",
-        f"| Fecha de la corrida (40+40) | {informe.get('fecha_corrida', informe.get('fecha', '—'))} |",
-        f"| Fecha de calificación ciega | {informe.get('fecha_calificacion', '—')} |",
-        f"| Responsable | {informe.get('responsable', 'Anuar Harb')} |",
-        f"| Equipo | {texto_equipo(informe.get('equipo') or {})} |",
-        "",
-        "## 1. Resumen",
-        "",
-        informe.get("resumen_ejecutivo", ""),
-        "",
-        "## 2. Comparación de sistemas",
-        "",
-        f"- Tareas del protocolo: **{c.get('tareas_total', 40)}**",
-        f"- Respuestas modelo local ({c.get('modelo_local', '—')}): **{c.get('respuestas_local', 0)}/{c.get('tareas_total', 40)}**",
-        f"- Respuestas referencia ({c.get('proveedor_referencia', '—')} · {c.get('modelo_referencia', '—')}): **{c.get('respuestas_referencia', 0)}/{c.get('tareas_total', 40)}**",
-        "",
-        "### Tiempos de respuesta (segundos, medidos)",
-        "",
-        "| Camino | Primera tarea | Promedio en caliente | Promedio todas | Máximo en caliente |",
-        "| --- | --- | --- | --- | --- |",
-        f"| Local | {rl.get('primera_s', '—')} | {rl.get('promedio_caliente_s', '—')} | {rl.get('promedio_todas_s', '—')} | {rl.get('maximo_caliente_s', '—')} |",
-        f"| Referencia | — | {rr.get('promedio_caliente_s', '—')} | {rr.get('promedio_todas_s', '—')} | {rr.get('maximo_caliente_s', '—')} |",
-        "",
-        "**Costo local:** 0 USD por consulta (inferencia en el nodo). No incluye energía ni amortización del equipo. "
-        "El costo de la referencia comercial no se consolida aquí sin tarifa confirmada del día.",
-        "",
-        "## 3. Paquete ciego",
-        "",
-    ]
-    if p.get("listo"):
-        lineas += [
-            f"- **Generado:** sí ({p.get('tareas_en_paquete')} tareas).",
-            f"- **Identificador (hash):** `{p.get('hash', '')}`",
-            f"- **Archivo para calificadores:** `{p.get('archivo')}` (sin identificar qué respuesta es local o comercial).",
-            f"- **Clave de desblindaje (no entregar a calificadores):** `{p.get('clave_archivo')}`",
-            f"- {p.get('aviso', '')}",
-            "",
-            "Calificación: [http://127.0.0.1:8765/calificar](http://127.0.0.1:8765/calificar) o interfaz Demo 3 → *Calificar paquete ciego*.",
-            "",
-        ]
-    else:
-        lineas += ["- **Generado:** no. Correr el experimento hasta 40+40 respuestas.", ""]
-
-    lineas += ["## 4. Estado del protocolo", "", "| Paso | Medido | Cumple |", "| --- | --- | --- |"]
-    for fila in informe.get("protocolo_checklist") or []:
-        lineas.append(f"| {fila.get('item', '')} | {fila.get('medido', '')} | {'Sí' if fila.get('cumple') else 'No'} |")
-    lineas += [
-        "",
-        "## 5. Calificación humana y métricas",
-        "",
-        cal.get("descripcion", "Pendiente."),
-        "",
-    ]
-    if cal.get("estado") == "calculado":
-        cp = cal.get("calidad_promedio") or {}
-        lineas += [
-            f"- Evaluadores: **{', '.join(cal.get('calificadores') or [])}**",
-            f"- Calidad promedio **local:** {cp.get('local')}",
-            f"- Calidad promedio **referencia:** {cp.get('referencia')}",
-            f"- Tareas comparables: {cal.get('porcentaje_comparables')} %",
-            f"- κ Cohen promedio (acuerdo entre evaluadores): **{cal.get('kappa_cohen_promedio')}**",
-            "",
-        ]
-        if cal.get("limitacion_evaluadores"):
-            lineas += [f"- *Limitación:* {cal['limitacion_evaluadores']}", ""]
-
-    lineas += [
-        "## 6. Definiciones",
-        "",
-        "- **Calidad de una respuesta:** promedio de exactitud, completitud, tono y utilidad (1–5).",
-        "- **Calidad de un camino:** promedio de las dos calificaciones humanas por tarea.",
-        "- **Tarea comparable:** diferencia absoluta ≤ 1 punto entre caminos.",
-        "- **Kappa de Cohen:** acuerdo entre calificadores (sin ponderar); kappa cuadrático aparte.",
-        "",
-        "## 7. Limitaciones",
-        "",
-        "Tareas y radicados ficticios. Modelo local pequeño (nodo borde). No se exige que gane lo local; se valida el método. "
-        "Las entradas incluyen el texto de trabajo: se mide aplicación de la instrucción, no memoria legal.",
-        "",
-    ]
-    if informe.get("limitacion_calificadores"):
-        lineas.insert(-2, informe["limitacion_calificadores"])
-        lineas.insert(-2, "")
-    NOTA.write_text("\n".join(lineas), encoding="utf-8")
+    escribir_nota(3, informe)
 
 
 def sincronizar_informe_demo3(extra: dict | None = None) -> dict | None:

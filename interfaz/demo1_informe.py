@@ -9,17 +9,57 @@ from pathlib import Path
 
 import jiwer
 
-from demo4_wer.wer import wer_corpus
+from demo4_wer.wer import _variedad_demo1, wer_corpus
 from equipo import describir_equipo
 from interfaz.catalogo import DEMOS
 from interfaz.informes import _ruta_historial, ruta_video_corrida
 from medicion import normalizar
+from voz.frases import FRASES
 from voz.motor import MODELO_LOCAL, VOZ_ASISTENTE_ONNX, WHISPER_REPO
 
 RAIZ = Path(__file__).resolve().parents[1]
 DEMO1 = RAIZ / "resultados" / "demo1"
 GRABACIONES = RAIZ / "grabaciones"
-NOTA = RAIZ / "notas" / "Demo-1_Voz-en-espanol-costeno.md"
+
+# Lo que pide la especificación: tres o cuatro personas, diez frases cada una.
+HABLANTES_PROTOCOLO = 3
+FRASES_POR_HABLANTE = len(FRASES)
+
+
+def _errores_de_palabras(referencia: str, hipotesis: str) -> list[dict]:
+    """Qué palabras cambió, omitió o agregó el reconocimiento, según la alineación de jiwer."""
+    ref = normalizar(referencia or "")
+    hyp = normalizar(hipotesis or "")
+    if not ref or not hyp:
+        return []
+    salida = jiwer.process_words(ref, hyp)
+    palabras_ref = salida.references[0]
+    palabras_hyp = salida.hypotheses[0]
+    errores: list[dict] = []
+    for tramo in salida.alignments[0]:
+        if tramo.type == "equal":
+            continue
+        errores.append(
+            {
+                "tipo": {"substitute": "sustitucion", "delete": "omision", "insert": "insercion"}[tramo.type],
+                "referencia": " ".join(palabras_ref[tramo.ref_start_idx : tramo.ref_end_idx]),
+                "sistema": " ".join(palabras_hyp[tramo.hyp_start_idx : tramo.hyp_end_idx]),
+            }
+        )
+    return errores
+
+
+def _ruta_relativa(ruta: str) -> str:
+    """El informe se publica: no lleva la ruta absoluta del computador de quien midió."""
+    if not ruta:
+        return ""
+    camino = Path(ruta)
+    if not camino.is_absolute():
+        return ruta
+    try:
+        return str(camino.resolve().relative_to(RAIZ))
+    except ValueError:
+        return camino.name
 
 
 def _cargar_turnos() -> dict[str, dict]:
@@ -156,15 +196,25 @@ def construir_informe_demo1(extra: dict | None = None) -> dict | None:
     if not filas_raw:
         return None
     _sincronizar_marcado_correcta(filas_raw)
+    for fila in filas_raw:
+        if fila.get("audio"):
+            fila["audio"] = _ruta_relativa(str(fila["audio"]))
     filas_path.write_text(json.dumps(filas_raw, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     turnos = _cargar_turnos()
     meta = DEMOS[1]
     modelos = _modelos()
 
+    # Este demo es de español costeño. Las frases en palenquero que se graben en la misma
+    # pantalla alimentan el demo 4 y no entran en estas cifras.
+    filas_palenquero = sum(1 for f in filas_raw if _variedad_demo1(f) == "palenquero")
+    filas_costeno = [f for f in filas_raw if _variedad_demo1(f) == "costeno"]
+    if not filas_costeno:
+        return None
+
     tabla: list[dict] = []
     referencias: list[str] = []
     hipotesis: list[str] = []
-    for fila in filas_raw:
+    for fila in filas_costeno:
         identificador = str(fila.get("id") or "")
         turno = turnos.get(identificador, {})
         ref = (fila.get("transcripcion_correcta") or "").strip()
@@ -174,21 +224,37 @@ def construir_informe_demo1(extra: dict | None = None) -> dict | None:
             hipotesis.append(hyp)
         fila_out = {
             **fila,
+            "audio": _ruta_relativa(str(fila.get("audio") or "")),
             "audio_entrada_url": _audio_url(identificador),
             "respuesta_asistente": turno.get("respuesta") or "",
             "asr_s": turno.get("asr_s"),
             "llm_s": turno.get("llm_s"),
             "tts_s": turno.get("tts_s"),
             "segundos_total": turno.get("segundos"),
+            "ts": turno.get("ts"),
             "wer_porcentaje": _wer_fila(ref, hyp),
+            "errores_palabras": _errores_de_palabras(ref, hyp),
             "flujo_completo": bool(turno.get("respuesta") and turno.get("asr_s") is not None),
         }
         tabla.append(fila_out)
 
-    errores = sum(1 for f in filas_raw if f.get("correcta") == "no")
-    aciertos = sum(1 for f in filas_raw if f.get("correcta") == "si")
+    errores = sum(1 for f in filas_costeno if f.get("correcta") == "no")
+    aciertos = sum(1 for f in filas_costeno if f.get("correcta") == "si")
     wer_global = wer_corpus(referencias, hipotesis) if referencias else None
-    wer_personas = _wer_por_persona(filas_raw)
+    wer_personas = _wer_por_persona(filas_costeno)
+
+    por_hablante: dict[str, int] = defaultdict(int)
+    for fila in filas_costeno:
+        por_hablante[fila.get("persona") or "Sin nombre"] += 1
+    cobertura = {
+        "hablantes": len(por_hablante),
+        "hablantes_protocolo": HABLANTES_PROTOCOLO,
+        "frases": len(filas_costeno),
+        "frases_por_hablante_protocolo": FRASES_POR_HABLANTE,
+        "por_hablante": [{"persona": persona, "frases": n} for persona, n in sorted(por_hablante.items())],
+        "completa": len(por_hablante) >= HABLANTES_PROTOCOLO
+        and all(n >= FRASES_POR_HABLANTE for n in por_hablante.values()),
+    }
 
     tiempos = [t for t in tabla if t.get("asr_s") is not None]
     promedios_etapas = {}
@@ -198,7 +264,12 @@ def construir_informe_demo1(extra: dict | None = None) -> dict | None:
             "llm_promedio_s": round(sum(t["llm_s"] for t in tiempos) / len(tiempos), 3),
             "tts_promedio_s": round(sum(t["tts_s"] for t in tiempos) / len(tiempos), 3),
             "total_promedio_s": round(sum(t["segundos_total"] for t in tiempos) / len(tiempos), 3),
+            "total_maximo_s": round(max(t["segundos_total"] for t in tiempos), 3),
+            "primera_total_s": round(tiempos[0]["segundos_total"], 3),
         }
+        if len(tiempos) > 1:
+            resto = tiempos[1:]
+            promedios_etapas["resto_promedio_s"] = round(sum(t["segundos_total"] for t in resto) / len(resto), 3)
 
     corrida_id = (extra or {}).get("corrida_id")
     video_corrida = None
@@ -208,10 +279,11 @@ def construir_informe_demo1(extra: dict | None = None) -> dict | None:
     observaciones_llm = _observaciones_respuestas_llm(tabla)
     flujo_ok = all(f.get("flujo_completo") for f in tabla) if tabla else False
     resumen = (
-        f"{len(tabla)} frases medidas ({aciertos} coincidencia exacta tras normalizar, {errores} con error visible). "
+        f"{len(tabla)} frases medidas con {cobertura['hablantes']} hablante(s): "
+        f"{aciertos} transcritas bien y {errores} con error de reconocimiento. "
     )
     if wer_global:
-        resumen += f"WER corpus {wer_global['wer_porcentaje']} %. "
+        resumen += f"WER del corpus {wer_global['wer_porcentaje']} %. "
     if promedios_etapas:
         resumen += (
             f"Tiempos promedio: escuchar {promedios_etapas['asr_promedio_s']} s, "
@@ -235,6 +307,8 @@ def construir_informe_demo1(extra: dict | None = None) -> dict | None:
         "wer_corpus": wer_global,
         "wer_por_persona": wer_personas,
         "tiempos_promedio": promedios_etapas,
+        "cobertura": cobertura,
+        "filas_palenquero": filas_palenquero,
         "tabla": tabla,
         "video_corrida": video_corrida,
         "definicion_wer": "WER por frase y por hablante con jiwer; texto en minúsculas y sin puntuación.",
@@ -254,48 +328,9 @@ def construir_informe_demo1(extra: dict | None = None) -> dict | None:
 
 
 def escribir_nota_tecnica_demo1(informe: dict) -> None:
-    NOTA.parent.mkdir(parents=True, exist_ok=True)
-    wc = informe.get("wer_corpus") or {}
-    m = informe.get("modelos") or {}
-    lineas = [
-        "# Nota técnica · Voz en español costeño",
-        "",
-        "Evidencia TRL 3 · Nodo IA Caribe.",
-        "",
-        f"| Responsable | {informe.get('responsable', 'Anuar Harb')} |",
-        f"| Frases medidas | {informe.get('filas', 0)} |",
-        f"| WER corpus | {wc.get('wer_porcentaje', '—')} % |",
-        "",
-        "## Modelos",
-        "",
-        f"- **Whisper:** {m.get('whisper', '—')}",
-        f"- **LLM (Ollama):** {m.get('ollama', '—')}",
-        f"- **TTS (Piper):** {m.get('piper_asistente', '—')}",
-        "",
-        "## Referencia vs transcripción",
-        "",
-        informe.get("nota_referencias", ""),
-        "",
-        "## Alucinaciones del asistente (sin ocultar)",
-        "",
-        informe.get("implicacion_alucinaciones", ""),
-        "",
-    ]
-    for item in informe.get("observaciones_llm") or []:
-        lineas += [
-            f"- **Frase {item.get('id')}:** {item.get('observacion')}",
-            f"  - Guion: _{item.get('guion', '')}_",
-            f"  - Respuesta: _{item.get('respuesta', '')}_",
-            "",
-        ]
-    lineas += [
-        "## Limitaciones",
-        "",
-        "Muestra corta con un hablante; no sustituye un estudio dialectal. "
-        "El sí/no de coincidencia exacta es aparte del WER (este último cuenta ediciones palabra a palabra).",
-        "",
-    ]
-    NOTA.write_text("\n".join(lineas), encoding="utf-8")
+    from interfaz.notas import escribir_nota
+
+    escribir_nota(1, informe)
 
 
 def guardar_informe_demo1(informe: dict, *, historial: bool = False) -> None:

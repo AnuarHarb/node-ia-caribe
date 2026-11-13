@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 import shutil
-import statistics
 from datetime import datetime
 from pathlib import Path
 
@@ -59,6 +58,18 @@ def cargar(demo_id: int) -> dict | None:
                         encoding="utf-8",
                     )
         return informe
+    if demo_id == 2:
+        # Siempre se recalcula desde los turnos medidos: un informe viejo de carga por
+        # texto no puede tapar (ni reemplazar) la sesión de voz.
+        from interfaz.demo2_informe import construir_informe_demo2
+
+        path = ruta_informe(2)
+        extra = {}
+        if path.is_file():
+            previo = json.loads(path.read_text(encoding="utf-8"))
+            if "criterios" in previo:
+                extra["corrida_id"] = previo.get("corrida_id")
+        return construir_informe_demo2(extra or None)
     path = ruta_informe(demo_id)
     if path.exists():
         return json.loads(path.read_text(encoding="utf-8"))
@@ -75,24 +86,9 @@ def construir_desde_fuentes(demo_id: int) -> dict | None:
 
         return construir_informe_demo1()
     if demo_id == 2:
-        carga = RAIZ / "resultados" / "demo2" / "carga.json"
-        if carga.exists():
-            return json.loads(carga.read_text(encoding="utf-8"))
-        turnos = RAIZ / "resultados" / "demo2" / "turnos.jsonl"
-        if not turnos.exists():
-            return None
-        filas = [json.loads(line) for line in turnos.read_text(encoding="utf-8").splitlines() if line.strip()]
-        voz = [f for f in filas if f.get("entrada") == "voz"]
-        seg = [float(f["segundos"]) for f in voz if f.get("segundos")]
-        if not seg:
-            seg = [float(f["segundos"]) for f in filas if f.get("segundos")]
-        return {
-            "demo": 2,
-            "consultas": len(filas),
-            "consultas_voz": len(voz),
-            "tiempo_promedio_s": round(statistics.fmean(seg), 3) if seg else None,
-            "parcial": len(voz) == 0,
-        }
+        from interfaz.demo2_informe import construir_informe_demo2
+
+        return construir_informe_demo2()
     return None
 
 
@@ -112,10 +108,15 @@ def _ruta_indice(demo_id: int) -> Path:
 def estado_corrida(demo_id: int, informe: dict) -> str:
     if informe.get("criterio_cumplido") is True:
         return "ok"
-    if demo_id == 2 and informe.get("criterio_10s") is True:
-        return "ok"
-    if demo_id == 2 and informe.get("criterio_10s") is False:
-        return "falla"
+    if demo_id == 2:
+        # El criterio tiene tres partes (usuarios a la vez, tiempo y sin internet). Solo
+        # está cumplido con las tres medidas; un promedio bajo por sí solo no alcanza.
+        if not informe.get("consultas_voz") or informe.get("entrada") == "texto":
+            return "parcial" if "criterios" not in informe else "pendiente"
+        criterios = informe.get("criterios") or {}
+        if criterios.get("tiempo") is False or informe.get("criterio_10s") is False:
+            return "falla"
+        return "parcial"
     if demo_id == 3:
         if informe.get("ultima_corrida_error"):
             return "falla"
@@ -137,9 +138,10 @@ def estado_corrida(demo_id: int, informe: dict) -> str:
     if demo_id == 1 and informe.get("filas", 0) > 0:
         return "ok" if informe.get("criterio_video_error_real") else "parcial"
     if demo_id == 4 and (informe.get("variedades") or []):
-        return "ok"
-    if demo_id in (2, 5) and informe:
+        # Hay cifra, pero no con la muestra del protocolo en las dos variedades.
         return "parcial"
+    if demo_id == 5 and informe:
+        return "falla" if informe.get("criterio_cumplido") is False else "parcial"
     return "pendiente"
 
 
@@ -195,25 +197,50 @@ def resumen_de_informe(demo_id: int, informe: dict) -> str:
         cal = (informe.get("paquete_ciego") or {}).get("calificacion") or {}
         if cal.get("estado") == "calculado":
             cp = cal.get("calidad_promedio") or {}
-            base += f" · calidad {cp.get('local')} vs {cp.get('referencia')}"
+            base += f" · calidad {_dos(cp.get('local'))} local frente a {_dos(cp.get('referencia'))}"
+            if cal.get("porcentaje_comparables") is not None:
+                base += f" · {cal['porcentaje_comparables']:g} % comparables"
         elif cal.get("estado") == "parcial":
             base += " · 1/2 calificaciones"
         return f"{base} · {t} s prom." if t else base
     if demo_id == 1:
         wer = (informe.get("wer_corpus") or {}).get("wer_porcentaje")
-        base = f"{informe.get('filas', 0)} filas · {informe.get('errores_marcados', 0)} errores"
+        base = f"{informe.get('filas', 0)} frases · {informe.get('errores_marcados', 0)} con error"
         return f"{base} · WER {wer} %" if wer is not None else base
     if demo_id == 2:
-        t = informe.get("tiempo_promedio_s")
-        if informe.get("parcial"):
-            return f"Parcial · {t} s" if t else "Parcial (texto)"
-        return f"{informe.get('consultas_voz', informe.get('consultas', 0))} consultas · {t} s"
+        return _resumen_demo2(informe)
     if demo_id == 4:
-        vars_ = informe.get("variedades") or []
-        if vars_:
-            return " · ".join(f"{v['variedad']} {v['wer_porcentaje']}%" for v in vars_)
-        return "Sin WER medido"
+        return _resumen_demo4(informe)
     return "Corrida registrada"
+
+
+def _dos(valor: object) -> str:
+    return f"{valor:.2f}" if isinstance(valor, (int, float)) else "—"
+
+
+def _resumen_demo2(informe: dict) -> str:
+    t = informe.get("tiempo_promedio_s")
+    if not informe.get("consultas_voz") or informe.get("entrada") == "texto":
+        return "Falta la medición por voz con el router sin internet"
+    red = {True: "sin internet", False: "con internet", None: "red sin registrar"}[informe.get("sin_internet")]
+    a_la_vez = informe.get("usuarios_simultaneos")
+    partes = [f"{informe.get('consultas_voz')} consultas por voz"]
+    if a_la_vez is not None:
+        partes.append(f"{a_la_vez} a la vez")
+    partes.append(f"{t} s prom.")
+    partes.append(red)
+    return " · ".join(partes)
+
+
+def _resumen_demo4(informe: dict) -> str:
+    variedades = informe.get("variedades") or []
+    if not variedades:
+        return "Faltan audios y transcripciones"
+    partes = [f"{v['variedad']} WER {v['wer_porcentaje']} % ({v.get('frases', 0)} frases)" for v in variedades]
+    medidas = {v.get("clave") or v.get("variedad") for v in variedades}
+    if not ({"palenquero"} & medidas):
+        partes.append("falta palenquero")
+    return " · ".join(partes)
 
 
 def ruta_video_corrida(demo_id: int, corrida_id: str) -> Path:
@@ -278,6 +305,8 @@ def _sembrar_historial_si_falta(demo_id: int) -> None:
     if _ruta_indice(demo_id).exists():
         return
     actual = cargar(demo_id)
+    if demo_id == 2 and actual and not actual.get("consultas_voz"):
+        return  # sin sesión de voz no hay corrida que guardar en el historial
     if actual and actual.get("fecha"):
         persistir_informe(demo_id, actual)
 
@@ -324,18 +353,11 @@ def resumen_tarjeta(demo_id: int) -> str:
             return f"{base} · {t} s prom." if t else base
         return "Sin respuestas locales"
     if demo_id == 1:
-        return f"{informe.get('filas', 0)} filas · {informe.get('errores_marcados', 0)} errores"
+        return resumen_de_informe(1, informe)
     if demo_id == 2:
-        t = informe.get("tiempo_promedio_s")
-        if informe.get("parcial"):
-            return f"Parcial (texto) · {t} s" if t else "Parcial: falta voz con router sin internet"
-        return f"{informe.get('consultas_voz', informe.get('consultas', 0))} consultas · {t} s prom."
+        return _resumen_demo2(informe)
     if demo_id == 4:
-        vars_ = informe.get("variedades") or []
-        if vars_:
-            partes = [f"{v['variedad']} WER {v['wer_porcentaje']}%" for v in vars_]
-            return " · ".join(partes)
-        return "Faltan audios y transcripciones"
+        return _resumen_demo4(informe)
     return "Informe disponible"
 
 
@@ -356,9 +378,13 @@ def asegurar_informe_demo1(filas: list[dict]) -> str:
 
 
 def asegurar_informe_demo2(datos: dict) -> str:
+    from interfaz.notas import escribir_nota
+
     datos["demo"] = 2
     datos.setdefault("fecha", datetime.now().astimezone().isoformat(timespec="seconds"))
-    return persistir_informe(2, datos)
+    corrida_id = persistir_informe(2, datos)
+    escribir_nota(2, {**datos, "corrida_id": corrida_id})
+    return corrida_id
 
 
 def registrar_fallo_demo3(mensaje: str) -> str | None:

@@ -41,6 +41,50 @@
       "costo_usd": null
     }
   },
+  "costo": {
+    "local": {
+      "usd_por_tarea": 0.0,
+      "nota": "Inferencia en el propio equipo. No incluye energía ni amortización del computador."
+    },
+    "referencia": {
+      "tareas_con_tokens": 40,
+      "tokens_entrada": 8382,
+      "tokens_salida": 3497,
+      "tokens_entrada_por_tarea": 209.6,
+      "tokens_salida_por_tarea": 87.4,
+      "usd_total": null,
+      "usd_por_tarea": null,
+      "tarifa": null
+    }
+  },
+  "tipos_de_tarea": [
+    {
+      "tipo": "resumir_peticion",
+      "nombre": "Resumir una petición ciudadana",
+      "tareas": 8
+    },
+    {
+      "tipo": "redactar_respuesta",
+      "nombre": "Redactar una respuesta",
+      "tareas": 8
+    },
+    {
+      "tipo": "clasificar_solicitud",
+      "nombre": "Clasificar una solicitud",
+      "tareas": 8
+    },
+    {
+      "tipo": "extraer_datos",
+      "nombre": "Extraer datos de un documento",
+      "tareas": 8
+    },
+    {
+      "tipo": "consulta_normativa",
+      "nombre": "Responder una consulta normativa",
+      "tareas": 8
+    }
+  ],
+  "semilla_paquete": 20261110,
   "paquete_ciego": {
     "listo": true,
     "hash": "6fef1ff49dccfcae50137c8aeeaac3c03cc3a2eb5b4bc5c9979abae433eb6414",
@@ -67,6 +111,7 @@
         "referencia": 4.7938
       },
       "kappa_cohen_promedio": 0.456,
+      "kappa_interpretacion": "moderado",
       "kappa": {
         "exactitud": {
           "cohen": 0.6499,
@@ -88,6 +133,165 @@
           "cuadratico": 0.707,
           "n": 80
         }
+      },
+      "analisis": {
+        "gana": {
+          "local": 7,
+          "empate": 15,
+          "referencia": 18
+        },
+        "por_tipo": [
+          {
+            "tipo": "resumir_peticion",
+            "nombre": "Resumir una petición ciudadana",
+            "tareas": 8,
+            "local": 4.66,
+            "referencia": 4.98,
+            "comparables": 7,
+            "gana_local": 0,
+            "gana_referencia": 7
+          },
+          {
+            "tipo": "redactar_respuesta",
+            "nombre": "Redactar una respuesta",
+            "tareas": 8,
+            "local": 4.14,
+            "referencia": 5.0,
+            "comparables": 6,
+            "gana_local": 0,
+            "gana_referencia": 8
+          },
+          {
+            "tipo": "clasificar_solicitud",
+            "nombre": "Clasificar una solicitud",
+            "tareas": 8,
+            "local": 4.69,
+            "referencia": 4.5,
+            "comparables": 6,
+            "gana_local": 1,
+            "gana_referencia": 1
+          },
+          {
+            "tipo": "extraer_datos",
+            "nombre": "Extraer datos de un documento",
+            "tareas": 8,
+            "local": 5.0,
+            "referencia": 5.0,
+            "comparables": 8,
+            "gana_local": 0,
+            "gana_referencia": 0
+          },
+          {
+            "tipo": "consulta_normativa",
+            "nombre": "Responder una consulta normativa",
+            "tareas": 8,
+            "local": 4.61,
+            "referencia": 4.48,
+            "comparables": 7,
+            "gana_local": 6,
+            "gana_referencia": 2
+          }
+        ],
+        "no_comparables": [
+          {
+            "id": "T05",
+            "tipo": "Resumir una petición ciudadana",
+            "local": 3.375,
+            "referencia": 5.0,
+            "diferencia": 1.625,
+            "gana": "referencia"
+          },
+          {
+            "id": "T13",
+            "tipo": "Redactar una respuesta",
+            "local": 3.625,
+            "referencia": 5.0,
+            "diferencia": 1.375,
+            "gana": "referencia"
+          },
+          {
+            "id": "T15",
+            "tipo": "Redactar una respuesta",
+            "local": 3.625,
+            "referencia": 5.0,
+            "diferencia": 1.375,
+            "gana": "referencia"
+          },
+          {
+            "id": "T17",
+            "tipo": "Clasificar una solicitud",
+            "local": 2.5,
+            "referencia": 5.0,
+            "diferencia": 2.5,
+            "gana": "referencia"
+          },
+          {
+            "id": "T22",
+            "tipo": "Clasificar una solicitud",
+            "local": 5.0,
+            "referencia": 1.0,
+            "diferencia": 4.0,
+            "gana": "local"
+          },
+          {
+            "id": "T33",
+            "tipo": "Responder una consulta normativa",
+            "local": 2.625,
+            "referencia": 3.75,
+            "diferencia": 1.125,
+            "gana": "referencia"
+          }
+        ],
+        "dimensiones": [
+          {
+            "dimension": "exactitud",
+            "local": 4.76,
+            "referencia": 4.85,
+            "acuerdo_exacto_pct": 95.0,
+            "acuerdo_un_punto_pct": 98.8,
+            "notas_en_cinco_pct": 92.5,
+            "kappa_cohen": 0.6499,
+            "kappa_cuadratico": 0.9247,
+            "interpretacion": "considerable",
+            "respuestas": 80
+          },
+          {
+            "dimension": "completitud",
+            "local": 4.86,
+            "referencia": 4.89,
+            "acuerdo_exacto_pct": 92.5,
+            "acuerdo_un_punto_pct": 97.5,
+            "notas_en_cinco_pct": 94.4,
+            "kappa_cohen": 0.3074,
+            "kappa_cuadratico": 0.5833,
+            "interpretacion": "aceptable",
+            "respuestas": 80
+          },
+          {
+            "dimension": "tono",
+            "local": 4.38,
+            "referencia": 4.74,
+            "acuerdo_exacto_pct": 77.5,
+            "acuerdo_un_punto_pct": 93.8,
+            "notas_en_cinco_pct": 76.2,
+            "kappa_cohen": 0.4425,
+            "kappa_cuadratico": 0.6823,
+            "interpretacion": "moderado",
+            "respuestas": 80
+          },
+          {
+            "dimension": "utilidad",
+            "local": 4.47,
+            "referencia": 4.7,
+            "acuerdo_exacto_pct": 77.5,
+            "acuerdo_un_punto_pct": 92.5,
+            "notas_en_cinco_pct": 76.9,
+            "kappa_cohen": 0.424,
+            "kappa_cuadratico": 0.707,
+            "interpretacion": "moderado",
+            "respuestas": 80
+          }
+        ]
       },
       "fecha_calificacion": "2026-11-11T05:46:24.622Z",
       "fecha_calificacion_inicio": "2026-11-10T20:36:41.835Z",

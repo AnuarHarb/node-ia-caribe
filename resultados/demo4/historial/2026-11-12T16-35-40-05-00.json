@@ -1,0 +1,65 @@
+{
+  "demo": 4,
+  "fecha": "2026-11-12T16:35:40-05:00",
+  "equipo": {
+    "sistema": "macOS-14.6.1-arm64-arm-64bit",
+    "python": "3.12.2",
+    "arquitectura": "arm64",
+    "procesador": "Apple M2 Pro",
+    "memoria_gb": 16
+  },
+  "modelo": "mlx-community/whisper-small-mlx, sin ajustar",
+  "definicion": "WER de corpus con jiwer, tras pasar a minúsculas y quitar la puntuación.",
+  "variedades": [
+    {
+      "variedad": "español costeño",
+      "frases": 6,
+      "wer_porcentaje": 17.39,
+      "detalle": {
+        "frases": 6,
+        "wer": 0.17391304347826086,
+        "wer_porcentaje": 17.39,
+        "sustituciones": 10,
+        "inserciones": 1,
+        "eliminaciones": 1,
+        "palabras_referencia": 69,
+        "por_frase": [
+          {
+            "referencia": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+            "hipotesis": "Bueno, me voy a pedir una certificada de residencia. ¿Qué papeles tengo que traer?",
+            "wer": 0.38461538461538464
+          },
+          {
+            "referencia": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+            "hipotesis": "¿A qué hora atienden hoy en la Secretaría de Hacienda?",
+            "wer": 0.0
+          },
+          {
+            "referencia": "Necesito un turno para el Sisbén. Me lo pueden dar ahora.",
+            "hipotesis": "Necesito un turno para el 6. Me lo pueden dar ahora.",
+            "wer": 0.09090909090909091
+          },
+          {
+            "referencia": "¿Dónde queda la oficina del peredial? Es que me perdí.",
+            "hipotesis": "¿Dónde queda el oficinal peredial? Es que me perdí.",
+            "wer": 0.3
+          },
+          {
+            "referencia": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+            "hipotesis": "Quiero saber si ya salió la respuesta de mi Derecha de Petición del mes pasado.",
+            "wer": 0.06666666666666667
+          },
+          {
+            "referencia": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+            "hipotesis": "hasta que ahora están recibiendo el pago del impuesto hoy",
+            "wer": 0.2
+          }
+        ]
+      }
+    }
+  ],
+  "pendiente": [
+    "palenquero: faltan audios y transcripciones en corpus/palenquero"
+  ],
+  "corrida_id": "2026-11-12T16-35-40-05-00"
+}
