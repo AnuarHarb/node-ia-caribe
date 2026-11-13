@@ -1,0 +1,352 @@
+{
+  "demo": 3,
+  "titulo": "IA local frente a referencia externa",
+  "fecha_corrida": "2026-11-09T23:49:03",
+  "fecha_calificacion": "2026-11-11T05:46:24.622Z",
+  "fecha": "2026-11-09T23:49:03-05:00",
+  "equipo": {
+    "sistema": "macOS-14.6.1-arm64-arm-64bit",
+    "python": "3.12.2",
+    "arquitectura": "arm64",
+    "procesador": "Apple M2 Pro",
+    "memoria_gb": 16
+  },
+  "responsable": "Equipo del laboratorio",
+  "criterio_protocolo": "El método funciona; no se exige que la IA local gane.",
+  "resumen_ejecutivo": "Se compararon 40 tareas con modelo local qwen2.5:3b frente a anthropic claude-haiku-4-5. Paquete ciego generado (40 tareas, identificador 6fef1ff49dccfcae…). Tras calificación: calidad media local 4.6188 vs referencia 4.7938; Kappa Cohen 0.456.",
+  "comparacion": {
+    "tareas_total": 40,
+    "respuestas_local": 40,
+    "respuestas_referencia": 40,
+    "pares_completos": 40,
+    "modelo_local": "qwen2.5:3b",
+    "modelo_referencia": "claude-haiku-4-5",
+    "proveedor_referencia": "anthropic"
+  },
+  "rendimiento": {
+    "local": {
+      "n": 40,
+      "primera_s": 4.35,
+      "promedio_caliente_s": 0.767,
+      "promedio_todas_s": 0.857,
+      "maximo_caliente_s": 1.234,
+      "costo_usd": 0.0
+    },
+    "referencia": {
+      "n": 40,
+      "primera_s": 2.016,
+      "promedio_caliente_s": 1.405,
+      "promedio_todas_s": 1.42,
+      "maximo_caliente_s": 2.936,
+      "costo_usd": null
+    }
+  },
+  "costo": {
+    "local": {
+      "usd_por_tarea": 0.0,
+      "nota": "Inferencia en el propio equipo. No incluye energía ni amortización del computador."
+    },
+    "referencia": {
+      "tareas_con_tokens": 40,
+      "tokens_entrada": 8382,
+      "tokens_salida": 3497,
+      "tokens_entrada_por_tarea": 209.6,
+      "tokens_salida_por_tarea": 87.4,
+      "usd_total": null,
+      "usd_por_tarea": null,
+      "tarifa": null
+    }
+  },
+  "tipos_de_tarea": [
+    {
+      "tipo": "resumir_peticion",
+      "nombre": "Resumir una petición ciudadana",
+      "tareas": 8
+    },
+    {
+      "tipo": "redactar_respuesta",
+      "nombre": "Redactar una respuesta",
+      "tareas": 8
+    },
+    {
+      "tipo": "clasificar_solicitud",
+      "nombre": "Clasificar una solicitud",
+      "tareas": 8
+    },
+    {
+      "tipo": "extraer_datos",
+      "nombre": "Extraer datos de un documento",
+      "tareas": 8
+    },
+    {
+      "tipo": "consulta_normativa",
+      "nombre": "Responder una consulta normativa",
+      "tareas": 8
+    }
+  ],
+  "semilla_paquete": 20261110,
+  "paquete_ciego": {
+    "listo": true,
+    "hash": "6fef1ff49dccfcae50137c8aeeaac3c03cc3a2eb5b4bc5c9979abae433eb6414",
+    "archivo": "resultados/demo3/ciego.json",
+    "clave_archivo": "resultados/demo3/clave.json",
+    "aviso": "Las respuestas están marcadas como A y B. No se indica qué sistema escribió cada una.",
+    "tareas_en_paquete": 40,
+    "actualizado": "2026-11-09T23:49:03",
+    "calificacion": {
+      "estado": "calculado",
+      "archivos_recibidos": 2,
+      "calificadores_registrados": [
+        "Anuar Harb",
+        "Grace Torres"
+      ],
+      "calificadores": [
+        "Anuar Harb",
+        "Grace Torres"
+      ],
+      "tareas_calificadas": 40,
+      "porcentaje_comparables": 85.0,
+      "calidad_promedio": {
+        "local": 4.6188,
+        "referencia": 4.7938
+      },
+      "kappa_cohen_promedio": 0.456,
+      "kappa_interpretacion": "moderado",
+      "kappa": {
+        "exactitud": {
+          "cohen": 0.6499,
+          "cuadratico": 0.9247,
+          "n": 80
+        },
+        "completitud": {
+          "cohen": 0.3074,
+          "cuadratico": 0.5833,
+          "n": 80
+        },
+        "tono": {
+          "cohen": 0.4425,
+          "cuadratico": 0.6823,
+          "n": 80
+        },
+        "utilidad": {
+          "cohen": 0.424,
+          "cuadratico": 0.707,
+          "n": 80
+        }
+      },
+      "analisis": {
+        "gana": {
+          "local": 7,
+          "empate": 15,
+          "referencia": 18
+        },
+        "por_tipo": [
+          {
+            "tipo": "resumir_peticion",
+            "nombre": "Resumir una petición ciudadana",
+            "tareas": 8,
+            "local": 4.66,
+            "referencia": 4.98,
+            "comparables": 7,
+            "gana_local": 0,
+            "gana_referencia": 7
+          },
+          {
+            "tipo": "redactar_respuesta",
+            "nombre": "Redactar una respuesta",
+            "tareas": 8,
+            "local": 4.14,
+            "referencia": 5.0,
+            "comparables": 6,
+            "gana_local": 0,
+            "gana_referencia": 8
+          },
+          {
+            "tipo": "clasificar_solicitud",
+            "nombre": "Clasificar una solicitud",
+            "tareas": 8,
+            "local": 4.69,
+            "referencia": 4.5,
+            "comparables": 6,
+            "gana_local": 1,
+            "gana_referencia": 1
+          },
+          {
+            "tipo": "extraer_datos",
+            "nombre": "Extraer datos de un documento",
+            "tareas": 8,
+            "local": 5.0,
+            "referencia": 5.0,
+            "comparables": 8,
+            "gana_local": 0,
+            "gana_referencia": 0
+          },
+          {
+            "tipo": "consulta_normativa",
+            "nombre": "Responder una consulta normativa",
+            "tareas": 8,
+            "local": 4.61,
+            "referencia": 4.48,
+            "comparables": 7,
+            "gana_local": 6,
+            "gana_referencia": 2
+          }
+        ],
+        "no_comparables": [
+          {
+            "id": "T05",
+            "tipo": "Resumir una petición ciudadana",
+            "local": 3.375,
+            "referencia": 5.0,
+            "diferencia": 1.625,
+            "gana": "referencia"
+          },
+          {
+            "id": "T13",
+            "tipo": "Redactar una respuesta",
+            "local": 3.625,
+            "referencia": 5.0,
+            "diferencia": 1.375,
+            "gana": "referencia"
+          },
+          {
+            "id": "T15",
+            "tipo": "Redactar una respuesta",
+            "local": 3.625,
+            "referencia": 5.0,
+            "diferencia": 1.375,
+            "gana": "referencia"
+          },
+          {
+            "id": "T17",
+            "tipo": "Clasificar una solicitud",
+            "local": 2.5,
+            "referencia": 5.0,
+            "diferencia": 2.5,
+            "gana": "referencia"
+          },
+          {
+            "id": "T22",
+            "tipo": "Clasificar una solicitud",
+            "local": 5.0,
+            "referencia": 1.0,
+            "diferencia": 4.0,
+            "gana": "local"
+          },
+          {
+            "id": "T33",
+            "tipo": "Responder una consulta normativa",
+            "local": 2.625,
+            "referencia": 3.75,
+            "diferencia": 1.125,
+            "gana": "referencia"
+          }
+        ],
+        "dimensiones": [
+          {
+            "dimension": "exactitud",
+            "local": 4.76,
+            "referencia": 4.85,
+            "acuerdo_exacto_pct": 95.0,
+            "acuerdo_un_punto_pct": 98.8,
+            "notas_en_cinco_pct": 92.5,
+            "kappa_cohen": 0.6499,
+            "kappa_cuadratico": 0.9247,
+            "interpretacion": "considerable",
+            "respuestas": 80
+          },
+          {
+            "dimension": "completitud",
+            "local": 4.86,
+            "referencia": 4.89,
+            "acuerdo_exacto_pct": 92.5,
+            "acuerdo_un_punto_pct": 97.5,
+            "notas_en_cinco_pct": 94.4,
+            "kappa_cohen": 0.3074,
+            "kappa_cuadratico": 0.5833,
+            "interpretacion": "aceptable",
+            "respuestas": 80
+          },
+          {
+            "dimension": "tono",
+            "local": 4.38,
+            "referencia": 4.74,
+            "acuerdo_exacto_pct": 77.5,
+            "acuerdo_un_punto_pct": 93.8,
+            "notas_en_cinco_pct": 76.2,
+            "kappa_cohen": 0.4425,
+            "kappa_cuadratico": 0.6823,
+            "interpretacion": "moderado",
+            "respuestas": 80
+          },
+          {
+            "dimension": "utilidad",
+            "local": 4.47,
+            "referencia": 4.7,
+            "acuerdo_exacto_pct": 77.5,
+            "acuerdo_un_punto_pct": 92.5,
+            "notas_en_cinco_pct": 76.9,
+            "kappa_cohen": 0.424,
+            "kappa_cuadratico": 0.707,
+            "interpretacion": "moderado",
+            "respuestas": 80
+          }
+        ]
+      },
+      "fecha_calificacion": "2026-11-11T05:46:24.622Z",
+      "fecha_calificacion_inicio": "2026-11-10T20:36:41.835Z",
+      "fechas_calificacion": [
+        "2026-11-10T20:36:41.835Z",
+        "2026-11-11T05:46:24.622Z"
+      ],
+      "limitacion_evaluadores": "Evaluaron el director del proyecto (Anuar Harb) y la representante legal de FCA (Grace Torres). Aceptable en este laboratorio TRL 3; para mayor independencia, conviene un tercer evaluador ajeno a la fundación.",
+      "descripcion": "Calificación cerrada (Anuar Harb, Grace Torres). Calidad promedio local 4.6188 vs referencia 4.7938 (escala 1–5). 85.0 % comparables · Kappa Cohen promedio entre evaluadores: 0.456."
+    }
+  },
+  "protocolo_checklist": [
+    {
+      "item": "40 tareas con respuesta local (Ollama)",
+      "cumple": true,
+      "medido": "40/40"
+    },
+    {
+      "item": "40 tareas con respuesta de referencia comercial",
+      "cumple": true,
+      "medido": "40/40"
+    },
+    {
+      "item": "Paquete ciego (A/B sin identificar sistema)",
+      "cumple": true,
+      "medido": "40 tareas · hash 6fef1ff49dcc…"
+    },
+    {
+      "item": "Dos calificaciones humanas a ciegas",
+      "cumple": true,
+      "medido": "2/2 · Anuar Harb, Grace Torres"
+    },
+    {
+      "item": "Métricas de comparación (Kappa Cohen, % comparables)",
+      "cumple": true,
+      "medido": "85.0 % comparables · Kappa Cohen 0.456"
+    }
+  ],
+  "criterio_metodo_armado": true,
+  "criterio_calificacion_completa": true,
+  "criterio_cumplido": true,
+  "tareas_local": 40,
+  "tareas_referencia": 40,
+  "con_las_dos_respuestas": 40,
+  "modelo_local": "qwen2.5:3b",
+  "modelo_referencia": "claude-haiku-4-5",
+  "proveedor_referencia": "anthropic",
+  "tiempo_promedio_todas_s": 0.857,
+  "tiempo_promedio_caliente_s": 0.767,
+  "tiempo_maximo_caliente_s": 1.234,
+  "tiempo_promedio_referencia_s": 1.42,
+  "comparacion_completa": true,
+  "pendiente_calificacion": null,
+  "costo_local_usd": 0,
+  "costo_local_nota": "0 USD por consulta (inferencia local vía Ollama). No incluye energía ni amortización del equipo.",
+  "limitacion_calificadores": "Evaluaron el director del proyecto (Anuar Harb) y la representante legal de FCA (Grace Torres). Aceptable en este laboratorio TRL 3; para mayor independencia, conviene un tercer evaluador ajeno a la fundación.",
+  "corrida_id": "2026-11-09T23-49-03-05-00"
+}

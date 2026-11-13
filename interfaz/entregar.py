@@ -74,6 +74,18 @@ def revisar() -> dict:
     return {"notas": filas, "pendientes": pendientes}
 
 
+def tabla_viabilidad(notas: list[dict], respuesta: str = "Respuesta medida") -> list[str]:
+    """Una fila por demo: la pregunta del proyecto, la respuesta de su nota y qué sostiene."""
+    lineas = [
+        f"| Demo | Pregunta | {respuesta} | Qué sostiene |",
+        "| --- | --- | --- | --- |",
+    ]
+    for fila in notas:
+        celdas = [f"{fila['demo']}. {fila['titulo']}", fila["pregunta"], fila["respuesta"], fila["justifica"]]
+        lineas.append("| " + " | ".join(celda.replace("|", "\\|") for celda in celdas) + " |")
+    return lineas
+
+
 def resumen_markdown(revision: dict) -> str:
     """Texto corto por demo para pegar en el documento técnico (antecedentes y punto de partida del TRL)."""
     lineas = [
@@ -87,13 +99,9 @@ def resumen_markdown(revision: dict) -> str:
         "Los demos sostienen el punto de partida en TRL 3: la idea funciona en laboratorio, se sabe dónde falla "
         "y cuánto falta. Cada respuesta es la misma que abre la nota técnica del demo.",
         "",
-        "| Demo | Pregunta | Respuesta medida | Qué sostiene |",
-        "| --- | --- | --- | --- |",
+        *tabla_viabilidad(revision["notas"]),
+        "",
     ]
-    for fila in revision["notas"]:
-        celdas = [f"{fila['demo']}. {fila['titulo']}", fila["pregunta"], fila["respuesta"], fila["justifica"]]
-        lineas.append("| " + " | ".join(celda.replace("|", "\\|") for celda in celdas) + " |")
-    lineas.append("")
     for fila in revision["notas"]:
         if fila["video"]:
             video = fila["video"]

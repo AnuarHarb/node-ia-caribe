@@ -2,10 +2,10 @@
   "_ayuda": "Enlaces que la especificación pide en cada nota técnica. Pega aquí la URL del video de cada demo (YouTube no listado o Drive con enlace abierto). Vacío = la nota dice que está pendiente.",
   "repositorio": "https://github.com/AnuarHarb/node-ia-caribe",
   "video": {
-    "1": "",
-    "2": "",
-    "3": "",
-    "4": "",
-    "5": ""
+    "1": "https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing",
+    "2": "https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing",
+    "3": "https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing",
+    "4": "https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing",
+    "5": "https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing"
   }
 }

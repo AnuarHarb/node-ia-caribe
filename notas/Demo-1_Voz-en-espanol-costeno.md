@@ -12,7 +12,7 @@ Nodo IA Caribe · Convocatoria 54 · Evidencia del punto de partida (TRL 3)
 | Fecha de la prueba | del 11 de noviembre de 2026, 00:51 al 12 de noviembre de 2026, 23:05 |
 | Responsable | Anuar Harb |
 | Equipo | Apple M2 Pro, 16 GB, macOS-14.6.1-arm64-arm-64bit, Python 3.12.2 |
-| Video | Pendiente: falta subir el video (no listado) y pegar el enlace. |
+| Video | <https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing> |
 | Código y datos | <https://github.com/AnuarHarb/node-ia-caribe> |
 
 ## 1. Objetivo
@@ -124,7 +124,7 @@ En 4 respuestas el modelo local dio un dato que nadie le había dado. Se anota p
 
 ## 6. Enlaces
 
-- **Video:**pendiente. Cuando esté subido como no listado, el enlace se pega en `entregables/enlaces.json` y esta nota lo toma de ahí.
+- **Video:**<https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing>
 - **Repositorio:**<https://github.com/AnuarHarb/node-ia-caribe>
 - **Código:**`voz/`, `interfaz/demo1_informe.py`.
 - **Datos medidos:**`resultados/demo1/filas.json`, `resultados/demo1/turnos.jsonl`, `resultados/demo1/informe.json`.
@@ -132,4 +132,4 @@ En 4 respuestas el modelo local dio un dato que nadie le había dado. Se anota p
 
 ---
 
-Nota generada el 13 de noviembre de 2026, 02:29 (hora de Colombia) a partir de resultados/demo1/informe.json. Todas las cifras son medidas; ninguna se estima ni se completa a mano.
+Nota generada el 13 de noviembre de 2026, 03:06 (hora de Colombia) a partir de resultados/demo1/informe.json. Todas las cifras son medidas; ninguna se estima ni se completa a mano.

@@ -12,7 +12,7 @@ Nodo IA Caribe · Convocatoria 54 · Evidencia del punto de partida (TRL 3)
 | Fecha del cálculo | 13 de noviembre de 2026, 02:28 |
 | Responsable | Anuar Harb |
 | Equipo | Apple M2 Pro, 16 GB, macOS-14.6.1-arm64-arm-64bit, Python 3.12.2 |
-| Video | Opcional en este demo. Sin enlace todavía. |
+| Video | <https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing> |
 | Código y datos | <https://github.com/AnuarHarb/node-ia-caribe> |
 
 ## 1. Objetivo
@@ -117,7 +117,7 @@ El modelo local no superó al control en ninguna dirección: devolver el texto s
 
 ## 6. Enlaces
 
-- **Video:**opcional en este demo; no se ha subido.
+- **Video:**<https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing>
 - **Repositorio:**<https://github.com/AnuarHarb/node-ia-caribe>
 - **Código:**`demo4_wer/`, `medicion.py`.
 - **Datos medidos:**`resultados/demo4/informe.json`, `resultados/demo4/traduccion.json`, `resultados/demo1/filas.json`, `demo4_wer/corpus/`.
@@ -126,4 +126,4 @@ El modelo local no superó al control en ninguna dirección: devolver el texto s
 
 ---
 
-Nota generada el 13 de noviembre de 2026, 02:30 (hora de Colombia) a partir de resultados/demo4/informe.json. Todas las cifras son medidas; ninguna se estima ni se completa a mano.
+Nota generada el 13 de noviembre de 2026, 03:06 (hora de Colombia) a partir de resultados/demo4/informe.json. Todas las cifras son medidas; ninguna se estima ni se completa a mano.

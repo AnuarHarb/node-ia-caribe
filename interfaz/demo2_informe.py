@@ -14,11 +14,9 @@ from pathlib import Path
 
 from equipo import describir_equipo
 from interfaz.catalogo import DEMOS
+from interfaz.rutas_resultados import carpeta_demo, carpeta_escritura
 
 RAIZ = Path(__file__).resolve().parents[1]
-DEMO2 = RAIZ / "resultados" / "demo2"
-TURNOS = DEMO2 / "turnos.jsonl"
-CONSUMO = DEMO2 / "consumo.json"
 
 USUARIOS_MINIMOS = 3
 SEGUNDOS_MAXIMOS = 10.0
@@ -27,11 +25,16 @@ CONSULTAS_POR_USUARIO = 10
 PAUSA_ENTRE_SESIONES = timedelta(minutes=20)
 
 
+TURNOS: Path | None = None
+CONSUMO: Path | None = None
+
+
 def _leer_turnos() -> list[dict]:
-    if not TURNOS.is_file():
+    turnos = TURNOS or (carpeta_demo(2) / "turnos.jsonl")
+    if not turnos.is_file():
         return []
     filas = []
-    for linea in TURNOS.read_text(encoding="utf-8").splitlines():
+    for linea in turnos.read_text(encoding="utf-8").splitlines():
         linea = linea.strip()
         if not linea:
             continue
@@ -98,10 +101,11 @@ def _pico_simultaneo(filas: list[dict]) -> int:
 
 
 def _consumo() -> dict | None:
-    if not CONSUMO.is_file():
+    consumo = CONSUMO or (carpeta_demo(2) / "consumo.json")
+    if not consumo.is_file():
         return None
     try:
-        datos = json.loads(CONSUMO.read_text(encoding="utf-8"))
+        datos = json.loads(consumo.read_text(encoding="utf-8"))
     except json.JSONDecodeError:
         return None
     reposo = datos.get("reposo_w")
@@ -137,8 +141,9 @@ def guardar_consumo(cuerpo: dict) -> dict:
         "instrumento": str(cuerpo.get("instrumento") or "").strip()[:120],
         "fecha": datetime.now().astimezone().isoformat(timespec="seconds"),
     }
-    DEMO2.mkdir(parents=True, exist_ok=True)
-    CONSUMO.write_text(json.dumps(datos, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    carpeta = carpeta_escritura(2)
+    carpeta.mkdir(parents=True, exist_ok=True)
+    (carpeta / "consumo.json").write_text(json.dumps(datos, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return datos
 
 

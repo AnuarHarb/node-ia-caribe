@@ -114,6 +114,42 @@ class Manejador(BaseHTTPRequestHandler):
         if path == "/nota-tecnica":
             self._html(paginas.nota_tecnica())
             return
+        if path in ("/ejemplo", "/medicion-base"):
+            self._html(paginas.medicion_base())
+            return
+        for prefijo in ("/medicion-base/notas/", "/ejemplo/notas/"):
+            if path.startswith(prefijo):
+                carpeta = RAIZ / "ejemplo" / "notas"
+                nombre = path.removeprefix(prefijo)
+                permitidos = {a.name: a for a in carpeta.glob("Ejemplo_*") if a.suffix in (".html", ".pdf")}
+                if nombre in permitidos and nombre.endswith(".html"):
+                    self._enviar(200, "text/html; charset=utf-8", permitidos[nombre].read_bytes())
+                    return
+                if nombre in permitidos and nombre.endswith(".pdf"):
+                    datos = permitidos[nombre].read_bytes()
+                    forzar = parse_qs(ruta.query).get("descargar", [""])[0].lower() in ("1", "si", "true")
+                    if forzar:
+                        self._descargar("application/pdf", nombre, datos)
+                    else:
+                        self._enviar(200, "application/pdf", datos)
+                    return
+                break
+        if path in ("/medicion-base/notas.zip", "/ejemplo/notas.zip"):
+            import io
+            import zipfile
+
+            pdfs = sorted((RAIZ / "ejemplo" / "notas").glob("Ejemplo_*.pdf"))
+            if pdfs:
+                memoria = io.BytesIO()
+                with zipfile.ZipFile(memoria, "w", compression=zipfile.ZIP_DEFLATED) as paquete:
+                    for pdf in pdfs:
+                        paquete.write(pdf, arcname=pdf.name)
+                self._descargar(
+                    "application/zip",
+                    "Nodo-IA-Caribe_Medicion-base_Notas.zip",
+                    memoria.getvalue(),
+                )
+                return
         if path == "/calificar":
             cal = RAIZ / "demo3_comparacion" / "calificar.html"
             self._enviar(200, "text/html; charset=utf-8", cal.read_bytes())
@@ -249,7 +285,9 @@ class Manejador(BaseHTTPRequestHandler):
             self._enviar(200, "image/svg+xml; charset=utf-8", svg)
             return
         if path == "/api/filas":
-            self._json(200, _leer_json(RAIZ / "resultados" / "demo1" / "filas.json", []))
+            from interfaz.rutas_resultados import carpeta_demo
+
+            self._json(200, _leer_json(carpeta_demo(1) / "filas.json", []))
             return
         if path == "/api/turnos":
             demo = parse_qs(ruta.query).get("demo", ["2"])[0]
@@ -618,7 +656,9 @@ class Manejador(BaseHTTPRequestHandler):
                 sonda.join(timeout=3)
             # True: el equipo alcanzó internet. False: no lo alcanzó. None: la comprobación no terminó.
             fila["internet"] = red.get("internet")
-        destino = RAIZ / "resultados" / ("demo1" if demo == 1 else "demo2")
+        from interfaz.rutas_resultados import carpeta_escritura
+
+        destino = carpeta_escritura(1 if demo == 1 else 2)
         destino.mkdir(parents=True, exist_ok=True)
         with _candado_voz:
             with (destino / "turnos.jsonl").open("a", encoding="utf-8") as archivo:
@@ -653,7 +693,9 @@ class Manejador(BaseHTTPRequestHandler):
             else "no",
             "audio": cuerpo.get("audio") or "",
         }
-        path = RAIZ / "resultados" / "demo1" / "filas.json"
+        from interfaz.rutas_resultados import carpeta_escritura
+
+        path = carpeta_escritura(1) / "filas.json"
         with _candado_voz:
             filas = _leer_json(path, [])
             filas = [f for f in filas if f.get("id") != fila["id"]]
@@ -703,6 +745,14 @@ class Manejador(BaseHTTPRequestHandler):
     def _html(self, texto: str, codigo: int = 200) -> None:
         self._enviar(codigo, "text/html; charset=utf-8", texto.encode("utf-8"))
 
+    def _descargar(self, tipo: str, nombre: str, datos: bytes) -> None:
+        self.send_response(200)
+        self.send_header("Content-Type", tipo)
+        self.send_header("Content-Disposition", f'attachment; filename="{nombre}"')
+        self.send_header("Content-Length", str(len(datos)))
+        self.end_headers()
+        self.wfile.write(datos)
+
     def _enviar(self, codigo: int, tipo: str, datos: bytes) -> None:
         self.send_response(codigo)
         self.send_header("Content-Type", tipo)
@@ -711,7 +761,10 @@ class Manejador(BaseHTTPRequestHandler):
         self.wfile.write(datos)
 
     def _turnos_jsonl(self, demo: str) -> list:
-        path = RAIZ / "resultados" / ("demo1" if demo == "1" else "demo2") / "turnos.jsonl"
+        from interfaz.rutas_resultados import carpeta_demo
+
+        demo_id = 1 if demo == "1" else 2
+        path = carpeta_demo(demo_id) / "turnos.jsonl"
         if not path.exists():
             return []
         filas = []

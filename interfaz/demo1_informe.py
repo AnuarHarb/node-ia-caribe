@@ -12,13 +12,13 @@ import jiwer
 from demo4_wer.wer import _variedad_demo1, wer_corpus
 from equipo import describir_equipo
 from interfaz.catalogo import DEMOS
-from interfaz.informes import _ruta_historial, ruta_video_corrida
+from interfaz.informes import _ruta_historial_escritura, ruta_video_corrida
+from interfaz.rutas_resultados import carpeta_demo, carpeta_escritura
 from medicion import normalizar
 from voz.frases import FRASES
 from voz.motor import MODELO_LOCAL, VOZ_ASISTENTE_ONNX, WHISPER_REPO
 
 RAIZ = Path(__file__).resolve().parents[1]
-DEMO1 = RAIZ / "resultados" / "demo1"
 GRABACIONES = RAIZ / "grabaciones"
 
 # Lo que pide la especificación: tres o cuatro personas, diez frases cada una.
@@ -63,7 +63,7 @@ def _ruta_relativa(ruta: str) -> str:
 
 
 def _cargar_turnos() -> dict[str, dict]:
-    path = DEMO1 / "turnos.jsonl"
+    path = carpeta_demo(1) / "turnos.jsonl"
     if not path.is_file():
         return {}
     por_id: dict[str, dict] = {}
@@ -189,7 +189,7 @@ def _audio_url(identificador: str) -> str | None:
 
 
 def construir_informe_demo1(extra: dict | None = None) -> dict | None:
-    filas_path = DEMO1 / "filas.json"
+    filas_path = carpeta_demo(1) / "filas.json"
     if not filas_path.is_file():
         return None
     filas_raw = json.loads(filas_path.read_text(encoding="utf-8"))
@@ -340,11 +340,11 @@ def guardar_informe_demo1(informe: dict, *, historial: bool = False) -> None:
     if historial:
         persistir_informe(1, informe)
         return
-    destino = DEMO1 / "informe.json"
+    destino = carpeta_escritura(1) / "informe.json"
     destino.parent.mkdir(parents=True, exist_ok=True)
     destino.write_text(json.dumps(informe, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     cid = informe.get("corrida_id")
     if cid:
-        snap = _ruta_historial(1) / f"{cid}.json"
+        snap = _ruta_historial_escritura(1) / f"{cid}.json"
         snap.parent.mkdir(parents=True, exist_ok=True)
         snap.write_text(json.dumps(informe, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

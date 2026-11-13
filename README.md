@@ -112,13 +112,22 @@ demo3_comparacion/ Protocolo de comparación y calificación
 demo4_wer/         Cálculo WER y prueba de traducción por escrito
 demo5_agentes/     Aislamiento multi-entidad
 voz/               ASR, LLM local y Piper (demo 1 y 2)
-resultados/        Informes JSON, PDF, historial y videos .webm
+resultados/        Mediciones locales (gitignore). Ver resultados/README.md
+ejemplo/resultados/ Medición base en el clon (python -m ejemplo.generar)
 notas/             Notas técnicas por demo
 entregables/       Notas en PDF, ZIP, enlaces a los videos y guion de cada video
+ejemplo/           Medición base: notas y datos de referencia (no sustituye resultados/)
 ```
 
-No subas al repositorio: `.env`, API keys, grabaciones con datos personales sin consentimiento
-documentado, ni `grabaciones/` si contienen voz identificable (revisa `.gitignore`).
+**.** `.venv/bin/python -m ejemplo.generar` escribe en `ejemplo/` cómo se verían las
+cinco notas al completar el protocolo. Los demos 1, 2 y 4 combinan lo medido con datos sintéticos que
+siguen su tendencia; cada nota lo dice en el encabezado y en el pie de cada página, y cada fila
+sintética lleva `"sintetica": true`. No toca `resultados/` ni `entregables/`, y no sirve como evidencia.
+Desde la portada o en `/medicion-base` (alias `/ejemplo`).
+
+No subas al repositorio: `resultados/` (voz, historial, calificaciones), `.env`, API keys,
+grabaciones con datos personales sin consentimiento documentado, ni `grabaciones/` con voz
+identificable. En Git solo el historial ilustrativo en `ejemplo/resultados/`.
 
 ## Pruebas automatizadas
 

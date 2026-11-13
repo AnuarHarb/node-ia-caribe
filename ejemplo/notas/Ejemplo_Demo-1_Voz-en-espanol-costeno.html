@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo 1. Voz en español costeño · </title>
+  <style>/* Nota técnica: mismos estilos en la pestaña Informe y en la vista para imprimir.
+   Usa los tokens FCA cuando la página los define y, si no, sus valores claros. */
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/static/fca/FCA_Sistema-de-diseno/fuentes/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/static/fca/FCA_Sistema-de-diseno/fuentes/Poppins-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+
+.nota {
+  --nota-tinta: var(--ink, #0b1220);
+  --nota-tenue: var(--ink-muted, #526077);
+  --nota-linea: var(--line, #d9e4ee);
+  --nota-niebla: var(--surface-mist, #eff8ff);
+  --nota-titulo: var(--ink, #050a30);
+  --nota-azul: var(--brand-blue-strong, #006bad);
+  color: var(--nota-tinta);
+  font-family: "Poppins", system-ui, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  max-width: 54rem;
+  text-align: left;
+}
+
+.nota .antetitulo {
+  margin: 0 0 0.35rem;
+  color: var(--nota-azul);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nota h1 {
+  margin: 0 0 0.9rem;
+  color: var(--nota-titulo);
+  font-size: 1.55rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.nota h2 {
+  margin: 1.6rem 0 0.6rem;
+  color: var(--nota-titulo);
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
+.nota h3 {
+  margin: 1.1rem 0 0.4rem;
+  color: var(--nota-azul);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.nota p {
+  margin: 0 0 0.7rem;
+  max-width: 78ch;
+}
+
+.nota ul,
+.nota ol {
+  margin: 0 0 0.9rem;
+  padding-left: 1.4rem;
+  max-width: 78ch;
+}
+
+.nota li {
+  margin-bottom: 0.35rem;
+}
+
+.nota a {
+  color: var(--nota-azul);
+  overflow-wrap: anywhere;
+}
+
+.nota code {
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: 0.86em;
+  overflow-wrap: anywhere;
+}
+
+.nota .estado,
+.nota .aviso {
+  --nota-estado: #526077;
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.9rem;
+  border-left: 4px solid var(--nota-estado);
+  background: color-mix(in srgb, var(--nota-estado) 13%, transparent);
+  color: inherit;
+  font-size: inherit;
+  max-width: none;
+}
+
+.nota .aviso p {
+  margin: 0;
+  max-width: none;
+}
+
+.nota .estado-ok,
+.nota .aviso-ok {
+  --nota-estado: #008c55;
+}
+
+.nota .estado-parcial,
+.nota .aviso-parcial {
+  --nota-estado: #d6781e;
+}
+
+.nota .estado-falla,
+.nota .aviso-falla {
+  --nota-estado: #be2828;
+}
+
+.nota .ficha {
+  display: grid;
+  grid-template-columns: minmax(8rem, 11rem) 1fr;
+  gap: 0;
+  margin: 0 0 0.5rem;
+  border-top: 1px solid var(--nota-linea);
+}
+
+.nota .ficha dt,
+.nota .ficha dd {
+  margin: 0;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--nota-linea);
+}
+
+.nota .ficha dt {
+  font-weight: 600;
+}
+
+.nota table {
+  width: 100%;
+  margin: 0 0 1rem;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.nota caption {
+  padding: 0 0 0.4rem;
+  color: var(--nota-titulo);
+  font-weight: 600;
+  text-align: left;
+}
+
+.nota th,
+.nota td {
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--nota-linea);
+  text-align: left;
+  vertical-align: top;
+}
+
+.nota thead th {
+  background: var(--nota-niebla);
+  color: var(--nota-titulo);
+  font-weight: 600;
+}
+
+.nota tbody th {
+  font-weight: 600;
+}
+
+.nota td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.nota footer {
+  margin-top: 1.4rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--nota-linea);
+  color: var(--nota-tenue);
+  font-size: 0.78rem;
+}
+
+.nota footer p {
+  max-width: none;
+}
+
+/* En pantallas angostas las tablas anchas se desplazan dentro de su sección. */
+.nota section {
+  overflow-x: auto;
+}
+
+/* --- Vista para imprimir -------------------------------------------------------- */
+
+.hoja-nota {
+  margin: 0;
+  padding: 1.5rem 1rem 3rem;
+  background: #f8fafc;
+  color: #0b1220;
+}
+
+.hoja-nota main {
+  max-width: 54rem;
+  margin: 0 auto;
+  padding: 2rem 2.2rem;
+  background: #fff;
+  border: 1px solid #d9e4ee;
+}
+
+.hoja-nota .barra-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  max-width: 54rem;
+  margin: 0 auto 1rem;
+  font-family: "Poppins", system-ui, sans-serif;
+  font-size: 0.9rem;
+}
+
+.hoja-nota .barra-acciones button,
+.hoja-nota .barra-acciones a {
+  min-height: 44px;
+  padding: 0.55rem 1rem;
+  border: 1px solid #006bad;
+  border-radius: 6px;
+  background: #fff;
+  color: #006bad;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hoja-nota .barra-acciones button {
+  background: #006bad;
+  color: #fff;
+}
+
+.hoja-nota .barra-acciones :focus-visible {
+  outline: 3px solid #00a0f9;
+  outline-offset: 2px;
+}
+
+@page {
+  size: A4;
+  margin: 15mm 16mm;
+}
+
+@media print {
+  .hoja-nota {
+    padding: 0;
+    background: #fff;
+  }
+
+  .hoja-nota main {
+    max-width: none;
+    padding: 0;
+    border: 0;
+  }
+
+  .hoja-nota .barra-acciones {
+    display: none;
+  }
+
+  .nota {
+    max-width: none;
+    font-size: 9.2pt;
+  }
+
+  .nota h1 {
+    font-size: 16.5pt;
+  }
+
+  .nota h2 {
+    font-size: 11.5pt;
+    break-after: avoid;
+  }
+
+  .nota table {
+    font-size: 8pt;
+  }
+
+  .nota tr,
+  .nota .aviso,
+  .nota .estado {
+    break-inside: avoid;
+  }
+
+  .nota .estado,
+  .nota .aviso,
+  .nota thead th {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+</style>
+</head>
+<body class="hoja-nota">
+  <nav class="barra-acciones" aria-label="Acciones de la nota">
+    <a href="/medicion-base">Volver a la medición base</a>
+    <a href="Ejemplo_Demo-1_Voz-en-espanol-costeno.pdf">Ver PDF</a>
+    <a href="Ejemplo_Demo-1_Voz-en-espanol-costeno.pdf?descargar=1">Descargar PDF</a>
+    <button type="button" onclick="window.print()">Imprimir</button>
+  </nav>
+  <main>
+  <article class="nota">
+<header>
+<p class="antetitulo">Nodo IA Caribe · Convocatoria 54</p>
+<h1>Demo 1. Voz en español costeño</h1>
+<p class="estado estado-ok" role="status"><strong>Criterio cumplido.</strong> El flujo completo (escuchar, responder y hablar) funcionó en 40 de 40 frases y en 19 de ellas quedó registrado un error real de reconocimiento.</p>
+<dl class="ficha"><dt>Pregunta que responde</dt><dd><strong>¿Un equipo común puede escuchar, entender y responder sin servicios externos?</strong></dd><dt>Respuesta medida</dt><dd>Sí, con fallas: el flujo se completó en 40 de 40 frases, en 5.53 s en promedio. 19 de 40 quedaron con error de transcripción (WER 7.05 %) y el modelo inventó datos en 7 respuestas.</dd><dt>Qué sostiene en el proyecto</dt><dd>Objetivo específico 4.</dd><dt>Fecha de la prueba</dt><dd>del 11 de noviembre de 2026, 00:58 al 12 de noviembre de 2026, 19:45</dd><dt>Responsable</dt><dd>Anuar Harb</dd><dt>Equipo</dt><dd>Apple M2 Pro, 16 GB, macOS-14.6.1-arm64-arm-64bit, Python 3.12.2</dd><dt>Video</dt><dd><a href="https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing">https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing</a></dd><dt>Código y datos</dt><dd><a href="https://github.com/AnuarHarb/node-ia-caribe">https://github.com/AnuarHarb/node-ia-caribe</a></dd></dl>
+</header>
+<section aria-labelledby="nota-seccion-1"><h2 id="nota-seccion-1">1. Objetivo</h2>
+<p>Mostrar que el reconocimiento y la síntesis de voz ya funcionan con habla costeña, y dónde fallan hoy. Justifica el objetivo específico 4 del proyecto.</p>
+<p><strong>Criterio de éxito: </strong>flujo de punta a punta y al menos un error real de reconocimiento registrado.</p>
+</section>
+<section aria-labelledby="nota-seccion-2"><h2 id="nota-seccion-2">2. Montaje</h2>
+<table><thead><tr><th scope="col">Componente</th><th scope="col">Detalle</th></tr></thead><tbody><tr><td>Equipo</td><td>Apple M2 Pro, 16 GB, macOS-14.6.1-arm64-arm-64bit, Python 3.12.2</td></tr><tr><td>Reconocimiento de voz</td><td>Whisper small (MLX, mlx-community/whisper-small-mlx), sin ajustar, con el idioma fijado en español.</td></tr><tr><td>Modelo de lenguaje</td><td>qwen2.5:3b servido con Ollama en el mismo equipo. Temperatura 0.2 y respuestas de hasta 120 tokens.</td></tr><tr><td>Síntesis de voz</td><td>Piper es_MX-ald-medium.onnx (español México, voz masculina medium).</td></tr><tr><td>Interfaz</td><td>Página web local (python -m interfaz); el audio entra por el micrófono del navegador.</td></tr><tr><td>Hablantes</td><td>4 personas del equipo: Camila Rentería, Diego Molina, Jairo Barrios, Marelvis Pérez.</td></tr><tr><td>Consentimiento</td><td>El protocolo exige consentimiento escrito de cada hablante. La Fundación lo conserva y no se publica.</td></tr><tr><td>Internet</td><td>Los tres modelos corren en el equipo y ninguno llama a un servicio externo. La prueba con la red cortada y medida es el demo 2.</td></tr></tbody></table>
+</section>
+<section aria-labelledby="nota-seccion-3"><h2 id="nota-seccion-3">3. Procedimiento</h2>
+<ol><li>Cada hablante dice, con su habla natural, frases cotidianas de trámite tomadas de un guion de 10.</li><li>Whisper transcribe el audio, el modelo local redacta una respuesta corta y Piper la dice en voz alta. El servidor cronometra cada etapa.</li><li>Una persona escucha la grabación y escribe la transcripción correcta: lo que de verdad se dijo, que puede no ser igual al guion.</li><li>La transcripción del sistema se compara con la correcta después de pasar las dos a minúsculas y quitar la puntuación. Si son iguales, la frase es correcta.</li><li>Con la misma normalización se calcula el WER con la biblioteca jiwer: palabras cambiadas, omitidas o agregadas, divididas por las palabras dichas.</li><li>Cada turno queda guardado con su audio, sus tiempos y las dos transcripciones.</li></ol>
+</section>
+<section aria-labelledby="nota-seccion-4"><h2 id="nota-seccion-4">4. Resultados</h2>
+<p>Se midieron 40 frases de 4 hablantes. El flujo de punta a punta se completó en 40 de 40: el sistema escuchó, respondió y habló. <strong>Transcribió sin error 21 y se equivocó en 19.</strong></p>
+<table><caption>Tabla 1. Lo que se dijo y lo que escribió el sistema</caption><thead><tr><th scope="col">#</th><th scope="col">Transcripción correcta (lo que se dijo)</th><th scope="col">Transcripción del sistema</th><th scope="col">¿Correcta?</th><th scope="col">WER</th></tr></thead><tbody><tr><td>1</td><td>Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?</td><td>Bueno, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?</td><td>No</td><td class="num">7.7 %</td></tr><tr><td>2</td><td>¿A qué horas atienden hoy en la secretaría de hacienda?</td><td>¿A qué hora atiende Noi en la Secretaría de Hacienda?</td><td>No</td><td class="num">30.0 %</td></tr><tr><td>3</td><td>Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?</td><td>Necesito un turno para el 6. Me lo pueden dar ahora.</td><td>No</td><td class="num">9.1 %</td></tr><tr><td>4</td><td>¿Dónde queda la oficina del predial? Es que me perdí.</td><td>¿Dónde queda la oficina de el pre dial? Es que me perdí.</td><td>No</td><td class="num">40.0 %</td></tr><tr><td>5</td><td>Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.</td><td>Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.</td><td>Sí</td><td class="num">0.0 %</td></tr><tr><td>6</td><td>¿Hasta qué hora están recibiendo el pago del impuesto hoy?</td><td>¿Hasta qué hora están recibiendo el pago del impuesto hoy?</td><td>Sí</td><td class="num">0.0 %</td></tr><tr><td>7</td><td>Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?</td><td>Se me dañó el recibo del agua, como pido uno nuevo.</td><td>No</td><td class="num">9.1 %</td></tr><tr><td>8</td><td>¿El médico de la cita de las tres todavía está atendiendo?</td><td>¿El médico de la cita de las tres todavía está atendiendo?</td><td>Sí</td><td class="num">0.0 %</td></tr><tr><td>9</td><td>Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?</td><td>Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?</td><td>Sí</td><td class="num">0.0 %</td></tr><tr><td>10</td><td>En mi calle no hay luz desde anoche. ¿A quién le toca eso?</td><td>En mi calle no hay luz desde anoche. ¿A quién le toca ese?</td><td>No</td><td class="num">7.7 %</td></tr><tr><td>11</td><td>Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?</td><td>Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?</td><td>Sí</td><td class="num">0.0 %</td></tr><tr><td>12</td><td>¿A qué horas atienden hoy en la secretaría de hacienda?</td><td>¿A qué horas atienden hoy en la secretaría de hacienda?</td><td>Sí</td><td class="num">0.0 %</td></tr></tbody></table>
+<p>La tabla muestra las primeras 12 frases; hay 28 más en los datos.</p>
+<p><strong>Error de palabras (WER) del conjunto: 7.05 %. </strong>Son 33 palabras con error sobre 468 dichas: 28 cambiadas, 0 omitidas y 5 agregadas. Una frase cuenta como correcta solo si coincide entera con la transcripción correcta, después de pasar todo a minúsculas y quitar la puntuación.</p>
+<table><caption>Tabla 2. Dónde falla el reconocimiento, palabra por palabra</caption><thead><tr><th scope="col">#</th><th scope="col">Qué hizo</th><th scope="col">Lo que se dijo</th><th scope="col">Lo que escribió el sistema</th></tr></thead><tbody><tr><td>1</td><td>Cambió</td><td>buenas</td><td>bueno</td></tr><tr><td>2</td><td>Cambió</td><td>horas atienden hoy</td><td>hora atiende noi</td></tr><tr><td>3</td><td>Cambió</td><td>sisbén</td><td>6</td></tr><tr><td>4</td><td>Agregó</td><td>(nada)</td><td>de el</td></tr><tr><td>4</td><td>Cambió</td><td>del predial</td><td>pre dial</td></tr><tr><td>7</td><td>Cambió</td><td>cómo</td><td>como</td></tr><tr><td>10</td><td>Cambió</td><td>eso</td><td>ese</td></tr><tr><td>14</td><td>Agregó</td><td>(nada)</td><td>de el</td></tr><tr><td>14</td><td>Cambió</td><td>del predial</td><td>pre dial</td></tr><tr><td>21</td><td>Cambió</td><td>un certificado</td><td>una certificada</td></tr><tr><td>22</td><td>Cambió</td><td>horas atienden hoy</td><td>hora atiende noi</td></tr><tr><td>23</td><td>Cambió</td><td>sisbén</td><td>sistema</td></tr><tr><td>25</td><td>Cambió</td><td>derecho</td><td>derecha</td></tr><tr><td>27</td><td>Cambió</td><td>cómo</td><td>como</td></tr></tbody></table>
+<p>Hay 9 errores más en los datos.</p>
+<table><caption>WER por hablante</caption><thead><tr><th scope="col">Hablante</th><th scope="col">Frases</th><th scope="col">WER</th></tr></thead><tbody><tr><td>Camila Rentería</td><td class="num">10</td><td class="num">9.40 %</td></tr><tr><td>Diego Molina</td><td class="num">10</td><td class="num">3.42 %</td></tr><tr><td>Jairo Barrios</td><td class="num">10</td><td class="num">7.69 %</td></tr><tr><td>Marelvis Pérez</td><td class="num">10</td><td class="num">7.69 %</td></tr></tbody></table>
+<table><caption>Tabla 3. Cuánto tarda cada etapa del flujo (40 frases)</caption><thead><tr><th scope="col">Etapa</th><th scope="col">Promedio (s)</th><th scope="col">Mínimo (s)</th><th scope="col">Máximo (s)</th></tr></thead><tbody><tr><td>Escuchar y transcribir (Whisper)</td><td class="num">2.10</td><td class="num">1.71</td><td class="num">2.39</td></tr><tr><td>Responder (modelo local)</td><td class="num">2.51</td><td class="num">2.13</td><td class="num">2.93</td></tr><tr><td>Hablar (Piper)</td><td class="num">0.37</td><td class="num">0.30</td><td class="num">0.42</td></tr><tr><td><strong>Total de la frase</strong></td><td class="num"><strong>5.53</strong></td><td class="num"><strong>4.83</strong></td><td class="num"><strong>6.24</strong></td></tr></tbody></table>
+<p>La primera frase tardó 5.66 s porque los modelos se cargan en memoria en la primera consulta. Sin ella, el promedio es de 5.53 s y el máximo registrado fue de 6.24 s. El total es algo mayor que la suma de las tres etapas porque incluye guardar el audio y convertirlo al formato que lee Whisper.</p>
+<h3>Lo que respondió el asistente</h3>
+<p>En 7 respuestas el modelo local dio un dato que nadie le había dado. Se anota porque es un fallo real del sistema, distinto del error de reconocimiento:</p>
+<ul><li>El asistente pidió «cédula de residencia»; el ciudadano hablaba de un certificado de residencia. Requisito inventado. (3 veces)</li><li>Inventó que la oficina del predial «está en la avenida principal» sin dato en la petición. (4 veces)</li></ul>
+</section>
+<section aria-labelledby="nota-seccion-5"><h2 id="nota-seccion-5">5. Limitaciones</h2>
+<ul><li><strong>Habla leída. </strong>Son frases de un guion dichas frente al computador, no conversación espontánea ni ruido de una oficina. En esas condiciones el error puede ser mayor.</li><li><strong>Una sola persona fijó la transcripción correcta. </strong>El WER depende de esa referencia; no hubo segunda revisión.</li><li><strong>La voz que responde no es costeña. </strong>Piper no tiene una voz del Caribe colombiano; se usó una voz de español de México. La síntesis funciona, pero no suena local.</li><li><strong>El asistente no consulta fuentes oficiales. </strong>Por eso inventó requisitos y ubicaciones. Para atender trámites reales tiene que conectarse a la información oficial de cada entidad.</li><li><strong>Un solo equipo y un solo modelo. </strong>Los tiempos son de este portátil y de Whisper small; con otro equipo u otro tamaño de modelo cambian.</li><li>Las 30 frases en palenquero grabadas en esta misma pantalla no entran en estas cifras; se miden en el demo 4.</li></ul>
+</section>
+<section aria-labelledby="nota-seccion-6"><h2 id="nota-seccion-6">6. Enlaces</h2>
+<ul><li><strong>Video: </strong><a href="https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing">https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing</a></li><li><strong>Repositorio: </strong><a href="https://github.com/AnuarHarb/node-ia-caribe">https://github.com/AnuarHarb/node-ia-caribe</a></li><li><strong>Código: </strong><code>voz/</code>, <code>interfaz/demo1_informe.py</code>.</li><li><strong>Datos medidos: </strong><code>resultados/demo1/filas.json</code>, <code>resultados/demo1/turnos.jsonl</code>, <code>resultados/demo1/informe.json</code>.</li><li><strong>Audios: </strong>las grabaciones no se publican porque la voz identifica a la persona. Quedan en el equipo, junto con los consentimientos.</li></ul>
+</section>
+</article>
+  </main>
+</body>
+</html>

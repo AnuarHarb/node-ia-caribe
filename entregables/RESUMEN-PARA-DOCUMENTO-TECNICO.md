@@ -19,7 +19,7 @@ Los demos sostienen el punto de partida en TRL 3: la idea funciona en laboratori
 **Criterio cumplido.** El flujo completo (escuchar, responder y hablar) funcionó en 15 de 15 frases y en 9 de ellas quedó registrado un error real de reconocimiento. La muestra es menor que la del protocolo: 15 frases de 2 hablantes, frente a 3 o 4 hablantes con 10 frases cada uno.
 
 - Nota técnica: `Nodo-IA-Caribe_Demo-1_Voz-en-espanol-costeno.pdf` (3 páginas)
-- Video: pendiente
+- Video: https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing
 - Código y datos: https://github.com/AnuarHarb/node-ia-caribe
 
 ## Demo 2. IA completa sin internet
@@ -27,7 +27,7 @@ Los demos sostienen el punto de partida en TRL 3: la idea funciona en laboratori
 **Sin medición.** Todavía no se ha hecho la medición por voz con los teléfonos y el router sin internet. Esta nota describe el montaje y el procedimiento; la tabla de resultados se llena sola al medir.
 
 - Nota técnica: `Nodo-IA-Caribe_Demo-2_IA-completa-sin-internet.pdf` (2 páginas)
-- Video: pendiente
+- Video: https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing
 - Código y datos: https://github.com/AnuarHarb/node-ia-caribe
 
 ## Demo 3. IA local frente a referencia externa
@@ -35,7 +35,7 @@ Los demos sostienen el punto de partida en TRL 3: la idea funciona en laboratori
 **Criterio cumplido.** El método funcionó de principio a fin: 40 tareas por los dos caminos, paquete a ciegas, dos calificaciones humanas y métricas calculadas. El modelo local quedó por debajo de la referencia (4.62 frente a 4.79 sobre 5; el 96 % de la calidad de la referencia) y perdió en 18 tareas: la medición no lo favorece. El 85 % de las tareas quedó con calidad comparable y el acuerdo entre las dos personas fue moderado (kappa de Cohen 0.456).
 
 - Nota técnica: `Nodo-IA-Caribe_Demo-3_IA-local-frente-a-referencia-externa.pdf` (3 páginas)
-- Video: pendiente
+- Video: https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing
 - Código y datos: https://github.com/AnuarHarb/node-ia-caribe
 
 ## Demo 4. Línea base del error (WER)
@@ -43,7 +43,7 @@ Los demos sostienen el punto de partida en TRL 3: la idea funciona en laboratori
 **Evidencia parcial.** Hay una cifra por variedad (palenquero, WER 89.47 % con 10 frases; español costeño, WER 11.05 % con 15 frases), pero con menos frases que las 30 a 50 del protocolo en palenquero y español costeño. Por escrito, al traducir 12 estrofas de 8 poemas al palenquero, el modelo local obtuvo chrF 24.64; dejar el texto sin traducir ya da 24.85.
 
 - Nota técnica: `Nodo-IA-Caribe_Demo-4_Linea-base-del-error-WER.pdf` (3 páginas)
-- Video: opcional en este demo; no se ha subido
+- Video: https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing
 - Código y datos: https://github.com/AnuarHarb/node-ia-caribe
 
 ## Demo 5. Agentes aislados por entidad
@@ -51,14 +51,10 @@ Los demos sostienen el punto de partida en TRL 3: la idea funciona en laboratori
 **Criterio cumplido.** El intento de lectura cruzada quedó bloqueado, pasaron 11 de 11 pruebas y el registro de auditoría conserva su cadena íntegra.
 
 - Nota técnica: `Nodo-IA-Caribe_Demo-5_Agentes-aislados-por-entidad.pdf` (2 páginas)
-- Video: pendiente
+- Video: https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing
 - Código y datos: https://github.com/AnuarHarb/node-ia-caribe
 
 ## Falta antes de radicar
 
-- Demo 1: falta el enlace al video (2 a 3 minutos, no listado) en entregables/enlaces.json.
 - Demo 2: sin medición. Todavía no se ha hecho la medición por voz con los teléfonos y el router sin internet. Esta nota describe el montaje y el procedimiento; la tabla de resultados se llena sola al medir.
-- Demo 2: falta el enlace al video (2 a 3 minutos, no listado) en entregables/enlaces.json.
-- Demo 3: falta el enlace al video (2 a 3 minutos, no listado) en entregables/enlaces.json.
 - Demo 4: evidencia parcial. Hay una cifra por variedad (palenquero, WER 89.47 % con 10 frases; español costeño, WER 11.05 % con 15 frases), pero con menos frases que las 30 a 50 del protocolo en palenquero y español costeño. Por escrito, al traducir 12 estrofas de 8 poemas al palenquero, el modelo local obtuvo chrF 24.64; dejar el texto sin traducir ya da 24.85.
-- Demo 5: falta el enlace al video (2 a 3 minutos, no listado) en entregables/enlaces.json.

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo 3. IA local frente a referencia externa · </title>
+  <style>/* Nota técnica: mismos estilos en la pestaña Informe y en la vista para imprimir.
+   Usa los tokens FCA cuando la página los define y, si no, sus valores claros. */
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/static/fca/FCA_Sistema-de-diseno/fuentes/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/static/fca/FCA_Sistema-de-diseno/fuentes/Poppins-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+
+.nota {
+  --nota-tinta: var(--ink, #0b1220);
+  --nota-tenue: var(--ink-muted, #526077);
+  --nota-linea: var(--line, #d9e4ee);
+  --nota-niebla: var(--surface-mist, #eff8ff);
+  --nota-titulo: var(--ink, #050a30);
+  --nota-azul: var(--brand-blue-strong, #006bad);
+  color: var(--nota-tinta);
+  font-family: "Poppins", system-ui, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  max-width: 54rem;
+  text-align: left;
+}
+
+.nota .antetitulo {
+  margin: 0 0 0.35rem;
+  color: var(--nota-azul);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nota h1 {
+  margin: 0 0 0.9rem;
+  color: var(--nota-titulo);
+  font-size: 1.55rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.nota h2 {
+  margin: 1.6rem 0 0.6rem;
+  color: var(--nota-titulo);
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
+.nota h3 {
+  margin: 1.1rem 0 0.4rem;
+  color: var(--nota-azul);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.nota p {
+  margin: 0 0 0.7rem;
+  max-width: 78ch;
+}
+
+.nota ul,
+.nota ol {
+  margin: 0 0 0.9rem;
+  padding-left: 1.4rem;
+  max-width: 78ch;
+}
+
+.nota li {
+  margin-bottom: 0.35rem;
+}
+
+.nota a {
+  color: var(--nota-azul);
+  overflow-wrap: anywhere;
+}
+
+.nota code {
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: 0.86em;
+  overflow-wrap: anywhere;
+}
+
+.nota .estado,
+.nota .aviso {
+  --nota-estado: #526077;
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.9rem;
+  border-left: 4px solid var(--nota-estado);
+  background: color-mix(in srgb, var(--nota-estado) 13%, transparent);
+  color: inherit;
+  font-size: inherit;
+  max-width: none;
+}
+
+.nota .aviso p {
+  margin: 0;
+  max-width: none;
+}
+
+.nota .estado-ok,
+.nota .aviso-ok {
+  --nota-estado: #008c55;
+}
+
+.nota .estado-parcial,
+.nota .aviso-parcial {
+  --nota-estado: #d6781e;
+}
+
+.nota .estado-falla,
+.nota .aviso-falla {
+  --nota-estado: #be2828;
+}
+
+.nota .ficha {
+  display: grid;
+  grid-template-columns: minmax(8rem, 11rem) 1fr;
+  gap: 0;
+  margin: 0 0 0.5rem;
+  border-top: 1px solid var(--nota-linea);
+}
+
+.nota .ficha dt,
+.nota .ficha dd {
+  margin: 0;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--nota-linea);
+}
+
+.nota .ficha dt {
+  font-weight: 600;
+}
+
+.nota table {
+  width: 100%;
+  margin: 0 0 1rem;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.nota caption {
+  padding: 0 0 0.4rem;
+  color: var(--nota-titulo);
+  font-weight: 600;
+  text-align: left;
+}
+
+.nota th,
+.nota td {
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--nota-linea);
+  text-align: left;
+  vertical-align: top;
+}
+
+.nota thead th {
+  background: var(--nota-niebla);
+  color: var(--nota-titulo);
+  font-weight: 600;
+}
+
+.nota tbody th {
+  font-weight: 600;
+}
+
+.nota td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.nota footer {
+  margin-top: 1.4rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--nota-linea);
+  color: var(--nota-tenue);
+  font-size: 0.78rem;
+}
+
+.nota footer p {
+  max-width: none;
+}
+
+/* En pantallas angostas las tablas anchas se desplazan dentro de su sección. */
+.nota section {
+  overflow-x: auto;
+}
+
+/* --- Vista para imprimir -------------------------------------------------------- */
+
+.hoja-nota {
+  margin: 0;
+  padding: 1.5rem 1rem 3rem;
+  background: #f8fafc;
+  color: #0b1220;
+}
+
+.hoja-nota main {
+  max-width: 54rem;
+  margin: 0 auto;
+  padding: 2rem 2.2rem;
+  background: #fff;
+  border: 1px solid #d9e4ee;
+}
+
+.hoja-nota .barra-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  max-width: 54rem;
+  margin: 0 auto 1rem;
+  font-family: "Poppins", system-ui, sans-serif;
+  font-size: 0.9rem;
+}
+
+.hoja-nota .barra-acciones button,
+.hoja-nota .barra-acciones a {
+  min-height: 44px;
+  padding: 0.55rem 1rem;
+  border: 1px solid #006bad;
+  border-radius: 6px;
+  background: #fff;
+  color: #006bad;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hoja-nota .barra-acciones button {
+  background: #006bad;
+  color: #fff;
+}
+
+.hoja-nota .barra-acciones :focus-visible {
+  outline: 3px solid #00a0f9;
+  outline-offset: 2px;
+}
+
+@page {
+  size: A4;
+  margin: 15mm 16mm;
+}
+
+@media print {
+  .hoja-nota {
+    padding: 0;
+    background: #fff;
+  }
+
+  .hoja-nota main {
+    max-width: none;
+    padding: 0;
+    border: 0;
+  }
+
+  .hoja-nota .barra-acciones {
+    display: none;
+  }
+
+  .nota {
+    max-width: none;
+    font-size: 9.2pt;
+  }
+
+  .nota h1 {
+    font-size: 16.5pt;
+  }
+
+  .nota h2 {
+    font-size: 11.5pt;
+    break-after: avoid;
+  }
+
+  .nota table {
+    font-size: 8pt;
+  }
+
+  .nota tr,
+  .nota .aviso,
+  .nota .estado {
+    break-inside: avoid;
+  }
+
+  .nota .estado,
+  .nota .aviso,
+  .nota thead th {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+</style>
+</head>
+<body class="hoja-nota">
+  <nav class="barra-acciones" aria-label="Acciones de la nota">
+    <a href="/medicion-base">Volver a la medición base</a>
+    <a href="Ejemplo_Demo-3_IA-local-frente-a-referencia-externa.pdf">Ver PDF</a>
+    <a href="Ejemplo_Demo-3_IA-local-frente-a-referencia-externa.pdf?descargar=1">Descargar PDF</a>
+    <button type="button" onclick="window.print()">Imprimir</button>
+  </nav>
+  <main>
+  <article class="nota">
+<header>
+<p class="antetitulo">Nodo IA Caribe · Convocatoria 54</p>
+<h1>Demo 3. IA local frente a referencia externa</h1>
+<p class="estado estado-ok" role="status"><strong>Criterio cumplido.</strong> El método funcionó de principio a fin: 40 tareas por los dos caminos, paquete a ciegas, dos calificaciones humanas y métricas calculadas. El modelo local quedó por debajo de la referencia (4.62 frente a 4.79 sobre 5; el 96 % de la calidad de la referencia) y perdió en 18 tareas: la medición no lo favorece. El 85 % de las tareas quedó con calidad comparable y el acuerdo entre las dos personas fue moderado (kappa de Cohen 0.456).</p>
+<dl class="ficha"><dt>Pregunta que responde</dt><dd><strong>¿Un modelo abierto alcanza una calidad comparable a la de un servicio comercial?</strong></dd><dt>Respuesta medida</dt><dd>Sí, cerca: el modelo local obtuvo 4.62 sobre 5 frente a 4.79 de la referencia, el 96 % de su calidad. El 85 % de las 40 tareas quedó comparable.</dd><dt>Qué sostiene en el proyecto</dt><dd>Objetivo específico 1 y el método de evaluación.</dd><dt>Fecha de la prueba</dt><dd>Generación de respuestas: 9 de noviembre de 2026, 23:49. Calificación a ciegas: del 10 de noviembre de 2026, 15:36 al 11 de noviembre de 2026, 00:46.</dd><dt>Responsable</dt><dd>Equipo del laboratorio</dd><dt>Equipo</dt><dd>Apple M2 Pro, 16 GB, macOS-14.6.1-arm64-arm-64bit, Python 3.12.2</dd><dt>Video</dt><dd><a href="https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing">https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing</a></dd><dt>Código y datos</dt><dd><a href="https://github.com/AnuarHarb/node-ia-caribe">https://github.com/AnuarHarb/node-ia-caribe</a></dd></dl>
+</header>
+<section aria-labelledby="nota-seccion-1"><h2 id="nota-seccion-1">1. Objetivo</h2>
+<p>Mostrar que el método de evaluación comparativa del proyecto ya funciona a pequeña escala: las mismas tareas pasan por un modelo local y por un servicio comercial, dos personas califican a ciegas y las métricas se calculan de forma reproducible.</p>
+<p><strong>Criterio de éxito: </strong>que el método funcione. No se exige que gane el modelo local; si pierde en algunas tareas, eso muestra que la medición es honesta.</p>
+</section>
+<section aria-labelledby="nota-seccion-2"><h2 id="nota-seccion-2">2. Montaje</h2>
+<table><thead><tr><th scope="col">Componente</th><th scope="col">Detalle</th></tr></thead><tbody><tr><td>Equipo</td><td>Apple M2 Pro, 16 GB, macOS-14.6.1-arm64-arm-64bit, Python 3.12.2</td></tr><tr><td>Camino local</td><td>qwen2.5:3b, modelo abierto servido con Ollama en el equipo. Temperatura 0, semilla fija y hasta 500 tokens por respuesta.</td></tr><tr><td>Camino de referencia</td><td>claude-haiku-4-5 de Anthropic, por su API. Temperatura 0. La clave de acceso se escribe al correr y no se guarda en disco.</td></tr><tr><td>Tareas</td><td>40 tareas con datos ficticios de trámites públicos: resumir una petición ciudadana (8); redactar una respuesta (8); clasificar una solicitud (8); extraer datos de un documento (8); responder una consulta normativa (8). Cada tarea trae el texto sobre el que hay que trabajar.</td></tr><tr><td>Calificadores</td><td>Anuar Harb, Grace Torres. Cada persona califica por separado, en una hoja web que solo muestra «respuesta A» y «respuesta B».</td></tr><tr><td>Escala</td><td>De 1 a 5 en cuatro dimensiones: exactitud, completitud, tono y utilidad.</td></tr></tbody></table>
+</section>
+<section aria-labelledby="nota-seccion-3"><h2 id="nota-seccion-3">3. Procedimiento</h2>
+<ol><li>Las 40 tareas se envían, con la misma instrucción, al modelo local y al servicio comercial. De cada respuesta se guarda el texto, el tiempo y, en la referencia, los tokens que reporta el proveedor.</li><li>Para cada tarea se sortea cuál respuesta aparece como A y cuál como B (semilla 20261110). El paquete que reciben los calificadores no dice qué sistema escribió cada una; la clave queda en un archivo aparte.</li><li>Dos personas califican por separado cada respuesta, sin ver la clave ni las notas de la otra.</li><li>Al cerrar las dos calificaciones se abre la clave. La calidad de una respuesta es el promedio de sus cuatro dimensiones; la de un camino en una tarea, el promedio de las dos personas.</li><li>Una tarea es «comparable» si la diferencia entre los dos caminos es de 1 punto o menos.</li><li>El acuerdo entre las dos personas se mide con el kappa de Cohen en cada dimensión.</li></ol>
+</section>
+<section aria-labelledby="nota-seccion-4"><h2 id="nota-seccion-4">4. Resultados</h2>
+<table><caption>Tabla 1. Lo que pide medir la especificación</caption><thead><tr><th scope="col">Medida</th><th scope="col">Local (qwen2.5:3b)</th><th scope="col">Referencia (claude-haiku-4-5)</th></tr></thead><tbody><tr><td><strong>Calidad promedio (1 a 5)</strong></td><td class="num"><strong>4.62</strong></td><td class="num"><strong>4.79</strong></td></tr><tr><td>Tiempo promedio por tarea (s)</td><td class="num">0.77</td><td class="num">1.41</td></tr><tr><td>Tiempo máximo por tarea (s)</td><td class="num">1.23</td><td class="num">2.94</td></tr><tr><td>Tiempo de la primera tarea (s)</td><td class="num">4.35</td><td class="num">2.02</td></tr><tr><td>Costo por tarea (USD)</td><td class="num">0, sin contar energía ni equipo</td><td class="num">Sin tarifa confirmada</td></tr></tbody></table>
+<p><strong>Tareas comparables: 85 %</strong> (34 de 40). <strong>Kappa de Cohen promedio: 0.456</strong>, acuerdo moderado entre las dos personas. El promedio y el máximo de tiempo excluyen la primera tarea, que incluye la carga del modelo. El uso de la referencia sí está medido: 8382 tokens de entrada y 3497 de salida en las 40 tareas (209.6 y 87.4 por tarea). Falta multiplicarlo por la tarifa vigente del proveedor; no se escribe un valor en dólares sin confirmarla.</p>
+<p><strong>Tarea por tarea: </strong>la referencia fue mejor en 18, hubo empate en 15 y el modelo local fue mejor en 7.</p>
+<table><caption>Tabla 2. Calidad por tipo de tarea</caption><thead><tr><th scope="col">Tipo de tarea</th><th scope="col">Tareas</th><th scope="col">Local</th><th scope="col">Referencia</th><th scope="col">Comparables</th><th scope="col">Gana local</th><th scope="col">Gana referencia</th></tr></thead><tbody><tr><td>Resumir una petición ciudadana</td><td class="num">8</td><td class="num">4.66</td><td class="num">4.98</td><td class="num">7 de 8</td><td class="num">0</td><td class="num">7</td></tr><tr><td>Redactar una respuesta</td><td class="num">8</td><td class="num">4.14</td><td class="num">5.00</td><td class="num">6 de 8</td><td class="num">0</td><td class="num">8</td></tr><tr><td>Clasificar una solicitud</td><td class="num">8</td><td class="num">4.69</td><td class="num">4.50</td><td class="num">6 de 8</td><td class="num">1</td><td class="num">1</td></tr><tr><td>Extraer datos de un documento</td><td class="num">8</td><td class="num">5.00</td><td class="num">5.00</td><td class="num">8 de 8</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Responder una consulta normativa</td><td class="num">8</td><td class="num">4.61</td><td class="num">4.48</td><td class="num">7 de 8</td><td class="num">6</td><td class="num">2</td></tr></tbody></table>
+<p>En 6 tareas la diferencia pasó de 1 punto: en T05, T13, T15, T17, T33 el modelo local quedó claramente por debajo y en T22 quedó por encima.</p>
+<table><caption>Tabla 3. Tareas no comparables</caption><thead><tr><th scope="col">Tarea</th><th scope="col">Tipo</th><th scope="col">Local</th><th scope="col">Referencia</th><th scope="col">Diferencia</th></tr></thead><tbody><tr><td>T05</td><td>Resumir una petición ciudadana</td><td class="num">3.375</td><td class="num">5.000</td><td class="num">1.625</td></tr><tr><td>T13</td><td>Redactar una respuesta</td><td class="num">3.625</td><td class="num">5.000</td><td class="num">1.375</td></tr><tr><td>T15</td><td>Redactar una respuesta</td><td class="num">3.625</td><td class="num">5.000</td><td class="num">1.375</td></tr><tr><td>T17</td><td>Clasificar una solicitud</td><td class="num">2.500</td><td class="num">5.000</td><td class="num">2.500</td></tr><tr><td>T22</td><td>Clasificar una solicitud</td><td class="num">5.000</td><td class="num">1.000</td><td class="num">4.000</td></tr><tr><td>T33</td><td>Responder una consulta normativa</td><td class="num">2.625</td><td class="num">3.750</td><td class="num">1.125</td></tr></tbody></table>
+<table><caption>Tabla 4. Por dimensión, y cuánto coinciden las dos personas</caption><thead><tr><th scope="col">Dimensión</th><th scope="col">Local</th><th scope="col">Referencia</th><th scope="col">Kappa de Cohen</th><th scope="col">Acuerdo</th><th scope="col">Kappa cuadrático</th><th scope="col">Misma nota</th><th scope="col">Notas en 5</th></tr></thead><tbody><tr><td>Exactitud</td><td class="num">4.76</td><td class="num">4.85</td><td class="num">0.650</td><td>considerable</td><td class="num">0.925</td><td class="num">95.0 %</td><td class="num">92.5 %</td></tr><tr><td>Completitud</td><td class="num">4.86</td><td class="num">4.89</td><td class="num">0.307</td><td>aceptable</td><td class="num">0.583</td><td class="num">92.5 %</td><td class="num">94.4 %</td></tr><tr><td>Tono</td><td class="num">4.38</td><td class="num">4.74</td><td class="num">0.443</td><td>moderado</td><td class="num">0.682</td><td class="num">77.5 %</td><td class="num">76.2 %</td></tr><tr><td>Utilidad</td><td class="num">4.47</td><td class="num">4.70</td><td class="num">0.424</td><td>moderado</td><td class="num">0.707</td><td class="num">77.5 %</td><td class="num">76.9 %</td></tr></tbody></table>
+<p>«Misma nota» es el porcentaje de respuestas en que las dos personas pusieron exactamente el mismo número. El kappa descuenta el acuerdo que se daría por azar: como la mayoría de las notas son 5, ese acuerdo por azar es alto y el kappa queda bajo aunque coincidan casi siempre. El kappa cuadrático pesa menos los desacuerdos de un solo punto.</p>
+</section>
+<section aria-labelledby="nota-seccion-5"><h2 id="nota-seccion-5">5. Limitaciones</h2>
+<ul><li><strong>Tareas ficticias y con el texto a la vista. </strong>Cada tarea incluye el documento sobre el que se trabaja, así que se mide si el modelo aplica bien la instrucción, no si conoce la norma de memoria.</li><li><strong>Muestra pequeña. </strong>Son 40 tareas, 8 por tipo. Las diferencias entre tipos de tarea son indicativas.</li><li><strong>Calificadores cercanos al proyecto. </strong>Evaluaron el director del proyecto (Anuar Harb) y la representante legal de FCA (Grace Torres). Aceptable en este laboratorio TRL 3; para mayor independencia, conviene un tercer evaluador ajeno a la fundación.</li><li><strong>La escala se queda corta por arriba. </strong>Con casi todas las notas en 5, la escala distingue poco entre respuestas buenas y el kappa pierde fuerza. En el proyecto conviene usar tareas más difíciles o una rúbrica más exigente.</li><li><strong>Un solo modelo local, pequeño. </strong>qwen2.5:3b es un modelo de tamaño reducido, elegido porque corre en un portátil. No representa a todos los modelos abiertos.</li><li><strong>El costo local no es cero en la realidad. </strong>No se paga por consulta, pero hay energía y equipo, que esta prueba no midió.</li><li><strong>Tiempos de la referencia dependen de la red. </strong>Incluyen el viaje por internet hasta el proveedor; los del modelo local no.</li></ul>
+</section>
+<section aria-labelledby="nota-seccion-6"><h2 id="nota-seccion-6">6. Enlaces</h2>
+<ul><li><strong>Video: </strong><a href="https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing">https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing</a></li><li><strong>Repositorio: </strong><a href="https://github.com/AnuarHarb/node-ia-caribe">https://github.com/AnuarHarb/node-ia-caribe</a></li><li><strong>Código: </strong><code>demo3_comparacion/</code>, <code>interfaz/demo3_informe.py</code>.</li><li><strong>Datos medidos: </strong><code>resultados/demo3/generaciones.json</code>, <code>resultados/demo3/ciego.json</code>, <code>resultados/demo3/clave.json</code>, <code>resultados/demo3/calificaciones/</code>, <code>resultados/demo3/metricas.json</code>.</li><li><strong>Paquete a ciegas: </strong>identificador <code>6fef1ff49dccfcae</code>. Sirve para comprobar que las dos personas calificaron el mismo paquete.</li></ul>
+</section>
+</article>
+  </main>
+</body>
+</html>

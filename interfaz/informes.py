@@ -7,14 +7,24 @@ import shutil
 from datetime import datetime
 from pathlib import Path
 
+from interfaz.rutas_resultados import carpeta_demo, carpeta_escritura, usa_medicion_local
+
 RAIZ = Path(__file__).resolve().parents[1]
 
 
 def ruta_informe(demo_id: int) -> Path:
-    return RAIZ / "resultados" / f"demo{demo_id}" / "informe.json"
+    return carpeta_demo(demo_id) / "informe.json"
+
+
+def ruta_informe_escritura(demo_id: int) -> Path:
+    return carpeta_escritura(demo_id) / "informe.json"
 
 
 def cargar(demo_id: int) -> dict | None:
+    if demo_id in (3, 4, 5) and not usa_medicion_local(demo_id):
+        path = carpeta_demo(demo_id) / "informe.json"
+        if path.is_file():
+            return json.loads(path.read_text(encoding="utf-8"))
     if demo_id == 1:
         from interfaz.demo1_informe import construir_informe_demo1, guardar_informe_demo1
 
@@ -98,11 +108,16 @@ def _id_corrida(fecha: str) -> str:
 
 
 def _ruta_historial(demo_id: int) -> Path:
-    return RAIZ / "resultados" / f"demo{demo_id}" / "historial"
+    return carpeta_demo(demo_id) / "historial"
 
 
-def _ruta_indice(demo_id: int) -> Path:
-    return _ruta_historial(demo_id) / "indice.json"
+def _ruta_historial_escritura(demo_id: int) -> Path:
+    return carpeta_escritura(demo_id) / "historial"
+
+
+def _ruta_indice(demo_id: int, *, escritura: bool = False) -> Path:
+    hist = _ruta_historial_escritura(demo_id) if escritura else _ruta_historial(demo_id)
+    return hist / "indice.json"
 
 
 def estado_corrida(demo_id: int, informe: dict) -> str:
@@ -243,8 +258,9 @@ def _resumen_demo4(informe: dict) -> str:
     return " · ".join(partes)
 
 
-def ruta_video_corrida(demo_id: int, corrida_id: str) -> Path:
-    return _ruta_historial(demo_id) / f"{corrida_id}.webm"
+def ruta_video_corrida(demo_id: int, corrida_id: str, *, escritura: bool = False) -> Path:
+    hist = _ruta_historial_escritura(demo_id) if escritura else _ruta_historial(demo_id)
+    return hist / f"{corrida_id}.webm"
 
 
 def persistir_informe(demo_id: int, datos: dict) -> str:
@@ -253,12 +269,12 @@ def persistir_informe(demo_id: int, datos: dict) -> str:
     datos.setdefault("fecha", datetime.now().astimezone().isoformat(timespec="seconds"))
     corrida_id = datos.get("corrida_id") or _id_corrida(str(datos["fecha"]))
     datos["corrida_id"] = corrida_id
-    destino = ruta_informe(demo_id)
+    destino = ruta_informe_escritura(demo_id)
     destino.parent.mkdir(parents=True, exist_ok=True)
     temporal = destino.with_suffix(".tmp")
     temporal.write_text(json.dumps(datos, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     temporal.replace(destino)
-    carpeta = _ruta_historial(demo_id)
+    carpeta = _ruta_historial_escritura(demo_id)
     carpeta.mkdir(parents=True, exist_ok=True)
     snap = carpeta / f"{corrida_id}.json"
     snap.write_text(json.dumps(datos, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -269,14 +285,14 @@ def persistir_informe(demo_id: int, datos: dict) -> str:
         "estado": estado_corrida(demo_id, datos),
     }
     indice: list[dict] = []
-    if _ruta_indice(demo_id).exists():
-        indice = json.loads(_ruta_indice(demo_id).read_text(encoding="utf-8"))
+    if _ruta_indice(demo_id, escritura=True).exists():
+        indice = json.loads(_ruta_indice(demo_id, escritura=True).read_text(encoding="utf-8"))
     indice = [item for item in indice if item.get("id") != corrida_id]
     indice.insert(0, entrada)
     indice = indice[:50]
-    _ruta_indice(demo_id).write_text(json.dumps(indice, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    _ruta_indice(demo_id, escritura=True).write_text(json.dumps(indice, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if demo_id == 3 and datos.get("comparacion_completa"):
-        ciego_src = RAIZ / "resultados" / "demo3" / "ciego.json"
+        ciego_src = carpeta_escritura(3) / "ciego.json"
         if ciego_src.is_file():
             shutil.copy2(ciego_src, carpeta / f"{corrida_id}.ciego.json")
     return corrida_id
@@ -285,23 +301,25 @@ def persistir_informe(demo_id: int, datos: dict) -> str:
 def guardar_video_corrida(demo_id: int, corrida_id: str, datos: bytes) -> None:
     if demo_id not in range(1, 6) or not corrida_id or not datos:
         raise ValueError("corrida o video inválido")
-    destino = ruta_video_corrida(demo_id, corrida_id)
+    destino = ruta_video_corrida(demo_id, corrida_id, escritura=True)
     destino.parent.mkdir(parents=True, exist_ok=True)
     temporal = destino.with_suffix(".part")
     temporal.write_bytes(datos)
     temporal.replace(destino)
     entrada_video = {"video": True}
-    if not _ruta_indice(demo_id).exists():
+    if not _ruta_indice(demo_id, escritura=True).exists():
         return
-    indice = json.loads(_ruta_indice(demo_id).read_text(encoding="utf-8"))
+    indice = json.loads(_ruta_indice(demo_id, escritura=True).read_text(encoding="utf-8"))
     for item in indice:
         if item.get("id") == corrida_id:
             item.update(entrada_video)
             break
-    _ruta_indice(demo_id).write_text(json.dumps(indice, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    _ruta_indice(demo_id, escritura=True).write_text(json.dumps(indice, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def _sembrar_historial_si_falta(demo_id: int) -> None:
+    if not usa_medicion_local(demo_id):
+        return
     if _ruta_indice(demo_id).exists():
         return
     actual = cargar(demo_id)

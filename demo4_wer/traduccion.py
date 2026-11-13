@@ -113,8 +113,13 @@ def _guardar(path: Path, data: dict) -> None:
     temporal.replace(path)
 
 
-def leer_publico(path: Path = PUBLICO) -> dict | None:
-    return _leer(path) or None
+def leer_publico(path: Path | None = None) -> dict | None:
+    if path is not None:
+        return _leer(path) or None
+    from interfaz.rutas_resultados import traduccion_publica
+
+    ruta = traduccion_publica()
+    return _leer(ruta) if ruta else None
 
 
 def _texto(unidad: dict, campo: str) -> str:

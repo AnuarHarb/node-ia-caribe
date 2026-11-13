@@ -1,0 +1,139 @@
+{
+  "demo": 5,
+  "titulo": "Agentes aislados por entidad",
+  "fecha": "2026-11-09T23:33:27-05:00",
+  "equipo": {
+    "sistema": "macOS-14.6.1-arm64-arm-64bit",
+    "python": "3.12.2",
+    "arquitectura": "arm64",
+    "procesador": "Apple M2 Pro",
+    "memoria_gb": 16
+  },
+  "datos": "ficticios",
+  "internet": false,
+  "pruebas_pasadas": 11,
+  "pruebas_total": 11,
+  "criterio": "El acceso cruzado queda bloqueado y las 11 pruebas pasan.",
+  "criterio_cumplido": true,
+  "bloqueo": {
+    "bloqueado": true,
+    "motivo": "fuera_del_aislamiento",
+    "ruta": "../gobernacion-atlantico/educacion/cupos-mahates.txt"
+  },
+  "auditoria_integra": true,
+  "filas": [
+    {
+      "prueba": "test_01_lectura_propia_entidad_a",
+      "esperado": "El agente de la alcaldía lee un archivo de su propia caja.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_02_lectura_propia_entidad_b",
+      "esperado": "El agente de la gobernación lee un archivo de su propia caja.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_03_trabajo_simultaneo",
+      "esperado": "Dos agentes de dos entidades escriben y leen a la vez, cada uno en su caja.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_04_lectura_cruzada_bloqueada",
+      "esperado": "Un agente no obtiene el archivo de la otra entidad.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_05_escritura_cruzada_bloqueada",
+      "esperado": "Un agente no escribe en la caja de la otra entidad.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_06_listado_cruzado_bloqueado",
+      "esperado": "El listado de una entidad no muestra los archivos de la otra, ni a través de un enlace.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_07_traversal_de_ruta_bloqueado",
+      "esperado": "Una ruta absoluta y una ruta con .. no salen de la caja.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_08_escape_por_symlink_bloqueado",
+      "esperado": "Un enlace simbólico hacia el archivo de otra entidad no se puede leer.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_09_auditoria_registra_bloqueo",
+      "esperado": "El intento bloqueado queda en el registro, sin el contenido del archivo ajeno.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_10_auditoria_registra_acceso_permitido",
+      "esperado": "Una lectura dentro de la propia caja queda registrada como permitida.",
+      "obtenido": "pasó"
+    },
+    {
+      "prueba": "test_11_cadena_de_auditoria_integra",
+      "esperado": "El registro íntegro verifica, y una alteración se detecta.",
+      "obtenido": "pasó"
+    }
+  ],
+  "eventos": [
+    {
+      "accion": "escribir",
+      "entidad": "alcaldia-santa-marta",
+      "hash": "1c73bcf7f58247349550628d914aa1f76622d5e6b42de65a3c850a82191a3726",
+      "motivo": "dentro_de_la_entidad",
+      "n": 1,
+      "prev": "0000000000000000000000000000000000000000000000000000000000000000",
+      "resultado": "permitido",
+      "ruta": "pqrs/turno-1042.txt",
+      "ts": "2026-11-10T04:33:27+00:00"
+    },
+    {
+      "accion": "escribir",
+      "entidad": "gobernacion-atlantico",
+      "hash": "e609b504b6b36608acdff2ff7882a6d6ec29ea59d07fb10bea21264c2f481c6d",
+      "motivo": "dentro_de_la_entidad",
+      "n": 2,
+      "prev": "1c73bcf7f58247349550628d914aa1f76622d5e6b42de65a3c850a82191a3726",
+      "resultado": "permitido",
+      "ruta": "educacion/cupos-mahates.txt",
+      "ts": "2026-11-10T04:33:27+00:00"
+    },
+    {
+      "accion": "escribir",
+      "entidad": "alcaldia-santa-marta",
+      "hash": "e201ebc71ca03cc744e631d680f56f42ae3fe6c7afae701c2d1a7786d3037d08",
+      "motivo": "dentro_de_la_entidad",
+      "n": 3,
+      "prev": "e609b504b6b36608acdff2ff7882a6d6ec29ea59d07fb10bea21264c2f481c6d",
+      "resultado": "permitido",
+      "ruta": "pqrs/nota-de-trabajo.txt",
+      "ts": "2026-11-10T04:33:27+00:00"
+    },
+    {
+      "accion": "escribir",
+      "entidad": "gobernacion-atlantico",
+      "hash": "2e7fa6dab1f89bb1a0e89673ae031197c059cb655d06e58029ab07128b789ad5",
+      "motivo": "dentro_de_la_entidad",
+      "n": 4,
+      "prev": "e201ebc71ca03cc744e631d680f56f42ae3fe6c7afae701c2d1a7786d3037d08",
+      "resultado": "permitido",
+      "ruta": "educacion/nota-de-trabajo.txt",
+      "ts": "2026-11-10T04:33:27+00:00"
+    },
+    {
+      "accion": "leer",
+      "entidad": "alcaldia-santa-marta",
+      "hash": "c67245a27c6f23a700db4f2aeeac682b145e082251274ffe856e6affd1200fb7",
+      "motivo": "fuera_del_aislamiento",
+      "n": 5,
+      "prev": "2e7fa6dab1f89bb1a0e89673ae031197c059cb655d06e58029ab07128b789ad5",
+      "resultado": "denegado",
+      "ruta": "../gobernacion-atlantico/educacion/cupos-mahates.txt",
+      "ts": "2026-11-10T04:33:27+00:00"
+    }
+  ],
+  "corrida_id": "2026-11-09T23-33-27-05-00"
+}

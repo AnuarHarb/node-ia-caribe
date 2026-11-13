@@ -1,0 +1,1379 @@
+{
+  "demo": 1,
+  "titulo": "Voz en español costeño",
+  "fecha": "2026-11-12T19:45:57-05:00",
+  "responsable": "Anuar Harb",
+  "equipo": {
+    "sistema": "macOS-14.6.1-arm64-arm-64bit",
+    "python": "3.12.2",
+    "arquitectura": "arm64",
+    "procesador": "Apple M2 Pro",
+    "memoria_gb": 16
+  },
+  "modelos": {
+    "whisper_repo": "mlx-community/whisper-small-mlx",
+    "whisper": "Whisper small (MLX, mlx-community/whisper-small-mlx)",
+    "ollama": "qwen2.5:3b",
+    "piper_asistente": "Piper es_MX-ald-medium.onnx (español México, voz masculina medium)",
+    "piper_archivo": "es_MX-ald-medium.onnx"
+  },
+  "resumen_ejecutivo": "40 frases medidas con 4 hablante(s): 21 transcritas bien y 19 con error de reconocimiento. WER del corpus 7.05 %. Tiempos promedio: escuchar 2.105 s, entender/responder 2.508 s, hablar 0.365 s.",
+  "filas": 40,
+  "aciertos_marcados": 21,
+  "errores_marcados": 19,
+  "criterio_flujo": true,
+  "criterio_video_error_real": true,
+  "criterio_cumplido": true,
+  "wer_corpus": {
+    "frases": 40,
+    "wer": 0.07051282051282051,
+    "wer_porcentaje": 7.05,
+    "sustituciones": 28,
+    "inserciones": 5,
+    "eliminaciones": 0,
+    "palabras_referencia": 468,
+    "por_frase": [
+      {
+        "referencia": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+        "hipotesis": "Bueno, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+        "wer": 0.07692307692307693
+      },
+      {
+        "referencia": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+        "hipotesis": "¿A qué hora atiende Noi en la Secretaría de Hacienda?",
+        "wer": 0.3
+      },
+      {
+        "referencia": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+        "hipotesis": "Necesito un turno para el 6. Me lo pueden dar ahora.",
+        "wer": 0.09090909090909091
+      },
+      {
+        "referencia": "¿Dónde queda la oficina del predial? Es que me perdí.",
+        "hipotesis": "¿Dónde queda la oficina de el pre dial? Es que me perdí.",
+        "wer": 0.4
+      },
+      {
+        "referencia": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+        "hipotesis": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+        "wer": 0.0
+      },
+      {
+        "referencia": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+        "hipotesis": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?",
+        "hipotesis": "Se me dañó el recibo del agua, como pido uno nuevo.",
+        "wer": 0.09090909090909091
+      },
+      {
+        "referencia": "¿El médico de la cita de las tres todavía está atendiendo?",
+        "hipotesis": "¿El médico de la cita de las tres todavía está atendiendo?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+        "hipotesis": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+        "hipotesis": "En mi calle no hay luz desde anoche. ¿A quién le toca ese?",
+        "wer": 0.07692307692307693
+      },
+      {
+        "referencia": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+        "hipotesis": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+        "hipotesis": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+        "hipotesis": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "¿Dónde queda la oficina del predial? Es que me perdí.",
+        "hipotesis": "¿Dónde queda la oficina de el pre dial? Es que me perdí.",
+        "wer": 0.4
+      },
+      {
+        "referencia": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+        "hipotesis": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+        "wer": 0.0
+      },
+      {
+        "referencia": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+        "hipotesis": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?",
+        "hipotesis": "Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "¿El médico de la cita de las tres todavía está atendiendo?",
+        "hipotesis": "¿El médico de la cita de las tres todavía está atendiendo?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+        "hipotesis": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+        "hipotesis": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+        "hipotesis": "Buenas, vengo a pedir una certificada de residencia. ¿Qué papeles tengo que traer?",
+        "wer": 0.15384615384615385
+      },
+      {
+        "referencia": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+        "hipotesis": "¿A qué hora atiende Noi en la Secretaría de Hacienda?",
+        "wer": 0.3
+      },
+      {
+        "referencia": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+        "hipotesis": "Necesito un turno para el sistema. ¿Me lo pueden dar ahora?",
+        "wer": 0.09090909090909091
+      },
+      {
+        "referencia": "¿Dónde queda la oficina del predial? Es que me perdí.",
+        "hipotesis": "¿Dónde queda la oficina del predial? Es que me perdí.",
+        "wer": 0.0
+      },
+      {
+        "referencia": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+        "hipotesis": "Quiero saber si ya salió la respuesta de mi Derecha de Petición del mes pasado.",
+        "wer": 0.06666666666666667
+      },
+      {
+        "referencia": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+        "hipotesis": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?",
+        "hipotesis": "Se me dañó el recibo del agua, como pido uno nuevo.",
+        "wer": 0.09090909090909091
+      },
+      {
+        "referencia": "¿El médico de la cita de las tres todavía está atendiendo?",
+        "hipotesis": "¿El médico de la cita de las tres todavía está atendiendo?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+        "hipotesis": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padre?",
+        "wer": 0.07692307692307693
+      },
+      {
+        "referencia": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+        "hipotesis": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+        "hipotesis": "Buenas, vengo a pedir una certificada de residencia. ¿Qué papeles tengo que traer?",
+        "wer": 0.15384615384615385
+      },
+      {
+        "referencia": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+        "hipotesis": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+        "hipotesis": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "¿Dónde queda la oficina del predial? Es que me perdí.",
+        "hipotesis": "¿Dónde queda la oficina del predial? Es que me perdí.",
+        "wer": 0.0
+      },
+      {
+        "referencia": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+        "hipotesis": "Quiero saber si ya salió la respuesta de mi Derecha de Petición del mes pasado.",
+        "wer": 0.06666666666666667
+      },
+      {
+        "referencia": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+        "hipotesis": "¿Hasta qué hora están recibiendo el pago de impuesto hoy?",
+        "wer": 0.1
+      },
+      {
+        "referencia": "Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?",
+        "hipotesis": "Se me daño el recibo de la agua. ¿Cómo pido uno nuevo?",
+        "wer": 0.2727272727272727
+      },
+      {
+        "referencia": "¿El médico de la cita de las tres todavía está atendiendo?",
+        "hipotesis": "¿El médico de la cita de las 3 todavía está atendiendo?",
+        "wer": 0.09090909090909091
+      },
+      {
+        "referencia": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+        "hipotesis": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+        "wer": 0.0
+      },
+      {
+        "referencia": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+        "hipotesis": "En mi calle no hay luz desde anoche. ¿A quién le toca ese?",
+        "wer": 0.07692307692307693
+      }
+    ]
+  },
+  "wer_por_persona": [
+    {
+      "persona": "Camila Rentería",
+      "frases": 10,
+      "wer_porcentaje": 9.4,
+      "sustituciones": 9,
+      "eliminaciones": 0,
+      "inserciones": 2
+    },
+    {
+      "persona": "Diego Molina",
+      "frases": 10,
+      "wer_porcentaje": 3.42,
+      "sustituciones": 2,
+      "eliminaciones": 0,
+      "inserciones": 2
+    },
+    {
+      "persona": "Jairo Barrios",
+      "frases": 10,
+      "wer_porcentaje": 7.69,
+      "sustituciones": 8,
+      "eliminaciones": 0,
+      "inserciones": 1
+    },
+    {
+      "persona": "Marelvis Pérez",
+      "frases": 10,
+      "wer_porcentaje": 7.69,
+      "sustituciones": 9,
+      "eliminaciones": 0,
+      "inserciones": 0
+    }
+  ],
+  "tiempos_promedio": {
+    "asr_promedio_s": 2.105,
+    "llm_promedio_s": 2.508,
+    "tts_promedio_s": 0.365,
+    "total_promedio_s": 5.534,
+    "total_maximo_s": 6.241,
+    "primera_total_s": 5.662,
+    "resto_promedio_s": 5.531
+  },
+  "cobertura": {
+    "hablantes": 4,
+    "hablantes_protocolo": 3,
+    "frases": 40,
+    "frases_por_hablante_protocolo": 10,
+    "por_hablante": [
+      {
+        "persona": "Camila Rentería",
+        "frases": 10
+      },
+      {
+        "persona": "Diego Molina",
+        "frases": 10
+      },
+      {
+        "persona": "Jairo Barrios",
+        "frases": 10
+      },
+      {
+        "persona": "Marelvis Pérez",
+        "frases": 10
+      }
+    ],
+    "completa": true
+  },
+  "filas_palenquero": 30,
+  "tabla": [
+    {
+      "id": "2a76cde770fe",
+      "persona": "Camila Rentería",
+      "variedad": "costeno",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_correcta": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_sistema": "Bueno, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Tienes que traer tu documento de identidad y tu cédula de residencia.",
+      "asr_s": 1.95,
+      "llm_s": 2.782,
+      "tts_s": 0.411,
+      "segundos_total": 5.662,
+      "ts": "2026-11-11T00:58:15-05:00",
+      "wer_porcentaje": 7.69,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "buenas",
+          "sistema": "bueno"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "0cc88660c10e",
+      "persona": "Camila Rentería",
+      "variedad": "costeno",
+      "guion": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "transcripcion_correcta": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "transcripcion_sistema": "¿A qué hora atiende Noi en la Secretaría de Hacienda?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo ese dato. ¿Podrías preguntar en la recepción o verificar en el sitio web de la alcaldía?",
+      "asr_s": 2.163,
+      "llm_s": 2.491,
+      "tts_s": 0.364,
+      "segundos_total": 5.505,
+      "ts": "2026-11-11T00:59:03-05:00",
+      "wer_porcentaje": 30.0,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "horas atienden hoy",
+          "sistema": "hora atiende noi"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "003106cb6ace",
+      "persona": "Camila Rentería",
+      "variedad": "costeno",
+      "guion": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "transcripcion_correcta": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "transcripcion_sistema": "Necesito un turno para el 6. Me lo pueden dar ahora.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo información sobre turnos para eso. Puedo ayudarte con otros asuntos de la alcaldía.",
+      "asr_s": 2.19,
+      "llm_s": 2.716,
+      "tts_s": 0.414,
+      "segundos_total": 5.812,
+      "ts": "2026-11-11T01:00:08-05:00",
+      "wer_porcentaje": 9.09,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "sisbén",
+          "sistema": "6"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "f9a15f1d02a7",
+      "persona": "Camila Rentería",
+      "variedad": "costeno",
+      "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "transcripcion_correcta": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "transcripcion_sistema": "¿Dónde queda la oficina de el pre dial? Es que me perdí.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "La oficina del predial está en la avenida principal, cerca del mercado. ¿Necesitas más información?",
+      "asr_s": 2.059,
+      "llm_s": 2.463,
+      "tts_s": 0.381,
+      "segundos_total": 5.41,
+      "ts": "2026-11-11T01:00:59-05:00",
+      "wer_porcentaje": 40.0,
+      "errores_palabras": [
+        {
+          "tipo": "insercion",
+          "referencia": "",
+          "sistema": "de el"
+        },
+        {
+          "tipo": "sustitucion",
+          "referencia": "del predial",
+          "sistema": "pre dial"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "9499dda39a59",
+      "persona": "Camila Rentería",
+      "variedad": "costeno",
+      "guion": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "transcripcion_correcta": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "transcripcion_sistema": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo ese dato. Pide el radicado de tu solicitud para poder ayudarte mejor.",
+      "asr_s": 2.359,
+      "llm_s": 2.262,
+      "tts_s": 0.372,
+      "segundos_total": 5.598,
+      "ts": "2026-11-11T01:01:45-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "b659b6bb4ae9",
+      "persona": "Camila Rentería",
+      "variedad": "costeno",
+      "guion": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+      "transcripcion_correcta": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+      "transcripcion_sistema": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo ese dato. Pregunta en la caja de la secretaría de hacienda.",
+      "asr_s": 2.266,
+      "llm_s": 2.868,
+      "tts_s": 0.395,
+      "segundos_total": 6.115,
+      "ts": "2026-11-11T01:02:35-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "01dfd757718b",
+      "persona": "Camila Rentería",
+      "variedad": "costeno",
+      "guion": "Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?",
+      "transcripcion_correcta": "Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?",
+      "transcripcion_sistema": "Se me dañó el recibo del agua, como pido uno nuevo.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "No tengo información sobre el recibo del agua. Puedes pedir ayuda en la oficina de servicios públicos.",
+      "asr_s": 2.316,
+      "llm_s": 2.869,
+      "tts_s": 0.417,
+      "segundos_total": 6.096,
+      "ts": "2026-11-11T01:03:33-05:00",
+      "wer_porcentaje": 9.09,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "cómo",
+          "sistema": "como"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "7c6ef9278f96",
+      "persona": "Camila Rentería",
+      "variedad": "costeno",
+      "guion": "¿El médico de la cita de las tres todavía está atendiendo?",
+      "transcripcion_correcta": "¿El médico de la cita de las tres todavía está atendiendo?",
+      "transcripcion_sistema": "¿El médico de la cita de las tres todavía está atendiendo?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "No tengo ese dato. ¿Puedes confirmar en la recepción si el médico sigue atendiendo?",
+      "asr_s": 2.151,
+      "llm_s": 2.171,
+      "tts_s": 0.364,
+      "segundos_total": 5.213,
+      "ts": "2026-11-11T01:04:26-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "bf2936c62f82",
+      "persona": "Camila Rentería",
+      "variedad": "costeno",
+      "guion": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+      "transcripcion_correcta": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+      "transcripcion_sistema": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "No tengo ese dato. ¿Puedes preguntar en la secretaría del colegio?",
+      "asr_s": 1.951,
+      "llm_s": 2.564,
+      "tts_s": 0.415,
+      "segundos_total": 5.518,
+      "ts": "2026-11-11T01:05:26-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "3b896a97304d",
+      "persona": "Camila Rentería",
+      "variedad": "costeno",
+      "guion": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+      "transcripcion_correcta": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+      "transcripcion_sistema": "En mi calle no hay luz desde anoche. ¿A quién le toca ese?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo ese dato. Puedes reportarlo a la empresa de energía de tu municipio.",
+      "asr_s": 1.792,
+      "llm_s": 2.431,
+      "tts_s": 0.399,
+      "segundos_total": 5.098,
+      "ts": "2026-11-11T01:06:10-05:00",
+      "wer_porcentaje": 7.69,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "eso",
+          "sistema": "ese"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "a51d9b655bf4",
+      "persona": "Diego Molina",
+      "variedad": "costeno",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_correcta": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_sistema": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Tienes que traer tu documento de identidad y tu cédula de residencia.",
+      "asr_s": 1.734,
+      "llm_s": 2.608,
+      "tts_s": 0.355,
+      "segundos_total": 5.278,
+      "ts": "2026-11-12T19:05:07-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "a3b119ec0cfa",
+      "persona": "Diego Molina",
+      "variedad": "costeno",
+      "guion": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "transcripcion_correcta": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "transcripcion_sistema": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo ese dato. ¿Podrías preguntar en la recepción o verificar en el sitio web de la alcaldía?",
+      "asr_s": 2.178,
+      "llm_s": 2.39,
+      "tts_s": 0.34,
+      "segundos_total": 5.407,
+      "ts": "2026-11-12T19:05:46-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "b5cd73a7f727",
+      "persona": "Diego Molina",
+      "variedad": "costeno",
+      "guion": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "transcripcion_correcta": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "transcripcion_sistema": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no puedo dar turnos. Acércate a la ventanilla y pide uno allí.",
+      "asr_s": 1.741,
+      "llm_s": 2.27,
+      "tts_s": 0.307,
+      "segundos_total": 4.919,
+      "ts": "2026-11-12T19:06:20-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "2fde4055ba0e",
+      "persona": "Diego Molina",
+      "variedad": "costeno",
+      "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "transcripcion_correcta": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "transcripcion_sistema": "¿Dónde queda la oficina de el pre dial? Es que me perdí.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "La oficina del predial está en la avenida principal, cerca del mercado. ¿Necesitas más información?",
+      "asr_s": 2.391,
+      "llm_s": 2.504,
+      "tts_s": 0.365,
+      "segundos_total": 5.757,
+      "ts": "2026-11-12T19:07:30-05:00",
+      "wer_porcentaje": 40.0,
+      "errores_palabras": [
+        {
+          "tipo": "insercion",
+          "referencia": "",
+          "sistema": "de el"
+        },
+        {
+          "tipo": "sustitucion",
+          "referencia": "del predial",
+          "sistema": "pre dial"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "16c48efdd029",
+      "persona": "Diego Molina",
+      "variedad": "costeno",
+      "guion": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "transcripcion_correcta": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "transcripcion_sistema": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo ese dato. Pide el radicado de tu solicitud para poder ayudarte mejor.",
+      "asr_s": 2.305,
+      "llm_s": 2.205,
+      "tts_s": 0.332,
+      "segundos_total": 5.5,
+      "ts": "2026-11-12T19:08:26-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "87cc3a84b73e",
+      "persona": "Diego Molina",
+      "variedad": "costeno",
+      "guion": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+      "transcripcion_correcta": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+      "transcripcion_sistema": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "No tengo información sobre el horario de recepción de pagos. ¿Puedes verificar con la secretaría de hacienda?",
+      "asr_s": 2.224,
+      "llm_s": 2.241,
+      "tts_s": 0.37,
+      "segundos_total": 5.336,
+      "ts": "2026-11-12T19:09:19-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "1ac77c180108",
+      "persona": "Diego Molina",
+      "variedad": "costeno",
+      "guion": "Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?",
+      "transcripcion_correcta": "Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?",
+      "transcripcion_sistema": "Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "No tengo información sobre el recibo del agua. Puedes pedir ayuda en la oficina de servicios públicos.",
+      "asr_s": 2.342,
+      "llm_s": 2.887,
+      "tts_s": 0.365,
+      "segundos_total": 6.241,
+      "ts": "2026-11-12T19:10:04-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "ed22e746572e",
+      "persona": "Diego Molina",
+      "variedad": "costeno",
+      "guion": "¿El médico de la cita de las tres todavía está atendiendo?",
+      "transcripcion_correcta": "¿El médico de la cita de las tres todavía está atendiendo?",
+      "transcripcion_sistema": "¿El médico de la cita de las tres todavía está atendiendo?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "No tengo ese dato. ¿Puedes confirmar en la recepción si el médico sigue atendiendo?",
+      "asr_s": 1.747,
+      "llm_s": 2.65,
+      "tts_s": 0.392,
+      "segundos_total": 5.295,
+      "ts": "2026-11-12T19:10:59-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "a9a301b02b3d",
+      "persona": "Diego Molina",
+      "variedad": "costeno",
+      "guion": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+      "transcripcion_correcta": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+      "transcripcion_sistema": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo el horario del colegio. Puedes consultarlo en la secretaría del colegio.",
+      "asr_s": 2.127,
+      "llm_s": 2.242,
+      "tts_s": 0.347,
+      "segundos_total": 5.193,
+      "ts": "2026-11-12T19:11:39-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "5548f1afa80d",
+      "persona": "Diego Molina",
+      "variedad": "costeno",
+      "guion": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+      "transcripcion_correcta": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+      "transcripcion_sistema": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo ese dato. Puedes reportarlo a la empresa de energía de tu municipio.",
+      "asr_s": 2.072,
+      "llm_s": 2.276,
+      "tts_s": 0.34,
+      "segundos_total": 5.3,
+      "ts": "2026-11-12T19:12:36-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "c66c53558900",
+      "persona": "Marelvis Pérez",
+      "variedad": "costeno",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_correcta": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_sistema": "Buenas, vengo a pedir una certificada de residencia. ¿Qué papeles tengo que traer?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo la lista de requisitos. Pregunta en la ventanilla de atención al ciudadano.",
+      "asr_s": 2.311,
+      "llm_s": 2.407,
+      "tts_s": 0.366,
+      "segundos_total": 5.707,
+      "ts": "2026-11-12T19:21:45-05:00",
+      "wer_porcentaje": 15.38,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "un certificado",
+          "sistema": "una certificada"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "cbe9972df8a0",
+      "persona": "Marelvis Pérez",
+      "variedad": "costeno",
+      "guion": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "transcripcion_correcta": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "transcripcion_sistema": "¿A qué hora atiende Noi en la Secretaría de Hacienda?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo ese dato. ¿Podrías preguntar en la recepción o verificar en el sitio web de la alcaldía?",
+      "asr_s": 1.861,
+      "llm_s": 2.933,
+      "tts_s": 0.376,
+      "segundos_total": 5.787,
+      "ts": "2026-11-12T19:22:49-05:00",
+      "wer_porcentaje": 30.0,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "horas atienden hoy",
+          "sistema": "hora atiende noi"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "ee5a24fec9ab",
+      "persona": "Marelvis Pérez",
+      "variedad": "costeno",
+      "guion": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "transcripcion_correcta": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "transcripcion_sistema": "Necesito un turno para el sistema. ¿Me lo pueden dar ahora?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo información sobre turnos para eso. Puedo ayudarte con otros asuntos de la alcaldía.",
+      "asr_s": 2.204,
+      "llm_s": 2.675,
+      "tts_s": 0.358,
+      "segundos_total": 5.841,
+      "ts": "2026-11-12T19:23:39-05:00",
+      "wer_porcentaje": 9.09,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "sisbén",
+          "sistema": "sistema"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "4e033da82fc3",
+      "persona": "Marelvis Pérez",
+      "variedad": "costeno",
+      "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "transcripcion_correcta": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "transcripcion_sistema": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "La oficina del predial está en la avenida principal, cerca del mercado. ¿Necesitas más información?",
+      "asr_s": 2.319,
+      "llm_s": 2.586,
+      "tts_s": 0.337,
+      "segundos_total": 5.788,
+      "ts": "2026-11-12T19:24:35-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "9adc64ea6050",
+      "persona": "Marelvis Pérez",
+      "variedad": "costeno",
+      "guion": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "transcripcion_correcta": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "transcripcion_sistema": "Quiero saber si ya salió la respuesta de mi Derecha de Petición del mes pasado.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo ese dato. Pide el radicado de tu solicitud para poder ayudarte mejor.",
+      "asr_s": 1.762,
+      "llm_s": 2.326,
+      "tts_s": 0.302,
+      "segundos_total": 4.988,
+      "ts": "2026-11-12T19:25:24-05:00",
+      "wer_porcentaje": 6.67,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "derecho",
+          "sistema": "derecha"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "fc75058bf9be",
+      "persona": "Marelvis Pérez",
+      "variedad": "costeno",
+      "guion": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+      "transcripcion_correcta": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+      "transcripcion_sistema": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "No tengo información sobre el horario de recepción de pagos. ¿Puedes verificar con la secretaría de hacienda?",
+      "asr_s": 1.709,
+      "llm_s": 2.896,
+      "tts_s": 0.368,
+      "segundos_total": 5.448,
+      "ts": "2026-11-12T19:26:30-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "66b3d17dac9d",
+      "persona": "Marelvis Pérez",
+      "variedad": "costeno",
+      "guion": "Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?",
+      "transcripcion_correcta": "Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?",
+      "transcripcion_sistema": "Se me dañó el recibo del agua, como pido uno nuevo.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "No tengo información sobre el recibo del agua. Puedes pedir ayuda en la oficina de servicios públicos.",
+      "asr_s": 2.143,
+      "llm_s": 2.849,
+      "tts_s": 0.342,
+      "segundos_total": 5.857,
+      "ts": "2026-11-12T19:27:36-05:00",
+      "wer_porcentaje": 9.09,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "cómo",
+          "sistema": "como"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "5c9d571ccabe",
+      "persona": "Marelvis Pérez",
+      "variedad": "costeno",
+      "guion": "¿El médico de la cita de las tres todavía está atendiendo?",
+      "transcripcion_correcta": "¿El médico de la cita de las tres todavía está atendiendo?",
+      "transcripcion_sistema": "¿El médico de la cita de las tres todavía está atendiendo?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo información sobre las citas médicas. Pregunta en la recepción del centro de salud.",
+      "asr_s": 1.837,
+      "llm_s": 2.917,
+      "tts_s": 0.383,
+      "segundos_total": 5.606,
+      "ts": "2026-11-12T19:28:28-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "4f7d76b0a4a2",
+      "persona": "Marelvis Pérez",
+      "variedad": "costeno",
+      "guion": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+      "transcripcion_correcta": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+      "transcripcion_sistema": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padre?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo el horario del colegio. Puedes consultarlo en la secretaría del colegio.",
+      "asr_s": 2.388,
+      "llm_s": 2.593,
+      "tts_s": 0.415,
+      "segundos_total": 5.952,
+      "ts": "2026-11-12T19:29:05-05:00",
+      "wer_porcentaje": 7.69,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "padres",
+          "sistema": "padre"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "b90a22a7c7f7",
+      "persona": "Marelvis Pérez",
+      "variedad": "costeno",
+      "guion": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+      "transcripcion_correcta": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+      "transcripcion_sistema": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo ese dato. Puedes reportarlo a la empresa de energía de tu municipio.",
+      "asr_s": 2.138,
+      "llm_s": 2.148,
+      "tts_s": 0.344,
+      "segundos_total": 5.21,
+      "ts": "2026-11-12T19:30:10-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "6cfe28337a78",
+      "persona": "Jairo Barrios",
+      "variedad": "costeno",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_correcta": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "transcripcion_sistema": "Buenas, vengo a pedir una certificada de residencia. ¿Qué papeles tengo que traer?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Tienes que traer tu documento de identidad y tu cédula de residencia.",
+      "asr_s": 2.137,
+      "llm_s": 2.378,
+      "tts_s": 0.301,
+      "segundos_total": 5.374,
+      "ts": "2026-11-12T19:38:20-05:00",
+      "wer_porcentaje": 15.38,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "un certificado",
+          "sistema": "una certificada"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "4f2744bd4f4e",
+      "persona": "Jairo Barrios",
+      "variedad": "costeno",
+      "guion": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "transcripcion_correcta": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "transcripcion_sistema": "¿A qué horas atienden hoy en la secretaría de hacienda?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo esa información. Pide el horario al personal de la secretaría.",
+      "asr_s": 2.384,
+      "llm_s": 2.475,
+      "tts_s": 0.363,
+      "segundos_total": 5.821,
+      "ts": "2026-11-12T19:39:15-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "d132b7a250d6",
+      "persona": "Jairo Barrios",
+      "variedad": "costeno",
+      "guion": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "transcripcion_correcta": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "transcripcion_sistema": "Necesito un turno para el Sisbén. ¿Me lo pueden dar ahora?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no puedo dar turnos. Acércate a la ventanilla y pide uno allí.",
+      "asr_s": 2.107,
+      "llm_s": 2.777,
+      "tts_s": 0.346,
+      "segundos_total": 5.722,
+      "ts": "2026-11-12T19:40:18-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "b682592f48de",
+      "persona": "Jairo Barrios",
+      "variedad": "costeno",
+      "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "transcripcion_correcta": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "transcripcion_sistema": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "La oficina del predial está en la avenida principal, cerca del mercado. ¿Necesitas más información?",
+      "asr_s": 2.353,
+      "llm_s": 2.131,
+      "tts_s": 0.417,
+      "segundos_total": 5.531,
+      "ts": "2026-11-12T19:40:52-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "bb69223ce4a9",
+      "persona": "Jairo Barrios",
+      "variedad": "costeno",
+      "guion": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "transcripcion_correcta": "Quiero saber si ya salió la respuesta de mi derecho de petición del mes pasado.",
+      "transcripcion_sistema": "Quiero saber si ya salió la respuesta de mi Derecha de Petición del mes pasado.",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo ese dato. Pide el radicado de tu solicitud para poder ayudarte mejor.",
+      "asr_s": 2.062,
+      "llm_s": 2.686,
+      "tts_s": 0.364,
+      "segundos_total": 5.625,
+      "ts": "2026-11-12T19:41:31-05:00",
+      "wer_porcentaje": 6.67,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "derecho",
+          "sistema": "derecha"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "8f660874a2ac",
+      "persona": "Jairo Barrios",
+      "variedad": "costeno",
+      "guion": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+      "transcripcion_correcta": "¿Hasta qué hora están recibiendo el pago del impuesto hoy?",
+      "transcripcion_sistema": "¿Hasta qué hora están recibiendo el pago de impuesto hoy?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo ese dato. Pregunta en la caja de la secretaría de hacienda.",
+      "asr_s": 2.035,
+      "llm_s": 2.545,
+      "tts_s": 0.33,
+      "segundos_total": 5.566,
+      "ts": "2026-11-12T19:42:33-05:00",
+      "wer_porcentaje": 10.0,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "del",
+          "sistema": "de"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "4c99fe3cf8b8",
+      "persona": "Jairo Barrios",
+      "variedad": "costeno",
+      "guion": "Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?",
+      "transcripcion_correcta": "Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?",
+      "transcripcion_sistema": "Se me daño el recibo de la agua. ¿Cómo pido uno nuevo?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo ese dato. Pregunta en la empresa de acueducto cómo pedir un duplicado.",
+      "asr_s": 2.335,
+      "llm_s": 2.176,
+      "tts_s": 0.394,
+      "segundos_total": 5.469,
+      "ts": "2026-11-12T19:43:28-05:00",
+      "wer_porcentaje": 27.27,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "dañó",
+          "sistema": "daño"
+        },
+        {
+          "tipo": "insercion",
+          "referencia": "",
+          "sistema": "de"
+        },
+        {
+          "tipo": "sustitucion",
+          "referencia": "del",
+          "sistema": "la"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "d39731dd830a",
+      "persona": "Jairo Barrios",
+      "variedad": "costeno",
+      "guion": "¿El médico de la cita de las tres todavía está atendiendo?",
+      "transcripcion_correcta": "¿El médico de la cita de las tres todavía está atendiendo?",
+      "transcripcion_sistema": "¿El médico de la cita de las 3 todavía está atendiendo?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo información sobre las citas médicas. Pregunta en la recepción del centro de salud.",
+      "asr_s": 2.333,
+      "llm_s": 2.407,
+      "tts_s": 0.383,
+      "segundos_total": 5.688,
+      "ts": "2026-11-12T19:44:37-05:00",
+      "wer_porcentaje": 9.09,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "tres",
+          "sistema": "3"
+        }
+      ],
+      "flujo_completo": true
+    },
+    {
+      "id": "c91af509591a",
+      "persona": "Jairo Barrios",
+      "variedad": "costeno",
+      "guion": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+      "transcripcion_correcta": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+      "transcripcion_sistema": "Buenas tardes, ¿me regala el horario del colegio para la reunión de padres?",
+      "correcta": "si",
+      "correcta_automatica": "si",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo el horario del colegio. Puedes consultarlo en la secretaría del colegio.",
+      "asr_s": 1.734,
+      "llm_s": 2.13,
+      "tts_s": 0.315,
+      "segundos_total": 4.831,
+      "ts": "2026-11-12T19:45:10-05:00",
+      "wer_porcentaje": 0.0,
+      "errores_palabras": [],
+      "flujo_completo": true
+    },
+    {
+      "id": "015d3482ad46",
+      "persona": "Jairo Barrios",
+      "variedad": "costeno",
+      "guion": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+      "transcripcion_correcta": "En mi calle no hay luz desde anoche. ¿A quién le toca eso?",
+      "transcripcion_sistema": "En mi calle no hay luz desde anoche. ¿A quién le toca ese?",
+      "correcta": "no",
+      "correcta_automatica": "no",
+      "audio": "",
+      "sintetica": true,
+      "audio_entrada_url": null,
+      "respuesta_asistente": "Lo siento, no tengo ese dato. Puedes reportarlo a la empresa de energía de tu municipio.",
+      "asr_s": 1.979,
+      "llm_s": 2.414,
+      "tts_s": 0.36,
+      "segundos_total": 5.298,
+      "ts": "2026-11-12T19:45:57-05:00",
+      "wer_porcentaje": 7.69,
+      "errores_palabras": [
+        {
+          "tipo": "sustitucion",
+          "referencia": "eso",
+          "sistema": "ese"
+        }
+      ],
+      "flujo_completo": true
+    }
+  ],
+  "video_corrida": null,
+  "definicion_wer": "WER por frase y por hablante con jiwer; texto en minúsculas y sin puntuación.",
+  "nota_referencias": "La referencia humana es lo dicho (guion revisado), no la transcripción del ASR. Se corrigieron dos referencias que habían copiado el texto del reconocimiento.",
+  "observaciones_llm": [
+    {
+      "id": "2a76cde770fe",
+      "tipo": "alucinacion",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "respuesta": "Tienes que traer tu documento de identidad y tu cédula de residencia.",
+      "observacion": "El asistente pidió «cédula de residencia»; el ciudadano hablaba de un certificado de residencia. Requisito inventado."
+    },
+    {
+      "id": "f9a15f1d02a7",
+      "tipo": "alucinacion",
+      "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "respuesta": "La oficina del predial está en la avenida principal, cerca del mercado. ¿Necesitas más información?",
+      "observacion": "Inventó que la oficina del predial «está en la avenida principal» sin dato en la petición."
+    },
+    {
+      "id": "a51d9b655bf4",
+      "tipo": "alucinacion",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "respuesta": "Tienes que traer tu documento de identidad y tu cédula de residencia.",
+      "observacion": "El asistente pidió «cédula de residencia»; el ciudadano hablaba de un certificado de residencia. Requisito inventado."
+    },
+    {
+      "id": "2fde4055ba0e",
+      "tipo": "alucinacion",
+      "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "respuesta": "La oficina del predial está en la avenida principal, cerca del mercado. ¿Necesitas más información?",
+      "observacion": "Inventó que la oficina del predial «está en la avenida principal» sin dato en la petición."
+    },
+    {
+      "id": "4e033da82fc3",
+      "tipo": "alucinacion",
+      "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "respuesta": "La oficina del predial está en la avenida principal, cerca del mercado. ¿Necesitas más información?",
+      "observacion": "Inventó que la oficina del predial «está en la avenida principal» sin dato en la petición."
+    },
+    {
+      "id": "6cfe28337a78",
+      "tipo": "alucinacion",
+      "guion": "Buenas, vengo a pedir un certificado de residencia. ¿Qué papeles tengo que traer?",
+      "respuesta": "Tienes que traer tu documento de identidad y tu cédula de residencia.",
+      "observacion": "El asistente pidió «cédula de residencia»; el ciudadano hablaba de un certificado de residencia. Requisito inventado."
+    },
+    {
+      "id": "b682592f48de",
+      "tipo": "alucinacion",
+      "guion": "¿Dónde queda la oficina del predial? Es que me perdí.",
+      "respuesta": "La oficina del predial está en la avenida principal, cerca del mercado. ¿Necesitas más información?",
+      "observacion": "Inventó que la oficina del predial «está en la avenida principal» sin dato en la petición."
+    }
+  ],
+  "implicacion_alucinaciones": "El modelo local inventó requisitos y ubicaciones sin base documental. Eso motiva conectar el asistente a la información oficial de cada entidad (RAG o integración).",
+  "corrida_id": "2026-11-12T19-45-57-05-00"
+}

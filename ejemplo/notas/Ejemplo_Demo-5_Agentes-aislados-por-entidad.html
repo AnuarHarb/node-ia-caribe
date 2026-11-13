@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo 5. Agentes aislados por entidad · </title>
+  <style>/* Nota técnica: mismos estilos en la pestaña Informe y en la vista para imprimir.
+   Usa los tokens FCA cuando la página los define y, si no, sus valores claros. */
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/static/fca/FCA_Sistema-de-diseno/fuentes/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/static/fca/FCA_Sistema-de-diseno/fuentes/Poppins-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+
+.nota {
+  --nota-tinta: var(--ink, #0b1220);
+  --nota-tenue: var(--ink-muted, #526077);
+  --nota-linea: var(--line, #d9e4ee);
+  --nota-niebla: var(--surface-mist, #eff8ff);
+  --nota-titulo: var(--ink, #050a30);
+  --nota-azul: var(--brand-blue-strong, #006bad);
+  color: var(--nota-tinta);
+  font-family: "Poppins", system-ui, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  max-width: 54rem;
+  text-align: left;
+}
+
+.nota .antetitulo {
+  margin: 0 0 0.35rem;
+  color: var(--nota-azul);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nota h1 {
+  margin: 0 0 0.9rem;
+  color: var(--nota-titulo);
+  font-size: 1.55rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.nota h2 {
+  margin: 1.6rem 0 0.6rem;
+  color: var(--nota-titulo);
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
+.nota h3 {
+  margin: 1.1rem 0 0.4rem;
+  color: var(--nota-azul);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.nota p {
+  margin: 0 0 0.7rem;
+  max-width: 78ch;
+}
+
+.nota ul,
+.nota ol {
+  margin: 0 0 0.9rem;
+  padding-left: 1.4rem;
+  max-width: 78ch;
+}
+
+.nota li {
+  margin-bottom: 0.35rem;
+}
+
+.nota a {
+  color: var(--nota-azul);
+  overflow-wrap: anywhere;
+}
+
+.nota code {
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: 0.86em;
+  overflow-wrap: anywhere;
+}
+
+.nota .estado,
+.nota .aviso {
+  --nota-estado: #526077;
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.9rem;
+  border-left: 4px solid var(--nota-estado);
+  background: color-mix(in srgb, var(--nota-estado) 13%, transparent);
+  color: inherit;
+  font-size: inherit;
+  max-width: none;
+}
+
+.nota .aviso p {
+  margin: 0;
+  max-width: none;
+}
+
+.nota .estado-ok,
+.nota .aviso-ok {
+  --nota-estado: #008c55;
+}
+
+.nota .estado-parcial,
+.nota .aviso-parcial {
+  --nota-estado: #d6781e;
+}
+
+.nota .estado-falla,
+.nota .aviso-falla {
+  --nota-estado: #be2828;
+}
+
+.nota .ficha {
+  display: grid;
+  grid-template-columns: minmax(8rem, 11rem) 1fr;
+  gap: 0;
+  margin: 0 0 0.5rem;
+  border-top: 1px solid var(--nota-linea);
+}
+
+.nota .ficha dt,
+.nota .ficha dd {
+  margin: 0;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--nota-linea);
+}
+
+.nota .ficha dt {
+  font-weight: 600;
+}
+
+.nota table {
+  width: 100%;
+  margin: 0 0 1rem;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.nota caption {
+  padding: 0 0 0.4rem;
+  color: var(--nota-titulo);
+  font-weight: 600;
+  text-align: left;
+}
+
+.nota th,
+.nota td {
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--nota-linea);
+  text-align: left;
+  vertical-align: top;
+}
+
+.nota thead th {
+  background: var(--nota-niebla);
+  color: var(--nota-titulo);
+  font-weight: 600;
+}
+
+.nota tbody th {
+  font-weight: 600;
+}
+
+.nota td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.nota footer {
+  margin-top: 1.4rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--nota-linea);
+  color: var(--nota-tenue);
+  font-size: 0.78rem;
+}
+
+.nota footer p {
+  max-width: none;
+}
+
+/* En pantallas angostas las tablas anchas se desplazan dentro de su sección. */
+.nota section {
+  overflow-x: auto;
+}
+
+/* --- Vista para imprimir -------------------------------------------------------- */
+
+.hoja-nota {
+  margin: 0;
+  padding: 1.5rem 1rem 3rem;
+  background: #f8fafc;
+  color: #0b1220;
+}
+
+.hoja-nota main {
+  max-width: 54rem;
+  margin: 0 auto;
+  padding: 2rem 2.2rem;
+  background: #fff;
+  border: 1px solid #d9e4ee;
+}
+
+.hoja-nota .barra-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  max-width: 54rem;
+  margin: 0 auto 1rem;
+  font-family: "Poppins", system-ui, sans-serif;
+  font-size: 0.9rem;
+}
+
+.hoja-nota .barra-acciones button,
+.hoja-nota .barra-acciones a {
+  min-height: 44px;
+  padding: 0.55rem 1rem;
+  border: 1px solid #006bad;
+  border-radius: 6px;
+  background: #fff;
+  color: #006bad;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hoja-nota .barra-acciones button {
+  background: #006bad;
+  color: #fff;
+}
+
+.hoja-nota .barra-acciones :focus-visible {
+  outline: 3px solid #00a0f9;
+  outline-offset: 2px;
+}
+
+@page {
+  size: A4;
+  margin: 15mm 16mm;
+}
+
+@media print {
+  .hoja-nota {
+    padding: 0;
+    background: #fff;
+  }
+
+  .hoja-nota main {
+    max-width: none;
+    padding: 0;
+    border: 0;
+  }
+
+  .hoja-nota .barra-acciones {
+    display: none;
+  }
+
+  .nota {
+    max-width: none;
+    font-size: 9.2pt;
+  }
+
+  .nota h1 {
+    font-size: 16.5pt;
+  }
+
+  .nota h2 {
+    font-size: 11.5pt;
+    break-after: avoid;
+  }
+
+  .nota table {
+    font-size: 8pt;
+  }
+
+  .nota tr,
+  .nota .aviso,
+  .nota .estado {
+    break-inside: avoid;
+  }
+
+  .nota .estado,
+  .nota .aviso,
+  .nota thead th {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+</style>
+</head>
+<body class="hoja-nota">
+  <nav class="barra-acciones" aria-label="Acciones de la nota">
+    <a href="/medicion-base">Volver a la medición base</a>
+    <a href="Ejemplo_Demo-5_Agentes-aislados-por-entidad.pdf">Ver PDF</a>
+    <a href="Ejemplo_Demo-5_Agentes-aislados-por-entidad.pdf?descargar=1">Descargar PDF</a>
+    <button type="button" onclick="window.print()">Imprimir</button>
+  </nav>
+  <main>
+  <article class="nota">
+<header>
+<p class="antetitulo">Nodo IA Caribe · Convocatoria 54</p>
+<h1>Demo 5. Agentes aislados por entidad</h1>
+<p class="estado estado-ok" role="status"><strong>Criterio cumplido.</strong> El intento de lectura cruzada quedó bloqueado, pasaron 11 de 11 pruebas y el registro de auditoría conserva su cadena íntegra.</p>
+<dl class="ficha"><dt>Pregunta que responde</dt><dd><strong>¿Cada entidad puede tener un agente que no vea los datos de las otras?</strong></dd><dt>Respuesta medida</dt><dd>Sí: pasaron 11 de 11 pruebas; acceso cruzado bloqueado: sí; auditoría íntegra: sí.</dd><dt>Qué sostiene en el proyecto</dt><dd>El arnés y los agentes.</dd><dt>Fecha de la prueba</dt><dd>9 de noviembre de 2026, 23:33</dd><dt>Responsable</dt><dd>Anuar Harb</dd><dt>Equipo</dt><dd>Apple M2 Pro, 16 GB, macOS-14.6.1-arm64-arm-64bit, Python 3.12.2</dd><dt>Video</dt><dd><a href="https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing">https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing</a></dd><dt>Código y datos</dt><dd><a href="https://github.com/AnuarHarb/node-ia-caribe">https://github.com/AnuarHarb/node-ia-caribe</a></dd></dl>
+</header>
+<section aria-labelledby="nota-seccion-1"><h2 id="nota-seccion-1">1. Objetivo</h2>
+<p>Mostrar que la arquitectura de agentes aislados por entidad ya existe y está probada: dos agentes de dos entidades trabajan en el mismo nodo y ninguno puede leer ni escribir los archivos del otro.</p>
+<p><strong>Criterio de éxito: </strong>acceso cruzado bloqueado y las 11 pruebas pasando.</p>
+</section>
+<section aria-labelledby="nota-seccion-2"><h2 id="nota-seccion-2">2. Montaje</h2>
+<table><thead><tr><th scope="col">Componente</th><th scope="col">Detalle</th></tr></thead><tbody><tr><td>Equipo</td><td>Apple M2 Pro, 16 GB, macOS-14.6.1-arm64-arm-64bit, Python 3.12.2</td></tr><tr><td>Prototipo</td><td>Un nodo que entrega a cada entidad un agente con su propia caja de archivos. Toda lectura, escritura y listado pasa por el agente; si la ruta sale de la caja, la operación se niega y se anota.</td></tr><tr><td>Entidades</td><td>Dos, ficticias: alcaldia-santa-marta y gobernacion-atlantico.</td></tr><tr><td>Datos</td><td>Ficticios: un trámite inventado y una lista inventada de cupos escolares.</td></tr><tr><td>Registro de auditoría</td><td>Cada operación queda en una línea con su resultado y un hash que encadena la línea anterior; si alguien cambia o borra una línea, la cadena deja de cuadrar.</td></tr><tr><td>Software</td><td>Python 3.12.2, pruebas con unittest de la biblioteca estándar. No usa modelo de lenguaje.</td></tr><tr><td>Internet</td><td>No usa red: el prototipo solo lee y escribe archivos en el equipo.</td></tr></tbody></table>
+</section>
+<section aria-labelledby="nota-seccion-3"><h2 id="nota-seccion-3">3. Procedimiento</h2>
+<ol><li>Se crea un entorno nuevo con las dos cajas y sus archivos ficticios.</li><li>Cada agente escribe una nota de trabajo en su propia caja.</li><li>El agente de la alcaldía intenta leer un archivo de la gobernación usando una ruta que sale de su caja.</li><li>Se muestra el registro de auditoría y se verifica su cadena de hashes.</li><li>Se corren las 11 pruebas automatizadas, cada una en un directorio temporal propio: lectura y escritura propias, trabajo simultáneo, lectura, escritura y listado cruzados, rutas con «..», enlaces simbólicos y auditoría.</li></ol>
+</section>
+<section aria-labelledby="nota-seccion-4"><h2 id="nota-seccion-4">4. Resultados</h2>
+<p><strong>Acceso cruzado: </strong>el agente de la alcaldía pidió el archivo ../gobernacion-atlantico/educacion/cupos-mahates.txt de la otra entidad. El nodo lo negó (motivo: fuera_del_aislamiento) y dejó el intento en el registro.</p>
+<table><caption>Tabla 1. Registro de auditoría de la corrida, en orden</caption><thead><tr><th scope="col">#</th><th scope="col">Entidad</th><th scope="col">Acción</th><th scope="col">Ruta pedida</th><th scope="col">Resultado</th><th scope="col">Motivo</th></tr></thead><tbody><tr><td>1</td><td>alcaldia-santa-marta</td><td>escribir</td><td>pqrs/turno-1042.txt</td><td>permitido</td><td>dentro_de_la_entidad</td></tr><tr><td>2</td><td>gobernacion-atlantico</td><td>escribir</td><td>educacion/cupos-mahates.txt</td><td>permitido</td><td>dentro_de_la_entidad</td></tr><tr><td>3</td><td>alcaldia-santa-marta</td><td>escribir</td><td>pqrs/nota-de-trabajo.txt</td><td>permitido</td><td>dentro_de_la_entidad</td></tr><tr><td>4</td><td>gobernacion-atlantico</td><td>escribir</td><td>educacion/nota-de-trabajo.txt</td><td>permitido</td><td>dentro_de_la_entidad</td></tr><tr><td>5</td><td>alcaldia-santa-marta</td><td>leer</td><td>../gobernacion-atlantico/educacion/cupos-mahates.txt</td><td>denegado</td><td>fuera_del_aislamiento</td></tr></tbody></table>
+<p>Cadena de hashes del registro: <strong>íntegra.</strong> Se verifica recalculando el hash de cada línea a partir de la anterior.</p>
+<table><caption>Tabla 2. Las 11 pruebas automatizadas: 11 de 11 pasaron</caption><thead><tr><th scope="col">Prueba</th><th scope="col">Esperado</th><th scope="col">Obtenido</th></tr></thead><tbody><tr><td>test_01_lectura_propia_entidad_a</td><td>El agente de la alcaldía lee un archivo de su propia caja.</td><td>pasó</td></tr><tr><td>test_02_lectura_propia_entidad_b</td><td>El agente de la gobernación lee un archivo de su propia caja.</td><td>pasó</td></tr><tr><td>test_03_trabajo_simultaneo</td><td>Dos agentes de dos entidades escriben y leen a la vez, cada uno en su caja.</td><td>pasó</td></tr><tr><td>test_04_lectura_cruzada_bloqueada</td><td>Un agente no obtiene el archivo de la otra entidad.</td><td>pasó</td></tr><tr><td>test_05_escritura_cruzada_bloqueada</td><td>Un agente no escribe en la caja de la otra entidad.</td><td>pasó</td></tr><tr><td>test_06_listado_cruzado_bloqueado</td><td>El listado de una entidad no muestra los archivos de la otra, ni a través de un enlace.</td><td>pasó</td></tr><tr><td>test_07_traversal_de_ruta_bloqueado</td><td>Una ruta absoluta y una ruta con .. no salen de la caja.</td><td>pasó</td></tr><tr><td>test_08_escape_por_symlink_bloqueado</td><td>Un enlace simbólico hacia el archivo de otra entidad no se puede leer.</td><td>pasó</td></tr><tr><td>test_09_auditoria_registra_bloqueo</td><td>El intento bloqueado queda en el registro, sin el contenido del archivo ajeno.</td><td>pasó</td></tr><tr><td>test_10_auditoria_registra_acceso_permitido</td><td>Una lectura dentro de la propia caja queda registrada como permitida.</td><td>pasó</td></tr><tr><td>test_11_cadena_de_auditoria_integra</td><td>El registro íntegro verifica, y una alteración se detecta.</td><td>pasó</td></tr></tbody></table>
+</section>
+<section aria-labelledby="nota-seccion-5"><h2 id="nota-seccion-5">5. Limitaciones</h2>
+<ul><li><strong>Entorno simulado. </strong>Un solo computador, datos ficticios y entidades inventadas. No hay red ni entidades reales.</li><li><strong>El aislamiento está en las herramientas del agente. </strong>Quien ya controla el proceso de Python puede saltárselo. No se usan usuarios distintos del sistema operativo ni contenedores.</li><li><strong>El registro es un archivo en el mismo equipo. </strong>La cadena de hashes detecta si alguien cambia o quita una línea, pero no impide que quien tenga acceso al disco borre el archivo o lo reescriba entero.</li><li><strong>No es el nodo del proyecto. </strong>Es la prueba de concepto de la arquitectura (TRL 3). En las fases siguientes el mismo aislamiento se debe sostener con entidades reales y con un registro que no dependa de un solo proceso.</li></ul>
+</section>
+<section aria-labelledby="nota-seccion-6"><h2 id="nota-seccion-6">6. Enlaces</h2>
+<ul><li><strong>Video: </strong><a href="https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing">https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing</a></li><li><strong>Repositorio: </strong><a href="https://github.com/AnuarHarb/node-ia-caribe">https://github.com/AnuarHarb/node-ia-caribe</a></li><li><strong>Código: </strong><code>demo5_agentes/nodo.py</code>, <code>demo5_agentes/test_aislamiento.py</code>, <code>demo5_agentes/en_vivo.py</code>.</li><li><strong>Datos medidos: </strong><code>resultados/demo5/informe.json</code>, <code>resultados/demo5/pruebas.csv</code>.</li><li><strong>Para repetirla: </strong><code>python -m demo5_agentes.en_vivo</code>.</li></ul>
+</section>
+</article>
+  </main>
+</body>
+</html>

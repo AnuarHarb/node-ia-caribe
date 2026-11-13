@@ -1,0 +1,67 @@
+[
+  {
+    "demo": 1,
+    "titulo": "Voz en español costeño",
+    "estado": "ok",
+    "etiqueta": "Criterio cumplido",
+    "resumen": "El flujo completo (escuchar, responder y hablar) funcionó en 40 de 40 frases y en 19 de ellas quedó registrado un error real de reconocimiento.",
+    "pregunta": "¿Un equipo común puede escuchar, entender y responder sin servicios externos?",
+    "respuesta": "Sí, con fallas: el flujo se completó en 40 de 40 frases, en 5.53 s en promedio. 19 de 40 quedaron con error de transcripción (WER 7.05 %) y el modelo inventó datos en 7 respuestas.",
+    "justifica": "Objetivo específico 4.",
+    "paginas": 3,
+    "sintetico": false,
+    "archivo": "Ejemplo_Demo-1_Voz-en-espanol-costeno"
+  },
+  {
+    "demo": 2,
+    "titulo": "IA completa sin internet",
+    "estado": "ok",
+    "etiqueta": "Criterio cumplido",
+    "resumen": "3 usuarios a la vez, respuesta de voz en 7.16 s en promedio y sin salida a internet durante toda la sesión.",
+    "pregunta": "¿El mismo equipo atiende a varias personas a la vez con el internet cortado?",
+    "respuesta": "Sí: 3 usuarios a la vez y respuesta de voz en 7.16 s en promedio.",
+    "justifica": "La operación del nodo sin conexión.",
+    "paginas": 2,
+    "sintetico": false,
+    "archivo": "Ejemplo_Demo-2_IA-completa-sin-internet"
+  },
+  {
+    "demo": 3,
+    "titulo": "IA local frente a referencia externa",
+    "estado": "ok",
+    "etiqueta": "Criterio cumplido",
+    "resumen": "El método funcionó de principio a fin: 40 tareas por los dos caminos, paquete a ciegas, dos calificaciones humanas y métricas calculadas. El modelo local quedó por debajo de la referencia (4.62 frente a 4.79 sobre 5; el 96 % de la calidad de la referencia) y perdió en 18 tareas: la medición no lo favorece. El 85 % de las tareas quedó con calidad comparable y el acuerdo entre las dos personas fue moderado (kappa de Cohen 0.456).",
+    "pregunta": "¿Un modelo abierto alcanza una calidad comparable a la de un servicio comercial?",
+    "respuesta": "Sí, cerca: el modelo local obtuvo 4.62 sobre 5 frente a 4.79 de la referencia, el 96 % de su calidad. El 85 % de las 40 tareas quedó comparable.",
+    "justifica": "Objetivo específico 1 y el método de evaluación.",
+    "paginas": 3,
+    "sintetico": false,
+    "archivo": "Ejemplo_Demo-3_IA-local-frente-a-referencia-externa"
+  },
+  {
+    "demo": 4,
+    "titulo": "Línea base del error (WER)",
+    "estado": "ok",
+    "etiqueta": "Criterio cumplido",
+    "resumen": "Una cifra por variedad, con la muestra del protocolo: palenquero, WER 86.55 % con 30 frases; español costeño, WER 7.05 % con 40 frases. Por escrito, al traducir 12 estrofas de 8 poemas al palenquero, el modelo local obtuvo chrF 24.64; dejar el texto sin traducir ya da 24.85.",
+    "pregunta": "¿Los modelos de hoy entienden el palenquero?",
+    "respuesta": "No: al transcribir palenquero hablado, el error de palabras fue de 86.55 %, frente a 7.05 % en español costeño. Al traducir poemas al palenquero, el modelo local obtuvo chrF 24.64; no traducir da 24.85.",
+    "justifica": "Objetivo específico 3.",
+    "paginas": 3,
+    "sintetico": false,
+    "archivo": "Ejemplo_Demo-4_Linea-base-del-error-WER"
+  },
+  {
+    "demo": 5,
+    "titulo": "Agentes aislados por entidad",
+    "estado": "ok",
+    "etiqueta": "Criterio cumplido",
+    "resumen": "El intento de lectura cruzada quedó bloqueado, pasaron 11 de 11 pruebas y el registro de auditoría conserva su cadena íntegra.",
+    "pregunta": "¿Cada entidad puede tener un agente que no vea los datos de las otras?",
+    "respuesta": "Sí: pasaron 11 de 11 pruebas; acceso cruzado bloqueado: sí; auditoría íntegra: sí.",
+    "justifica": "El arnés y los agentes.",
+    "paginas": 2,
+    "sintetico": false,
+    "archivo": "Ejemplo_Demo-5_Agentes-aislados-por-entidad"
+  }
+]

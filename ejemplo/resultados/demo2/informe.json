@@ -1,0 +1,79 @@
+{
+  "demo": 2,
+  "titulo": "IA completa sin internet",
+  "fecha": "2026-11-12T20:17:19-05:00",
+  "responsable": "Anuar Harb",
+  "equipo": {
+    "sistema": "macOS-14.6.1-arm64-arm-64bit",
+    "python": "3.12.2",
+    "arquitectura": "arm64",
+    "procesador": "Apple M2 Pro",
+    "memoria_gb": 16
+  },
+  "modelos": {
+    "whisper_repo": "mlx-community/whisper-small-mlx",
+    "whisper": "Whisper small (MLX, mlx-community/whisper-small-mlx)",
+    "ollama": "qwen2.5:3b",
+    "piper_asistente": "Piper es_MX-ald-medium.onnx (español México, voz masculina medium)",
+    "piper_archivo": "es_MX-ald-medium.onnx"
+  },
+  "usuarios_minimos": 3,
+  "segundos_maximos": 10.0,
+  "consultas_por_usuario_protocolo": 10,
+  "consultas_texto": 0,
+  "consumo": {
+    "reposo_w": 7.4,
+    "carga_w": 41.8,
+    "instrumento": "vatímetro de enchufe, resolución de 0,1 W",
+    "fecha": "2026-11-12T20:17:19-05:00"
+  },
+  "entrada": "voz",
+  "consultas": 30,
+  "consultas_voz": 30,
+  "usuarios": 3,
+  "usuarios_simultaneos": 3,
+  "tiempo_promedio_s": 7.155,
+  "tiempo_maximo_s": 13.086,
+  "tiempo_mediana_s": 6.957,
+  "etapas_promedio": {
+    "asr_s": 3.247,
+    "llm_s": 2.612,
+    "tts_s": 0.378
+  },
+  "sesion_inicio": "2026-11-12T20:14:05-05:00",
+  "sesion_fin": "2026-11-12T20:17:19-05:00",
+  "por_usuario": [
+    {
+      "usuario": "Dayana Mercado",
+      "consultas": 10,
+      "promedio_s": 7.221,
+      "maximo_s": 9.983
+    },
+    {
+      "usuario": "Jairo Barrios",
+      "consultas": 10,
+      "promedio_s": 6.208,
+      "maximo_s": 7.97
+    },
+    {
+      "usuario": "Marelvis Pérez",
+      "consultas": 10,
+      "promedio_s": 8.038,
+      "maximo_s": 13.086
+    }
+  ],
+  "sin_internet": true,
+  "criterios": {
+    "usuarios": true,
+    "tiempo": true,
+    "sin_internet": true
+  },
+  "criterio_10s": true,
+  "cobertura_completa": true,
+  "usuarios_con_menos_consultas": [],
+  "faltantes": [],
+  "parcial": false,
+  "criterio_cumplido": true,
+  "resumen_ejecutivo": "30 consultas por voz de 3 usuario(s), hasta 3 a la vez, sin internet. Tiempo de respuesta promedio 7.16 s y máximo 13.09 s.",
+  "corrida_id": "2026-11-12T20-17-19-05-00"
+}

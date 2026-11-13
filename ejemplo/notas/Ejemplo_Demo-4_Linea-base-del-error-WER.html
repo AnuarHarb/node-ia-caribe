@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo 4. Línea base del error (WER) · </title>
+  <style>/* Nota técnica: mismos estilos en la pestaña Informe y en la vista para imprimir.
+   Usa los tokens FCA cuando la página los define y, si no, sus valores claros. */
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/static/fca/FCA_Sistema-de-diseno/fuentes/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/static/fca/FCA_Sistema-de-diseno/fuentes/Poppins-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+
+.nota {
+  --nota-tinta: var(--ink, #0b1220);
+  --nota-tenue: var(--ink-muted, #526077);
+  --nota-linea: var(--line, #d9e4ee);
+  --nota-niebla: var(--surface-mist, #eff8ff);
+  --nota-titulo: var(--ink, #050a30);
+  --nota-azul: var(--brand-blue-strong, #006bad);
+  color: var(--nota-tinta);
+  font-family: "Poppins", system-ui, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  max-width: 54rem;
+  text-align: left;
+}
+
+.nota .antetitulo {
+  margin: 0 0 0.35rem;
+  color: var(--nota-azul);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nota h1 {
+  margin: 0 0 0.9rem;
+  color: var(--nota-titulo);
+  font-size: 1.55rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.nota h2 {
+  margin: 1.6rem 0 0.6rem;
+  color: var(--nota-titulo);
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
+.nota h3 {
+  margin: 1.1rem 0 0.4rem;
+  color: var(--nota-azul);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.nota p {
+  margin: 0 0 0.7rem;
+  max-width: 78ch;
+}
+
+.nota ul,
+.nota ol {
+  margin: 0 0 0.9rem;
+  padding-left: 1.4rem;
+  max-width: 78ch;
+}
+
+.nota li {
+  margin-bottom: 0.35rem;
+}
+
+.nota a {
+  color: var(--nota-azul);
+  overflow-wrap: anywhere;
+}
+
+.nota code {
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: 0.86em;
+  overflow-wrap: anywhere;
+}
+
+.nota .estado,
+.nota .aviso {
+  --nota-estado: #526077;
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.9rem;
+  border-left: 4px solid var(--nota-estado);
+  background: color-mix(in srgb, var(--nota-estado) 13%, transparent);
+  color: inherit;
+  font-size: inherit;
+  max-width: none;
+}
+
+.nota .aviso p {
+  margin: 0;
+  max-width: none;
+}
+
+.nota .estado-ok,
+.nota .aviso-ok {
+  --nota-estado: #008c55;
+}
+
+.nota .estado-parcial,
+.nota .aviso-parcial {
+  --nota-estado: #d6781e;
+}
+
+.nota .estado-falla,
+.nota .aviso-falla {
+  --nota-estado: #be2828;
+}
+
+.nota .ficha {
+  display: grid;
+  grid-template-columns: minmax(8rem, 11rem) 1fr;
+  gap: 0;
+  margin: 0 0 0.5rem;
+  border-top: 1px solid var(--nota-linea);
+}
+
+.nota .ficha dt,
+.nota .ficha dd {
+  margin: 0;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--nota-linea);
+}
+
+.nota .ficha dt {
+  font-weight: 600;
+}
+
+.nota table {
+  width: 100%;
+  margin: 0 0 1rem;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.nota caption {
+  padding: 0 0 0.4rem;
+  color: var(--nota-titulo);
+  font-weight: 600;
+  text-align: left;
+}
+
+.nota th,
+.nota td {
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--nota-linea);
+  text-align: left;
+  vertical-align: top;
+}
+
+.nota thead th {
+  background: var(--nota-niebla);
+  color: var(--nota-titulo);
+  font-weight: 600;
+}
+
+.nota tbody th {
+  font-weight: 600;
+}
+
+.nota td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.nota footer {
+  margin-top: 1.4rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--nota-linea);
+  color: var(--nota-tenue);
+  font-size: 0.78rem;
+}
+
+.nota footer p {
+  max-width: none;
+}
+
+/* En pantallas angostas las tablas anchas se desplazan dentro de su sección. */
+.nota section {
+  overflow-x: auto;
+}
+
+/* --- Vista para imprimir -------------------------------------------------------- */
+
+.hoja-nota {
+  margin: 0;
+  padding: 1.5rem 1rem 3rem;
+  background: #f8fafc;
+  color: #0b1220;
+}
+
+.hoja-nota main {
+  max-width: 54rem;
+  margin: 0 auto;
+  padding: 2rem 2.2rem;
+  background: #fff;
+  border: 1px solid #d9e4ee;
+}
+
+.hoja-nota .barra-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  max-width: 54rem;
+  margin: 0 auto 1rem;
+  font-family: "Poppins", system-ui, sans-serif;
+  font-size: 0.9rem;
+}
+
+.hoja-nota .barra-acciones button,
+.hoja-nota .barra-acciones a {
+  min-height: 44px;
+  padding: 0.55rem 1rem;
+  border: 1px solid #006bad;
+  border-radius: 6px;
+  background: #fff;
+  color: #006bad;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hoja-nota .barra-acciones button {
+  background: #006bad;
+  color: #fff;
+}
+
+.hoja-nota .barra-acciones :focus-visible {
+  outline: 3px solid #00a0f9;
+  outline-offset: 2px;
+}
+
+@page {
+  size: A4;
+  margin: 15mm 16mm;
+}
+
+@media print {
+  .hoja-nota {
+    padding: 0;
+    background: #fff;
+  }
+
+  .hoja-nota main {
+    max-width: none;
+    padding: 0;
+    border: 0;
+  }
+
+  .hoja-nota .barra-acciones {
+    display: none;
+  }
+
+  .nota {
+    max-width: none;
+    font-size: 9.2pt;
+  }
+
+  .nota h1 {
+    font-size: 16.5pt;
+  }
+
+  .nota h2 {
+    font-size: 11.5pt;
+    break-after: avoid;
+  }
+
+  .nota table {
+    font-size: 8pt;
+  }
+
+  .nota tr,
+  .nota .aviso,
+  .nota .estado {
+    break-inside: avoid;
+  }
+
+  .nota .estado,
+  .nota .aviso,
+  .nota thead th {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+</style>
+</head>
+<body class="hoja-nota">
+  <nav class="barra-acciones" aria-label="Acciones de la nota">
+    <a href="/medicion-base">Volver a la medición base</a>
+    <a href="Ejemplo_Demo-4_Linea-base-del-error-WER.pdf">Ver PDF</a>
+    <a href="Ejemplo_Demo-4_Linea-base-del-error-WER.pdf?descargar=1">Descargar PDF</a>
+    <button type="button" onclick="window.print()">Imprimir</button>
+  </nav>
+  <main>
+  <article class="nota">
+<header>
+<p class="antetitulo">Nodo IA Caribe · Convocatoria 54</p>
+<h1>Demo 4. Línea base del error (WER)</h1>
+<p class="estado estado-ok" role="status"><strong>Criterio cumplido.</strong> Una cifra por variedad, con la muestra del protocolo: palenquero, WER 86.55 % con 30 frases; español costeño, WER 7.05 % con 40 frases. Por escrito, al traducir 12 estrofas de 8 poemas al palenquero, el modelo local obtuvo chrF 24.64; dejar el texto sin traducir ya da 24.85.</p>
+<dl class="ficha"><dt>Pregunta que responde</dt><dd><strong>¿Los modelos de hoy entienden el palenquero?</strong></dd><dt>Respuesta medida</dt><dd>No: al transcribir palenquero hablado, el error de palabras fue de 86.55 %, frente a 7.05 % en español costeño. Al traducir poemas al palenquero, el modelo local obtuvo chrF 24.64; no traducir da 24.85.</dd><dt>Qué sostiene en el proyecto</dt><dd>Objetivo específico 3.</dd><dt>Fecha del cálculo</dt><dd>12 de noviembre de 2026, 23:41</dd><dt>Responsable</dt><dd>Anuar Harb</dd><dt>Equipo</dt><dd>Apple M2 Pro, 16 GB, macOS-14.6.1-arm64-arm-64bit, Python 3.12.2</dd><dt>Video</dt><dd><a href="https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing">https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing</a></dd><dt>Código y datos</dt><dd><a href="https://github.com/AnuarHarb/node-ia-caribe">https://github.com/AnuarHarb/node-ia-caribe</a></dd></dl>
+</header>
+<section aria-labelledby="nota-seccion-1"><h2 id="nota-seccion-1">1. Objetivo</h2>
+<p>Mostrar, con un número, cuánto fallan hoy los modelos con el palenquero, hablado y escrito. El español costeño se mide con el mismo método y sirve de comparación. Justifica el objetivo específico 3 del proyecto.</p>
+<p><strong>Criterio de éxito: </strong>una cifra clara de error por cada variedad.</p>
+</section>
+<section aria-labelledby="nota-seccion-2"><h2 id="nota-seccion-2">2. Montaje</h2>
+<table><thead><tr><th scope="col">Componente</th><th scope="col">Detalle</th></tr></thead><tbody><tr><td>Equipo</td><td>Apple M2 Pro, 16 GB, macOS-14.6.1-arm64-arm-64bit, Python 3.12.2</td></tr><tr><td>Modelo</td><td>Whisper (mlx-community/whisper-small-mlx, sin ajustar). Es el modelo tal como se descarga, sin entrenamiento adicional.</td></tr><tr><td>Idioma del reconocimiento</td><td>Fijado en español para las dos variedades. Whisper no incluye el palenquero entre sus idiomas, así que se mide con la misma configuración que usaría hoy una entidad.</td></tr><tr><td>Corpus de palenquero</td><td>30 frases: 30 grabadas en la pantalla del demo 1. Deben ser grabaciones públicas o de una persona hablante designada por la Fundación Chano y Chalole, con consentimiento y aval.</td></tr><tr><td>Corpus de español costeño</td><td>40 frases: 40 grabadas en la pantalla del demo 1.</td></tr><tr><td>Cálculo</td><td>Biblioteca jiwer, sobre el texto en minúsculas y sin puntuación. Se conservan las tildes.</td></tr><tr><td>Prueba por escrito</td><td>12 estrofas de 8 poemas (83 versos en palenquero) del libro «Letras palenqueras, la profunda necesidad de nombrar», de Sebastián Salgado, Faustino Torres y Uriel Cassiani. Modelo local (qwen2.5:3b), versión 357c53fb659c en Ollama; referencia comercial (claude-haiku-4-5). Métrica: chrF (sacrebleu 2.5.1, nrefs:1|case:mixed|eff:yes|nc:6|nw:0|space:no|version:2.5.1).</td></tr></tbody></table>
+</section>
+<section aria-labelledby="nota-seccion-3"><h2 id="nota-seccion-3">3. Procedimiento</h2>
+<ol><li>Se reúnen de 30 a 50 frases por variedad, cada una con su audio y su transcripción correcta.</li><li>Whisper, sin ajustar, transcribe cada audio.</li><li>Las dos transcripciones se pasan a minúsculas y se les quita la puntuación.</li><li>Se calcula el WER de cada variedad con jiwer, sobre todas sus frases juntas.</li><li>Si a una variedad le faltan frases, el informe lo dice y no calcula una cifra para ella.</li><li>Por escrito: cada modelo traduce cada estrofa en las dos direcciones, con temperatura 0. Se calcula el chrF frente a la traducción humana y se compara con el control de no traducir.</li></ol>
+</section>
+<section aria-labelledby="nota-seccion-4"><h2 id="nota-seccion-4">4. Resultados</h2>
+<table><caption>Tabla 1. Error de palabras por variedad</caption><thead><tr><th scope="col">Variedad</th><th scope="col">Número de frases</th><th scope="col">Palabras dichas</th><th scope="col">Cambiadas</th><th scope="col">Omitidas</th><th scope="col">Agregadas</th><th scope="col">WER (%)</th></tr></thead><tbody><tr><td>Palenquero</td><td class="num">30</td><td class="num">171</td><td class="num">121</td><td class="num">11</td><td class="num">16</td><td class="num"><strong>86.55</strong></td></tr><tr><td>Español costeño</td><td class="num">40</td><td class="num">468</td><td class="num">28</td><td class="num">0</td><td class="num">5</td><td class="num"><strong>7.05</strong></td></tr></tbody></table>
+<p>El WER es la suma de palabras cambiadas, omitidas y agregadas, dividida por las palabras que de verdad se dijeron. Se calcula sobre todo el conjunto de frases de la variedad, no como promedio de cada frase. Un WER de 20 % significa que, de cada cinco palabras, el sistema falla en una.</p>
+<table><caption>Palenquero: las frases con más error</caption><thead><tr><th scope="col">Transcripción correcta</th><th scope="col">Transcripción del sistema</th><th scope="col">WER</th></tr></thead><tbody><tr><td>Palenke tiela suto, asino kumo Afrika.</td><td>Palenque tiene la su todo, así no cumo África.</td><td class="num">150.0 %</td></tr><tr><td>Palenke tiela suto, asino kumo Afrika.</td><td>Palenque tierra su todo, así no como África.</td><td class="num">133.3 %</td></tr><tr><td>Ané kume mbollo mí.</td><td>A ne cumembo yo mi.</td><td class="num">125.0 %</td></tr><tr><td>Suto á bae pa Katagena.</td><td>Su tuá va e para Cartagena.</td><td class="num">120.0 %</td></tr><tr><td>Palenke tiela suto, asino kumo Afrika.</td><td>Palenque, tiene la suto, a sino como África.</td><td class="num">116.7 %</td></tr></tbody></table>
+<p>Palenquero: 0 de 30 frases quedaron sin ningún error.</p>
+<table><caption>Español costeño: las frases con más error</caption><thead><tr><th scope="col">Transcripción correcta</th><th scope="col">Transcripción del sistema</th><th scope="col">WER</th></tr></thead><tbody><tr><td>¿Dónde queda la oficina del predial? Es que me perdí.</td><td>¿Dónde queda la oficina de el pre dial? Es que me perdí.</td><td class="num">40.0 %</td></tr><tr><td>¿Dónde queda la oficina del predial? Es que me perdí.</td><td>¿Dónde queda la oficina de el pre dial? Es que me perdí.</td><td class="num">40.0 %</td></tr><tr><td>¿A qué horas atienden hoy en la secretaría de hacienda?</td><td>¿A qué hora atiende Noi en la Secretaría de Hacienda?</td><td class="num">30.0 %</td></tr><tr><td>¿A qué horas atienden hoy en la secretaría de hacienda?</td><td>¿A qué hora atiende Noi en la Secretaría de Hacienda?</td><td class="num">30.0 %</td></tr><tr><td>Se me dañó el recibo del agua. ¿Cómo pido uno nuevo?</td><td>Se me daño el recibo de la agua. ¿Cómo pido uno nuevo?</td><td class="num">27.3 %</td></tr></tbody></table>
+<p>Español costeño: 21 de 40 frases quedaron sin ningún error.</p>
+<p>El error en palenquero (86.55 %) es más alto que en español costeño (7.05 %). La especificación esperaba un error alto en palenquero y moderado en costeño.</p>
+<h3>Por escrito: traducción entre español y palenquero</h3>
+<p>La misma pregunta, sin audio. Cada modelo tradujo 12 estrofas de 8 poemas del libro «Letras palenqueras, la profunda necesidad de nombrar», de Sebastián Salgado, Faustino Torres y Uriel Cassiani, que trae cada poema en las dos lenguas, y su salida se comparó con la traducción humana del libro.</p>
+<table><caption>Tabla 2. Traducción de 12 estrofas de 8 poemas frente a la traducción humana</caption><thead><tr><th scope="col">Dirección</th><th scope="col">Sistema</th><th scope="col">chrF (0 a 100)</th><th scope="col">Palabras acertadas</th><th scope="col">Palabras copiadas del origen</th></tr></thead><tbody><tr><td>español → palenquero</td><td>Sin traducir (control)</td><td class="num">24.85</td><td class="num">5.10 %</td><td class="num">—</td></tr><tr><td></td><td><strong>Modelo local (qwen2.5:3b)</strong></td><td class="num"><strong>24.64</strong></td><td class="num">6.05 %</td><td class="num">84.17 %</td></tr><tr><td></td><td><strong>Referencia comercial (claude-haiku-4-5)</strong></td><td class="num"><strong>29.37</strong></td><td class="num">13.69 %</td><td class="num">38.52 %</td></tr><tr><td>palenquero → español</td><td>Sin traducir (control)</td><td class="num">21.42</td><td class="num">4.56 %</td><td class="num">—</td></tr><tr><td></td><td><strong>Modelo local (qwen2.5:3b)</strong></td><td class="num"><strong>20.54</strong></td><td class="num">3.99 %</td><td class="num">97.76 %</td></tr><tr><td></td><td><strong>Referencia comercial (claude-haiku-4-5)</strong></td><td class="num"><strong>37.84</strong></td><td class="num">21.65 %</td><td class="num">12.31 %</td></tr></tbody></table>
+<p>El modelo local no superó al control en ninguna dirección: devolver el texto sin tocar se parece igual o más a la traducción humana. La referencia comercial superó al control en las dos direcciones. El chrF mide cuánto se parecen las letras de la salida a las de la traducción humana. El control es no traducir: como el palenquero comparte vocabulario con el español, el texto sin tocar ya se parece algo. Un modelo que no supera esa cifra no está aportando la lengua.</p>
+<table><caption>Ejemplo: dos versos del poema «Nosotros» (páginas 70-71)</caption><thead><tr><th scope="col">Dirección</th><th scope="col">Texto de origen</th><th scope="col">Traducción humana</th><th scope="col">Modelo local</th><th scope="col">Referencia</th></tr></thead><tbody><tr><td>español → palenquero</td><td>En esta vida somos / Como aves que emigran</td><td>E bila suto sendá / Kumo kajomba</td><td>En ahi vida somos / Como aves ke emigran</td><td>E bila suto ta / Kumo pájaro ke ta bae</td></tr><tr><td>palenquero → español</td><td>E bila suto sendá / Kumo kajomba</td><td>En esta vida somos / Como aves que emigran</td><td>E bila suto sendá / Kumo kajomba</td><td>En la vida nosotros somos / Como palomas</td></tr></tbody></table>
+</section>
+<section aria-labelledby="nota-seccion-5"><h2 id="nota-seccion-5">5. Limitaciones</h2>
+<ul><li><strong>Las frases de costeño son las del demo 1. </strong>Comparten sus límites: pocas voces y frases leídas de un guion.</li><li><strong>El palenquero no tiene una sola forma de escribirse. </strong>El WER compara texto contra texto, así que depende de la ortografía que use quien fija la transcripción correcta. Esa convención la debe avalar la comunidad hablante.</li><li><strong>El WER cuenta palabras, no gravedad. </strong>Un cambio de género pesa lo mismo que confundir el nombre de un trámite.</li><li><strong>Un solo modelo y un solo tamaño. </strong>Se midió Whisper small; los modelos más grandes pueden dar cifras distintas.</li><li><strong>Una sola persona fija cada transcripción correcta. </strong>No hubo doble revisión de las referencias.</li><li><strong>La traducción de los poemas es literaria. </strong>Hay una sola traducción humana y es libre, así que una traducción correcta con otras palabras también puntúa bajo. Las cifras sirven para comparar contra el control, no como nota de calidad. Son 12 estrofas de 8 poemas de un solo libro.</li></ul>
+</section>
+<section aria-labelledby="nota-seccion-6"><h2 id="nota-seccion-6">6. Enlaces</h2>
+<ul><li><strong>Video: </strong><a href="https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing">https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing</a></li><li><strong>Repositorio: </strong><a href="https://github.com/AnuarHarb/node-ia-caribe">https://github.com/AnuarHarb/node-ia-caribe</a></li><li><strong>Código: </strong><code>demo4_wer/</code>, <code>medicion.py</code>.</li><li><strong>Datos medidos: </strong><code>resultados/demo4/informe.json</code>, <code>resultados/demo4/traduccion.json</code>, <code>resultados/demo1/filas.json</code>, <code>demo4_wer/corpus/</code>.</li><li><strong>Audios: </strong>no se publican grabaciones con voz identificable. Los consentimientos y el aval se conservan, no se suben.</li><li><strong>Poemas: </strong>son obras con autor. El repositorio publica las cifras y dos versos de ejemplo, no los poemas.</li></ul>
+</section>
+</article>
+  </main>
+</body>
+</html>

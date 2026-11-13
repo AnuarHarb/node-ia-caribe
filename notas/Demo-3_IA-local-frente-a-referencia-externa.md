@@ -12,7 +12,7 @@ Nodo IA Caribe · Convocatoria 54 · Evidencia del punto de partida (TRL 3)
 | Fecha de la prueba | Generación de respuestas: 9 de noviembre de 2026, 23:49. Calificación a ciegas: del 10 de noviembre de 2026, 15:36 al 11 de noviembre de 2026, 00:46. |
 | Responsable | Anuar Harb |
 | Equipo | Apple M2 Pro, 16 GB, macOS-14.6.1-arm64-arm-64bit, Python 3.12.2 |
-| Video | Pendiente: falta subir el video (no listado) y pegar el enlace. |
+| Video | <https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing> |
 | Código y datos | <https://github.com/AnuarHarb/node-ia-caribe> |
 
 ## 1. Objetivo
@@ -103,7 +103,7 @@ En 6 tareas la diferencia pasó de 1 punto: en T05, T13, T15, T17, T33 el modelo
 
 ## 6. Enlaces
 
-- **Video:**pendiente. Cuando esté subido como no listado, el enlace se pega en `entregables/enlaces.json` y esta nota lo toma de ahí.
+- **Video:**<https://drive.google.com/drive/folders/1JtBeA1K9i7CE9_z_gD65JP6rT34B4t58?usp=sharing>
 - **Repositorio:**<https://github.com/AnuarHarb/node-ia-caribe>
 - **Código:**`demo3_comparacion/`, `interfaz/demo3_informe.py`.
 - **Datos medidos:**`resultados/demo3/generaciones.json`, `resultados/demo3/ciego.json`, `resultados/demo3/clave.json`, `resultados/demo3/calificaciones/`, `resultados/demo3/metricas.json`.
@@ -111,4 +111,4 @@ En 6 tareas la diferencia pasó de 1 punto: en T05, T13, T15, T17, T33 el modelo
 
 ---
 
-Nota generada el 13 de noviembre de 2026, 02:29 (hora de Colombia) a partir de resultados/demo3/informe.json. Todas las cifras son medidas; ninguna se estima ni se completa a mano.
+Nota generada el 13 de noviembre de 2026, 03:06 (hora de Colombia) a partir de resultados/demo3/informe.json. Todas las cifras son medidas; ninguna se estima ni se completa a mano.

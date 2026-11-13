@@ -9,6 +9,9 @@ grabaciones/
 *.aiff
 *.onnx
 .env
+# Mediciones locales (voz, historial, calificaciones). Historial público: ejemplo/resultados/.
+resultados/*
+!resultados/README.md
 resultados/humo/
 # Poemas con autor: se usan para medir, no se publican.
 demo4_wer/corpus/poemas/

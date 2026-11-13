@@ -145,6 +145,34 @@ a:hover {
   max-width: 42rem;
 }
 
+.portada-complementos {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+  color: var(--ink-muted);
+  max-width: 42rem;
+}
+
+.portada-complementos-linea {
+  margin: 0 0 var(--space-2);
+  line-height: 1.5;
+}
+
+.portada-complementos-sep {
+  margin: 0 0.35em;
+  color: var(--line);
+}
+
+.medicion-base-complementos {
+  margin-top: var(--space-5);
+  color: var(--ink-muted);
+  max-width: 42rem;
+}
+
+.medicion-base-complementos p {
+  margin: var(--space-3) 0 0;
+}
+
 main {
   max-width: 52rem;
   margin: 0 auto;
@@ -1616,6 +1644,33 @@ table.datos td {
   padding: 0.75rem 1rem;
   border: 1px solid var(--line);
   font-size: 0.88rem;
+}
+
+.ejemplo-descargas {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin: 1.5rem 0 2rem;
+  padding: 1.25rem 1.35rem;
+  border: 1px solid var(--line, #c5d4d8);
+  border-radius: 10px;
+  background: var(--surface, #f6fafb);
+}
+
+.ejemplo-descargas-ayuda {
+  margin: 0;
+  max-width: 42rem;
+  color: var(--ink-muted, #3d4a5c);
+}
+
+.ejemplo-nota-enlaces {
+  white-space: nowrap;
+}
+
+.ejemplo-nota-sep {
+  margin: 0 0.35rem;
+  color: var(--ink-muted, #3d4a5c);
 }
 
 .entrega-resultados {

@@ -143,10 +143,11 @@ def _pie(extra_script: str = "", *, demo: bool = False) -> str:
   <footer class="site-footer">
     <div class="footer-bars" aria-hidden="true"><span class="fca-bars"><i></i><i></i><i></i><i></i><i></i></span></div>
     <p class="body-sm">Nodo IA Caribe · <a href="https://codigoabierto.tech" rel="noopener">Fundación Código Abierto</a>.
-      Informes en <code>resultados/</code> · <a href="/nota-tecnica">Entrega</a> ·
+      Grabaciones y mediciones sensibles: solo local (<code>resultados/</code>, <code>grabaciones/</code>).
+      <a href="/medicion-base">Medición base del equipo</a> en <code>ejemplo/resultados/</code> ·
+      <a href="/nota-tecnica">Entrega</a> ·
       <a href="{e(REPO_GITHUB)}" rel="noopener">Repositorio</a> ·
-      <a href="{e(REPO_GITHUB + "/blob/main/LICENSE")}" rel="noopener">Licencia</a>.
-      Videos de corrida (demos 2–5): <code>resultados/demoN/historial/</code>.</p>
+      <a href="{e(REPO_GITHUB + "/blob/main/LICENSE")}" rel="noopener">Licencia</a>.</p>
   </footer>
   {scripts_demo}<script src="/static/escenario.js"></script>
   <script src="/static/app.js"></script>
@@ -154,6 +155,21 @@ def _pie(extra_script: str = "", *, demo: bool = False) -> str:
 </body>
 </html>
 """
+
+
+def _portada_complementos() -> str:
+    from ejemplo.datos import AUTORIZACION_PALENQUERO
+
+    return f"""<section class="portada-complementos" aria-label="Información complementaria">
+      <p class="body-sm portada-complementos-linea">
+        <a href="/nota-tecnica">Entrega del laboratorio</a>
+        <span class="portada-complementos-sep" aria-hidden="true">·</span>
+        <a href="/medicion-base">Medición base del equipo</a>
+        <span class="portada-complementos-sep" aria-hidden="true">·</span>
+        Lo que grabes queda solo en <code>resultados/</code> en este computador.
+      </p>
+      <p class="body-sm portada-complementos-linea">{e(AUTORIZACION_PALENQUERO)}</p>
+    </section>"""
 
 
 def inicio() -> str:
@@ -186,8 +202,6 @@ def inicio() -> str:
         "Pruebas de laboratorio del punto de partida (TRL 3). Cada demo se corre en este equipo, se mide y deja un informe.",
         portada=True,
     )
-    cuerpo += """<p class="portada-nota">Orden 1 → 5. Desliza o usa las flechas. <strong>Verde ✓</strong> hipótesis cumplida, <strong>rojo ✗</strong> no cumplida, <strong>amarillo</strong> por ejecutar o en progreso. El pie de cada tarjeta resume la última medición.</p>"""
-    cuerpo += """<p class="portada-entrega body-sm"><a href="/nota-tecnica">Entrega del laboratorio</a>: cómo va cada nota técnica (2 a 3 páginas), su video y lo que falta para radicar.</p>"""
     cuerpo += f"""<section class="demo-carrusel-seccion" aria-labelledby="demos-portada-titulo">
       <div class="demo-carrusel-cabecera">
         <h2 id="demos-portada-titulo" class="demo-carrusel-titulo">Demos del laboratorio</h2>
@@ -206,6 +220,8 @@ def inicio() -> str:
         </ul>
       </div>
     </section>"""
+    cuerpo += """<p class="portada-nota">Orden 1 → 5. Desliza o usa las flechas. <strong>Verde ✓</strong> hipótesis cumplida, <strong>rojo ✗</strong> no cumplida, <strong>amarillo</strong> por ejecutar o en progreso. El pie de cada tarjeta resume la última medición.</p>"""
+    cuerpo += _portada_complementos()
     return cuerpo + _pie()
 
 
@@ -707,6 +723,83 @@ def nota_tecnica() -> str:
     cuerpo += f'<article class="nota-tecnica panel fca-card">{_markdown_simple(texto)}</article>'
     cuerpo += """<p class="body-sm"><a href="/">← Volver a la portada</a></p>"""
     return cuerpo + _pie()
+
+
+def medicion_base() -> str:
+    """Medición base del repositorio: notas, datos e historial de referencia."""
+    from pathlib import Path
+
+    from ejemplo.datos import AUTORIZACION_PALENQUERO
+
+    indice = Path(__file__).resolve().parents[1] / "ejemplo" / "indice.json"
+    cuerpo = _cabecera(
+        "Medición base",
+        "Referencia del equipo con la muestra completa del protocolo (notas, datos e historial en ejemplo/resultados/).",
+        breadcrumb="Medición base",
+    )
+    if not indice.is_file():
+        cuerpo += """<section class="panel fca-card entrega" aria-labelledby="medicion-base-titulo">
+      <h2 id="medicion-base-titulo">Todavía no se ha generado</h2>
+      <p>Para escribir la medición base: <code>.venv/bin/python -m ejemplo.generar</code>.</p>
+    </section>"""
+        return cuerpo + _pie()
+    notas = json.loads(indice.read_text(encoding="utf-8"))
+    filas = []
+    for nota in notas:
+        archivo = e(nota["archivo"])
+        origen = "Datos sintéticos" if nota["sintetico"] else "Semillas de referencia"
+        filas.append(
+            f"""<tr>
+          <th scope="row">Demo {nota["demo"]}. {e(nota["titulo"])}</th>
+          <td><span class="estado-badge {e(nota["estado"])}">{e(nota["etiqueta"])}</span></td>
+          <td>{origen}</td>
+          <td class="num">{nota["paginas"]}</td>
+          <td class="ejemplo-nota-enlaces">
+            <a href="/medicion-base/notas/{archivo}.html">Ver en pantalla</a>
+            <span class="ejemplo-nota-sep" aria-hidden="true">·</span>
+            <a href="/medicion-base/notas/{archivo}.pdf">Ver PDF</a>
+            <span class="ejemplo-nota-sep" aria-hidden="true">·</span>
+            <a href="/medicion-base/notas/{archivo}.pdf?descargar=1">Descargar PDF</a>
+          </td>
+        </tr>"""
+        )
+    respuestas = "".join(
+        f"<dt>Demo {nota['demo']}. {e(nota['pregunta'])}</dt><dd>{e(nota['respuesta'])}</dd>" for nota in notas
+    )
+    cuerpo += f"""<section class="panel fca-card entrega" aria-labelledby="medicion-base-titulo">
+      <h2 id="medicion-base-titulo">Las cinco notas con la muestra completa</h2>
+      <p class="body-sm">Referencia pública del protocolo completo. La evidencia de radicación está en <a href="/nota-tecnica">Entrega</a> y en tu <code>resultados/</code> local.</p>
+      <div class="ejemplo-descargas">
+        <a class="fca-btn fca-btn--secondary" href="/medicion-base/notas.zip">Descargar los cinco PDF (ZIP)</a>
+        <p class="ejemplo-descargas-ayuda body-sm">«Ver en pantalla» abre la nota en HTML. «Ver PDF» la muestra en el navegador; «Descargar PDF» guarda el archivo.</p>
+      </div>
+      <div class="tabla-desplazable">
+        <table class="datos entrega-tabla">
+          <caption>Notas de la medición base</caption>
+          <thead><tr>
+            <th scope="col">Demo</th><th scope="col">Estado en la base</th>
+            <th scope="col">Origen de cifras</th><th scope="col">Páginas</th><th scope="col">Nota</th>
+          </tr></thead>
+          <tbody>{"".join(filas)}</tbody>
+        </table>
+      </div>
+      <h3>Qué responde cada demo en la base</h3>
+      <dl class="entrega-resultados">{respuestas}</dl>
+      <p>Se regenera con <code>.venv/bin/python -m ejemplo.generar</code> → <code>ejemplo/resultados/</code> e <code>ejemplo/notas/</code>.</p>
+    </section>
+    <details class="medicion-base-complementos body-sm">
+      <summary>Datos sensibles, palenquero y alcance de esta referencia</summary>
+      <p>Las grabaciones reales solo existen en <code>resultados/</code> en tu equipo; esta página no las sustituye.
+      La radicación oficial está en <a href="/nota-tecnica">Entrega</a>.</p>
+      <p>{e(AUTORIZACION_PALENQUERO)}</p>
+    </details>
+    <p class="body-sm"><a href="/">← Volver a la portada</a> · <a href="/demo/1">Ir al demo 1</a></p>"""
+    return cuerpo + _pie()
+
+
+def ejemplo() -> str:
+    """Compatibilidad con la ruta /ejemplo."""
+    return medicion_base()
 
 
 def pagina_voz(modo: str) -> str:
